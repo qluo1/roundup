@@ -1,0 +1,44 @@
+{% extends layout\layout.html %}
+
+{% block content %}
+
+<div class="row" id="index">
+    <button type="button">index page</button>
+    <div id="list">
+    </div>
+</div>
+
+{% end %}
+
+{% block extrajs %} 
+
+<script>
+  var index = flight.component(function() {
+    //...
+
+    this.doSomething = function (){
+
+        alert("clicked");
+    }
+
+
+    this.ready = function(){
+        alert("ready");
+    }
+    this.after('initialize',function(){
+
+        this.on('click',this.doSomething);
+        this.on('ready',this.ready);
+
+        $.get("api/index?status=bug",function(data){
+            $("#list").html(data);   
+        });
+
+    });
+
+  });
+
+  index.attachTo("#index",{});
+
+</script>
+{% end %}

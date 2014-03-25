@@ -1,0 +1,62 @@
+{% from roundup import i18n %}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="customized roundup tracker">
+    <meta name="viewport" content="width=device-width">
+    <title>{% block head_title %}{% end %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/bootstrap-theme.css')}}">
+    {% block extracss %}{% end %}
+  </head>
+  <body>
+    {% block navbar %}
+      {% include 'banner.html' %}
+    {% end %}
+
+    {% block page_content %}
+      <div class='container-fluid'>
+        <div class='row'>
+          <div class='col-xs-3 navigation'>
+            {% block leftnav %}
+              {% include 'navigation.html' %}
+            {% end %}
+          </div>
+
+          <div class='col-xs-9'>
+              <div class='page-header'>
+                <h1> {% block page_header %} {% end %} </h1>
+                {% if error_message %}
+                  <p class='alert alert-danger alert-dismissable'> 
+                    {{ error_message }}
+                    <button type='button' class='close' data-dismiss='alert'>X</button>
+                  </p>
+                {% end %}
+                {% if ok_message %}
+                  <p class='alert alert-block alert-success alert-dismissable'> 
+                    {{ ok_message }}
+                    <button type='button' class='close' data-dismiss='alert'>X</button>
+                  </p>
+                {% end %}
+              </div>
+            {% block content %}{% end %}
+          </div>
+        </div>
+      </div>
+    {% end %}
+
+    {% block footer %}
+      {% include 'footer.html' %}
+    {% end %}
+
+    <script src="{{static_url('js/jquery/jquery-1.10.2.js') }}"></script>
+    <script src="{{static_url('js/jquery/jquery.pjax.js') }}"></script>
+    <script src="{{static_url('js/bootstrap/bootstrap.js') }}"></script>
+	<script src="{{static_url('js/es5-shim.min.js') }}"></script>
+	<script src="{{static_url('js/flight.js') }}"></script>
+    {% block extrajs %} {% end %}
+  </body>
+</html>
+

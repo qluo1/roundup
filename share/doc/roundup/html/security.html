@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Security Mechanisms &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">Security Mechanisms</a><ul>
+<li><a class="reference external" href="#current-situation">Current situation</a></li>
+<li><a class="reference external" href="#issues">Issues</a></li>
+<li><a class="reference external" href="#possible-approaches">Possible approaches</a><ul>
+<li><a class="reference external" href="#hyperdb-level-control">Hyperdb-level control</a></li>
+<li><a class="reference external" href="#user-interface-control">User-interface control</a></li>
+<li><a class="reference external" href="#logical-control">Logical control</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#action">Action</a></li>
+</ul>
+</li>
+</ul>
+
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/security.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="security-mechanisms">
+<h1>Security Mechanisms</h1>
+<div class="section" id="current-situation">
+<h2>Current situation</h2>
+<p>Current logical controls:</p>
+<dl class="docutils">
+<dt>ANONYMOUS_ACCESS = &#8216;deny&#8217;</dt>
+<dd>Deny or allow anonymous access to the web interface</dd>
+<dt>ANONYMOUS_REGISTER = &#8216;deny&#8217;</dt>
+<dd>Deny or allow anonymous users to register through the web interface</dd>
+<dt>ANONYMOUS_REGISTER_MAIL = &#8216;deny&#8217;</dt>
+<dd>Deny or allow anonymous users to register through the mail interface</dd>
+</dl>
+<p>Current user interface authentication and controls:</p>
+<ul class="simple">
+<li>command-line tool access controlled with passwords, but no logical controls</li>
+<li>CGI access is by username and password and has some logical controls</li>
+<li>mailgw access is through identification using sender email address, with
+limited functionality available</li>
+</ul>
+<p>The web interface implements has specific logical controls,
+preventing non-admin users from accessing:</p>
+<blockquote>
+<ul class="simple">
+<li>other user&#8217;s details pages</li>
+<li>listing the base classes (not issues or their user page)</li>
+<li>editing base classes</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="issues">
+<h2>Issues</h2>
+<ol class="arabic simple">
+<li>The current implementation is ad-hoc, and not complete for all use cases.</li>
+<li>Currently it is not possible to allow submission of issues through email
+but restrict those users from accessing the web interface.</li>
+<li>Only one user may perform admin functions.</li>
+<li>There is no verification of users in the mail gateway by any means other
+than the From address. Support for strong identification through digital
+signatures should be added.</li>
+<li>The command-line tool has no logical controls.</li>
+<li>The anonymous control needs revising - there should only be one way to be
+an anonymous user, not two (currently there is user==None and
+user==&#8217;anonymous&#8217;).</li>
+</ol>
+</div>
+<div class="section" id="possible-approaches">
+<h2>Possible approaches</h2>
+<p>Security controls in Roundup could be approached in three ways:</p>
+<ol class="arabic simple">
+<li>at the hyperdb level, with read/write/modify permissions on classes, items
+and item properties for all or specific transitions.</li>
+<li>at the user interface level, with access permissions on CGI interface
+methods, mailgw methods, roundup-admin methods, and so on.</li>
+<li>at a logical permission level, checked as needed.</li>
+</ol>
+<p>In all cases, the security built into roundup assumes restricted access to the
+hyperdatabase itself, through operating-system controls such as user or group
+permissions.</p>
+<div class="section" id="hyperdb-level-control">
+<h3>Hyperdb-level control</h3>
+<p>Control is implemented at the Class.get, Class.set and Class.create level. All
+other methods must access items through these methods. Since all accesses go
+through the database, we can implement deny by default.</p>
+<p>Pros:</p>
+<blockquote>
+<ul class="simple">
+<li>easier to implement as it only affects one module</li>
+<li>smaller number of permissions to worry about</li>
+</ul>
+</blockquote>
+<p>Cons:</p>
+<blockquote>
+<ul class="simple">
+<li>harder to determine the relationship between user interaction and hyperdb
+permission.</li>
+<li>a lot of work to define</li>
+<li>must special-case to handle by-item permissions (editing user details,
+having private messages)</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="user-interface-control">
+<h3>User-interface control</h3>
+<p>The user interfaces would have an extra layer between that which
+parses the request to determine action and the action method. This layer
+controls access. Since it is possible to require methods be registered
+with the security mechanisms to be accessed by the user, deny by default
+is possible.</p>
+<p>Pros:</p>
+<blockquote>
+<ul class="simple">
+<li>much more obvious at the user level what the controls are</li>
+</ul>
+</blockquote>
+<p>Cons:</p>
+<blockquote>
+<ul class="simple">
+<li>much more work to implement</li>
+<li>most user interfaces have multiple uses which can&#8217;t be covered by a
+single permission</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="logical-control">
+<h3>Logical control</h3>
+<p>At each point that requires an action to be performed, the security mechanisms
+are asked if the current user has permission. Since code must call the
+check function to raise a denial, there is no possibility to have automatic
+default of deny in this situation.</p>
+<p>Pros:</p>
+<blockquote>
+<ul class="simple">
+<li>quite obvious what is going on</li>
+<li>is very similar to the current system</li>
+</ul>
+</blockquote>
+<p>Cons:</p>
+<blockquote>
+<ul class="simple">
+<li>large number of possible permissions that may be defined, possibly
+mirroring actual user interface controls.</li>
+<li>access to the hyperdb must be strictly controlled through program code
+that implements the logical controls.</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div class="section" id="action">
+<h2>Action</h2>
+<p>The CGI interface must be changed to:</p>
+<ul class="simple">
+<li>authenticate over a secure connection</li>
+<li>use unique tokens as a result of authentication, rather than pass the user&#8217;s
+real credentials (username/password) around for each request (this means
+sessions and hence a session database)</li>
+<li>use the new logical control mechanisms<ul>
+<li>implement the permission module</li>
+<li>implement a Role editing interface for users</li>
+<li>implement htmltemplate tests on permissions</li>
+<li>switch all code over from using config vars for permission checks to using
+permissions</li>
+<li>change all explicit admin user checks for Role checks</li>
+<li>include config vars for initial Roles for anonymous web, new web and new
+email users</li>
+</ul>
+</li>
+</ul>
+<p>The mail gateway must be changed to:</p>
+<ul class="simple">
+<li>use digital signatures</li>
+<li>use the new logical control mechanisms<ul>
+<li>switch all code over from using config vars for permission checks to using
+permissions</li>
+</ul>
+</li>
+</ul>
+<p>The command-line tool must be changed to:</p>
+<ul class="simple">
+<li>use the new logical control mechanisms (only allowing write
+access by admin users, and read-only by everyone else)</li>
+</ul>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/security.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Roundup FAQ &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="User Guide" href="user_guide.html" />
+    <link rel="prev" title="Upgrading to newer versions of Roundup" href="upgrading.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">Roundup FAQ</a><ul>
+<li><a class="reference external" href="#installation">Installation</a><ul>
+<li><a class="reference external" href="#living-without-a-mailserver">Living without a mailserver</a></li>
+<li><a class="reference external" href="#the-cgi-bin-is-very-slow">The cgi-bin is very slow!</a></li>
+<li><a class="reference external" href="#how-do-i-put-roundup-behind-apache">How do I put Roundup behind Apache</a></li>
+<li><a class="reference external" href="#how-do-i-run-roundup-through-ssl-https">How do I run Roundup through SSL (HTTPS)?</a></li>
+<li><a class="reference external" href="#roundup-runs-very-slowly-on-my-xp-machine-when-accessed-from-the-internet">Roundup runs very slowly on my XP machine when accessed from the Internet</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#templates">Templates</a><ul>
+<li><a class="reference external" href="#what-is-that-stuff-in-the-tracker-html-directory">What is that stuff in the tracker html directory?</a></li>
+<li><a class="reference external" href="#but-i-just-want-a-select-option-list-for">But I just want a select/option list for ....</a></li>
+<li><a class="reference external" href="#great-but-now-the-select-option-list-is-too-big">Great! But now the select/option list is too big</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#using-roundup">Using Roundup</a><ul>
+<li><a class="reference external" href="#i-got-an-error-and-i-cannot-reload-it">I got an error and I cannot reload it!</a></li>
+<li><a class="reference external" href="#i-keep-getting-logged-out">I keep getting logged out</a></li>
+<li><a class="reference external" href="#i-m-getting-infinite-redirects-in-the-browser">I&#8217;m getting infinite redirects in the browser</a></li>
+<li><a class="reference external" href="#how-is-sorting-performed-and-why-does-it-seem-to-fail-sometimes">How is sorting performed, and why does it seem to fail sometimes?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="upgrading.html"
+                          title="previous chapter">Upgrading to newer versions of Roundup</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="user_guide.html"
+                          title="next chapter">User Guide</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/FAQ.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="user_guide.html" title="User Guide"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading to newer versions of Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="roundup-faq">
+<h1><a class="toc-backref" href="#id1">Roundup FAQ</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#roundup-faq" id="id1">Roundup FAQ</a><ul>
+<li><a class="reference internal" href="#installation" id="id2">Installation</a><ul>
+<li><a class="reference internal" href="#living-without-a-mailserver" id="id3">Living without a mailserver</a></li>
+<li><a class="reference internal" href="#the-cgi-bin-is-very-slow" id="id4">The cgi-bin is very slow!</a></li>
+<li><a class="reference internal" href="#how-do-i-put-roundup-behind-apache" id="id5">How do I put Roundup behind Apache</a></li>
+<li><a class="reference internal" href="#how-do-i-run-roundup-through-ssl-https" id="id6">How do I run Roundup through SSL (HTTPS)?</a></li>
+<li><a class="reference internal" href="#roundup-runs-very-slowly-on-my-xp-machine-when-accessed-from-the-internet" id="id7">Roundup runs very slowly on my XP machine when accessed from the Internet</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#templates" id="id8">Templates</a><ul>
+<li><a class="reference internal" href="#what-is-that-stuff-in-the-tracker-html-directory" id="id9">What is that stuff in the tracker html directory?</a></li>
+<li><a class="reference internal" href="#but-i-just-want-a-select-option-list-for" id="id10">But I just want a select/option list for ....</a></li>
+<li><a class="reference internal" href="#great-but-now-the-select-option-list-is-too-big" id="id11">Great! But now the select/option list is too big</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-roundup" id="id12">Using Roundup</a><ul>
+<li><a class="reference internal" href="#i-got-an-error-and-i-cannot-reload-it" id="id13">I got an error and I cannot reload it!</a></li>
+<li><a class="reference internal" href="#i-keep-getting-logged-out" id="id14">I keep getting logged out</a></li>
+<li><a class="reference internal" href="#i-m-getting-infinite-redirects-in-the-browser" id="id15">I&#8217;m getting infinite redirects in the browser</a></li>
+<li><a class="reference internal" href="#how-is-sorting-performed-and-why-does-it-seem-to-fail-sometimes" id="id16">How is sorting performed, and why does it seem to fail sometimes?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#id2">Installation</a></h2>
+<div class="section" id="living-without-a-mailserver">
+<h3><a class="toc-backref" href="#id3">Living without a mailserver</a></h3>
+<p>Remove the nosy reactor - delete the tracker file
+<tt class="docutils literal"><span class="pre">detectors/nosyreactor.py</span></tt> from your tracker home.</p>
+</div>
+<div class="section" id="the-cgi-bin-is-very-slow">
+<h3><a class="toc-backref" href="#id4">The cgi-bin is very slow!</a></h3>
+<p>Yep, it sure is. It has to start up Python and load all of the support
+libraries for <em>every</em> request.</p>
+<p>The solution is to use the built in server (or possibly the mod_python
+or WSGI support).</p>
+<p>To make Roundup more seamless with your website, you may place the built
+in server behind apache and link it into your web tree (see below).</p>
+</div>
+<div class="section" id="how-do-i-put-roundup-behind-apache">
+<h3><a class="toc-backref" href="#id5">How do I put Roundup behind Apache</a></h3>
+<p>We have a project (foo) running on <tt class="docutils literal"><span class="pre">tracker.example:8080</span></tt>.
+We want <tt class="docutils literal"><span class="pre">http://tracker.example/issues</span></tt> to use the roundup server, so we
+set that up on port 8080 on <tt class="docutils literal"><span class="pre">tracker.example</span></tt> with the <tt class="docutils literal"><span class="pre">config.ini</span></tt> line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">tracker</span><span class="p">]</span>
+<span class="o">...</span>
+<span class="n">web</span> <span class="o">=</span> <span class="s">&#39;http://tracker.example/issues/&#39;</span>
+</pre></div>
+</div>
+<p>We have a &#8220;foo_issues&#8221; tracker and we run the server with:</p>
+<div class="highlight-python"><pre>roundup-server -p 8080 issues=/home/roundup/trackers/issues</pre>
+</div>
+<p>Then, on the Apache machine (eg. redhat 7.3 with apache 1.3), in
+<tt class="docutils literal"><span class="pre">/etc/httpd/conf/httpd.conf</span></tt> uncomment:</p>
+<div class="highlight-python"><pre>LoadModule proxy_module       modules/libproxy.so</pre>
+</div>
+<p>and:</p>
+<div class="highlight-python"><pre>AddModule mod_proxy.c</pre>
+</div>
+<p>Then add:</p>
+<div class="highlight-python"><pre># roundup stuff (added manually)
+&lt;IfModule mod_proxy.c&gt;
+# proxy through one tracker
+ProxyPass /issues/ http://tracker.example:8080/issues/
+# proxy through all tracker(*)
+#ProxyPass /roundup/ http://tracker.example:8080/
+&lt;/IfModule&gt;</pre>
+</div>
+<p>Then restart Apache. Now Apache will proxy the request on to the
+roundup-server.</p>
+<p>Note that if you&#8217;re proxying multiple trackers, you&#8217;ll need to use the
+second ProxyPass rule described above. It will mean that your TRACKER_WEB
+will change to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TRACKER_WEB</span> <span class="o">=</span> <span class="s">&#39;http://tracker.example/roundup/issues/&#39;</span>
+</pre></div>
+</div>
+<p>Once you&#8217;re done, you can firewall off port 8080 from the rest of the world.</p>
+<p>Note that in some situations (eg. virtual hosting) you might need to use a
+more complex rewrite rule instead of the simpler ProxyPass above. The
+following should be useful as a starting template:</p>
+<div class="highlight-python"><pre># roundup stuff (added manually)
+&lt;IfModule mod_proxy.c&gt;
+
+RewriteEngine on
+
+# General Roundup
+RewriteRule ^/roundup$  roundup/    [R]
+RewriteRule ^/roundup/(.*)$ http://tracker.example:8080/$1   [P,L]
+
+# Handle Foo Issues
+RewriteRule ^/issues$  issues/    [R]
+RewriteRule ^/issues/(.*)$ http://tracker.example:8080/issues/$1 [P,L]
+
+&lt;/IfModule&gt;</pre>
+</div>
+</div>
+<div class="section" id="how-do-i-run-roundup-through-ssl-https">
+<h3><a class="toc-backref" href="#id6">How do I run Roundup through SSL (HTTPS)?</a></h3>
+<p>The preferred way of using SSL is to proxy through apache and use its
+SSL service. See the previous question on how to proxy through apache.</p>
+<p>The standalone roundup-server now also has SSL support which is still
+considered experimental. For details refer to the documentation of
+roundup server, in particular to the generated configuration file
+generated with</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">roundup</span><span class="o">-</span><span class="n">server</span> <span class="o">--</span><span class="n">save</span><span class="o">-</span><span class="n">config</span>
+</pre></div>
+</div>
+<p>that describes the needed option in detail. With the standalone server
+now XMLRPC over SSL works, too.</p>
+</div>
+<div class="section" id="roundup-runs-very-slowly-on-my-xp-machine-when-accessed-from-the-internet">
+<h3><a class="toc-backref" href="#id7">Roundup runs very slowly on my XP machine when accessed from the Internet</a></h3>
+<p>The issue is probably related to host name resolution for the client
+performing the request. You can turn off the resolution of the names
+when it&#8217;s so slow like this. To do so, edit the module
+roundup/scripts/roundup_server.py around line 77 to add the following
+to the RoundupRequestHandler class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">address_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client_address</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="templates">
+<h2><a class="toc-backref" href="#id8">Templates</a></h2>
+<div class="section" id="what-is-that-stuff-in-the-tracker-html-directory">
+<h3><a class="toc-backref" href="#id9">What is that stuff in the tracker html directory?</a></h3>
+<p>This is the template code that Roundup uses to display the various pages.
+This is based upon the template markup language in Zope called, oddly
+enough, &#8220;Zope Page Templates&#8221;. There&#8217;s documentation in the Roundup
+<a class="reference external" href="customizing.html">customisation</a> documentation. For more information have a look at:</p>
+<blockquote>
+<a class="reference external" href="http://docs.zope.org/zope2/zope2book/">http://docs.zope.org/zope2/zope2book/</a></blockquote>
+<p>specifically chapter 10 &#8220;Using Zope Page Templates&#8221; and chapter 14 &#8220;Advanced
+Page Templates&#8221;.</p>
+</div>
+<div class="section" id="but-i-just-want-a-select-option-list-for">
+<h3><a class="toc-backref" href="#id10">But I just want a select/option list for ....</a></h3>
+<p>Really easy... edit <tt class="docutils literal"><span class="pre">html/issue.item.html</span></tt>. For <tt class="docutils literal"><span class="pre">nosy</span></tt>, change the line
+(around line 69) from:</p>
+<div class="highlight-python"><pre>&lt;span tal:replace="structure context/nosy/field" /&gt;</pre>
+</div>
+<p>to:</p>
+<div class="highlight-python"><pre>&lt;span tal:replace="structure context/nosy/menu" /&gt;</pre>
+</div>
+<p>For <tt class="docutils literal"><span class="pre">assigned</span> <span class="pre">to</span></tt>, this is already done around line 77:</p>
+<div class="highlight-python"><pre>&lt;td tal:content="structure context/assignedto/menu"&gt;assignedto menu&lt;/td&gt;</pre>
+</div>
+</div>
+<div class="section" id="great-but-now-the-select-option-list-is-too-big">
+<h3><a class="toc-backref" href="#id11">Great! But now the select/option list is too big</a></h3>
+<p>That is a little harder (but only a little ;^)</p>
+<p>Again, edit <tt class="docutils literal"><span class="pre">html/issue.item</span></tt>. For nosy, change line (around line 69) from:</p>
+<div class="highlight-python"><pre>&lt;span tal:replace="structure context/nosy/field" /&gt;</pre>
+</div>
+<p>to:</p>
+<div class="highlight-python"><pre>&lt;span tal:replace="structure python:context.nosy.menu(height=3)" /&gt;</pre>
+</div>
+<p>for more information, go and read about Zope Page Templates.</p>
+</div>
+</div>
+<div class="section" id="using-roundup">
+<h2><a class="toc-backref" href="#id12">Using Roundup</a></h2>
+<div class="section" id="i-got-an-error-and-i-cannot-reload-it">
+<h3><a class="toc-backref" href="#id13">I got an error and I cannot reload it!</a></h3>
+<p>If you&#8217;re using Netscape/Mozilla, try holding shift and pressing reload.
+If you&#8217;re using IE then install Mozilla and try again ;^)</p>
+</div>
+<div class="section" id="i-keep-getting-logged-out">
+<h3><a class="toc-backref" href="#id14">I keep getting logged out</a></h3>
+<p>Make sure that the <tt class="docutils literal"><span class="pre">tracker</span></tt> -&gt; <tt class="docutils literal"><span class="pre">web</span></tt> setting in your tracker&#8217;s
+config.ini is set to the URL of the tracker.</p>
+</div>
+<div class="section" id="i-m-getting-infinite-redirects-in-the-browser">
+<h3><a class="toc-backref" href="#id15">I&#8217;m getting infinite redirects in the browser</a></h3>
+<p>A wrong value for the <tt class="docutils literal"><span class="pre">tracker</span></tt> -&gt; <tt class="docutils literal"><span class="pre">web</span></tt> setting may also result in
+infinite redirects, see <a class="reference external" href="http://issues.roundup-tracker.org/issue2537286">http://issues.roundup-tracker.org/issue2537286</a></p>
+</div>
+<div class="section" id="how-is-sorting-performed-and-why-does-it-seem-to-fail-sometimes">
+<h3><a class="toc-backref" href="#id16">How is sorting performed, and why does it seem to fail sometimes?</a></h3>
+<p>When we sort items in the hyperdb, we use one of a number of methods,
+depending on the properties being sorted on:</p>
+<ol class="arabic simple">
+<li>If it&#8217;s a String, Number, Date or Interval property, we just sort the
+scalar value of the property. Strings are sorted case-sensitively.</li>
+<li>If it&#8217;s a Link property, we sort by either the linked item&#8217;s &#8220;order&#8221;
+property (if it has one) or the linked item&#8217;s &#8220;id&#8221;.</li>
+<li>Mulitlinks sort similar to #2, but we start with the first
+Multilink list item, and if they&#8217;re the same, we sort by the second item,
+and so on.</li>
+</ol>
+<p>Note that if an &#8220;order&#8221; property is defined on a Class that is used for
+sorting, all items of that Class <em>must</em> have a value against the &#8220;order&#8221;
+property, or sorting will result in random ordering.</p>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="user_guide.html" title="User Guide"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading to newer versions of Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/FAQ.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

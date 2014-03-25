@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Administration Guide &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="XML-RPC access to Roundup" href="xmlrpc.html" />
+    <link rel="prev" title="Customising Roundup" href="customizing.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">Administration Guide</a><ul>
+<li><a class="reference external" href="#what-does-roundup-install">What does Roundup install?</a></li>
+<li><a class="reference external" href="#configuring-roundup-s-logging-of-messages-for-sysadmins">Configuring Roundup&#8217;s Logging of Messages For Sysadmins</a></li>
+<li><a class="reference external" href="#configuring-roundup-server">Configuring roundup-server</a></li>
+<li><a class="reference external" href="#users-and-security">Users and Security</a></li>
+<li><a class="reference external" href="#tasks">Tasks</a><ul>
+<li><a class="reference external" href="#tracker-backup">Tracker Backup</a></li>
+<li><a class="reference external" href="#software-upgrade">Software Upgrade</a></li>
+<li><a class="reference external" href="#migrating-backends">Migrating Backends</a></li>
+<li><a class="reference external" href="#moving-a-tracker">Moving a Tracker</a></li>
+<li><a class="reference external" href="#migrating-from-other-software">Migrating From Other Software</a></li>
+<li><a class="reference external" href="#adding-a-user-from-the-command-line">Adding A User From The Command-Line</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#running-the-servers">Running the Servers</a><ul>
+<li><a class="reference external" href="#unix">Unix</a></li>
+<li><a class="reference external" href="#windows">Windows</a><ul>
+<li><a class="reference external" href="#running-the-mail-gateway-script">Running the Mail Gateway Script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="customizing.html"
+                          title="previous chapter">Customising Roundup</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="xmlrpc.html"
+                          title="next chapter">XML-RPC access to Roundup</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/admin_guide.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="xmlrpc.html" title="XML-RPC access to Roundup"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="customizing.html" title="Customising Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="administration-guide">
+<h1><a class="toc-backref" href="#id1">Administration Guide</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#administration-guide" id="id1">Administration Guide</a><ul>
+<li><a class="reference internal" href="#what-does-roundup-install" id="id2">What does Roundup install?</a></li>
+<li><a class="reference internal" href="#configuring-roundup-s-logging-of-messages-for-sysadmins" id="id3">Configuring Roundup&#8217;s Logging of Messages For Sysadmins</a></li>
+<li><a class="reference internal" href="#configuring-roundup-server" id="id4">Configuring roundup-server</a></li>
+<li><a class="reference internal" href="#users-and-security" id="id5">Users and Security</a></li>
+<li><a class="reference internal" href="#tasks" id="id6">Tasks</a><ul>
+<li><a class="reference internal" href="#tracker-backup" id="id7">Tracker Backup</a></li>
+<li><a class="reference internal" href="#software-upgrade" id="id8">Software Upgrade</a></li>
+<li><a class="reference internal" href="#migrating-backends" id="id9">Migrating Backends</a></li>
+<li><a class="reference internal" href="#moving-a-tracker" id="id10">Moving a Tracker</a></li>
+<li><a class="reference internal" href="#migrating-from-other-software" id="id11">Migrating From Other Software</a></li>
+<li><a class="reference internal" href="#adding-a-user-from-the-command-line" id="id12">Adding A User From The Command-Line</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-servers" id="id13">Running the Servers</a><ul>
+<li><a class="reference internal" href="#unix" id="id14">Unix</a></li>
+<li><a class="reference internal" href="#windows" id="id15">Windows</a><ul>
+<li><a class="reference internal" href="#running-the-mail-gateway-script" id="id16">Running the Mail Gateway Script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-does-roundup-install">
+<h2><a class="toc-backref" href="#id2">What does Roundup install?</a></h2>
+<p>There&#8217;s two &#8220;installations&#8221; that we talk about when using Roundup:</p>
+<ol class="arabic">
+<li><p class="first">The installation of the software and its support files. This uses the
+standard Python mechanism called &#8220;distutils&#8221; and thus Roundup&#8217;s core code,
+executable scripts and support data files are installed in Python&#8217;s
+directories. On Windows, this is typically:</p>
+<dl class="docutils">
+<dt>Scripts</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">&lt;python</span> <span class="pre">dir&gt;\scripts\...</span></tt></p>
+</dd>
+<dt>Core code</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">&lt;python</span> <span class="pre">dir&gt;\lib\site-packages\roundup\...</span></tt></p>
+</dd>
+<dt>Support files</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">&lt;python</span> <span class="pre">dir&gt;\share\roundup\...</span></tt></p>
+</dd>
+</dl>
+<p>and on Unix-like systems (eg. Linux):</p>
+<dl class="docutils">
+<dt>Scripts</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">&lt;python</span> <span class="pre">root&gt;/bin/...</span></tt></p>
+</dd>
+<dt>Core code</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">&lt;python</span> <span class="pre">root&gt;/lib-&lt;python</span> <span class="pre">version&gt;/site-packages/roundup/...</span></tt></p>
+</dd>
+<dt>Support files</dt>
+<dd><p class="first last"><tt class="docutils literal"><span class="pre">&lt;python</span> <span class="pre">root&gt;/share/roundup/...</span></tt></p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The installation of a specific tracker. When invoking the roundup-admin
+&#8220;inst&#8221; (and &#8220;init&#8221;) commands, you&#8217;re creating a new Roundup tracker. This
+installs configuration files, HTML templates, detector code and a new
+database. You have complete control over where this stuff goes through
+both choosing your &#8220;tracker home&#8221; and the <tt class="docutils literal"><span class="pre">main</span></tt> -&gt; <tt class="docutils literal"><span class="pre">database</span></tt> variable
+in the tracker&#8217;s config.ini.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-roundup-s-logging-of-messages-for-sysadmins">
+<h2><a class="toc-backref" href="#id3">Configuring Roundup&#8217;s Logging of Messages For Sysadmins</a></h2>
+<p>You may configure where Roundup logs messages in your tracker&#8217;s config.ini
+file. Roundup will use the standard Python (2.3+) logging implementation.</p>
+<dl class="docutils">
+<dt>Configuration for standard &#8220;logging&#8221; module:</dt>
+<dd><ul class="first last simple">
+<li>tracker configuration file specifies the location of a logging
+configration file as <tt class="docutils literal"><span class="pre">logging</span></tt> -&gt; <tt class="docutils literal"><span class="pre">config</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">roundup-server</span></tt> specifies the location of a logging configuration
+file on the command line</li>
+</ul>
+</dd>
+<dt>Configuration for &#8220;BasicLogging&#8221; implementation:</dt>
+<dd><ul class="first last simple">
+<li>tracker configuration file specifies the location of a log file
+<tt class="docutils literal"><span class="pre">logging</span></tt> -&gt; <tt class="docutils literal"><span class="pre">filename</span></tt></li>
+<li>tracker configuration file specifies the level to log to as
+<tt class="docutils literal"><span class="pre">logging</span></tt> -&gt; <tt class="docutils literal"><span class="pre">level</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">roundup-server</span></tt> specifies the location of a log file on the command
+line</li>
+<li><tt class="docutils literal"><span class="pre">roundup-server</span></tt> specifies the level to log to on the command line</li>
+</ul>
+</dd>
+</dl>
+<p>(<tt class="docutils literal"><span class="pre">roundup-mailgw</span></tt> always logs to the tracker&#8217;s log file)</p>
+<p>In both cases, if no logfile is specified then logging will simply be sent
+to sys.stderr with only logging of ERROR messages.</p>
+</div>
+<div class="section" id="configuring-roundup-server">
+<h2><a class="toc-backref" href="#id4">Configuring roundup-server</a></h2>
+<p>The basic configuration file layout is as follows (take from the
+<tt class="docutils literal"><span class="pre">roundup-server.ini.example</span></tt> file in the &#8220;doc&#8221; directory):</p>
+<div class="highlight-python"><pre>[main]
+port = 8080
+;host =
+;user =
+;group =
+;log_ip = yes
+;pidfile =
+;logfile =
+;template =
+;ssl = no
+;pem =
+
+[trackers]
+; Add one of these per tracker being served
+name = /path/to/tracker/name</pre>
+</div>
+<p>Values &#8220;;commented out&#8221; are optional. The meaning of the various options
+are as follows:</p>
+<dl class="docutils">
+<dt><strong>port</strong></dt>
+<dd>Defines the local TCP port to listen for clients on.</dd>
+<dt><strong>host</strong></dt>
+<dd>Defines the hostname or IP number to listen for clients on. Only
+required if <cite>localhost</cite> is not sufficient. If left empty (as opposed
+to no <cite>host</cite> keyword in the config-file) this will listen to all
+network interfaces and is equivalent to an explicit address <cite>0.0.0.0</cite>.
+The use of an empty string to listen to all interfaces is deprecated
+and will go away in a future version.</dd>
+<dt><strong>user</strong> and <strong>group</strong></dt>
+<dd>Defines the Unix user and group to run the server as. Only work if the
+server is started as root.</dd>
+<dt><strong>log_ip</strong></dt>
+<dd>If <tt class="docutils literal"><span class="pre">yes</span></tt> then we log IP addresses against accesses. If <tt class="docutils literal"><span class="pre">no</span></tt> then we
+log the hostname of the client. The latter can be much slower.</dd>
+<dt><strong>pidfile</strong></dt>
+<dd>If specified, the server will fork at startup and write its new PID to
+the file.</dd>
+<dt><strong>logfile</strong></dt>
+<dd>Any unhandled exception messages or other output from Roundup will be
+written to this file. It must be specified if <strong>pidfile</strong> is specified.
+If per-tracker logging is specified, then very little will be written to
+this file.</dd>
+<dt><strong>template</strong></dt>
+<dd>Specifies a template used for displaying the tracker index when
+multiple trackers are being used. The variable &#8220;trackers&#8221; is available
+to the template and is a dict of all configured trackers.</dd>
+<dt><strong>ssl</strong></dt>
+<dd>Enables the use of SSL to secure the connection to the roundup-server.
+If you enable this, ensure that your tracker&#8217;s config.ini specifies
+an <em>https</em> URL.</dd>
+<dt><strong>pem</strong></dt>
+<dd>If specified, the SSL PEM file containing the private key and certificate.
+If not specified, roundup will generate a temporary, self-signed certificate
+for use.</dd>
+<dt><strong>trackers</strong> section</dt>
+<dd>Each line denotes a mapping from a URL component to a tracker home.
+Make sure the name part doesn&#8217;t include any url-unsafe characters like
+spaces. Stick to alphanumeric characters and you&#8217;ll be ok.</dd>
+</dl>
+</div>
+<div class="section" id="users-and-security">
+<h2><a class="toc-backref" href="#id5">Users and Security</a></h2>
+<p>Roundup holds its own user database which primarily contains a username,
+password and email address for the user. Roundup <em>must</em> have its own user
+listing, in order to maintain internal consistency of its data. It is a
+relatively simple exercise to update this listing on a regular basis, or on
+demand, so that it matches an external listing (eg. unix passwd file, LDAP,
+etc.)</p>
+<p>Roundup identifies users in a number of ways:</p>
+<ol class="arabic simple">
+<li>Through the web, users may be identified by either HTTP Basic
+Authentication or cookie authentication. If you are running the web
+server (roundup-server) through another HTTP server (eg. apache or IIS)
+then that server may require HTTP Basic Authentication, and it will pass
+the <tt class="docutils literal"><span class="pre">REMOTE_USER</span></tt> variable through to Roundup. If this variable is not
+present, then Roundup defaults to using its own cookie-based login
+mechanism.</li>
+<li>In email messages handled by roundup-mailgw, users are identified by the
+From address in the message.</li>
+</ol>
+<p>In both cases, Roundup&#8217;s behaviour when dealing with unknown users is
+controlled by Permissions defined in the &#8220;SECURITY SETTINGS&#8221; section of the
+tracker&#8217;s <tt class="docutils literal"><span class="pre">schema.py</span></tt> module:</p>
+<dl class="docutils">
+<dt>Web Registration</dt>
+<dd>If granted to the Anonymous Role, then anonymous users will be able to
+register through the web.</dd>
+<dt>Email Registration</dt>
+<dd>If granted to the Anonymous Role, then email messages from unknown users
+will result in those users being registered with the tracker.</dd>
+</dl>
+<p>More information about how to customise your tracker&#8217;s security settings
+may be found in the <a class="reference external" href="customizing.html">customisation documentation</a>.</p>
+</div>
+<div class="section" id="tasks">
+<h2><a class="toc-backref" href="#id6">Tasks</a></h2>
+<p>Maintenance of Roundup can involve one of the following:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#tracker-backup">tracker backup</a></li>
+<li><a class="reference internal" href="#software-upgrade">software upgrade</a></li>
+<li><a class="reference internal" href="#migrating-backends">migrating backends</a></li>
+<li><a class="reference internal" href="#moving-a-tracker">moving a tracker</a></li>
+<li><a class="reference internal" href="#migrating-from-other-software">migrating from other software</a></li>
+<li><a class="reference internal" href="#adding-a-user-from-the-command-line">adding a user from the command-line</a></li>
+</ol>
+<div class="section" id="tracker-backup">
+<h3><a class="toc-backref" href="#id7">Tracker Backup</a></h3>
+<p>The roundup-admin import and export commands are <strong>not</strong> recommended for
+performing backup.</p>
+<p>Optionally stop the web and email frontends and to copy the contents of the
+tracker home directory to some other place using standard backup tools.
+This means using
+<em>pg_dump</em> to take a snapshot of your Postgres backend database, for example.
+A simple copy of the tracker home (and files storage area if you&#8217;ve configured
+it to be elsewhere) will then complete the backup.</p>
+</div>
+<div class="section" id="software-upgrade">
+<h3><a class="toc-backref" href="#id8">Software Upgrade</a></h3>
+<p>Always make a backup of your tracker before upgrading software. Steps you may
+take:</p>
+<ol class="arabic">
+<li><p class="first">Ensure that the unit tests run on your system:</p>
+<div class="highlight-python"><pre>python run_tests.py</pre>
+</div>
+</li>
+<li><p class="first">If you&#8217;re using an RDBMS backend, make a backup of its contents now.</p>
+</li>
+<li><p class="first">Make a backup of the tracker home itself.</p>
+</li>
+<li><p class="first">Stop the tracker web and email frontends.</p>
+</li>
+<li><p class="first">Install the new version of the software:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
+</div>
+</li>
+<li><p class="first">Follow the steps in the <a class="reference external" href="upgrading.html">upgrading documentation</a> for the new version of
+the software in the copied.</p>
+<p>Usually you will be asked to run <cite>roundup_admin migrate</cite> on your tracker
+before you allow users to start accessing the tracker.</p>
+<p>It&#8217;s safe to run this even if it&#8217;s not required, so just get into the
+habit.</p>
+</li>
+<li><p class="first">Restart your tracker web and email frontends.</p>
+</li>
+</ol>
+<p>If something bad happens, you may reinstate your backup of the tracker and
+reinstall the older version of the sofware using the same install command:</p>
+<div class="highlight-python"><pre>python setup.py install</pre>
+</div>
+</div>
+<div class="section" id="migrating-backends">
+<h3><a class="toc-backref" href="#id9">Migrating Backends</a></h3>
+<ol class="arabic">
+<li><p class="first">Stop the existing tracker web and email frontends (preventing changes).</p>
+</li>
+<li><p class="first">Use the roundup-admin tool &#8220;export&#8221; command to export the contents of
+your tracker to disk.</p>
+</li>
+<li><p class="first">Copy the tracker home to a new directory.</p>
+</li>
+<li><p class="first">Delete the &#8220;db&#8221; directory from the new directory.</p>
+</li>
+<li><p class="first">Enter the new backend name in the tracker home <tt class="docutils literal"><span class="pre">db/backend_name</span></tt> file.</p>
+</li>
+<li><p class="first">Use the roundup-admin &#8220;import&#8221; command to import the previous export with
+the new tracker home. If non-interactively:</p>
+<div class="highlight-python"><pre>roundup-admin -i &lt;tracker home&gt; import &lt;tracker export dir&gt;</pre>
+</div>
+<p>If interactively, enter &#8216;commit&#8217; before exiting.</p>
+</li>
+<li><p class="first">Test each of the admin tool, web interface and mail gateway using the new
+backend.</p>
+</li>
+<li><p class="first">Move the old tracker home out of the way (rename to &#8220;tracker.old&#8221;) and
+move the new tracker home into its place.</p>
+</li>
+<li><p class="first">Restart web and email frontends.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="moving-a-tracker">
+<h3><a class="toc-backref" href="#id10">Moving a Tracker</a></h3>
+<p>If you&#8217;re moving the tracker to a similar machine, you should:</p>
+<ol class="arabic simple">
+<li>install Roundup on the new machine and test that it works there,</li>
+<li>stop the existing tracker web and email frontends (preventing changes),</li>
+<li>copy the tracker home directory over to the new machine, and</li>
+<li>start the tracker web and email frontends on the new machine.</li>
+</ol>
+<p>Most of the backends are actually portable across platforms (ie. from Unix to
+Windows to Mac). If this isn&#8217;t the case (ie. the tracker doesn&#8217;t work when
+moved using the above steps) then you&#8217;ll need to:</p>
+<ol class="arabic simple">
+<li>install Roundup on the new machine and test that it works there,</li>
+<li>stop the existing tracker web and email frontends (preventing changes),</li>
+<li>use the roundup-admin tool &#8220;export&#8221; command to export the contents of
+the existing tracker,</li>
+<li>copy the export to the new machine,</li>
+<li>use the roundup-admin &#8220;import&#8221; command to import the tracker on the new
+machine, and</li>
+<li>start the tracker web and email frontends on the new machine.</li>
+</ol>
+</div>
+<div class="section" id="migrating-from-other-software">
+<h3><a class="toc-backref" href="#id11">Migrating From Other Software</a></h3>
+<p>You have a couple of choices. You can either use a CSV import into Roundup,
+or you can write a simple Python script which uses the Roundup API
+directly. The latter is almost always simpler &#8211; see the &#8220;scripts&#8221;
+directory in the Roundup source for some example uses of the API.</p>
+<p>&#8220;roundup-admin import&#8221; will import data into your tracker from a
+directory containing files with the following format:</p>
+<ul>
+<li><p class="first">one colon-separated-values file per Class with columns for each property,
+named &lt;classname&gt;.csv</p>
+</li>
+<li><p class="first">one colon-separated-values file per Class with journal information,
+named &lt;classname&gt;-journals.csv (this is required, even if it&#8217;s empty)</p>
+</li>
+<li><p class="first">if the Class is a FileClass, you may have the &#8220;content&#8221; property
+stored in separate files from the csv files. This goes in a directory
+structure:</p>
+<div class="highlight-python"><pre>&lt;classname&gt;-files/&lt;N&gt;/&lt;designator&gt;</pre>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">&lt;designator&gt;</span></tt> is the item&#8217;s <tt class="docutils literal"><span class="pre">&lt;classname&gt;&lt;id&gt;</span></tt> combination.
+The <tt class="docutils literal"><span class="pre">&lt;N&gt;</span></tt> value is <tt class="docutils literal"><span class="pre">int(&lt;id&gt;</span> <span class="pre">/</span> <span class="pre">1000)</span></tt>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="adding-a-user-from-the-command-line">
+<h3><a class="toc-backref" href="#id12">Adding A User From The Command-Line</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">roundup-admin</span></tt> program can create any data you wish to in the
+database. To create a new user, use:</p>
+<div class="highlight-python"><pre>roundup-admin create user</pre>
+</div>
+<p>To figure out what good values might be for some of the fields (eg. Roles)
+you can just display another user:</p>
+<div class="highlight-python"><pre>roundup-admin list user</pre>
+</div>
+<p>(or if you know their username, and it happens to be &#8220;richard&#8221;):</p>
+<div class="highlight-python"><pre>roundup-admin find username=richard</pre>
+</div>
+<p>then using the user id you get from one of the above commands, you may
+display the user&#8217;s details:</p>
+<div class="highlight-python"><pre>roundup-admin display &lt;userid&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-servers">
+<h2><a class="toc-backref" href="#id13">Running the Servers</a></h2>
+<div class="section" id="unix">
+<h3><a class="toc-backref" href="#id14">Unix</a></h3>
+<p>On Unix systems, use the scripts/server-ctl script to control the
+roundup-server server. Copy it somewhere and edit the variables at the top
+to reflect your specific installation.</p>
+</div>
+<div class="section" id="windows">
+<h3><a class="toc-backref" href="#id15">Windows</a></h3>
+<p>On Windows, the roundup-server program runs as a Windows Service, and
+therefore may be controlled through the Services control panel. The
+roundup-server program may also control the service directly:</p>
+<dl class="docutils">
+<dt><strong>install the service</strong></dt>
+<dd><tt class="docutils literal"><span class="pre">roundup-server</span> <span class="pre">-C</span> <span class="pre">/path/to/my/roundup-server.ini</span> <span class="pre">-c</span> <span class="pre">install</span></tt></dd>
+<dt><strong>start the service</strong></dt>
+<dd><tt class="docutils literal"><span class="pre">roundup-server</span> <span class="pre">-c</span> <span class="pre">start</span></tt></dd>
+<dt><strong>stop the service</strong></dt>
+<dd><tt class="docutils literal"><span class="pre">roundup-server</span> <span class="pre">-c</span> <span class="pre">stop</span></tt></dd>
+</dl>
+<p>To bring up the services panel:</p>
+<dl class="docutils">
+<dt>Windows 2000 and later</dt>
+<dd>Start/Control Panel/Administrative Tools/Services</dd>
+<dt>Windows NT4</dt>
+<dd>Start/Control Panel/Services</dd>
+</dl>
+<p>You will need a server configuration file (as described in
+<a class="reference internal" href="#configuring-roundup-server">Configuring roundup-server</a>) for specifying tracker homes
+and other roundup-server configuration. Specify the name of
+this file using the <tt class="docutils literal"><span class="pre">-C</span></tt> switch when installing the service.</p>
+<div class="section" id="running-the-mail-gateway-script">
+<h4><a class="toc-backref" href="#id16">Running the Mail Gateway Script</a></h4>
+<p>The mail gateway script should be scheduled to run regularly on your
+Windows server. Normally this will result in a window popping up. The
+solution to this is to:</p>
+<ol class="arabic simple">
+<li>Create a new local account on the Roundup server</li>
+<li>Set the scheduled task to run in the context of this user instead
+of your normal login</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="xmlrpc.html" title="XML-RPC access to Roundup"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="customizing.html" title="Customising Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/admin_guide.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

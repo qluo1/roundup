@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MySQL Backend &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">MySQL Backend</a><ul>
+<li><a class="reference external" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference external" href="#running-the-mysql-tests">Running the MySQL tests</a></li>
+<li><a class="reference external" href="#showing-mysql-who-s-boss">Showing MySQL who&#8217;s boss</a></li>
+</ul>
+</li>
+</ul>
+
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/mysql.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="mysql-backend">
+<h1>MySQL Backend</h1>
+<p>This notes detail the MySQL backend for the Roundup issue tracker.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<p>To use MySQL as the backend for storing roundup data, you also need
+to install:</p>
+<ol class="arabic simple">
+<li>MySQL RDBMS 4.0.18 or higher - <a class="reference external" href="http://www.mysql.com">http://www.mysql.com</a>. Your MySQL
+installation MUST support InnoDB tables (or Berkeley DB (BDB) tables
+if you have no other choice). If you&#8217;re running &lt; 4.0.18 (but not &lt;4.0)
+then you&#8217;ll need to use BDB to pass all unit tests. Edit the
+<tt class="docutils literal"><span class="pre">roundup/backends/back_mysql.py</span></tt> file to enable DBD instead of InnoDB.</li>
+<li>Python MySQL interface - <a class="reference external" href="http://sourceforge.net/projects/mysql-python">http://sourceforge.net/projects/mysql-python</a></li>
+</ol>
+</div>
+<div class="section" id="running-the-mysql-tests">
+<h2>Running the MySQL tests</h2>
+<p>Roundup tests expect an empty MySQL database. Two alternate ways to provide
+this:</p>
+<ol class="arabic">
+<li><p class="first">If you have root permissions on the MySQL server, you can create
+the necessary database entries using the follwing SQL sequence. Use
+<tt class="docutils literal"><span class="pre">mysql</span></tt> on the command line to enter:</p>
+<div class="highlight-python"><pre>CREATE DATABASE rounduptest;
+USE rounduptest;
+GRANT ALL PRIVILEGES ON rounduptest.* TO rounduptest@localhost
+     IDENTIFIED BY 'rounduptest';
+FLUSH PRIVILEGES;</pre>
+</div>
+</li>
+<li><p class="first">If your administrator has provided you with database connection info,
+see the config values in &#8216;test/db_test_base.py&#8217;
+about which database connection, name and user will be used.</p>
+</li>
+</ol>
+<p>The MySQL database should not contain any tables. Tests will not
+drop the database with existing data.</p>
+</div>
+<div class="section" id="showing-mysql-who-s-boss">
+<h2>Showing MySQL who&#8217;s boss</h2>
+<p>If things ever get to the point where that test database is totally hosed,
+just:</p>
+<div class="highlight-python"><pre>$ su -
+# /etc/init.d/mysql stop
+# rm -rf /var/lib/mysql/rounduptest
+# /etc/init.d/mysql start</pre>
+</div>
+<p>and all will be better (note that on some systems, <tt class="docutils literal"><span class="pre">mysql</span></tt> is spelt
+<tt class="docutils literal"><span class="pre">mysqld</span></tt>).</p>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/mysql.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

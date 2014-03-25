@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Developing Roundup &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="Roundup Tracker Templates" href="tracker_templates.html" />
+    <link rel="prev" title="Roundup - An Issue-Tracking System for Knowledge Workers" href="design.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">Developing Roundup</a><ul>
+<li><a class="reference external" href="#getting-started">Getting Started</a></li>
+<li><a class="reference external" href="#website-wiki">Website, wiki</a></li>
+<li><a class="reference external" href="#issue-tracker">Issue Tracker</a></li>
+<li><a class="reference external" href="#small-changes">Small Changes</a></li>
+<li><a class="reference external" href="#source-repository-access">Source Repository Access</a></li>
+<li><a class="reference external" href="#project-rules">Project Rules</a></li>
+<li><a class="reference external" href="#debugging-aids">Debugging Aids</a></li>
+<li><a class="reference external" href="#internationalization-notes">Internationalization Notes</a><ul>
+<li><a class="reference external" href="#gnu-gettext-package">GNU gettext package</a></li>
+<li><a class="reference external" href="#marking-strings-for-translation">Marking Strings for Translation</a><ul>
+<li><a class="reference external" href="#command-line-interfaces">Command Line Interfaces</a></li>
+<li><a class="reference external" href="#deferred-translations">Deferred Translations</a></li>
+<li><a class="reference external" href="#web-user-interface">Web User Interface</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#extracting-translatable-messages">Extracting Translatable Messages</a></li>
+<li><a class="reference external" href="#translating-messages">Translating Messages</a></li>
+<li><a class="reference external" href="#compiling-message-catalogs">Compiling Message Catalogs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="design.html"
+                          title="previous chapter">Roundup - An Issue-Tracking System for Knowledge Workers</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tracker_templates.html"
+                          title="next chapter">Roundup Tracker Templates</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/developers.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tracker_templates.html" title="Roundup Tracker Templates"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="design.html" title="Roundup - An Issue-Tracking System for Knowledge Workers"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="developing-roundup">
+<h1><a class="toc-backref" href="#id2">Developing Roundup</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The intended audience of this document is the developers of the core
+Roundup code. If you just wish to alter some behaviour of your Roundup
+installation, see <a class="reference external" href="customizing.html">customising roundup</a>.</p>
+</div>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#developing-roundup" id="id2">Developing Roundup</a><ul>
+<li><a class="reference internal" href="#getting-started" id="id3">Getting Started</a></li>
+<li><a class="reference internal" href="#website-wiki" id="id4">Website, wiki</a></li>
+<li><a class="reference internal" href="#issue-tracker" id="id5">Issue Tracker</a></li>
+<li><a class="reference internal" href="#small-changes" id="id6">Small Changes</a></li>
+<li><a class="reference internal" href="#source-repository-access" id="id7">Source Repository Access</a></li>
+<li><a class="reference internal" href="#project-rules" id="id8">Project Rules</a></li>
+<li><a class="reference internal" href="#debugging-aids" id="id9">Debugging Aids</a></li>
+<li><a class="reference internal" href="#internationalization-notes" id="id10">Internationalization Notes</a><ul>
+<li><a class="reference internal" href="#gnu-gettext-package" id="id11">GNU gettext package</a></li>
+<li><a class="reference internal" href="#marking-strings-for-translation" id="id12">Marking Strings for Translation</a><ul>
+<li><a class="reference internal" href="#command-line-interfaces" id="id13">Command Line Interfaces</a></li>
+<li><a class="reference internal" href="#deferred-translations" id="id14">Deferred Translations</a></li>
+<li><a class="reference internal" href="#web-user-interface" id="id15">Web User Interface</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extracting-translatable-messages" id="id16">Extracting Translatable Messages</a></li>
+<li><a class="reference internal" href="#translating-messages" id="id17">Translating Messages</a></li>
+<li><a class="reference internal" href="#compiling-message-catalogs" id="id18">Compiling Message Catalogs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="getting-started">
+<h2><a class="toc-backref" href="#id3">Getting Started</a></h2>
+<p>Anyone wishing to help in the development of Roundup must read <a class="reference external" href="spec.html">Roundup&#8217;s
+Design Document</a> and the <a class="reference external" href="implementation.html">implementation notes</a>.</p>
+<p>All development is coordinated through two resources:</p>
+<ul class="simple">
+<li>roundup-devel mailing list at
+<a class="reference external" href="http://lists.sourceforge.net/mailman/listinfo/roundup-devel">http://lists.sourceforge.net/mailman/listinfo/roundup-devel</a></li>
+<li>The issue tracker running at
+<a class="reference external" href="http://issues.roundup-tracker.org/">http://issues.roundup-tracker.org/</a></li>
+</ul>
+</div>
+<div class="section" id="website-wiki">
+<h2><a class="toc-backref" href="#id4">Website, wiki</a></h2>
+<p>The website is in our repository, so is the configuration of the wiki.
+Please check the README.txt in the &#8220;website&#8221; subdirectory
+of a current checkout.</p>
+</div>
+<div class="section" id="issue-tracker">
+<h2><a class="toc-backref" href="#id5">Issue Tracker</a></h2>
+<p>The tracker resides on psf.upfronthosting.co.za.
+(2012-07-04) 2048 c4:ad:63:92:1b:c0:4a:35:c8:c5:3e:96:51:c0:88:67 (RSA)</p>
+<p>The roundup installation belongs to the user roundup.
+In ~roundup, all trackers are stored and the roundup code itself.
+roundup is started through /etc/init.d/roundup;
+other parts of the installation are started through
+/etc/init.d/{postgresql-8-1,spambayes,postfix}.</p>
+<p>The machine is operated by Upfronthosting in South Africa. The meta
+tracker is <a class="reference external" href="http://psf.upfronthosting.co.za/roundup/meta/">http://psf.upfronthosting.co.za/roundup/meta/</a>
+In this tracker, Upfronthosting people are the users izak and roche.</p>
+<p>The Roundup tracker <a class="reference external" href="http://issues.roundup-tracker.org/">http://issues.roundup-tracker.org/</a> is in
+~roundup/trackers/roundup</p>
+<p>The configuration is in the &#8220;website/issues&#8221; section of Roundup&#8217;s
+Mercurical SCM repository and copied manually to the live tracker.</p>
+<p>A checkout of the roundup sources is in ~roundup/src/roundup-src.</p>
+</div>
+<div class="section" id="small-changes">
+<h2><a class="toc-backref" href="#id6">Small Changes</a></h2>
+<p>Most small changes can be submitted as patches through the issue
+tracker or sent to <a class="reference external" href="http://lists.sourceforge.net/mailman/listinfo/roundup-devel">roundup-devel mailing list</a>.</p>
+</div>
+<div class="section" id="source-repository-access">
+<h2><a class="toc-backref" href="#id7">Source Repository Access</a></h2>
+<p>See <a class="reference external" href="http://www.roundup-tracker.org/code.html">http://www.roundup-tracker.org/code.html</a>.
+For all other questions ask on the development mailinglist.</p>
+</div>
+<div class="section" id="project-rules">
+<h2><a class="toc-backref" href="#id8">Project Rules</a></h2>
+<p>Mostly the project follows Guido&#8217;s Style (though naming tends to be a little
+relaxed sometimes). In short:</p>
+<ul class="simple">
+<li>80 column width code</li>
+<li>4-space indentations</li>
+<li>All modules must have an Id line near the top</li>
+</ul>
+<p>Other project rules:</p>
+<ul class="simple">
+<li>New functionality must be documented, even briefly (so at least we know
+where there&#8217;s missing documentation) and changes to tracker configuration
+must be logged in the upgrading document.</li>
+<li>subscribe to roundup-checkins to receive checkin notifications from the
+other developers with write access to the source-code repository.</li>
+<li>discuss any changes with the other developers on roundup-dev. If nothing
+else, this makes sure there&#8217;s no rude shocks</li>
+<li>write unit tests for changes you make (where possible), and ensure that
+all unit tests run before committing changes</li>
+<li>run pychecker over changed code</li>
+</ul>
+<p>The administrators of the project reserve the right to boot developers who
+consistently check in code which is either broken or takes the codebase in
+directions that have not been agreed to.</p>
+</div>
+<div class="section" id="debugging-aids">
+<h2><a class="toc-backref" href="#id9">Debugging Aids</a></h2>
+<p>See <a class="reference external" href="debugging.html"><em>debugging</em></a>.</p>
+</div>
+<div class="section" id="internationalization-notes">
+<h2><a class="toc-backref" href="#id10">Internationalization Notes</a></h2>
+<p>How stuff works:</p>
+<ol class="arabic simple">
+<li>Strings that may require translation (messages in human language)
+are marked in the source code.  This step is discussed in
+<a class="reference internal" href="#marking-strings-for-translation">Marking Strings for Translation</a> section.</li>
+<li>These strings are all extracted into Message Template File
+<tt class="docutils literal"><span class="pre">locale/roundup.pot</span></tt> (<span class="target" id="pot">POT</span> file).  See <a class="reference internal" href="#extracting-translatable-messages">Extracting Translatable
+Messages</a> below.</li>
+<li>Language teams use POT file to make Message Files for national
+languages (<span class="target" id="po">PO</span> files).  All PO files for Roundup are kept in
+the <tt class="docutils literal"><span class="pre">locale</span></tt> directory.  Names of these files are target
+locale names, usually just 2-letter language codes.  <a class="reference internal" href="#translating-messages">Translating
+Messages</a> section of this chapter gives useful hints for
+message translators.</li>
+<li>Translated Message Files are compiled into binary form (<span class="target" id="mo">MO</span> files)
+and stored in <tt class="docutils literal"><span class="pre">locale</span></tt> directory (but not kept in the source code
+repository, as they may be easily made from PO files).
+See <a class="reference internal" href="#compiling-message-catalogs">Compiling Message Catalogs</a> section.</li>
+<li>Roundup installer creates runtime locale structure on the file
+system, putting MO files in their appropriate places.</li>
+<li>Runtime internationalization (<span class="target" id="i18n">I18N</span>) services use these MO files
+to translate program messages into language selected by current
+Roundup user.  Roundup command line interface uses locale name
+set in OS environment variable <tt class="docutils literal"><span class="pre">LANGUAGE</span></tt>, <tt class="docutils literal"><span class="pre">LC_ALL</span></tt>,
+<tt class="docutils literal"><span class="pre">LC_MESSAGES</span></tt>, or <tt class="docutils literal"><span class="pre">LANG</span></tt> (in that order).  Roundup Web User
+Interface uses language selected by currently authenticated user.</li>
+</ol>
+<p>Additional details may be found in <a class="reference internal" href="#gnu-gettext">GNU gettext</a> and Python <a class="reference external" href="http://docs.python.org/lib/module-gettext.html">gettext
+module</a> documentation.</p>
+<p><a class="reference external" href="http://sourceforge.net/project/showfiles.php?group_id=31577">Roundup source distribution</a> includes POT and PO files for message
+translators, and also pre-built MO files to facilitate installations
+from source.  Roundup binary distribution includes MO files only.</p>
+<div class="section" id="gnu-gettext-package">
+<span id="gnu-gettext"></span><h3><a class="toc-backref" href="#id11">GNU gettext package</a></h3>
+<p>This chapter is full of references to GNU <a class="reference external" href="http://www.gnu.org/software/gettext/">gettext package</a>.
+GNU gettext is a &#8220;must have&#8221; for nearly all steps of internationalizing
+any program, and it&#8217;s manual is definetely a recommended reading
+for people involved in <a class="reference internal" href="#i18n">I18N</a>.</p>
+<p>There are GNU gettext ports to all major OS platforms.
+Windows binaries are available from <a class="reference external" href="http://www.gnu.org/prep/ftp.html">GNU mirror sites</a>.</p>
+<p>Roundup does not use GNU gettext at runtime, but it&#8217;s tools
+are used for <a class="reference internal" href="#extracting-translatable-messages">extracting translatable messages</a>, <a class="reference internal" href="#compiling-message-catalogs">compiling
+message catalogs</a> and, optionally, for <a class="reference internal" href="#translating-messages">translating messages</a>.</p>
+<p>Note that <tt class="docutils literal"><span class="pre">gettext</span></tt> package in some OS distributions means just
+runtime tools and libraries.  In such cases gettext development tools
+are usually distributed in separate package named <tt class="docutils literal"><span class="pre">gettext-devel</span></tt>.</p>
+</div>
+<div class="section" id="marking-strings-for-translation">
+<h3><a class="toc-backref" href="#id12">Marking Strings for Translation</a></h3>
+<p>Strings that need translation must be marked in the source code.
+Following subsections explain how this is done in different cases.</p>
+<p>If translatable string is used as a format string, it is recommended
+to always use <em>named</em> format specifiers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">_</span><span class="p">(</span><span class="s">&#39;Index of </span><span class="si">%(classname)s</span><span class="s">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="nb">locals</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This helps translators to better understand the context of the
+message and, with Python formatting, remove format specifier altogether
+(which is sometimes useful, especially in singular cases of <a class="reference external" href="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html">Plural Forms</a>).</p>
+<p>When there is more than one format specifier in the translatable
+format string, named format specifiers <strong>must</strong> be used almost always,
+because translation may require different order of items.</p>
+<p>It is better to <em>not</em> mark for translation strings that are not
+locale-dependent, as this makes it more difficult to keep track
+of translation completeness.  For example, string <tt class="docutils literal"><span class="pre">&lt;/ol&gt;&lt;/body&gt;&lt;/html&gt;</span></tt>
+(in <tt class="docutils literal"><span class="pre">index()</span></tt> method of the request handler in <tt class="docutils literal"><span class="pre">roundup_server</span></tt>
+script) has no human readable parts at all, and needs no translations.
+Such strings are left untranslated in PO files, and are reported
+as such by PO status checkers (e.g. <tt class="docutils literal"><span class="pre">msgfmt</span> <span class="pre">--statistics</span></tt>).</p>
+<div class="section" id="command-line-interfaces">
+<h4><a class="toc-backref" href="#id13">Command Line Interfaces</a></h4>
+<p>Scripts and routines run from the command line use &#8220;static&#8221; language
+defined by environment variables recognized by <tt class="docutils literal"><span class="pre">gettext</span></tt> module
+from Python library (<tt class="docutils literal"><span class="pre">LANGUAGE</span></tt>, <tt class="docutils literal"><span class="pre">LC_ALL</span></tt>, <tt class="docutils literal"><span class="pre">LC_MESSAGES</span></tt>, and
+<tt class="docutils literal"><span class="pre">LANG</span></tt>).  Primarilly, these are <tt class="docutils literal"><span class="pre">roundup-admin</span></tt> script and
+<tt class="docutils literal"><span class="pre">admin.py</span></tt> module, but also help texts and startup error messages
+in other scripts and their supporting modules.</p>
+<p>For these interfaces, Python <tt class="docutils literal"><span class="pre">gettext</span></tt> engine must be initialized
+to use Roundup message catalogs.  This is normally done by including
+the following line in the module imports:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">i18n</span> <span class="kn">import</span> <span class="n">_</span><span class="p">,</span> <span class="n">ngettext</span>
+</pre></div>
+</div>
+<p>Simple translations are automatically marked by calls to builtin
+message translation function <tt class="docutils literal"><span class="pre">_()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">_</span><span class="p">(</span><span class="s">&quot;This message is translated&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Translations for messages whose grammatical depends on a number
+must be done by <tt class="docutils literal"><span class="pre">ngettext()</span></tt> function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">ngettext</span><span class="p">(</span><span class="s">&quot;Nuked </span><span class="si">%i</span><span class="s"> file&quot;</span><span class="p">,</span> <span class="s">&quot;Nuked </span><span class="si">%i</span><span class="s"> files&quot;</span><span class="p">,</span> <span class="n">number_of_files_nuked</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deferred-translations">
+<h4><a class="toc-backref" href="#id14">Deferred Translations</a></h4>
+<p>Sometimes translatable strings appear in the source code in untranslated
+form <a class="footnote-reference" href="#note-admin-py" id="id1">[1]</a> and must be translated elsewhere.
+Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">meal</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;spam&quot;</span><span class="p">,</span> <span class="s">&quot;egg&quot;</span><span class="p">,</span> <span class="s">&quot;beacon&quot;</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">_</span><span class="p">(</span><span class="n">meal</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In such cases, strings must be marked for translation without actual
+call to the translating function.  To mark these strings, we use Python
+feature of automatic concatenation of adjacent strings and different
+types of string quotes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">strings_to_translate</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">&#39;&#39;&quot;This string will be translated&quot;</span><span class="p">,</span>
+    <span class="s">&quot;&quot;&#39;me too&#39;</span><span class="p">,</span>
+    <span class="s">&#39;&#39;r&quot;\raw string&quot;</span><span class="p">,</span>
+    <span class="s">&#39;&#39;&quot;&quot;&quot;</span>
+<span class="s">    multiline string&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils footnote" frame="void" id="note-admin-py" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>In current Roundup sources, this feature is
+extensively used in the <tt class="docutils literal"><span class="pre">admin</span></tt> module using method docstrings
+as help messages.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="web-user-interface">
+<h4><a class="toc-backref" href="#id15">Web User Interface</a></h4>
+<p>For Web User Interface, translation services are provided by Client
+object.  Action classes have methods <tt class="docutils literal"><span class="pre">_()</span></tt> and <tt class="docutils literal"><span class="pre">gettext()</span></tt>,
+delegating translation to the Client instance.  In HTML templates,
+translator object is available as context variable <tt class="docutils literal"><span class="pre">i18n</span></tt>.</p>
+<p>HTML templates have special markup for translatable strings.
+The syntax for this markup is defined on <a class="reference external" href="http://dev.zope.org/Wikis/DevSite/Projects/ComponentArchitecture/ZPTInternationalizationSupport">ZPTInternationalizationSupport</a>
+page.  Roundup translation service currently ignores values for
+<tt class="docutils literal"><span class="pre">i18n:domain</span></tt>, <tt class="docutils literal"><span class="pre">i18n:source</span></tt> and <tt class="docutils literal"><span class="pre">i18n:target</span></tt>.</p>
+<p>Template markup examples:</p>
+<ul>
+<li><p class="first">simplest case:</p>
+<div class="highlight-python"><pre>&lt;div i18n:translate=""&gt;
+ Say
+ no
+ more!
+&lt;/div&gt;</pre>
+</div>
+<p>this will result in msgid <tt class="docutils literal"><span class="pre">&quot;Say</span> <span class="pre">no</span> <span class="pre">more!&quot;</span></tt>, with all leading and
+trailing whitespace stripped, and inner blanks replaced with single
+space character.</p>
+</li>
+<li><p class="first">using variable slots:</p>
+<div class="highlight-python"><pre>&lt;div i18n:translate=""&gt;
+ And now...&lt;br/&gt;
+ No.&lt;span tal:replace="number" i18n:name="slideNo" /&gt;&lt;br/&gt;
+ THE LARCH
+&lt;/div&gt;</pre>
+</div>
+<p>Msgid will be: <tt class="docutils literal"><span class="pre">&quot;And</span> <span class="pre">now...&lt;br</span> <span class="pre">/&gt;</span> <span class="pre">No.${slideNo}&lt;br</span> <span class="pre">/&gt;</span> <span class="pre">THE</span> <span class="pre">LARCH&quot;</span></tt>.
+Template rendering will use context variable <tt class="docutils literal"><span class="pre">number</span></tt> (you may use
+any expression) to put instead of <tt class="docutils literal"><span class="pre">${slideNo}</span></tt> in translation.</p>
+</li>
+<li><p class="first">attribute translation:</p>
+<div class="highlight-python"><pre>&lt;button name="btn_wink" value=" Wink " i18n:attributes="value" /&gt;</pre>
+</div>
+<p>will translate the caption (and return value) for the &#8220;wink&#8221; button.</p>
+</li>
+<li><p class="first">explicit msgids.  Sometimes it may be useful to specify msgid
+for the element translation explicitely, like this:</p>
+<div class="highlight-python"><pre>&lt;span i18n:translate="know what i mean?"&gt;this text is ignored&lt;/span&gt;</pre>
+</div>
+<p>When rendered, element contents will be replaced by translation
+of the string specified in <tt class="docutils literal"><span class="pre">i18n:translate</span></tt> attribute.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">i18n</span></tt> in <a class="reference external" href="http://dev.zope.org/Wikis/DevSite/Projects/ZPT/TALES%20Specification%201.3">TALES</a>.  You may translate strings in <a class="reference external" href="http://dev.zope.org/Wikis/DevSite/Projects/ZPT/TALES%20Specification%201.3">TALES</a> python
+expressions:</p>
+<div class="highlight-python"><pre>&lt;span tal:replace="python: i18n.gettext('Oh, wicked.')" /&gt;</pre>
+</div>
+</li>
+<li><p class="first">plural forms.  There is no markup for plural forms in <a class="reference external" href="http://dev.zope.org/Wikis/DevSite/Projects/ZPT/TAL%20Specification%201.4">TAL</a> i18n.
+You must use python expression for that:</p>
+<div class="highlight-python"><pre>&lt;span tal:replace="python: i18n.ngettext(
+  'Oh but it\'s only %i shilling.',
+  'Oh but it\'s only %i shillings.',
+  fine) % fine"
+/&gt;</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="extracting-translatable-messages">
+<h3><a class="toc-backref" href="#id16">Extracting Translatable Messages</a></h3>
+<p>The most common tool for message extraction is <tt class="docutils literal"><span class="pre">xgettext</span></tt> utility
+from <a class="reference internal" href="#gnu-gettext-package">GNU gettext package</a>.  Unfortunately, this utility has no means
+of <a class="reference internal" href="#deferred-translations">Deferred Translations</a> in Python sources.  There is <tt class="docutils literal"><span class="pre">xpot</span></tt> tool
+from Francois Pinard free <a class="reference external" href="http://po-utils.progiciels-bpi.ca/">PO utilities</a> that allows to mark strings
+for deferred translations, but it does not handle <a class="reference external" href="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html">plural forms</a>.</p>
+<p>Roundup overcomes these limitations by using both of these utilities.
+This means that you need both <a class="reference internal" href="#gnu-gettext">GNU gettext</a> tools and <a class="reference external" href="http://po-utils.progiciels-bpi.ca/">PO utilities</a>
+to build the Message Template File yourself.</p>
+<p>Latest Message Template File is kept in the source code repository
+and distributed with <a class="reference external" href="http://sourceforge.net/project/showfiles.php?group_id=31577">Roundup Source</a>.
+If you wish to rebuild the template yourself,
+make sure that you have both <tt class="docutils literal"><span class="pre">xpot</span></tt> and <tt class="docutils literal"><span class="pre">xgettext</span></tt> installed and
+just run <tt class="docutils literal"><span class="pre">gmake</span></tt> (or <tt class="docutils literal"><span class="pre">make</span></tt>, if you are on a <a class="reference external" href="http://www.gnu.org/">GNU</a> system like
+<a class="reference external" href="http://www.linux.org/">linux</a> or <a class="reference external" href="http://www.cygwin.com/">cygwin</a>) in the <tt class="docutils literal"><span class="pre">locale</span></tt> directory.</p>
+<p>For on-site i18n, Roundup provides command-line utility:</p>
+<div class="highlight-python"><pre>roundup-gettext &lt;tracker_home&gt;</pre>
+</div>
+<p>extracting translatable messages from tracker&#8217;s html templates.
+This utility creates message template file <tt class="docutils literal"><span class="pre">messages.pot</span></tt> in
+<tt class="docutils literal"><span class="pre">locale</span></tt> subdirectory of the tracker home directory.  Translated
+messages may be put in <em>locale</em>.po files (where <em>locale</em> is selected
+locale name) in the same directory, e.g.: <tt class="docutils literal"><span class="pre">locale/ru.po</span></tt>.
+These message catalogs are searched prior to system-wide translations
+kept in the <tt class="docutils literal"><span class="pre">share</span></tt> directory.</p>
+</div>
+<div class="section" id="translating-messages">
+<h3><a class="toc-backref" href="#id17">Translating Messages</a></h3>
+<p>Gettext Message File (<a class="reference internal" href="#po">PO</a> file) is a plain text file, that can be created
+by simple copying <tt class="docutils literal"><span class="pre">roundup.pot</span></tt> to new .po file, like this:</p>
+<div class="highlight-python"><pre>$ cp roundup.pot ru.po</pre>
+</div>
+<p>The name of PO file is target locale name, usually just 2-letter language
+code (<tt class="docutils literal"><span class="pre">ru</span></tt> for Russian in the above example).  Alternatively, PO file
+may be initialized by <tt class="docutils literal"><span class="pre">msginit</span></tt> utility from <a class="reference internal" href="#gnu-gettext">GNU gettext</a> tools:</p>
+<div class="highlight-python"><pre>$ msginit -i roundup.pot</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">msginit</span></tt> will check your current locale, and initialize the header
+entry, setting language name, rules for <a class="reference external" href="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html">plural forms</a> and, if available,
+translator&#8217;s name and email address.  The name for PO file is also chosen
+based on current locale.</p>
+<p>Next, you will need to edit this file, filling all <tt class="docutils literal"><span class="pre">msgstr</span></tt> lines with
+translations of the above <tt class="docutils literal"><span class="pre">msgid</span></tt> entries.  PO file is a plain text
+file that can be edited with any text editor.  However, there are several
+tools that may help you with this process:</p>
+<blockquote>
+<ul>
+<li><p class="first"><a class="reference external" href="http://poedit.sourceforge.net/">poEdit</a> by Vaclav Slavik.  Very nice cross-platform GUI editor.</p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="http://i18n.kde.org/tools/kbabel/">KBabel</a>.  Being part of <a class="reference external" href="http://www.kde.org/">KDE</a>, it works in X windows only.</dt>
+<dd><p class="first last">At the first glance looks pretty hairy, with all bells and whistles.
+Haven&#8217;t had much experience with it, though.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">po-mode</span></tt> for <a class="reference external" href="http://www.gnu.org/software/emacs/">emacs</a>.  One of <a class="reference internal" href="#gnu-gettext">GNU gettext</a> tools.  Very handy,
+definitely recommended if you are comfortable with emacs.  Cannot
+handle <a class="reference external" href="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html">plural forms</a> per se, but allows to edit them in simple
+text mode.</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://vim.sourceforge.net/scripts/script.php?script_id=695">po filetype plugin</a> for <a class="reference external" href="http://www.vim.org/">vim</a>.  Does not do as much as <tt class="docutils literal"><span class="pre">po-mode</span></tt>,
+but helps in finding untranslated and fuzzy strings, and checking
+code references.  Please contact <a class="reference external" href="http://sourceforge.net/users/a1s/">alexander smishlajev</a> if you
+prefer this, as i have patched this plugin a bit.  I have also
+informed the original plugin author about these changes, but got
+no reply so far.</p>
+</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="compiling-message-catalogs">
+<h3><a class="toc-backref" href="#id18">Compiling Message Catalogs</a></h3>
+<p>Message catalogs (<a class="reference internal" href="#po">PO</a> files) must be compiled into binary form
+(<a class="reference internal" href="#mo">MO</a> files) before they can be used in the application.  This
+compilation is handled by <tt class="docutils literal"><span class="pre">msgfmt</span></tt> utility from <a class="reference internal" href="#gnu-gettext">GNU gettext</a>
+tools.  <tt class="docutils literal"><span class="pre">GNUmakefile</span></tt> in the <tt class="docutils literal"><span class="pre">locale</span></tt> directory automatically
+compiles all existing message catalogs after updating them from
+Roundup source files.  If you wish to rebuild an individual <a class="reference internal" href="#mo">MO</a>
+file without making everything else, you may, for example:</p>
+<div class="highlight-python"><pre>$ msgfmt --statistics -o ru.mo ru.po</pre>
+</div>
+<p>This way, message translators can check their <a class="reference internal" href="#po">PO</a> files without
+extracting strings from source.  (Note: String extraction requires
+additional utility that is not part of <a class="reference internal" href="#gnu-gettext">GNU gettext</a>.  See <a class="reference internal" href="#extracting-translatable-messages">Extracting
+Translatable Messages</a>.)</p>
+<p>At run time, Roundup automatically compiles message catalogs whenever
+<a class="reference internal" href="#po">PO</a> file is changed.</p>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tracker_templates.html" title="Roundup Tracker Templates"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="design.html" title="Roundup - An Issue-Tracking System for Knowledge Workers"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/developers.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

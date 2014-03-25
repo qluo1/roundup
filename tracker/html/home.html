@@ -1,0 +1,9 @@
+{{ 
+  db.issue.renderWith('index',
+    sort=[('-', 'activity')], group=[('+', 'priority')],
+    filter=['status'],
+    columns=['id','activity','title','creator','assignedto', 'status'],
+    filterspec={'status':['-1','1','2','3','4','5','6','7']}
+  )
+}}
+<!-- SHA: a092720827c1cfc7b6dfed1b7fd328d6d15581d0 -->

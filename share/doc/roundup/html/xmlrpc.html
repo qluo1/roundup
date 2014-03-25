@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XML-RPC access to Roundup &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="Roundup - An Issue-Tracking System for Knowledge Workers" href="design.html" />
+    <link rel="prev" title="Administration Guide" href="admin_guide.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">XML-RPC access to Roundup</a><ul>
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#stand-alone-roundup-xmlrpc-server">stand alone roundup-xmlrpc-server</a></li>
+<li><a class="reference external" href="#accessing-via-roundup-server">accessing via roundup server</a><ul>
+<li><a class="reference external" href="#security-consideration">security consideration</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#client-api">client API</a><ul>
+<li><a class="reference external" href="#sample-python-client">sample python client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="admin_guide.html"
+                          title="previous chapter">Administration Guide</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="design.html"
+                          title="next chapter">Roundup - An Issue-Tracking System for Knowledge Workers</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/xmlrpc.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="design.html" title="Roundup - An Issue-Tracking System for Knowledge Workers"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="admin_guide.html" title="Administration Guide"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="xml-rpc-access-to-roundup">
+<h1><a class="toc-backref" href="#id1">XML-RPC access to Roundup</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#xml-rpc-access-to-roundup" id="id1">XML-RPC access to Roundup</a><ul>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#stand-alone-roundup-xmlrpc-server" id="id3">stand alone roundup-xmlrpc-server</a></li>
+<li><a class="reference internal" href="#accessing-via-roundup-server" id="id4">accessing via roundup server</a><ul>
+<li><a class="reference internal" href="#security-consideration" id="id5">security consideration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#client-api" id="id6">client API</a><ul>
+<li><a class="reference internal" href="#sample-python-client" id="id7">sample python client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction</a></h2>
+<p>Version 1.4 of Roundup includes an XML-RPC frontend. Some installations find
+that roundup-admins requirement of local access to the tracker instance
+limiting. The XML-RPC frontend provides the ability to execute a limited subset
+of commands similar to those found in roundup-admin from remote machines.</p>
+<p>There are two ways to access the xmlrpc interface:</p>
+<blockquote>
+<p>stand alone roundup-xmlrpc-server</p>
+<p>access via the roundup server</p>
+</blockquote>
+</div>
+<div class="section" id="stand-alone-roundup-xmlrpc-server">
+<h2><a class="toc-backref" href="#id3">stand alone roundup-xmlrpc-server</a></h2>
+<p>The Roundup XML-RPC standalone server must be started before remote clients can access the
+tracker via XML-RPC. <tt class="docutils literal"><span class="pre">roundup-xmlrpc-server</span></tt> is installed in the scripts
+directory alongside <tt class="docutils literal"><span class="pre">roundup-server</span></tt> and roundup-admin``. When invoked, the
+location of the tracker instance must be specified.</p>
+<blockquote>
+roundup-xmlrpc-server -i <tt class="docutils literal"><span class="pre">/path/to/tracker</span></tt></blockquote>
+<p>The default port is <tt class="docutils literal"><span class="pre">8000</span></tt>. An alternative port can be specified with the
+<tt class="docutils literal"><span class="pre">--port</span></tt> switch.</p>
+</div>
+<div class="section" id="accessing-via-roundup-server">
+<h2><a class="toc-backref" href="#id4">accessing via roundup server</a></h2>
+<p>In addition to running a stand alone server described above, the
+xmlrpc service is available from the roundup HTTP server. Access it by
+sending text/xml data to the URL for the roundup tracker with the last
+component of the url set to &#8216;xmlrpc&#8217;.</p>
+<div class="section" id="security-consideration">
+<h3><a class="toc-backref" href="#id5">security consideration</a></h3>
+<p>Note that the current <tt class="docutils literal"><span class="pre">roundup-xmlrpc-server</span></tt> implementation does not
+support SSL. This means that usernames and passwords will be passed in
+cleartext unless the server is being proxied behind another server (such as
+Apache or lighttpd) that provide SSL.</p>
+</div>
+</div>
+<div class="section" id="client-api">
+<h2><a class="toc-backref" href="#id6">client API</a></h2>
+<p>The server currently implements four methods. Each method requires that the
+user provide a username and password in the HTTP authorization header in order
+to authenticate the request against the tracker.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Command</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>list</td>
+<td><p class="first">arguments: <em>classname, [property_name]</em></p>
+<p class="last">List all elements of a given <tt class="docutils literal"><span class="pre">classname</span></tt>. If <tt class="docutils literal"><span class="pre">property_name</span></tt> is
+specified, that is the property that will be displayed for each
+element. If <tt class="docutils literal"><span class="pre">property_name</span></tt> is not specified the default label
+property will be used.</p>
+</td>
+</tr>
+<tr><td>display</td>
+<td><p class="first">arguments: <em>designator, [property_1, ..., property_N]</em></p>
+<p class="last">Display a single item in the tracker as specified by <tt class="docutils literal"><span class="pre">designator</span></tt>
+(e.g. issue20 or user5). The default is to display all properties
+for the item. Alternatively, a list of properties to display can be
+specified.</p>
+</td>
+</tr>
+<tr><td>create</td>
+<td><p class="first">arguments: <em>classname, arg_1 ... arg_N</em></p>
+<p class="last">Create a new instance of <tt class="docutils literal"><span class="pre">classname</span></tt> with <tt class="docutils literal"><span class="pre">arg_1</span></tt> through
+<tt class="docutils literal"><span class="pre">arg_N</span></tt> as the values of the new instance. The arguments are
+name=value pairs (e.g. <tt class="docutils literal"><span class="pre">status='3'</span></tt>).</p>
+</td>
+</tr>
+<tr><td>set</td>
+<td><p class="first">arguments: <em>designator, arg_1 ... arg_N</em></p>
+<p class="last">Set the values of an existing item in the tracker as specified by
+<tt class="docutils literal"><span class="pre">designator</span></tt>. The new values are specified in <tt class="docutils literal"><span class="pre">arg_1</span></tt> through
+<tt class="docutils literal"><span class="pre">arg_N</span></tt>. The arguments are name=value pairs (e.g. <tt class="docutils literal"><span class="pre">status='3'</span></tt>).</p>
+</td>
+</tr>
+<tr><td>lookup</td>
+<td><p class="first">arguments: <em>classname, key_value</em></p>
+<p class="last">looks up the key_value for the given class. The class needs to
+have a key and the user needs search permission on the key
+attribute and id for the given classname.</p>
+</td>
+</tr>
+<tr><td>filter</td>
+<td><p class="first">arguments: <em>classname, list or None, attributes</em></p>
+<p class="last">list can be None (requires <tt class="docutils literal"><span class="pre">allow_none=True</span></tt> when
+instantiating the ServerProxy) to indicate search for all values,
+or a list of ids. The attributes are given as a dictionary of
+name value pairs to search for.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="sample-python-client">
+<h3><a class="toc-backref" href="#id7">sample python client</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmlrpclib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span> <span class="o">=</span> <span class="n">xmlrpclib</span><span class="o">.</span><span class="n">ServerProxy</span><span class="p">(</span><span class="s">&#39;http://username:password@localhost:8000&#39;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">)</span>
+<span class="go">[&#39;admin&#39;, &#39;anonymous&#39;, &#39;demo&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">)</span>
+<span class="go">[&#39;1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s">&#39;issue1&#39;</span><span class="p">)</span>
+<span class="go">{&#39;assignedto&#39; : None, &#39;files&#39; : [], &#39;title&#39; = &#39;yes, ..... }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s">&#39;issue1&#39;</span><span class="p">,</span> <span class="s">&#39;priority&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">)</span>
+<span class="go">{&#39;priority&#39; : &#39;1&#39;, &#39;status&#39; : &#39;2&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;issue1&#39;</span><span class="p">,</span> <span class="s">&#39;status=3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s">&#39;issue1&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">)</span>
+<span class="go">{&#39;status&#39; : &#39;3&#39; }</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&quot;title=&#39;another bug&#39;&quot;</span><span class="p">,</span> <span class="s">&quot;status=2&quot;</span><span class="p">)</span>
+<span class="go">&#39;2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">,</span><span class="bp">None</span><span class="p">,{</span><span class="s">&#39;username&#39;</span><span class="p">:</span><span class="s">&#39;adm&#39;</span><span class="p">})</span>
+<span class="go">[&#39;1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">,[</span><span class="s">&#39;1&#39;</span><span class="p">,</span><span class="s">&#39;2&#39;</span><span class="p">],{</span><span class="s">&#39;username&#39;</span><span class="p">:</span><span class="s">&#39;adm&#39;</span><span class="p">})</span>
+<span class="go">[&#39;1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">,[</span><span class="s">&#39;2&#39;</span><span class="p">],{</span><span class="s">&#39;username&#39;</span><span class="p">:</span><span class="s">&#39;adm&#39;</span><span class="p">})</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">,[],{</span><span class="s">&#39;username&#39;</span><span class="p">:</span><span class="s">&#39;adm&#39;</span><span class="p">})</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roundup_server</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">,</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+<span class="go">&#39;1&#39;</span>
+</pre></div>
+</div>
+<p>If you are accessing the interface via the roundup HTTP server, a url
+similar to:</p>
+<blockquote>
+<a class="reference external" href="http://username:password&#64;localhost:8000/tracker/xmlrpc">http://username:password&#64;localhost:8000/tracker/xmlrpc</a></blockquote>
+<p>should be used.</p>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="design.html" title="Roundup - An Issue-Tracking System for Knowledge Workers"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="admin_guide.html" title="Administration Guide"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/xmlrpc.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Roundup Tracker Templates &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="Roundup Glossary" href="glossary.html" />
+    <link rel="prev" title="Developing Roundup" href="developers.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="developers.html"
+                          title="previous chapter">Developing Roundup</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="glossary.html"
+                          title="next chapter">Roundup Glossary</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tracker_templates.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="glossary.html" title="Roundup Glossary"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="developers.html" title="Developing Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="roundup-tracker-templates">
+<h1>Roundup Tracker Templates</h1>
+<p>The templates distributed with Roundup are stored in the &#8220;share&#8221; directory
+nominated by Python. On Unix this is typically
+<tt class="docutils literal"><span class="pre">/usr/share/roundup/templates/</span></tt> (or <tt class="docutils literal"><span class="pre">/usr/local/share...</span></tt>) and
+on Windows this is <tt class="docutils literal"><span class="pre">c:\python22\share\roundup\templates\</span></tt>.</p>
+<p>The template loading looks in four places to find the templates:</p>
+<ol class="arabic simple">
+<li><em>share</em> - eg. <tt class="docutils literal"><span class="pre">&lt;prefix&gt;/share/roundup/templates/*</span></tt>.
+This should be the standard place to find them when Roundup is
+installed.</li>
+<li><tt class="docutils literal"><span class="pre">&lt;roundup.admin.__file__&gt;/../templates/*</span></tt>.
+This will be used if Roundup&#8217;s run in the distro (aka. source)
+directory.</li>
+<li><tt class="docutils literal"><span class="pre">&lt;current</span> <span class="pre">working</span> <span class="pre">dir&gt;/*</span></tt>.
+This is for when someone unpacks a 3rd-party template.</li>
+<li><tt class="docutils literal"><span class="pre">&lt;current</span> <span class="pre">working</span> <span class="pre">dir&gt;</span></tt>.
+This is for someone who &#8220;cd&#8221;s to the 3rd-party template dir.</li>
+</ol>
+<p>Templates contain:</p>
+<ul class="simple">
+<li>modules <tt class="docutils literal"><span class="pre">schema.py</span></tt> and <tt class="docutils literal"><span class="pre">initial_data.py</span></tt></li>
+<li>directories <tt class="docutils literal"><span class="pre">html</span></tt>, <tt class="docutils literal"><span class="pre">detectors</span></tt> and <tt class="docutils literal"><span class="pre">extensions</span></tt>
+(with appropriate contents)</li>
+<li>template &#8220;marker&#8221; file <tt class="docutils literal"><span class="pre">TEMPLATE-INFO.txt</span></tt>, which contains
+the name of the template, a description of the template
+and its intended audience.</li>
+</ul>
+<p>An example TEMPLATE-INFO.txt:</p>
+<div class="highlight-python"><pre>Name: classic
+Description: This is a generic issue tracker that may be used to track bugs,
+             feature requests, project issues or any number of other types
+             of issues. Most users of Roundup will find that this template
+             suits them, with perhaps a few customisations.
+Intended-For: All first-time Roundup users</pre>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="glossary.html" title="Roundup Glossary"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="developers.html" title="Developing Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/tracker_templates.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

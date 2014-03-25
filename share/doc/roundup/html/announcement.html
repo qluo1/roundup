@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>About Roundup &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/announcement.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <p>I&#8217;m proud to release version 1.4.21 of Roundup which has been possible
+due to the help of several contributors.  This release introduces some
+new features, most notably modular web templating with Jinja2 as a
+templating engine (the old templating engine is still the recommended
+one) and, as usual, fixes some bugs:</p>
+<p>Features:</p>
+<ul>
+<li><p class="first">issue2550775 Added rel=nofollow to links in the journal linking to
+attachments to allow the admin to delete attachment spam and prevent
+search engines from increasing the rankings. (John Rouillard)</p>
+</li>
+<li><p class="first">issue2550808 Enhanced the boolean field template function. Now by
+default the labels generated can be clicked on and select the
+corresponding radio button. Also can create a trivalued radiobutton
+(yes/no/unknown) as well as customize the labels for the
+yes/no/unknown radio buttons.  (John Rouillard)</p>
+</li>
+<li><p class="first">issue2550807 enhance classhelp method with ability to set html
+properties on the generated link. (John Rouillard)</p>
+</li>
+<li><p class="first">Support for tx_Source property on database handle. Can be used by
+detectors to find out the source of a change in an auditor to block
+changes arriving by unauthenticated mechanisms (e.g. plain email
+where headers can be faked). The property db.tx_Source has the
+following values:
+* None - Default value set to None. May be valid if it&#8217;s a script</p>
+<blockquote>
+<p>that is created by the user. Otherwise it&#8217;s an error and indicates
+that some code path is not properly setting the tx_Source property.</p>
+</blockquote>
+<ul class="simple">
+<li>&#8220;cli&#8221; - this string value is set when using roundup-admin and
+supplied scripts.</li>
+<li>&#8220;web&#8221; - this string value is set when using any web based
+technique: html interface, xmlrpc ....</li>
+<li>&#8220;email&#8221; - this string value is set when using an unauthenticated
+email based technique.</li>
+<li>&#8220;email-sig-openpgp&#8221; - this string value is set when email with a
+valid pgp signature is used. (<em>NOTE</em> the testing for this mode
+is incomplete. If you have a pgp infrastructure you should test
+and verify that this is properly set.) (John Rouillard)</li>
+</ul>
+</li>
+<li><p class="first">Introducing Template Loader API (anatoly techtonik)</p>
+</li>
+<li><p class="first">Experimental support for Jinja2, try &#8216;jinja2&#8217; for template_engine
+in config (anatoly techtonik)</p>
+</li>
+<li><p class="first">A new jinja2 template based on Classic schema and using Twitter
+bootstrap for responsive behaviour.  Run as -
+python demo.py -t jinja2 nuke (Pradip P Caulagi)</p>
+</li>
+<li><p class="first">roundup_admin.py and other scripts can now be run directly from the
+sources dir as roundupscriptsroundup_admin.py (anatoly techtonik)</p>
+</li>
+<li><p class="first">Renamed old Templates classes to Loader classes to clarify sources
+for alternative templating engines, updated docs (anatoly techtonik)</p>
+</li>
+<li><p class="first">Template selection code is moved from Loader classes into cgi.client
+limiting the responsibility of Loaders to compilation and rendering.
+Internally, templating.find_template is replaced with
+client.selectTemplate (anatoly techtonik)</p>
+</li>
+<li><p class="first">Increased generated password length to 12 symbols to slow down GPGPU
+attacks (anatoly techtonik)</p>
+</li>
+<li><p class="first">Implement XMLRPC MultiCall (including test), see
+<a class="reference external" href="http://docs.python.org/2/library/xmlrpclib.html#xmlrpclib.MultiCall">http://docs.python.org/2/library/xmlrpclib.html#xmlrpclib.MultiCall</a>
+(Ralf Schlatterbeck)</p>
+</li>
+</ul>
+<p>Fixed:</p>
+<ul class="simple">
+<li>issue2550789: add documentation on how to initialise a tracker
+without exposing the admin password.</li>
+<li>issue2550805: Postgres should search title attribute case insensitive
+like sqlite. Reported and fixed by Tom Ekberg. (Bernhard Reiter)</li>
+<li>Removed some old left over &#8220;rlog&#8221; references in documentation and code.
+Makes the debugging.txt advise for the database unit tests work again.</li>
+<li>Fixed OpenPGP support for modern versions of libgpgme. (Bernhard Reiter)</li>
+<li>Restored compatibility with old style trackers (anatoly techtonik)</li>
+<li>Make roundup play nice with setup tools (for using with virtualenv)
+(Pradip Caulagi)</li>
+<li>[minor] Template responsive: make demo.py work out of the box with it,
+by setting the static_files config.ini setting to &#8220;static&#8221;.
+Footer: link fixed and hardcoded last modified date removed. (Bernhard Reiter)</li>
+<li>demo.py print location of tracker home and fully erase its directory
+when nuking (anatoly techtonik)</li>
+<li>demo.py changing hostname in config.ini actually changes the address
+where demo.py listens. (John Rouillard)</li>
+<li>issue2550802: Fixed date so second fraction can&#8217;t cause rounding to
+60.000 when serialising. Report and fix by Erik Hanspers. (Bernhard Reiter)</li>
+<li>issue2550595: Allow migrating from roundup 0.x to 1.4 (Thomas Arendsen Hein)</li>
+<li>issue2550634: New German orthography corrections (Thomas Arendsen Hein)</li>
+</ul>
+<p>If you&#8217;re upgrading from an older version of Roundup you <em>must</em> follow
+the &#8220;Software Upgrade&#8221; guidelines given in the maintenance documentation.</p>
+<p>Roundup requires python 2.5 or later (but not 3+) for correct operation.</p>
+<p>To give Roundup a try, just download (see below), unpack and run:</p>
+<div class="highlight-python"><pre>python demo.py</pre>
+</div>
+<dl class="docutils">
+<dt>Release info and download page:</dt>
+<dd><a class="reference external" href="http://pypi.python.org/pypi/roundup">http://pypi.python.org/pypi/roundup</a></dd>
+<dt>Source and documentation is available at the website:</dt>
+<dd><a class="reference external" href="http://roundup-tracker.org/">http://roundup-tracker.org/</a></dd>
+<dt>Mailing lists - the place to ask questions:</dt>
+<dd><a class="reference external" href="http://sourceforge.net/mail/?group_id=31577">http://sourceforge.net/mail/?group_id=31577</a></dd>
+</dl>
+<div class="section" id="about-roundup">
+<h1>About Roundup</h1>
+<p>Roundup is a simple-to-use and -install issue-tracking system with
+command-line, web and e-mail interfaces. It is based on the winning design
+from Ka-Ping Yee in the Software Carpentry &#8220;Track&#8221; design competition.</p>
+<p>Note: Ping is not responsible for this project. The contact for this
+project is <a class="reference external" href="mailto:richard&#37;&#52;&#48;users&#46;sourceforge&#46;net">richard<span>&#64;</span>users<span>&#46;</span>sourceforge<span>&#46;</span>net</a>.</p>
+<p>Roundup manages a number of issues (with flexible properties such as
+&#8220;description&#8221;, &#8220;priority&#8221;, and so on) and provides the ability to:</p>
+<ol class="loweralpha simple">
+<li>submit new issues,</li>
+<li>find and edit existing issues, and</li>
+<li>discuss issues with other participants.</li>
+</ol>
+<p>The system will facilitate communication among the participants by managing
+discussions and notifying interested parties when issues are edited. One of
+the major design goals for Roundup that it be simple to get going. Roundup
+is therefore usable &#8220;out of the box&#8221; with any python 2.5+ (but not 3+)
+installation. It doesn&#8217;t even need to be &#8220;installed&#8221; to be operational,
+though an install script is provided.</p>
+<p>It comes with two issue tracker templates (a classic bug/feature tracker and
+a minimal skeleton) and four database back-ends (anydbm, sqlite, mysql
+and postgresql).</p>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/announcement.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

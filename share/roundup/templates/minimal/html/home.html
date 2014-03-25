@@ -1,0 +1,25 @@
+<tal:block metal:use-macro="templates/page/macros/icing">
+<title metal:fill-slot="head_title" i18n:translate="">Tracker home - <span
+ i18n:name="tracker" tal:replace="config/TRACKER_NAME" /></title>
+<span metal:fill-slot="body_title" tal:omit-tag="python:1"
+ i18n:translate="">Tracker home</span>
+<td class="content" metal:fill-slot="content">
+
+<!--
+ This is the default body that is displayed when people visit the
+ tracker. The tag below lists the currently open issues. You may
+ replace it with a greeting message, or a different list of issues or
+ whatever. It's a good idea to have the issues on the front page though
+-->
+
+<tal:block tal:define="anon python:request.user.username == 'anonymous'">
+<p tal:condition="not:anon" class="help" i18n:translate="">
+Please select from one of the menu options on the left.
+</p>
+<p tal:condition="anon" class="help" i18n:translate="">
+Please log in or register.
+</p>
+</tal:block>
+
+</td>
+</tal:block>

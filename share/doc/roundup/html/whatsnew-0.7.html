@@ -1,0 +1,553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>What’s New in Roundup 0.7 &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">What&#8217;s New in Roundup 0.7</a><ul>
+<li><a class="reference external" href="#instant-gratification-script-even-more-gratifying">Instant-Gratification script even more gratifying</a></li>
+<li><a class="reference external" href="#web-interface">Web Interface</a><ul>
+<li><a class="reference external" href="#saving-and-sharing-of-user-queries">Saving and sharing of user queries</a></li>
+<li><a class="reference external" href="#zroundup-reinstated">ZRoundup reinstated</a></li>
+<li><a class="reference external" href="#simple-support-for-collision-detection">Simple support for collision detection</a></li>
+<li><a class="reference external" href="#extending-the-cgi-interface">Extending the cgi interface</a></li>
+<li><a class="reference external" href="#roundup-server">Roundup server</a></li>
+<li><a class="reference external" href="#html-templating-made-easier">HTML templating made easier</a></li>
+<li><a class="reference external" href="#standards-changes">Standards changes</a></li>
+<li><a class="reference external" href="#quoting-of-urls-and-html">Quoting of URLs and HTML</a></li>
+<li><a class="reference external" href="#csv-download-of-search-results">CSV download of search results</a></li>
+<li><a class="reference external" href="#other-changes">Other changes</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#email-interface">Email Interface</a><ul>
+<li><a class="reference external" href="#better-handling-of-some-email-headers">Better handling of some email headers</a></li>
+<li><a class="reference external" href="#email-character-set">Email character set</a></li>
+<li><a class="reference external" href="#dispatcher-configuration">Dispatcher configuration</a></li>
+<li><a class="reference external" href="#more-flexible-message-generation">More flexible message generation</a></li>
+<li><a class="reference external" href="#registration-confirmation-by-email">Registration confirmation by email</a></li>
+<li><a class="reference external" href="#roundup-mailgw-now-supports-imap"><tt class="docutils literal"><span class="pre">roundup-mailgw</span></tt> now supports IMAP</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#database-configuration">Database configuration</a><ul>
+<li><a class="reference external" href="#postgresql-added-as-a-backend-option">Postgresql added as a backend option</a></li>
+<li><a class="reference external" href="#api-change">API change</a></li>
+<li><a class="reference external" href="#new-configuration-options">New configuration options</a></li>
+<li><a class="reference external" href="#typed-columns-in-rdbms-backends">Typed columns in RDBMS backends</a></li>
+<li><a class="reference external" href="#permission-setup">Permission setup</a></li>
+<li><a class="reference external" href="#new-actor-property">New &#8220;actor&#8221; property</a></li>
+<li><a class="reference external" href="#new-reject-exception-for-auditors">New Reject exception for Auditors</a></li>
+<li><a class="reference external" href="#new-auditor-fixes-outlook-bug">New auditor fixes Outlook bug</a></li>
+<li><a class="reference external" href="#new-script-for-copying-users">New script for copying users</a></li>
+<li><a class="reference external" href="#other-improvements">Other improvements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/whatsnew-0.7.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="what-s-new-in-roundup-0-7">
+<h1><a class="toc-backref" href="#id6">What&#8217;s New in Roundup 0.7</a></h1>
+<p>For those completely new to Roundup, you might want to look over the very
+terse <a class="reference external" href="features.html">features</a> page.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#what-s-new-in-roundup-0-7" id="id6">What&#8217;s New in Roundup 0.7</a><ul>
+<li><a class="reference internal" href="#instant-gratification-script-even-more-gratifying" id="id7">Instant-Gratification script even more gratifying</a></li>
+<li><a class="reference internal" href="#web-interface" id="id8">Web Interface</a><ul>
+<li><a class="reference internal" href="#saving-and-sharing-of-user-queries" id="id9">Saving and sharing of user queries</a></li>
+<li><a class="reference internal" href="#zroundup-reinstated" id="id10">ZRoundup reinstated</a></li>
+<li><a class="reference internal" href="#simple-support-for-collision-detection" id="id11">Simple support for collision detection</a></li>
+<li><a class="reference internal" href="#extending-the-cgi-interface" id="id12">Extending the cgi interface</a></li>
+<li><a class="reference internal" href="#roundup-server" id="id13">Roundup server</a></li>
+<li><a class="reference internal" href="#html-templating-made-easier" id="id14">HTML templating made easier</a></li>
+<li><a class="reference internal" href="#standards-changes" id="id15">Standards changes</a></li>
+<li><a class="reference internal" href="#quoting-of-urls-and-html" id="id16">Quoting of URLs and HTML</a></li>
+<li><a class="reference internal" href="#csv-download-of-search-results" id="id17">CSV download of search results</a></li>
+<li><a class="reference internal" href="#other-changes" id="id18">Other changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#email-interface" id="id19">Email Interface</a><ul>
+<li><a class="reference internal" href="#better-handling-of-some-email-headers" id="id20">Better handling of some email headers</a></li>
+<li><a class="reference internal" href="#email-character-set" id="id21">Email character set</a></li>
+<li><a class="reference internal" href="#dispatcher-configuration" id="id22">Dispatcher configuration</a></li>
+<li><a class="reference internal" href="#more-flexible-message-generation" id="id23">More flexible message generation</a></li>
+<li><a class="reference internal" href="#registration-confirmation-by-email" id="id24">Registration confirmation by email</a></li>
+<li><a class="reference internal" href="#roundup-mailgw-now-supports-imap" id="id25"><tt class="docutils literal"><span class="pre">roundup-mailgw</span></tt> now supports IMAP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database-configuration" id="id26">Database configuration</a><ul>
+<li><a class="reference internal" href="#postgresql-added-as-a-backend-option" id="id27">Postgresql added as a backend option</a></li>
+<li><a class="reference internal" href="#api-change" id="id28">API change</a></li>
+<li><a class="reference internal" href="#new-configuration-options" id="id29">New configuration options</a></li>
+<li><a class="reference internal" href="#typed-columns-in-rdbms-backends" id="id30">Typed columns in RDBMS backends</a></li>
+<li><a class="reference internal" href="#permission-setup" id="id31">Permission setup</a></li>
+<li><a class="reference internal" href="#new-actor-property" id="id32">New &#8220;actor&#8221; property</a></li>
+<li><a class="reference internal" href="#new-reject-exception-for-auditors" id="id33">New Reject exception for Auditors</a></li>
+<li><a class="reference internal" href="#new-auditor-fixes-outlook-bug" id="id34">New auditor fixes Outlook bug</a></li>
+<li><a class="reference internal" href="#new-script-for-copying-users" id="id35">New script for copying users</a></li>
+<li><a class="reference internal" href="#other-improvements" id="id36">Other improvements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="instant-gratification-script-even-more-gratifying">
+<h2><a class="toc-backref" href="#id7">Instant-Gratification script even more gratifying</a></h2>
+<p>The immensely popular <tt class="docutils literal"><span class="pre">python</span> <span class="pre">demo.py</span></tt> instant-gratification script has
+been extended to allow you to choose the backend to use with the demo. To
+select the &#8220;sqlite&#8221; backend (assuming it is available) you use:</p>
+<div class="highlight-python"><pre>python demo.py sqlite nuke</pre>
+</div>
+<p>This will nuke any existing demo and reinitialise it with the sqlite
+backend. Remember folks, if you want to restart the demo at a later point,
+you just need to type:</p>
+<div class="highlight-python"><pre>python demo.py</pre>
+</div>
+<p>without the &#8220;sqlite nuke&#8221; part, or you&#8217;ll clear out the demo again. The
+backend names are:</p>
+<blockquote>
+anydbm bsddb bsddb3 sqlite metakit mysql postgresql</blockquote>
+<p>You will need support modules installed for all except the first two. If
+you&#8217;re not sure whether you have support, run:</p>
+<div class="highlight-python"><pre>python run_tests.py</pre>
+</div>
+<p>and if you see a line saying &#8220;Including XXXX tests&#8221; where XXXX is the
+backend you wish to try, then you&#8217;re on your way. The mysql and postgresql
+require their test environments to be set up. Read their respective
+documents in the &#8220;doc&#8221; directory to do that.</p>
+</div>
+<div class="section" id="web-interface">
+<h2><a class="toc-backref" href="#id8">Web Interface</a></h2>
+<div class="section" id="saving-and-sharing-of-user-queries">
+<h3><a class="toc-backref" href="#id9">Saving and sharing of user queries</a></h3>
+<p>Due to popular demand, the user query saving mechanisms have been
+overhauled.</p>
+<p>As before, you may save queries in the tracker by giving the query a
+name. Each user may only have one query with a given name - if a
+subsequent search is performed with the same query name supplied, then
+it will edit the existing query of the same name.</p>
+<p>Queries may be marked as &#8220;private&#8221;. These queries are only visible to the
+user that created them. If they&#8217;re not marked &#8220;private&#8221; then all other
+users may include the query in their list of &#8220;Your Queries&#8221;. Marking it as
+private at a later date does not affect users already using the query, nor
+does deleting the query.</p>
+<p>If a user subsequently creates or edits a public query, a new personal
+version of that query is made, with the same editing rules as described
+above.</p>
+<p>You <em>are not required</em> to make these changes in your tracker. You only
+need to make them if you wish to use the new query editing features. It&#8217;s
+highly recommended, as the effort is minimal.</p>
+<ol class="arabic">
+<li><p class="first">You will need to edit your tracker&#8217;s <tt class="docutils literal"><span class="pre">dbinit.py</span></tt> to change the way
+queries are stored. Change the lines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">query</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;query&quot;</span><span class="p">,</span>
+                <span class="n">klass</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>     <span class="n">name</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">url</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+<span class="n">query</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">query</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;query&quot;</span><span class="p">,</span>
+                <span class="n">klass</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>     <span class="n">name</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">url</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>       <span class="n">private_for</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&#39;user&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>That is, add the &#8220;private_for&#8221; property, and remove the line that says
+<tt class="docutils literal"><span class="pre">query.setkey(&quot;name&quot;)</span></tt>.</p>
+</li>
+<li><p class="first">You will also need to copy the <tt class="docutils literal"><span class="pre">query.edit.html</span></tt> template page from the
+<tt class="docutils literal"><span class="pre">templates/classic/html/</span></tt> directory of the source to your tracker&#8217;s
+<tt class="docutils literal"><span class="pre">html</span></tt> directory.</p>
+</li>
+<li><p class="first">Once you&#8217;ve done that, edit the tracker&#8217;s <tt class="docutils literal"><span class="pre">page.html</span></tt> template to
+change:</p>
+<div class="highlight-python"><pre>&lt;td rowspan="2" valign="top" class="sidebar"&gt;
+ &lt;p class="classblock" tal:condition="request/user/queries"&gt;
+  &lt;b&gt;Your Queries&lt;/b&gt;&lt;br&gt;
+  &lt;tal:block tal:repeat="qs request/user/queries"&gt;</pre>
+</div>
+<p>to:</p>
+<div class="highlight-python"><pre>&lt;td rowspan="2" valign="top" class="sidebar"&gt;
+ &lt;p class="classblock"&gt;
+  &lt;b&gt;Your Queries&lt;/b&gt; (&lt;a href="query?@template=edit"&gt;edit&lt;/a&gt;)&lt;br&gt;
+  &lt;tal:block tal:repeat="qs request/user/queries"&gt;</pre>
+</div>
+<p>That is, you&#8217;re removing the <tt class="docutils literal"><span class="pre">tal:condition</span></tt> and adding a link to the
+new edit page.</p>
+</li>
+<li><p class="first">You might also wish to remove the redundant query editing section from the
+<tt class="docutils literal"><span class="pre">user.item.html</span></tt> page.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="zroundup-reinstated">
+<h3><a class="toc-backref" href="#id10">ZRoundup reinstated</a></h3>
+<p>The Zope interface, ZRoundup, lives again!</p>
+<p>See the <a class="reference external" href="upgrading.html#zroundup-changes">upgrading documentation</a> if you wish to use it.</p>
+</div>
+<div class="section" id="simple-support-for-collision-detection">
+<h3><a class="toc-backref" href="#id11">Simple support for collision detection</a></h3>
+<p>Item edit pages that use the <tt class="docutils literal"><span class="pre">context/submit</span></tt> function to generate their
+submit buttons now automatically include a datestamp in the form. This
+datestamp is compared to the &#8220;activity&#8221; property of the item when the form
+is submitted. If the &#8220;actvity&#8221; property is younger than the datestamp in
+the form submission, then someone else has edited the item, and a page
+indicating this is displayed to the user.</p>
+</div>
+<div class="section" id="extending-the-cgi-interface">
+<h3><a class="toc-backref" href="#id12">Extending the cgi interface</a></h3>
+<p>Before 0.7.0 adding or extending web actions was done by overriding or adding
+methods on the Client class. Though this approach still works to provide
+backwards compatibility, it is recommended you upgrade to the new approach, as
+described in the <a class="reference external" href="customizing.html#defining-new-web-actions">Defining new web actions</a> section of the customization
+documentation. You might also want to take a look at the <a class="reference external" href="customizing.html#using-an-external-password-validation-source">Using an external
+password validation source</a> example.</p>
+<p>Actions may also return the content that should return to the user, which
+causes the web interface to skip the normal template formatting step.
+This could be used to return an image to the user instead of HTML. Be sure
+to set the correct content-type header though! The default is still
+text/html. This is done with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s">&#39;image/png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>if you were returning a PNG image.</p>
+</div>
+<div class="section" id="roundup-server">
+<h3><a class="toc-backref" href="#id13">Roundup server</a></h3>
+<p>The roundup-server web interface now supports setgid and running on port
+&lt; 1024.</p>
+<p>It also forks to handle new connections, which means that trackers using
+the postgresql or mysql backends will be able to have multiple users
+accessing the tracker simultaneously.</p>
+</div>
+<div class="section" id="html-templating-made-easier">
+<h3><a class="toc-backref" href="#id14">HTML templating made easier</a></h3>
+<p>All HTML templating functions perform checks for permissions required to
+display or edit the data they are manipulating. The simplest case is
+editing an issue title. Including the expression:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">context</span><span class="o">/</span><span class="n">title</span><span class="o">/</span><span class="n">field</span>
+</pre></div>
+</div>
+<p>will present the user with an edit field if they have Edit Permission. If
+not, then they will be presented with a static display if they have View
+Permission. If they don&#8217;t even have View Permission, then an error message
+is raised, preventing the display of the page, indicating that they don&#8217;t
+have permission to view the information.</p>
+<p>This removes the need for the template to perform those checks, which was
+just plain messy.</p>
+<p>Some new permissions will need to be created in your trackers to cope with
+this change, as outlined in the <a class="reference external" href="upgrading.html#permission-assignments">upgrading documentation</a>.</p>
+</div>
+<div class="section" id="standards-changes">
+<h3><a class="toc-backref" href="#id15">Standards changes</a></h3>
+<p>The HTTP Content-Length header when we serve up files, either
+static ones from the &#8220;html&#8221; folder or file content from the database.</p>
+<p>We also handle If-Modified-Since and supply Last-Modified for both types
+of file too.</p>
+<p>The HTML generated in the classic tracker is now HTML4 (or optionally
+XHTML) compliant. The <tt class="docutils literal"><span class="pre">config.py</span></tt> variable &#8220;HTML_VERSION&#8221; is used to
+control this behaviour.</p>
+<p>The stylesheet includes printer settings now too, so printed pages
+don&#8217;t include the sidebar.</p>
+</div>
+<div class="section" id="quoting-of-urls-and-html">
+<h3><a class="toc-backref" href="#id16">Quoting of URLs and HTML</a></h3>
+<p>Templates that wish to offer file downloads may now use a new
+<tt class="docutils literal"><span class="pre">download_url</span></tt> method:</p>
+<div class="highlight-python"><pre>&lt;tr tal:repeat="file context/files"&gt;
+ &lt;td&gt;
+  &lt;a tal:attributes="href file/download_url"
+     tal:content="file/name"&gt;dld link&lt;/a&gt;
+ &lt;/td&gt;
+...</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">download_url</span></tt> method looks up the file&#8217;s &#8220;id&#8221; and &#8220;name&#8221; and
+generates a correctly-quoted URL.</p>
+<p>Additionally, users wishing to URL- or HTML- quote text in their templates
+may use the new <tt class="docutils literal"><span class="pre">utils.url_quote(url)</span></tt> and <tt class="docutils literal"><span class="pre">utils.html_quote(html)</span></tt>
+methods.</p>
+</div>
+<div class="section" id="csv-download-of-search-results">
+<h3><a class="toc-backref" href="#id17">CSV download of search results</a></h3>
+<p>A new CGI action, <tt class="docutils literal"><span class="pre">export_csv</span></tt> has been added which exports a given
+index page query as a comma-separated-value file.</p>
+<p>To use this new action, just add a link to your <tt class="docutils literal"><span class="pre">issue.index.html</span></tt>
+page:</p>
+<div class="highlight-python"><pre>&lt;a tal:attributes="href python:request.indexargs_url('issue',
+          {'@action':'export_csv'})"&gt;Download as CSV&lt;/a&gt;</pre>
+</div>
+<p>You may use this for other classes by adding it to their index page and
+changing the <tt class="docutils literal"><span class="pre">'issue'</span></tt> part of the expression to the new class&#8217; name.</p>
+</div>
+<div class="section" id="other-changes">
+<h3><a class="toc-backref" href="#id18">Other changes</a></h3>
+<ul class="simple">
+<li>we serve up a favicon now</li>
+<li>the page titles have the tracker name at the end of the text instead
+of the start</li>
+<li>added url_quote and html_quote methods to the utils object</li>
+<li>added isset method to HTMLProperty</li>
+<li>added search_checkboxes as an option for the search form</li>
+</ul>
+</div>
+</div>
+<div class="section" id="email-interface">
+<h2><a class="toc-backref" href="#id19">Email Interface</a></h2>
+<div class="section" id="better-handling-of-some-email-headers">
+<h3><a class="toc-backref" href="#id20">Better handling of some email headers</a></h3>
+<p>We ignore messages with the header &#8220;Precedence: bulk&#8221;.</p>
+<p>If a Resent-From: header is present, it is used in preference to the From:
+header when determining the author of the message. Useful for redirecting
+error messages from automated systems.</p>
+</div>
+<div class="section" id="email-character-set">
+<h3><a class="toc-backref" href="#id21">Email character set</a></h3>
+<p>The default character set for sending email is UTF-8 (ie. Unicode). If you
+have users whose email clients can&#8217;t handle UTF-8 (eg. Eudora) then you
+will need to edit the new config.py variable <tt class="docutils literal"><span class="pre">EMAIL_CHARSET</span></tt>.</p>
+</div>
+<div class="section" id="dispatcher-configuration">
+<h3><a class="toc-backref" href="#id22">Dispatcher configuration</a></h3>
+<p>A new config option has been added that specifies the email address of
+a &#8220;dispatcher&#8221; role.  This email address acts as a central sentinel for
+issues coming into the system. You can configure it so that all e-mail
+error messages get bounced to them, them and the user in question, or
+just the user (default).</p>
+<p>To toggle these switches, add the &#8220;DISPATCHER_EMAIL&#8221; and
+&#8220;ERROR_MESSAGES_TO&#8221; configuration values to your tracker&#8217;s <tt class="docutils literal"><span class="pre">config.py</span></tt>.
+See the <a class="reference external" href="customizing.html">customisation documentation</a> for how to use them.</p>
+</div>
+<div class="section" id="more-flexible-message-generation">
+<h3><a class="toc-backref" href="#id23">More flexible message generation</a></h3>
+<p>The code for generating email messages in Roundup has been refactored. A
+new module, <tt class="docutils literal"><span class="pre">roundup.mailer</span></tt> contains most of the nuts-n-bolts required
+to generate email messages from Roundup.</p>
+<p>In addition, the <tt class="docutils literal"><span class="pre">IssueClass</span></tt> methods <tt class="docutils literal"><span class="pre">nosymessage()</span></tt> and
+<tt class="docutils literal"><span class="pre">send_message()</span></tt> have both been altered so that they don&#8217;t require the
+message id parameter. This means that change notes with no associated
+change message may now be generated much more easily.</p>
+<p>The roundupdb nosymessage() method also accepts a <tt class="docutils literal"><span class="pre">bcc</span></tt> argument which
+specifies additional userids to send the message to that will not be
+included in the To: header of the message.</p>
+</div>
+<div class="section" id="registration-confirmation-by-email">
+<h3><a class="toc-backref" href="#id24">Registration confirmation by email</a></h3>
+<p>Users may now reply to their registration confirmation email, and the
+roundup mail gateway will complete their registration.</p>
+</div>
+<div class="section" id="roundup-mailgw-now-supports-imap">
+<h3><a class="toc-backref" href="#id25"><tt class="docutils literal"><span class="pre">roundup-mailgw</span></tt> now supports IMAP</a></h3>
+<p>To retrieve from an IMAP mailbox, use a <em>cron</em> entry similar to the
+POP one:</p>
+<div class="highlight-python"><pre>0,10,20,30,40,50 * * * * /usr/local/bin/roundup-mailgw /opt/roundup/trackers/support imap &lt;imap_spec&gt;</pre>
+</div>
+<p>where imap_spec is &#8220;<tt class="docutils literal"><span class="pre">username:password&#64;server</span></tt>&#8221; that specifies the roundup
+submission user&#8217;s IMAP account name, password and server. You may
+optionally include a mailbox to use other than the default <tt class="docutils literal"><span class="pre">INBOX</span></tt> with
+&#8220;<tt class="docutils literal"><span class="pre">imap</span> <span class="pre">username:password&#64;server</span> <span class="pre">mailbox</span></tt>&#8220;.</p>
+<p>If you have a secure (ie. HTTPS) IMAP server then you may use <tt class="docutils literal"><span class="pre">imaps</span></tt>
+in place of <tt class="docutils literal"><span class="pre">imap</span></tt> in the command to use a secure connection.</p>
+</div>
+</div>
+<div class="section" id="database-configuration">
+<h2><a class="toc-backref" href="#id26">Database configuration</a></h2>
+<div class="section" id="postgresql-added-as-a-backend-option">
+<h3><a class="toc-backref" href="#id27">Postgresql added as a backend option</a></h3>
+<p>Trackers may now use the postgresql RDBMS as a database store.</p>
+<p>Postgresql is a good choice if you expect your tracker to grow very large,
+and are expecting many users.</p>
+</div>
+<div class="section" id="api-change">
+<h3><a class="toc-backref" href="#id28">API change</a></h3>
+<p>The Database.curuserid attribute was removed. Any code referencing this
+attribute should be replaced with a call to Database.getuid().</p>
+</div>
+<div class="section" id="new-configuration-options">
+<h3><a class="toc-backref" href="#id29">New configuration options</a></h3>
+<ul class="simple">
+<li>Added DEFAULT_TIMEZONE which allows the tracker to have a different
+default to UTC when users don&#8217;t specify their own preference.</li>
+<li>Added EMAIL_CHARSET (in 0.6.6, but worth mentioning here) which hard-codes
+the character set to be used when sending email from Roundup. This works
+around some email clients&#8217; inability to cope well with UTF-8 (the
+default).</li>
+<li>ERROR_MESSAGES_TO and DISPATCHER_EMAIL as described above in <a class="reference internal" href="#dispatcher-configuration">Dispatcher
+configuration</a>.</li>
+</ul>
+</div>
+<div class="section" id="typed-columns-in-rdbms-backends">
+<h3><a class="toc-backref" href="#id30">Typed columns in RDBMS backends</a></h3>
+<p>The SQLite, MySQL and Postgresql backends now create tables with
+appropriate column datatypes (not just varchar).</p>
+<p>Your database will be automatically migrated to use the new schemas, but
+it will take time. It&#8217;s probably a good idea to make sure you do this as
+part of the upgrade when users are not expected to be using the system.</p>
+</div>
+<div class="section" id="permission-setup">
+<h3><a class="toc-backref" href="#id31">Permission setup</a></h3>
+<p>0.7 automatically sets up the Edit and View Permissions for all classes,
+thus you don&#8217;t need to do so. Feel free to remove the code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Add new Permissions for this schema</span>
+<span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;msg&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;keyword&#39;</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit &quot;</span><span class="o">+</span><span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;View&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to access &quot;</span><span class="o">+</span><span class="n">cl</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>from your <tt class="docutils literal"><span class="pre">dbinit.py</span></tt>.</p>
+</div>
+<div class="section" id="new-actor-property">
+<h3><a class="toc-backref" href="#id32">New &#8220;actor&#8221; property</a></h3>
+<p>Roundup&#8217;s database has a new per-item property &#8220;actor&#8221; which reflects the
+user performing the last &#8220;actvitiy&#8221;. See the classic template for ways to
+integrate this new property into your interface.</p>
+<p>The property will be automatically added to your existing database.</p>
+</div>
+<div class="section" id="new-reject-exception-for-auditors">
+<h3><a class="toc-backref" href="#id33">New Reject exception for Auditors</a></h3>
+<p>An auditor may raise this exception when the current create or set
+operation should be stopped.</p>
+<p>It is up to the specific interface invoking the create or set to
+handle this exception sanely. For example:</p>
+<ul class="simple">
+<li>mailgw will trap and ignore Reject for file attachments and messages</li>
+<li>cgi will trap and present the exception in a nice format</li>
+</ul>
+</div>
+<div class="section" id="new-auditor-fixes-outlook-bug">
+<h3><a class="toc-backref" href="#id34">New auditor fixes Outlook bug</a></h3>
+<p>The new optional auditor <tt class="docutils literal"><span class="pre">detectors/emailauditor.py</span></tt> fires whenever a
+new file entity is created.</p>
+<p>If the file is of type message/rfc822, we tack on the extension .mht.</p>
+<p>The reason for this is that Microsoft Internet Explorer will not open
+things with a .eml attachment, as they deem it &#8216;unsafe&#8217;. Worse yet,
+they&#8217;ll just give you an incomprehensible error message. For more
+information, please see:</p>
+<p><a class="reference external" href="http://support.microsoft.com/default.aspx?scid=kb;EN-US;825803">http://support.microsoft.com/default.aspx?scid=kb;EN-US;825803</a></p>
+<p>Their suggested work around is (excerpt):</p>
+<blockquote>
+<p>WORKAROUND</p>
+<p>To work around this behavior, rename the .EML file that the URL
+links to so that it has a .MHT file name extension, and then update
+the URL to reflect the change to the file name. To do this:</p>
+<ol class="arabic simple">
+<li>In Windows Explorer, locate and then select the .EML file that
+the URL links.</li>
+<li>Right-click the .EML file, and then click Rename.</li>
+<li>Change the file name so that the .EML file uses a .MHT file name
+extension, and then press ENTER.</li>
+<li>Updated the URL that links to the file to reflect the new file
+name extension.</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="new-script-for-copying-users">
+<h3><a class="toc-backref" href="#id35">New script for copying users</a></h3>
+<p>A new script, <tt class="docutils literal"><span class="pre">scripts/copy-user.py</span></tt>, will copy users from one tracker
+to another.  Example usage:</p>
+<div class="highlight-python"><pre>copy-user.py /roundup/tracker1 /roundup/tracker2 `seq 3 10` 14 16</pre>
+</div>
+<p>which copies users 3, 4, 5, 6, 7, 8, 9, 10, 14 and 16.</p>
+</div>
+<div class="section" id="other-improvements">
+<h3><a class="toc-backref" href="#id36">Other improvements</a></h3>
+<ul class="simple">
+<li>All RDBMS backends now have indexes automatically created on critical
+table columns.</li>
+<li>Additionally, the RDBMS backends also implement their own session,
+one-time-key and full-text indexing stores. These were previously external
+dbm stores. This change allows control of locking the database to be
+completely handed over to the RDBMS.</li>
+<li>Date values capture fractions of seconds now. Note that the MySQL backend
+is not capable of storing this precision though, so it will be lost for
+users of that backend.</li>
+<li>The roundup-admin &#8220;export&#8221; and &#8220;import&#8221; commands now handle the database
+journals too. This means that exports from previous versions of Roundup
+will not work under 0.7!</li>
+</ul>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/whatsnew-0.7.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

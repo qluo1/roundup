@@ -1,0 +1,2004 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Upgrading to newer versions of Roundup &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="Roundup FAQ" href="FAQ.html" />
+    <link rel="prev" title="Installing Roundup" href="installation.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">Upgrading to newer versions of Roundup</a><ul>
+<li><a class="reference external" href="#migrating-from-1-4-20-to-1-4-21">Migrating from 1.4.20 to 1.4.21</a></li>
+<li><a class="reference external" href="#migrating-from-1-4-19-to-1-4-20">Migrating from 1.4.19 to 1.4.20</a></li>
+<li><a class="reference external" href="#migrating-from-1-4-17-to-1-4-18">Migrating from 1.4.17 to 1.4.18</a></li>
+<li><a class="reference external" href="#migrating-from-1-4-x-to-1-4-17">Migrating from 1.4.x to 1.4.17</a></li>
+<li><a class="reference external" href="#migrating-from-1-4-x-to-1-4-12">Migrating from 1.4.x to 1.4.12</a><ul>
+<li><a class="reference external" href="#fixing-some-potential-security-holes">Fixing some potential security holes</a></li>
+<li><a class="reference external" href="#some-html-interface-tweaks">Some HTML interface tweaks</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-4-x-to-1-4-11">Migrating from 1.4.x to 1.4.11</a><ul>
+<li><a class="reference external" href="#close-potential-security-hole">Close potential security hole</a></li>
+<li><a class="reference external" href="#grant-the-register-permission-to-the-anonymous-role">Grant the &#8220;Register&#8221; permission to the Anonymous role</a></li>
+<li><a class="reference external" href="#generic-class-editor-may-now-restore-retired-items">Generic class editor may now restore retired items</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-4-x-to-1-4-9">Migrating from 1.4.x to 1.4.9</a><ul>
+<li><a class="reference external" href="#customized-mailgw-class">Customized MailGW Class</a></li>
+<li><a class="reference external" href="#fix-the-remove-button-in-issue-files-and-messages-lists">Fix the &#8220;remove&#8221; button in issue files and messages lists</a></li>
+<li><a class="reference external" href="#fixing-the-retire-button-in-user-management-list">Fixing the &#8220;retire&#8221; button in user management list</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-4-x-to-1-4-7">Migrating from 1.4.x to 1.4.7</a><ul>
+<li><a class="reference external" href="#grant-the-retire-permission-to-users-for-their-queries">Grant the &#8220;retire&#8221; permission to users for their queries</a></li>
+<li><a class="reference external" href="#fix-the-retire-link-in-the-users-list-for-admin-users">Fix the &#8220;retire&#8221; link in the users list for admin users</a></li>
+<li><a class="reference external" href="#fix-for-python-2-6-users">Fix for Python 2.6+ users</a></li>
+<li><a class="reference external" href="#trackers-currently-allowing-html-file-uploading">Trackers currently allowing HTML file uploading</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-4-2-to-1-4-3">Migrating from 1.4.2 to 1.4.3</a></li>
+<li><a class="reference external" href="#migrating-from-1-4-x-to-1-4-2">Migrating from 1.4.x to 1.4.2</a></li>
+<li><a class="reference external" href="#migrating-from-1-3-3-to-1-4-0">Migrating from 1.3.3 to 1.4.0</a></li>
+<li><a class="reference external" href="#migrating-from-1-2-x-to-1-3-0">Migrating from 1.2.x to 1.3.0</a><ul>
+<li><a class="reference external" href="#web-interface-changes">1.3.0 Web interface changes</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-1-2-to-1-2-0">Migrating from 1.1.2 to 1.2.0</a><ul>
+<li><a class="reference external" href="#sorting-and-grouping-by-multiple-properties">1.2.0 Sorting and grouping by multiple properties</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-1-0-to-1-1-1">Migrating from 1.1.0 to 1.1.1</a><ul>
+<li><a class="reference external" href="#clear-this-message">1.1.1 &#8220;Clear this message&#8221;</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-1-0-x-to-1-1-0">Migrating from 1.0.x to 1.1.0</a><ul>
+<li><a class="reference external" href="#login-for-session-only">1.1 Login &#8220;For Session Only&#8221;</a></li>
+<li><a class="reference external" href="#query-display-name">1.1 Query Display Name</a></li>
+<li><a class="reference external" href="#id1">1.1 &#8220;Clear this message&#8221;</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-8-x-to-1-0">Migrating from 0.8.x to 1.0</a><ul>
+<li><a class="reference external" href="#new-query-permissions">1.0 New Query Permissions</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-8-0-to-0-8-3">Migrating from 0.8.0 to 0.8.3</a><ul>
+<li><a class="reference external" href="#nosy-handling-changes">0.8.3 Nosy Handling Changes</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-7-1-to-0-8-0">Migrating from 0.7.1 to 0.8.0</a><ul>
+<li><a class="reference external" href="#backend-changes">0.8.0 Backend changes</a></li>
+<li><a class="reference external" href="#api-changes">0.8.0 API changes</a></li>
+<li><a class="reference external" href="#new-tracker-layout">0.8.0 New tracker layout</a></li>
+<li><a class="reference external" href="#permissions-changes">0.8.0 Permissions Changes</a></li>
+<li><a class="reference external" href="#use-of-templatingutils">0.8.0 Use of TemplatingUtils</a></li>
+<li><a class="reference external" href="#logging-configuration">0.8.0 Logging Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-7-2-to-0-7-3">Migrating from 0.7.2 to 0.7.3</a><ul>
+<li><a class="reference external" href="#configuration">0.7.3 Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-7-0-to-0-7-2">Migrating from 0.7.0 to 0.7.2</a><ul>
+<li><a class="reference external" href="#default-timezone-is-now-required">0.7.2 DEFAULT_TIMEZONE is now required</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-7-0-to-0-7-1">Migrating from 0.7.0 to 0.7.1</a><ul>
+<li><a class="reference external" href="#permission-assignments">0.7.1 Permission assignments</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-6-to-0-7">Migrating from 0.6 to 0.7</a><ul>
+<li><a class="reference external" href="#id2">0.7.0 Permission assignments</a></li>
+<li><a class="reference external" href="#getting-the-current-user-id">0.7.0 Getting the current user id</a></li>
+<li><a class="reference external" href="#zroundup-changes">0.7.0 ZRoundup changes</a></li>
+<li><a class="reference external" href="#edit-collision-detection">0.7.0 Edit collision detection</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-6-x-to-0-6-3">Migrating from 0.6.x to 0.6.3</a><ul>
+<li><a class="reference external" href="#id3">0.6.3 Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-5-to-0-6">Migrating from 0.5 to 0.6</a><ul>
+<li><a class="reference external" href="#id4">0.6.0 Configuration</a></li>
+<li><a class="reference external" href="#templating-changes">0.6.0 Templating changes</a></li>
+<li><a class="reference external" href="#form-handling-changes">0.6.0 Form handling changes</a></li>
+<li><a class="reference external" href="#multilingual-character-set-support">0.6.0 Multilingual character set support</a></li>
+<li><a class="reference external" href="#user-timezone-support">0.6.0 User timezone support</a></li>
+<li><a class="reference external" href="#search-page-structure">0.6.0 Search page structure</a></li>
+<li><a class="reference external" href="#notes-for-metakit-backend-users">0.6.0 Notes for metakit backend users</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-4-x-to-0-5-0">Migrating from 0.4.x to 0.5.0</a><ul>
+<li><a class="reference external" href="#id7">0.5.0 Configuration</a></li>
+<li><a class="reference external" href="#schema-specification">0.5.0 Schema Specification</a><ul>
+<li><a class="reference external" href="#database-backend-changes">0.5.0 Database backend changes</a></li>
+<li><a class="reference external" href="#journalling-changes">0.5.0 Journalling changes</a></li>
+<li><a class="reference external" href="#user-schema-changes">0.5.0 User schema changes</a></li>
+<li><a class="reference external" href="#security-settings">0.5.0 Security Settings</a></li>
+<li><a class="reference external" href="#user-changes">0.5.0 User changes</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#cgi-interface-changes">0.5.0 CGI interface changes</a></li>
+<li><a class="reference external" href="#html-templating">0.5.0 HTML templating</a></li>
+<li><a class="reference external" href="#detectors">0.5.0 Detectors</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-4-1-to-0-4-2">Migrating from 0.4.1 to 0.4.2</a><ul>
+<li><a class="reference external" href="#id8">0.4.2 Configuration</a></li>
+<li><a class="reference external" href="#changes-to-detectors">0.4.2 Changes to detectors</a></li>
+<li><a class="reference external" href="#html-templating-changes">0.4.2 HTML templating changes</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-4-0-to-0-4-1">Migrating from 0.4.0 to 0.4.1</a><ul>
+<li><a class="reference external" href="#files-storage">0.4.1 Files storage</a></li>
+<li><a class="reference external" href="#id9">0.4.1 Configuration</a></li>
+<li><a class="reference external" href="#alternate-e-mail-addresses">0.4.1 Alternate E-Mail Addresses</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-3-x-to-0-4-0">Migrating from 0.3.x to 0.4.0</a><ul>
+<li><a class="reference external" href="#message-id-and-in-reply-to-addition">0.4.0 Message-ID and In-Reply-To addition</a></li>
+<li><a class="reference external" href="#id10">0.4.0 Configuration</a></li>
+<li><a class="reference external" href="#cgi-script-roundup-cgi">0.4.0 CGI script roundup.cgi</a></li>
+<li><a class="reference external" href="#nosy-reactor">0.4.0 Nosy reactor</a></li>
+<li><a class="reference external" href="#id11">0.4.0 HTML templating</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#migrating-from-0-2-x-to-0-3-x">Migrating from 0.2.x to 0.3.x</a><ul>
+<li><a class="reference external" href="#x-cookie-authentication-changes">0.3.x Cookie Authentication changes</a></li>
+<li><a class="reference external" href="#x-password-encoding">0.3.x Password encoding</a></li>
+<li><a class="reference external" href="#x-configuration">0.3.x Configuration</a></li>
+<li><a class="reference external" href="#x-cgi-script-roundup-cgi">0.3.x CGI script roundup.cgi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="installation.html"
+                          title="previous chapter">Installing Roundup</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="FAQ.html"
+                          title="next chapter">Roundup FAQ</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/upgrading.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Roundup FAQ"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="upgrading-to-newer-versions-of-roundup">
+<h1><a class="toc-backref" href="#id12">Upgrading to newer versions of Roundup</a></h1>
+<p>Please read each section carefully and edit your tracker home files
+accordingly. Note that there is information about upgrade procedures in the
+<a class="reference external" href="admin_guide.html">administration guide</a>.</p>
+<p>If a specific version transition isn&#8217;t mentioned here (eg. 0.6.7 to 0.6.8)
+then you don&#8217;t need to do anything. If you&#8217;re upgrading from 0.5.6 to
+0.6.8 though, you&#8217;ll need to check the &#8220;0.5 to 0.6&#8221; and &#8220;0.6.x to 0.6.3&#8221;
+steps.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#upgrading-to-newer-versions-of-roundup" id="id12">Upgrading to newer versions of Roundup</a><ul>
+<li><a class="reference internal" href="#migrating-from-1-4-20-to-1-4-21" id="id13">Migrating from 1.4.20 to 1.4.21</a></li>
+<li><a class="reference internal" href="#migrating-from-1-4-19-to-1-4-20" id="id14">Migrating from 1.4.19 to 1.4.20</a></li>
+<li><a class="reference internal" href="#migrating-from-1-4-17-to-1-4-18" id="id15">Migrating from 1.4.17 to 1.4.18</a></li>
+<li><a class="reference internal" href="#migrating-from-1-4-x-to-1-4-17" id="id16">Migrating from 1.4.x to 1.4.17</a></li>
+<li><a class="reference internal" href="#migrating-from-1-4-x-to-1-4-12" id="id17">Migrating from 1.4.x to 1.4.12</a><ul>
+<li><a class="reference internal" href="#fixing-some-potential-security-holes" id="id18">Fixing some potential security holes</a></li>
+<li><a class="reference internal" href="#some-html-interface-tweaks" id="id19">Some HTML interface tweaks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-4-x-to-1-4-11" id="id20">Migrating from 1.4.x to 1.4.11</a><ul>
+<li><a class="reference internal" href="#close-potential-security-hole" id="id21">Close potential security hole</a></li>
+<li><a class="reference internal" href="#grant-the-register-permission-to-the-anonymous-role" id="id22">Grant the &#8220;Register&#8221; permission to the Anonymous role</a></li>
+<li><a class="reference internal" href="#generic-class-editor-may-now-restore-retired-items" id="id23">Generic class editor may now restore retired items</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-4-x-to-1-4-9" id="id24">Migrating from 1.4.x to 1.4.9</a><ul>
+<li><a class="reference internal" href="#customized-mailgw-class" id="id25">Customized MailGW Class</a></li>
+<li><a class="reference internal" href="#fix-the-remove-button-in-issue-files-and-messages-lists" id="id26">Fix the &#8220;remove&#8221; button in issue files and messages lists</a></li>
+<li><a class="reference internal" href="#fixing-the-retire-button-in-user-management-list" id="id27">Fixing the &#8220;retire&#8221; button in user management list</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-4-x-to-1-4-7" id="id28">Migrating from 1.4.x to 1.4.7</a><ul>
+<li><a class="reference internal" href="#grant-the-retire-permission-to-users-for-their-queries" id="id29">Grant the &#8220;retire&#8221; permission to users for their queries</a></li>
+<li><a class="reference internal" href="#fix-the-retire-link-in-the-users-list-for-admin-users" id="id30">Fix the &#8220;retire&#8221; link in the users list for admin users</a></li>
+<li><a class="reference internal" href="#fix-for-python-2-6-users" id="id31">Fix for Python 2.6+ users</a></li>
+<li><a class="reference internal" href="#trackers-currently-allowing-html-file-uploading" id="id32">Trackers currently allowing HTML file uploading</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-4-2-to-1-4-3" id="id33">Migrating from 1.4.2 to 1.4.3</a></li>
+<li><a class="reference internal" href="#migrating-from-1-4-x-to-1-4-2" id="id34">Migrating from 1.4.x to 1.4.2</a></li>
+<li><a class="reference internal" href="#migrating-from-1-3-3-to-1-4-0" id="id35">Migrating from 1.3.3 to 1.4.0</a></li>
+<li><a class="reference internal" href="#migrating-from-1-2-x-to-1-3-0" id="id36">Migrating from 1.2.x to 1.3.0</a><ul>
+<li><a class="reference internal" href="#web-interface-changes" id="id37">1.3.0 Web interface changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-1-2-to-1-2-0" id="id38">Migrating from 1.1.2 to 1.2.0</a><ul>
+<li><a class="reference internal" href="#sorting-and-grouping-by-multiple-properties" id="id39">1.2.0 Sorting and grouping by multiple properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-1-0-to-1-1-1" id="id40">Migrating from 1.1.0 to 1.1.1</a><ul>
+<li><a class="reference internal" href="#clear-this-message" id="id41">1.1.1 &#8220;Clear this message&#8221;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-1-0-x-to-1-1-0" id="id42">Migrating from 1.0.x to 1.1.0</a><ul>
+<li><a class="reference internal" href="#login-for-session-only" id="id43">1.1 Login &#8220;For Session Only&#8221;</a></li>
+<li><a class="reference internal" href="#query-display-name" id="id44">1.1 Query Display Name</a></li>
+<li><a class="reference internal" href="#id1" id="id45">1.1 &#8220;Clear this message&#8221;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-8-x-to-1-0" id="id46">Migrating from 0.8.x to 1.0</a><ul>
+<li><a class="reference internal" href="#new-query-permissions" id="id47">1.0 New Query Permissions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-8-0-to-0-8-3" id="id48">Migrating from 0.8.0 to 0.8.3</a><ul>
+<li><a class="reference internal" href="#nosy-handling-changes" id="id49">0.8.3 Nosy Handling Changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-7-1-to-0-8-0" id="id50">Migrating from 0.7.1 to 0.8.0</a><ul>
+<li><a class="reference internal" href="#backend-changes" id="id51">0.8.0 Backend changes</a></li>
+<li><a class="reference internal" href="#api-changes" id="id52">0.8.0 API changes</a></li>
+<li><a class="reference internal" href="#new-tracker-layout" id="id53">0.8.0 New tracker layout</a></li>
+<li><a class="reference internal" href="#permissions-changes" id="id54">0.8.0 Permissions Changes</a></li>
+<li><a class="reference internal" href="#use-of-templatingutils" id="id55">0.8.0 Use of TemplatingUtils</a></li>
+<li><a class="reference internal" href="#logging-configuration" id="id56">0.8.0 Logging Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-7-2-to-0-7-3" id="id57">Migrating from 0.7.2 to 0.7.3</a><ul>
+<li><a class="reference internal" href="#configuration" id="id58">0.7.3 Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-7-0-to-0-7-2" id="id59">Migrating from 0.7.0 to 0.7.2</a><ul>
+<li><a class="reference internal" href="#default-timezone-is-now-required" id="id60">0.7.2 DEFAULT_TIMEZONE is now required</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-7-0-to-0-7-1" id="id61">Migrating from 0.7.0 to 0.7.1</a><ul>
+<li><a class="reference internal" href="#permission-assignments" id="id62">0.7.1 Permission assignments</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-6-to-0-7" id="id63">Migrating from 0.6 to 0.7</a><ul>
+<li><a class="reference internal" href="#id2" id="id64">0.7.0 Permission assignments</a></li>
+<li><a class="reference internal" href="#getting-the-current-user-id" id="id65">0.7.0 Getting the current user id</a></li>
+<li><a class="reference internal" href="#zroundup-changes" id="id66">0.7.0 ZRoundup changes</a></li>
+<li><a class="reference internal" href="#edit-collision-detection" id="id67">0.7.0 Edit collision detection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-6-x-to-0-6-3" id="id68">Migrating from 0.6.x to 0.6.3</a><ul>
+<li><a class="reference internal" href="#id3" id="id69">0.6.3 Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-5-to-0-6" id="id70">Migrating from 0.5 to 0.6</a><ul>
+<li><a class="reference internal" href="#id4" id="id71">0.6.0 Configuration</a></li>
+<li><a class="reference internal" href="#templating-changes" id="id72">0.6.0 Templating changes</a></li>
+<li><a class="reference internal" href="#form-handling-changes" id="id73">0.6.0 Form handling changes</a></li>
+<li><a class="reference internal" href="#multilingual-character-set-support" id="id74">0.6.0 Multilingual character set support</a></li>
+<li><a class="reference internal" href="#user-timezone-support" id="id75">0.6.0 User timezone support</a></li>
+<li><a class="reference internal" href="#search-page-structure" id="id76">0.6.0 Search page structure</a></li>
+<li><a class="reference internal" href="#notes-for-metakit-backend-users" id="id77">0.6.0 Notes for metakit backend users</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-4-x-to-0-5-0" id="id78">Migrating from 0.4.x to 0.5.0</a><ul>
+<li><a class="reference internal" href="#id7" id="id79">0.5.0 Configuration</a></li>
+<li><a class="reference internal" href="#schema-specification" id="id80">0.5.0 Schema Specification</a><ul>
+<li><a class="reference internal" href="#database-backend-changes" id="id81">0.5.0 Database backend changes</a></li>
+<li><a class="reference internal" href="#journalling-changes" id="id82">0.5.0 Journalling changes</a></li>
+<li><a class="reference internal" href="#user-schema-changes" id="id83">0.5.0 User schema changes</a></li>
+<li><a class="reference internal" href="#security-settings" id="id84">0.5.0 Security Settings</a></li>
+<li><a class="reference internal" href="#user-changes" id="id85">0.5.0 User changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cgi-interface-changes" id="id86">0.5.0 CGI interface changes</a></li>
+<li><a class="reference internal" href="#html-templating" id="id87">0.5.0 HTML templating</a></li>
+<li><a class="reference internal" href="#detectors" id="id88">0.5.0 Detectors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-4-1-to-0-4-2" id="id89">Migrating from 0.4.1 to 0.4.2</a><ul>
+<li><a class="reference internal" href="#id8" id="id90">0.4.2 Configuration</a></li>
+<li><a class="reference internal" href="#changes-to-detectors" id="id91">0.4.2 Changes to detectors</a></li>
+<li><a class="reference internal" href="#html-templating-changes" id="id92">0.4.2 HTML templating changes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-4-0-to-0-4-1" id="id93">Migrating from 0.4.0 to 0.4.1</a><ul>
+<li><a class="reference internal" href="#files-storage" id="id94">0.4.1 Files storage</a></li>
+<li><a class="reference internal" href="#id9" id="id95">0.4.1 Configuration</a></li>
+<li><a class="reference internal" href="#alternate-e-mail-addresses" id="id96">0.4.1 Alternate E-Mail Addresses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-3-x-to-0-4-0" id="id97">Migrating from 0.3.x to 0.4.0</a><ul>
+<li><a class="reference internal" href="#message-id-and-in-reply-to-addition" id="id98">0.4.0 Message-ID and In-Reply-To addition</a></li>
+<li><a class="reference internal" href="#id10" id="id99">0.4.0 Configuration</a></li>
+<li><a class="reference internal" href="#cgi-script-roundup-cgi" id="id100">0.4.0 CGI script roundup.cgi</a></li>
+<li><a class="reference internal" href="#nosy-reactor" id="id101">0.4.0 Nosy reactor</a></li>
+<li><a class="reference internal" href="#id11" id="id102">0.4.0 HTML templating</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-0-2-x-to-0-3-x" id="id103">Migrating from 0.2.x to 0.3.x</a><ul>
+<li><a class="reference internal" href="#x-cookie-authentication-changes" id="id104">0.3.x Cookie Authentication changes</a></li>
+<li><a class="reference internal" href="#x-password-encoding" id="id105">0.3.x Password encoding</a></li>
+<li><a class="reference internal" href="#x-configuration" id="id106">0.3.x Configuration</a></li>
+<li><a class="reference internal" href="#x-cgi-script-roundup-cgi" id="id107">0.3.x CGI script roundup.cgi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="migrating-from-1-4-20-to-1-4-21">
+<h2><a class="toc-backref" href="#id13">Migrating from 1.4.20 to 1.4.21</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">_generic.calendar.html</span></tt> page of the instance has been updated to include
+<tt class="docutils literal"><span class="pre">&lt;meta</span> <span class="pre">name=&quot;robots&quot;</span> <span class="pre">content=&quot;noindex,</span> <span class="pre">nofollow&quot;</span> <span class="pre">/&gt;</span></tt>.  This prevents
+robots to follow all the links in the calendar.  If you haven&#8217;t modified the
+page on your local instance, you can simply replace it with the one in
+<tt class="docutils literal"><span class="pre">share/roundup/templates/classic/html/_generic.calendar.html</span></tt>; if you did,
+you can add the tag manually.  See issue2550765 and changeset a099ff2ceff3.</p>
+<dl class="docutils">
+<dt>If you are using the xml-rpc interface, there is a change</dt>
+<dd><p class="first">in accessing it. You can not send text/xml data to any
+roundup url and get a response, you must use the /xmlrpc
+url. For example, if you used to send your xmlrpc request to:</p>
+<blockquote>
+<a class="reference external" href="http://myroundup.com/roundup">http://myroundup.com/roundup</a></blockquote>
+<p>you need to change the url to read:</p>
+<blockquote>
+<a class="reference external" href="http://myroundup.com/roundup/xmlrpc">http://myroundup.com/roundup/xmlrpc</a></blockquote>
+<p class="last">to invoke the xmlrpc handler. This allows us to send xml
+data to roundup for other handlers (e.g. REST, SOAP ...)
+in the future.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="migrating-from-1-4-19-to-1-4-20">
+<h2><a class="toc-backref" href="#id14">Migrating from 1.4.19 to 1.4.20</a></h2>
+<p>Roundup used to allow certain HTML-Tags in OK- and Error-messages. Since
+these messages are passed via the URL (due to roundup redirecting after
+an edit), we did have security-issues (see issue2550724).</p>
+<p>If you have customized the OK or Error messages in your
+roundup-installation and you were using features like bold or italic
+in the message, you will have to do without this highlighting and
+remove HTML tags from messages.</p>
+<p>If you were using &lt;br&gt; tags for multi-line messages, you now should use
+newlines instead, these will be replaced with &lt;br/&gt; during formatting.</p>
+<p>Note that the previous implementation also allowed links inside
+messages. Since these links could be set by an attacker, no links in
+roundup messages are supported anymore. This does <em>not</em> affect the
+&#8220;clear this message&#8221; link in OK-messages as it is generated by the
+template and is not part of the OK-message.</p>
+<p>If you have not modified any roundup messages, you need not do anything,
+the templates shipped with roundup did not use HTML tags in messages for
+highlighting.</p>
+</div>
+<div class="section" id="migrating-from-1-4-17-to-1-4-18">
+<h2><a class="toc-backref" href="#id15">Migrating from 1.4.17 to 1.4.18</a></h2>
+<p>There was a bug in 1.4.17 where files were unlinked from issues if a
+mail without attachment was received via the mail interface. The
+following script will list likely issues being affected by the bug.
+The date in the script is the date of the 1.4.17 release. If you have
+installed 1.4.17 later than this date, you can change the date
+appropriately to your installation date. Run the script in the directory
+of your tracker:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">roundup</span> <span class="kn">import</span> <span class="n">instance</span>
+<span class="kn">from</span> <span class="nn">roundup.date</span> <span class="kn">import</span> <span class="n">Date</span>
+<span class="nb">dir</span>     <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span> <span class="p">()</span>
+<span class="n">tracker</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">open</span> <span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+<span class="n">db</span>      <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">open</span> <span class="p">(</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+<span class="c"># you may want to change this to your install date to find less candidates</span>
+<span class="n">last_release</span> <span class="o">=</span> <span class="n">Date</span><span class="p">(</span><span class="s">&#39;2011-05-13&#39;</span><span class="p">)</span>
+<span class="n">affected</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">getnodeids</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">history</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">affected</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">last_release</span> <span class="ow">or</span> <span class="n">j</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;set&#39;</span> <span class="ow">or</span> <span class="s">&#39;files&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">j</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">op</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">j</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="s">&#39;files&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">&#39;-&#39;</span><span class="p">:</span>
+                <span class="n">affected</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">break</span>
+<span class="k">print</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">affected</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">()))</span>
+</pre></div>
+</div>
+<p>To find out which files where attached before you can look in the
+history of the affected issue.  For fixing issues you can re-attach the
+files in question using the &#8220;set&#8221; command of roundup-admin, e.g., if the
+list of files attached to an issue should be files 5, 17, 23 for issue42
+you will set this using</p>
+<p>roundup-admin -i /path/to/your/tracker set issue42 files=5,17,23</p>
+</div>
+<div class="section" id="migrating-from-1-4-x-to-1-4-17">
+<h2><a class="toc-backref" href="#id16">Migrating from 1.4.x to 1.4.17</a></h2>
+<p>There is a new config-option <cite>migrate_passwords</cite> in section <cite>web</cite> to
+auto-migrate passwords at web-login time to a more secure storage
+scheme. Default for the new option is &#8220;yes&#8221; so if you don&#8217;t want that
+passwords are auto-migrated to a more secure password scheme on user
+login, set this to &#8220;no&#8221; before running your tracker(s) after the
+upgrade.</p>
+<p>The standalone roundup-server now defaults to listening on localhost (no
+longer on all network interfaces). This will not affect you if you&#8217;re
+already using a configuration file for roundup-server. If you are using
+an empty setting for the <cite>host</cite> parameter in the config-file you should
+explicitly put 0.0.0.0 there as the use of an empty string to specify
+listening to all interfaces is deprecated and will go away in a future
+version.  If you are starting the server without a configuration file
+and want to explicitly listen to all network interface, you should
+specify the -n option with the address <cite>0.0.0.0</cite>.</p>
+<p>Searching now requires either read-permission without a check method, or
+you will have to add a &#8220;Search&#8221; permission for a class or a list of
+properties for a class (if you want to allow searching). For the classic
+template (or other templates derived from it) you want to add the
+following lines to your <cite>schema.py</cite> file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Search&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;query&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is needed, because for the <cite>query</cite> class users may view only their
+own queries (or public queries). This is implemented with a <cite>check</cite>
+method, therefore the default search permissions will not allow
+searching and you&#8217;ll have to add an explicit search permission.
+If you have modified your schema, you can check if you&#8217;re missing any
+search permissions with the following script, run it in your tracker
+directory, it will list for each Class and Property the roles that may
+search for this property:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">roundup</span> <span class="kn">import</span> <span class="n">instance</span>
+
+<span class="n">tracker</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span> <span class="p">())</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">getclasses</span><span class="p">()):</span>
+    <span class="k">print</span> <span class="s">&quot;Class:&quot;</span><span class="p">,</span> <span class="n">cl</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">getclass</span><span class="p">(</span><span class="n">cl</span><span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="k">print</span> <span class="s">&quot;    Property:&quot;</span><span class="p">,</span> <span class="n">p</span>
+        <span class="n">roles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">role</span><span class="o">.</span><span class="n">iterkeys</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">roleHasSearchPermission</span><span class="p">(</span><span class="n">cl</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">role</span><span class="p">):</span>
+                <span class="n">roles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">role</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&quot;        roles may search:&quot;</span><span class="p">,</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">roles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="migrating-from-1-4-x-to-1-4-12">
+<h2><a class="toc-backref" href="#id17">Migrating from 1.4.x to 1.4.12</a></h2>
+<p>Item creation now checks the &#8220;Create&#8221; permission instead of the &#8220;Edit&#8221;
+permission for individual properties. If you have modified your tracker
+permissions from the default distribution, you should check that
+&#8220;Create&#8221; permissions exist for all properties you want users to be able
+to create.</p>
+<div class="section" id="fixing-some-potential-security-holes">
+<h3><a class="toc-backref" href="#id18">Fixing some potential security holes</a></h3>
+<p>Enhanced checking was added to the user registration auditor. If you
+run a public tracker you should update your tracker&#8217;s
+<tt class="docutils literal"><span class="pre">detectors/userauditor.py</span></tt> using the new code from
+<tt class="docutils literal"><span class="pre">share/roundup/templates/classic/detectors/userauditor.py</span></tt>. In most
+cases you may just copy the file over, but if you&#8217;ve made changes to
+the auditor in your tracker then you&#8217;ll need to manually integrate
+the new code.</p>
+<p>Some HTML templates were found to have formatting security problems:</p>
+<p><tt class="docutils literal"><span class="pre">html/page.html</span></tt>:</p>
+<div class="highlight-python"><pre>-tal:replace="request/user/username"&gt;username&lt;/span&gt;&lt;/b&gt;&lt;br&gt;
++tal:replace="python:request.user.username.plain(escape=1)"&gt;username&lt;/span&gt;&lt;/b&gt;&lt;br&gt;</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">html/_generic.help-list.html</span></tt>:</p>
+<div class="highlight-python"><pre>-tal:content="structure python:item[prop]"&gt;&lt;/label&gt;
++tal:content="python:item[prop]"&gt;&lt;/label&gt;</pre>
+</div>
+<p>The lines marked &#8220;+&#8221; should be added and lines marked &#8220;-&#8221; should be
+deleted (minus the &#8220;+&#8221;/&#8221;-&#8221; signs).</p>
+</div>
+<div class="section" id="some-html-interface-tweaks">
+<h3><a class="toc-backref" href="#id19">Some HTML interface tweaks</a></h3>
+<p>You may wish to copy the <tt class="docutils literal"><span class="pre">user_utils.js</span></tt> and <tt class="docutils literal"><span class="pre">style.css`</span> <span class="pre">files</span> <span class="pre">from</span> <span class="pre">the</span>
+<span class="pre">source</span> <span class="pre">distribution</span> <span class="pre">``share/roundup/templates/classic/html/</span></tt> directory to the
+<tt class="docutils literal"><span class="pre">html</span></tt> directory of your trackers as it includes a small improvement.</p>
+<p>If you have made local changes to those files you&#8217;ll need to manually work
+the differences in to your versions or ignore the changes.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-1-4-x-to-1-4-11">
+<h2><a class="toc-backref" href="#id20">Migrating from 1.4.x to 1.4.11</a></h2>
+<div class="section" id="close-potential-security-hole">
+<h3><a class="toc-backref" href="#id21">Close potential security hole</a></h3>
+<p>If your tracker has untrusted users you should examine its <tt class="docutils literal"><span class="pre">schema.py</span></tt>
+file and look for the section granting the &#8220;Edit&#8221; permission to your users.
+This should look something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">own_record</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit their own user details&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and should be modified to restrict the list of properties they are allowed
+to edit by adding the <tt class="docutils literal"><span class="pre">properties=</span></tt> section like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">own_record</span><span class="p">,</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">(</span><span class="s">&#39;username&#39;</span><span class="p">,</span> <span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="s">&#39;address&#39;</span><span class="p">,</span> <span class="s">&#39;realname&#39;</span><span class="p">,</span> <span class="s">&#39;phone&#39;</span><span class="p">,</span>
+        <span class="s">&#39;organisation&#39;</span><span class="p">,</span> <span class="s">&#39;alternate_addresses&#39;</span><span class="p">,</span> <span class="s">&#39;queries&#39;</span><span class="p">,</span> <span class="s">&#39;timezone&#39;</span><span class="p">),</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit their own user details&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Most importantly the &#8220;roles&#8221; property should not be editable - thus not
+appear in that list of properties.</p>
+</div>
+<div class="section" id="grant-the-register-permission-to-the-anonymous-role">
+<h3><a class="toc-backref" href="#id22">Grant the &#8220;Register&#8221; permission to the Anonymous role</a></h3>
+<p>A separate &#8220;Register&#8221; permission has been introduced to allow
+anonymous users to register. This means you will need to add the
+following to your tracker&#8217;s <tt class="docutils literal"><span class="pre">schema.py</span></tt> to add the permission and
+assign it to the Anonymous role (replacing any previously assigned
+&#8220;Create user&#8221; permission for the Anonymous role):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">+</span><span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Register&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span>
+<span class="o">+</span>     <span class="n">description</span><span class="o">=</span><span class="s">&#39;User is allowed to register new user&#39;</span><span class="p">)</span>
+
+ <span class="c"># Assign the appropriate permissions to the anonymous user&#39;s Anonymous</span>
+ <span class="c"># Role. Choices here are:</span>
+ <span class="c"># - Allow anonymous users to register</span>
+<span class="o">-</span><span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="s">&#39;Create&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">)</span>
+<span class="o">+</span><span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="s">&#39;Register&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The lines marked &#8220;+&#8221; should be added and lines marked &#8220;-&#8221; should be
+deleted (minus the &#8220;+&#8221;/&#8221;-&#8221; signs).</p>
+<p>You should also modify the <tt class="docutils literal"><span class="pre">html/page.html</span></tt> template to change the
+permission tested there:</p>
+<div class="highlight-python"><pre>-tal:condition="python:request.user.hasPermission('Create', 'user')"
++tal:condition="python:request.user.hasPermission('Register', 'user')"</pre>
+</div>
+</div>
+<div class="section" id="generic-class-editor-may-now-restore-retired-items">
+<h3><a class="toc-backref" href="#id23">Generic class editor may now restore retired items</a></h3>
+<p>The instructions for doing so won&#8217;t be present in your tracker unless you copy
+the <tt class="docutils literal"><span class="pre">_generic.index.html</span></tt> template from the roundup distribution in
+<tt class="docutils literal"><span class="pre">share/roundup/templates/classic/html</span></tt> to your tracker&#8217;s <tt class="docutils literal"><span class="pre">html</span></tt> directory.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-1-4-x-to-1-4-9">
+<h2><a class="toc-backref" href="#id24">Migrating from 1.4.x to 1.4.9</a></h2>
+<div class="section" id="customized-mailgw-class">
+<h3><a class="toc-backref" href="#id25">Customized MailGW Class</a></h3>
+<p>If you have customized the MailGW class in your tracker: The new MailGW
+class opens the database for each message in the method handle_message
+(instance.open) instead of passing the opened database as a parameter to
+the MailGW constructor. The old handle_message has been renamed to
+_handle_message. The new method opens the database and wraps the call to
+the old method into a try/finally.</p>
+<p>Your customized MailGW class needs to mirror this behavior.</p>
+</div>
+<div class="section" id="fix-the-remove-button-in-issue-files-and-messages-lists">
+<h3><a class="toc-backref" href="#id26">Fix the &#8220;remove&#8221; button in issue files and messages lists</a></h3>
+<p>The &#8220;remove&#8221; button(s) in the issue messages list needs to be altered. Find
+the following in your tracker&#8217;s <tt class="docutils literal"><span class="pre">html/issue.item.html</span></tt> template:</p>
+<div class="highlight-python"><pre>&lt;td&gt;
+ &lt;form style="padding:0" tal:condition="context/is_edit_ok"
+       tal:attributes="action string:issue${context/id}"&gt;
+  &lt;input type="hidden" name="@remove@files" tal:attributes="value file/id"&gt;</pre>
+</div>
+<p>and add <tt class="docutils literal"><span class="pre">method=&quot;POST&quot;</span></tt> as shown below:</p>
+<div class="highlight-python"><pre>&lt;td&gt;
+ &lt;form style="padding:0" method="POST" tal:condition="context/is_edit_ok"
+       tal:attributes="action string:issue${context/id}"&gt;
+  &lt;input type="hidden" name="@remove@files" tal:attributes="value file/id"&gt;</pre>
+</div>
+<p>Then also find:</p>
+<div class="highlight-python"><pre>&lt;td&gt;
+ &lt;form style="padding:0" tal:condition="context/is_edit_ok"
+       tal:attributes="action string:issue${context/id}"&gt;
+  &lt;input type="hidden" name="@remove@messages" tal:attributes="value msg/id"&gt;</pre>
+</div>
+<p>and add <tt class="docutils literal"><span class="pre">method=&quot;POST&quot;</span></tt> as shown below:</p>
+<div class="highlight-python"><pre>&lt;td&gt;
+ &lt;form style="padding:0" method="POST" tal:condition="context/is_edit_ok"
+       tal:attributes="action string:issue${context/id}"&gt;
+  &lt;input type="hidden" name="@remove@messages" tal:attributes="value msg/id"&gt;</pre>
+</div>
+</div>
+<div class="section" id="fixing-the-retire-button-in-user-management-list">
+<h3><a class="toc-backref" href="#id27">Fixing the &#8220;retire&#8221; button in user management list</a></h3>
+<p>Some previous versions of this upgrading document missed <tt class="docutils literal"><span class="pre">method=&quot;POST&quot;</span></tt>
+in the change to the &#8220;retire&#8221; link in the user management list
+in section <a class="reference internal" href="#migrating-from-1-4-x-to-1-4-7">Migrating from 1.4.x to 1.4.7</a>.
+Make sure the change is done as listed below in this document.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-1-4-x-to-1-4-7">
+<h2><a class="toc-backref" href="#id28">Migrating from 1.4.x to 1.4.7</a></h2>
+<p>Several security issues were addressed in this release. Some aspects of your
+trackers may no longer function depending on your local customisations. Core
+functionality that will need to be modified:</p>
+<div class="section" id="grant-the-retire-permission-to-users-for-their-queries">
+<h3><a class="toc-backref" href="#id29">Grant the &#8220;retire&#8221; permission to users for their queries</a></h3>
+<p>Users will no longer be able to retire their own queries. To remedy this you
+will need to add the following to your tracker&#8217;s <tt class="docutils literal"><span class="pre">schema.py</span></tt> just under the
+line that grants them permission to edit their own queries:</p>
+<div class="highlight-python"><pre>  p = db.security.addPermission(name='Edit', klass='query', check=edit_query,
+     description="User is allowed to edit their queries")
+  db.security.addPermissionToRole('User', p)
++ p = db.security.addPermission(name='Retire', klass='query', check=edit_query,
++    description="User is allowed to retire their queries")
++ db.security.addPermissionToRole('User', p)
+  p = db.security.addPermission(name='Create', klass='query',
+     description="User is allowed to create queries")
+  db.security.addPermissionToRole('User', p)</pre>
+</div>
+<p>The lines marked &#8220;+&#8221; should be added, minus the &#8220;+&#8221; sign.</p>
+</div>
+<div class="section" id="fix-the-retire-link-in-the-users-list-for-admin-users">
+<h3><a class="toc-backref" href="#id30">Fix the &#8220;retire&#8221; link in the users list for admin users</a></h3>
+<p>The &#8220;retire&#8221; link found in the file <tt class="docutils literal"><span class="pre">html/user.index.html</span></tt>:</p>
+<div class="highlight-python"><pre>&lt;td tal:condition="context/is_edit_ok"&gt;
+ &lt;a tal:attributes="href string:user${user/id}?@action=retire&amp;@template=index"
+  i18n:translate=""&gt;retire&lt;/a&gt;</pre>
+</div>
+<p>Should be replaced with:</p>
+<div class="highlight-python"><pre>&lt;td tal:condition="context/is_retire_ok"&gt;
+   &lt;form style="padding:0" method="POST"
+         tal:attributes="action string:user${user/id}"&gt;
+    &lt;input type="hidden" name="@template" value="index"&gt;
+    &lt;input type="hidden" name="@action" value="retire"&gt;
+    &lt;input type="submit" value="retire" i18n:attributes="value"&gt;
+   &lt;/form&gt;</pre>
+</div>
+</div>
+<div class="section" id="fix-for-python-2-6-users">
+<h3><a class="toc-backref" href="#id31">Fix for Python 2.6+ users</a></h3>
+<p>If you use Python 2.6 you should edit your tracker&#8217;s
+<tt class="docutils literal"><span class="pre">detectors/nosyreaction.py</span></tt> file to change:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sets</span>
+</pre></div>
+</div>
+<p>at the top to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">roundup.anypy.sets_</span> <span class="kn">import</span> <span class="nb">set</span>
+</pre></div>
+</div>
+<p>and then all instances of <tt class="docutils literal"><span class="pre">sets.Set()</span></tt> to <tt class="docutils literal"><span class="pre">set()</span></tt> in the later code.</p>
+</div>
+<div class="section" id="trackers-currently-allowing-html-file-uploading">
+<h3><a class="toc-backref" href="#id32">Trackers currently allowing HTML file uploading</a></h3>
+<p>Trackers which wish to continue to allow uploading of HTML content against issues
+will need to set a new configuration variable in the <tt class="docutils literal"><span class="pre">[web]</span></tt> section of the
+tracker&#8217;s <tt class="docutils literal"><span class="pre">config.ini</span></tt> file:</p>
+<blockquote>
+# Setting this option enables Roundup to serve uploaded HTML
+# file content <em>as HTML</em>. This is a potential security risk
+# and is therefore disabled by default. Set to &#8216;yes&#8217; if you
+# trust <em>all</em> users uploading content to your tracker.
+# Allowed values: yes, no
+# Default: no
+allow_html_file = no</blockquote>
+</div>
+</div>
+<div class="section" id="migrating-from-1-4-2-to-1-4-3">
+<h2><a class="toc-backref" href="#id33">Migrating from 1.4.2 to 1.4.3</a></h2>
+<p>If you are using the MySQL backend you will need to replace some indexes
+that may have been created by version 1.4.2.</p>
+<p>You should to access your MySQL database directly and remove any indexes
+with a name ending in &#8220;_key_retired_idx&#8221;. You should then re-add them with
+the same spec except the key column name needs a size. So an index on
+&#8220;_user (__retired, _name)&#8221; should become &#8220;_user (__retired, _name(255))&#8221;.</p>
+</div>
+<div class="section" id="migrating-from-1-4-x-to-1-4-2">
+<h2><a class="toc-backref" href="#id34">Migrating from 1.4.x to 1.4.2</a></h2>
+<p>You should run the &#8220;roundup-admin migrate&#8221; command for your tracker once
+you&#8217;ve installed the latest codebase.</p>
+<p>Do this before you use the web, command-line or mail interface and before
+any users access the tracker.</p>
+<p>This command will respond with either &#8220;Tracker updated&#8221; (if you&#8217;ve not
+previously run it on an RDBMS backend) or &#8220;No migration action required&#8221;
+(if you have run it, or have used another interface to the tracker,
+or are using anydbm).</p>
+<p>It&#8217;s safe to run this even if it&#8217;s not required, so just get into the
+habit.</p>
+</div>
+<div class="section" id="migrating-from-1-3-3-to-1-4-0">
+<h2><a class="toc-backref" href="#id35">Migrating from 1.3.3 to 1.4.0</a></h2>
+<p>Value of the &#8220;refwd_re&#8221; tracker configuration option (section &#8220;mailgw&#8221;)
+is treated as UTF-8 string.  In previous versions, it was ISO8859-1.</p>
+<p>If you have running trackers based on the classic template, please
+update the messagesummary detector as follows:</p>
+<div class="highlight-python"><pre>--- detectors/messagesummary.py 17 Apr 2003 03:26:38 -0000      1.1
++++ detectors/messagesummary.py 3 Apr 2007 06:47:21 -0000       1.2
+@@ -8,7 +8,7 @@
+ if newvalues.has_key('summary') or not newvalues.has_key('content'):
+     return
+
+-    summary, content = parseContent(newvalues['content'], 1, 1)
++    summary, content = parseContent(newvalues['content'], config=db.config)
+ newvalues['summary'] = summary</pre>
+</div>
+<p>In the latest version we have added some database indexes to the
+SQL-backends (mysql, postgresql, sqlite) for speeding up building the
+roundup-index for full-text search. We recommend that you create the
+following database indexes on the database by hand:</p>
+<div class="highlight-python"><pre>CREATE INDEX words_by_id ON __words (_textid);
+CREATE UNIQUE INDEX __textids_by_props ON __textids (_class, _itemid, _prop);</pre>
+</div>
+</div>
+<div class="section" id="migrating-from-1-2-x-to-1-3-0">
+<h2><a class="toc-backref" href="#id36">Migrating from 1.2.x to 1.3.0</a></h2>
+<div class="section" id="web-interface-changes">
+<h3><a class="toc-backref" href="#id37">1.3.0 Web interface changes</a></h3>
+<p>Some of the HTML files in the &#8220;classic&#8221; and &#8220;minimal&#8221; tracker templates
+were changed to fix some bugs and clean them up. You may wish to compare
+them to the HTML files in your tracker and apply any changes.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-1-1-2-to-1-2-0">
+<h2><a class="toc-backref" href="#id38">Migrating from 1.1.2 to 1.2.0</a></h2>
+<div class="section" id="sorting-and-grouping-by-multiple-properties">
+<h3><a class="toc-backref" href="#id39">1.2.0 Sorting and grouping by multiple properties</a></h3>
+<p>Starting with this version, sorting and grouping by multiple properties
+is possible. This means that request.sort and request.group are now
+lists. This is reflected in several places:</p>
+<blockquote>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">renderWith</span></tt> now has list attributes for <tt class="docutils literal"><span class="pre">sort</span></tt> and <tt class="docutils literal"><span class="pre">group</span></tt>,
+where you previously wrote:</p>
+<div class="highlight-python"><pre>renderWith(... sort=('-', 'activity'), group=('+', 'priority')</pre>
+</div>
+<p>you write now:</p>
+<div class="highlight-python"><pre>renderWith(... sort=[('-', 'activity')], group=[('+', 'priority')]</pre>
+</div>
+</li>
+<li><p class="first">In templates that permit to edit sorting/grouping, request.sort and
+request.group are (possibly empty) lists. You can now sort and group
+by multiple attributes. For an example, see the classic template. You
+may want search for the variable <tt class="docutils literal"><span class="pre">n_sort</span></tt> which can be set to the
+number of sort/group properties.</p>
+</li>
+<li><p class="first">Templates that diplay new headlines for each group of items with
+equal group properties can now use the modified <tt class="docutils literal"><span class="pre">batch.propchanged</span></tt>
+method that can take several properties which are checked for
+changes. See the example in the classic template which makes use of
+<tt class="docutils literal"><span class="pre">batch.propchanged</span></tt>.</p>
+</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div class="section" id="migrating-from-1-1-0-to-1-1-1">
+<h2><a class="toc-backref" href="#id40">Migrating from 1.1.0 to 1.1.1</a></h2>
+<div class="section" id="clear-this-message">
+<h3><a class="toc-backref" href="#id41">1.1.1 &#8220;Clear this message&#8221;</a></h3>
+<p>In 1.1.1, the standard <tt class="docutils literal"><span class="pre">page.html</span></tt> template includes a &#8220;clear this message&#8221;
+link in the green &#8220;ok&#8221; message bar that appears after a successful edit
+(or other) action.</p>
+<p>To include this in your tracker, change the following in your <tt class="docutils literal"><span class="pre">page.html</span></tt>
+template:</p>
+<div class="highlight-python"><pre>&lt;p tal:condition="options/ok_message | nothing" class="ok-message"
+   tal:repeat="m options/ok_message" tal:content="structure m"&gt;error&lt;/p&gt;</pre>
+</div>
+<p>to be:</p>
+<div class="highlight-python"><pre>&lt;p tal:condition="options/ok_message | nothing" class="ok-message"&gt;
+  &lt;span tal:repeat="m options/ok_message"
+     tal:content="structure string:$m &lt;br/ &gt; " /&gt;
+   &lt;a class="form-small" tal:attributes="href request/current_url"
+      i18n:translate=""&gt;clear this message&lt;/a&gt;
+&lt;/p&gt;</pre>
+</div>
+<p>If you implemented the &#8220;clear this message&#8221; in your 1.1.0 tracker, then you
+should change it to the above and it will work much better!</p>
+</div>
+</div>
+<div class="section" id="migrating-from-1-0-x-to-1-1-0">
+<h2><a class="toc-backref" href="#id42">Migrating from 1.0.x to 1.1.0</a></h2>
+<div class="section" id="login-for-session-only">
+<h3><a class="toc-backref" href="#id43">1.1 Login &#8220;For Session Only&#8221;</a></h3>
+<p>In 1.1, web logins are alive for the length of a session only, <em>unless</em> you
+add the following to the login form in your tracker&#8217;s <tt class="docutils literal"><span class="pre">page.html</span></tt>:</p>
+<div class="highlight-python"><pre>&lt;input type="checkbox" name="remember" id="remember"&gt;
+&lt;label for="remember" i18n:translate=""&gt;Remember me?&lt;/label&gt;&lt;br&gt;</pre>
+</div>
+<p>See the classic tracker <tt class="docutils literal"><span class="pre">page.html</span></tt> if you&#8217;re unsure where this should
+go.</p>
+</div>
+<div class="section" id="query-display-name">
+<h3><a class="toc-backref" href="#id44">1.1 Query Display Name</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">dispname</span></tt> web variable has been renamed <tt class="docutils literal"><span class="pre">&#64;dispname</span></tt> to avoid
+clashing with other variables of the same name. If you are using the
+display name feature, you will need to edit your tracker&#8217;s <tt class="docutils literal"><span class="pre">page.html</span></tt>
+and <tt class="docutils literal"><span class="pre">issue.index.html</span></tt> pages to change <tt class="docutils literal"><span class="pre">dispname</span></tt> to <tt class="docutils literal"><span class="pre">&#64;dispname</span></tt>.</p>
+<p>A side-effect of this change is that the renderWith method used in the
+<tt class="docutils literal"><span class="pre">home.html</span></tt> page may now take a dispname argument.</p>
+</div>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id45">1.1 &#8220;Clear this message&#8221;</a></h3>
+<p>In 1.1, the standard <tt class="docutils literal"><span class="pre">page.html</span></tt> template includes a &#8220;clear this message&#8221;
+link in the green &#8220;ok&#8221; message bar that appears after a successful edit
+(or other) action.</p>
+<p>To include this in your tracker, change the following in your <tt class="docutils literal"><span class="pre">page.html</span></tt>
+template:</p>
+<div class="highlight-python"><pre>&lt;p tal:condition="options/ok_message | nothing" class="ok-message"
+   tal:repeat="m options/ok_message" tal:content="structure m"&gt;error&lt;/p&gt;</pre>
+</div>
+<p>to be:</p>
+<div class="highlight-python"><pre>&lt;p tal:condition="options/ok_message | nothing" class="ok-message"&gt;
+  &lt;span tal:repeat="m options/ok_message"
+     tal:content="structure string:$m &lt;br/ &gt; " /&gt;
+   &lt;a class="form-small" tal:attributes="href string:issue${context/id}"
+      i18n:translate=""&gt;clear this message&lt;/a&gt;
+&lt;/p&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="migrating-from-0-8-x-to-1-0">
+<h2><a class="toc-backref" href="#id46">Migrating from 0.8.x to 1.0</a></h2>
+<div class="section" id="new-query-permissions">
+<h3><a class="toc-backref" href="#id47">1.0 New Query Permissions</a></h3>
+<p>New permissions are defined for query editing and viewing. To include these
+in your tracker, you need to add these lines to your tracker&#8217;s
+<tt class="docutils literal"><span class="pre">schema.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Users should be able to edit and view their own queries. They should also</span>
+<span class="c"># be able to view any marked as not private. They should not be able to</span>
+<span class="c"># edit others&#39; queries, even if they&#39;re not private</span>
+<span class="k">def</span> <span class="nf">view_query</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">userid</span><span class="p">,</span> <span class="n">itemid</span><span class="p">):</span>
+    <span class="n">private_for</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">itemid</span><span class="p">,</span> <span class="s">&#39;private_for&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">private_for</span><span class="p">:</span> <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="n">userid</span> <span class="o">==</span> <span class="n">private_for</span>
+<span class="k">def</span> <span class="nf">edit_query</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">userid</span><span class="p">,</span> <span class="n">itemid</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">userid</span> <span class="o">==</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">itemid</span><span class="p">,</span> <span class="s">&#39;creator&#39;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">view_query</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to view their own and public queries&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">edit_query</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit their queries&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Create&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;query&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to create queries&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and then remove &#8216;query&#8217; from the line:</p>
+<div class="highlight-python"><pre># Assign the access and edit Permissions for issue, file and message
+# to regular users now
+for cl in 'issue', 'file', 'msg', 'query', 'keyword':</pre>
+</div>
+<p>so it looks like:</p>
+<div class="highlight-python"><pre>for cl in 'issue', 'file', 'msg', 'keyword':</pre>
+</div>
+</div>
+</div>
+<div class="section" id="migrating-from-0-8-0-to-0-8-3">
+<h2><a class="toc-backref" href="#id48">Migrating from 0.8.0 to 0.8.3</a></h2>
+<div class="section" id="nosy-handling-changes">
+<h3><a class="toc-backref" href="#id49">0.8.3 Nosy Handling Changes</a></h3>
+<p>A change was made to fix a bug in the <tt class="docutils literal"><span class="pre">nosyreaction.py</span></tt> standard
+detector. To incorporate this fix in your trackers, you will need to copy
+the <tt class="docutils literal"><span class="pre">nosyreaction.py</span></tt> file from the <tt class="docutils literal"><span class="pre">templates/classic/detectors</span></tt>
+directory of the source to your tracker&#8217;s <tt class="docutils literal"><span class="pre">templates</span></tt> directory.</p>
+<p>If you have modified the <tt class="docutils literal"><span class="pre">nosyreaction.py</span></tt> file from the standard
+version, you will need to roll your changes into the new file.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-7-1-to-0-8-0">
+<h2><a class="toc-backref" href="#id50">Migrating from 0.7.1 to 0.8.0</a></h2>
+<p>You <em>must</em> fully uninstall previous Roundup version before installing
+Roundup 0.8.0.  If you don&#8217;t do that, <tt class="docutils literal"><span class="pre">roundup-admin</span> <span class="pre">install</span></tt>
+command may fail to function properly.</p>
+<div class="section" id="backend-changes">
+<h3><a class="toc-backref" href="#id51">0.8.0 Backend changes</a></h3>
+<p>Backends &#8216;bsddb&#8217; and &#8216;bsddb3&#8217; are removed.  If you are using one of these,
+you <em>must</em> migrate to another backend before upgrading.</p>
+</div>
+<div class="section" id="api-changes">
+<h3><a class="toc-backref" href="#id52">0.8.0 API changes</a></h3>
+<p>Class.safeget() was removed from the API. Test your item ids before calling
+Class.get() instead.</p>
+</div>
+<div class="section" id="new-tracker-layout">
+<h3><a class="toc-backref" href="#id53">0.8.0 New tracker layout</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">config.py</span></tt> file has been replaced by <tt class="docutils literal"><span class="pre">config.ini</span></tt>. You may use the
+roundup-admin command &#8220;genconfig&#8221; to generate a new config file:</p>
+<div class="highlight-python"><pre>roundup-admin genconfig &lt;tracker home&gt;/config.ini</pre>
+</div>
+<p>and modify the values therein based on the contents of your old config.py.
+In most cases, the names of the config variables are the same.</p>
+<p>The <tt class="docutils literal"><span class="pre">select_db.py</span></tt> file has been replaced by a file in the <tt class="docutils literal"><span class="pre">db</span></tt>
+directory called <tt class="docutils literal"><span class="pre">backend_name</span></tt>. As you might guess, this file contains
+just the name of the backend. To figure what the contents of yours should
+be, use the following table:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><tt class="docutils literal"><span class="pre">select_db.py</span></tt> contents</th>
+<th class="head"><tt class="docutils literal"><span class="pre">backend_name</span></tt> contents</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>from back_anydbm import ...</td>
+<td>anydbm</td>
+</tr>
+<tr><td>from back_metakit import ...</td>
+<td>metakit</td>
+</tr>
+<tr><td>from back_sqlite import ...</td>
+<td>sqlite</td>
+</tr>
+<tr><td>from back_mysql import ...</td>
+<td>mysql</td>
+</tr>
+<tr><td>from back_postgresql import ...</td>
+<td>postgresql</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>The <tt class="docutils literal"><span class="pre">dbinit.py</span></tt> file has been split into two new files,
+<tt class="docutils literal"><span class="pre">initial_data.py</span></tt> and <tt class="docutils literal"><span class="pre">schema.py</span></tt>. The contents of this file are:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">initial_data.py</span></tt></dt>
+<dd>You don&#8217;t need one of these as your tracker is already initialised.</dd>
+<dt><tt class="docutils literal"><span class="pre">schema.py</span></tt></dt>
+<dd><p class="first">Copy the body of the <tt class="docutils literal"><span class="pre">def</span> <span class="pre">open(name=None)</span></tt> function from your old
+tracker&#8217;s <tt class="docutils literal"><span class="pre">dbinit.py</span></tt> file to this file. As the lines you&#8217;re copying
+aren&#8217;t part of a function definition anymore, one level of indentation
+needs to be removed (remove only the leading four spaces on each
+line).</p>
+<p class="last">The first few lines &#8211; those starting with <tt class="docutils literal"><span class="pre">from</span> <span class="pre">roundup.hyperdb</span>
+<span class="pre">import</span> <span class="pre">...</span></tt> and the <tt class="docutils literal"><span class="pre">db</span> <span class="pre">=</span> <span class="pre">Database(config,</span> <span class="pre">name)</span></tt> line &#8211; don&#8217;t
+need to be copied. Neither do the last few lines &#8211; those starting
+with <tt class="docutils literal"><span class="pre">import</span> <span class="pre">detectors</span></tt>, down to <tt class="docutils literal"><span class="pre">return</span> <span class="pre">db</span></tt> inclusive.</p>
+</dd>
+</dl>
+<p>You may remove the <tt class="docutils literal"><span class="pre">__init__.py</span></tt> module from the &#8220;detectors&#8221; directory as
+it is no longer used.</p>
+<p>There&#8217;s a new way to write extension code for Roundup. If you have code in
+an <tt class="docutils literal"><span class="pre">interfaces.py</span></tt> file you should move it. See the <a class="reference external" href="customizing.html">customisation
+documentation</a> for information about how extensions are now written.
+Note that some older trackers may use <tt class="docutils literal"><span class="pre">interfaces.py</span></tt> to customise the
+mail gateway behaviour. You will need to keep your <tt class="docutils literal"><span class="pre">interfaces.py</span></tt> file
+if this is the case.</p>
+</div>
+<div class="section" id="permissions-changes">
+<h3><a class="toc-backref" href="#id54">0.8.0 Permissions Changes</a></h3>
+<p>The creation of a new item in the user interfaces is now controlled by the
+&#8220;Create&#8221; Permission. You will need to add an assignment of this Permission
+to your users who are allowed to create items. The most common form of this
+is the following in your <tt class="docutils literal"><span class="pre">schema.py</span></tt> added just under the current
+assignation of the Edit Permission:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;msg&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;keyword&#39;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Create&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You will need to explicitly let anonymous users access the web interface so
+that regular users are able to see the login form. Note that almost all
+trackers will need this Permission. The only situation where it&#8217;s not
+required is in a tracker that uses an HTTP Basic Authenticated front-end.
+It&#8217;s enabled by adding to your <tt class="docutils literal"><span class="pre">schema.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Web Access&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, you will need to enable permission for your users to edit their
+own details by adding the following to <tt class="docutils literal"><span class="pre">schema.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Users should be able to edit their own details. Note that this</span>
+<span class="c"># permission is limited to only the situation where the Viewed or</span>
+<span class="c"># Edited item is their own.</span>
+<span class="k">def</span> <span class="nf">own_record</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">userid</span><span class="p">,</span> <span class="n">itemid</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Determine whether the userid matches the item being accessed.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">userid</span> <span class="o">==</span> <span class="n">itemid</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">own_record</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to view their own user details&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">own_record</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit their own user details&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-of-templatingutils">
+<h3><a class="toc-backref" href="#id55">0.8.0 Use of TemplatingUtils</a></h3>
+<p>If you used custom python functions in TemplatingUtils, they must
+be moved from interfaces.py to a new file in the <tt class="docutils literal"><span class="pre">extensions</span></tt> directory.</p>
+<p>Each Function that should be available through TAL needs to be defined
+as a toplevel function in the newly created file. Furthermore you
+add an inititialization function, that registers the functions with the
+tracker.</p>
+<p>If you find this too tedious, donfu wrote an automatic init function that
+takes an existing TemplatingUtils class, and registers all class methods
+that do not start with an underscore. The following hack should be placed
+in the <tt class="docutils literal"><span class="pre">extensions</span></tt> directory alongside other extensions:</p>
+<div class="highlight-python"><pre>class TemplatingUtils:
+     # copy from interfaces.py
+
+def init(tracker):
+     util = TemplatingUtils()
+
+     def setClient(tu):
+         util.client = tu.client
+         return util
+
+     def execUtil(name):
+         return lambda tu, *args, **kwargs: \
+                 getattr(setClient(tu), name)(*args, **kwargs)
+
+     for name in dir(util):
+         if callable(getattr(util, name)) and not name.startswith('_'):
+              tracker.registerUtil(name, execUtil(name))</pre>
+</div>
+</div>
+<div class="section" id="logging-configuration">
+<h3><a class="toc-backref" href="#id56">0.8.0 Logging Configuration</a></h3>
+<p>See the <a class="reference external" href="admin_guide.html">administration guide</a> for information about configuring the new
+logging implemented in 0.8.0.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-7-2-to-0-7-3">
+<h2><a class="toc-backref" href="#id57">Migrating from 0.7.2 to 0.7.3</a></h2>
+<div class="section" id="configuration">
+<h3><a class="toc-backref" href="#id58">0.7.3 Configuration</a></h3>
+<p>If you choose, you may specify the directory from which static files are
+served (those which use the URL component <tt class="docutils literal"><span class="pre">&#64;&#64;file</span></tt>). Currently the
+directory defaults to the <tt class="docutils literal"><span class="pre">TEMPLATES</span></tt> configuration variable. You may
+define a new variable, <tt class="docutils literal"><span class="pre">STATIC_FILES</span></tt> which overrides this value for
+static files.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-7-0-to-0-7-2">
+<h2><a class="toc-backref" href="#id59">Migrating from 0.7.0 to 0.7.2</a></h2>
+<div class="section" id="default-timezone-is-now-required">
+<h3><a class="toc-backref" href="#id60">0.7.2 DEFAULT_TIMEZONE is now required</a></h3>
+<p>The DEFAULT_TIMEZONE configuration variable is now required. Add the
+following to your tracker&#8217;s <tt class="docutils literal"><span class="pre">config.py</span></tt> file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># You may specify a different default timezone, for use when users do not</span>
+<span class="c"># choose their own in their settings.</span>
+<span class="n">DEFAULT_TIMEZONE</span> <span class="o">=</span> <span class="mi">0</span>            <span class="c"># specify as numeric hour offest</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="migrating-from-0-7-0-to-0-7-1">
+<h2><a class="toc-backref" href="#id61">Migrating from 0.7.0 to 0.7.1</a></h2>
+<div class="section" id="permission-assignments">
+<h3><a class="toc-backref" href="#id62">0.7.1 Permission assignments</a></h3>
+<p>If you allow anonymous access to your tracker, you might need to assign
+some additional View (or Edit if your tracker is that open) permissions
+to the &#8220;anonymous&#8221; user. To do so, find the code in your <tt class="docutils literal"><span class="pre">dbinit.py</span></tt> that
+says:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;msg&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;keyword&#39;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;priority&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Add add a line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>next to the existing <tt class="docutils literal"><span class="pre">'User'</span></tt> lines for the Permissions you wish to
+assign to the anonymous user.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-6-to-0-7">
+<h2><a class="toc-backref" href="#id63">Migrating from 0.6 to 0.7</a></h2>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id64">0.7.0 Permission assignments</a></h3>
+<p>Due to a change in the rendering of web widgets, permissions are now
+checked on Classes where they previously weren&#8217;t (this is a good thing).</p>
+<p>You will need to add some additional Permission assignments for your
+regular users, or some displays will break. After the following in your
+tracker&#8217;s <tt class="docutils literal"><span class="pre">dbinit.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Assign the access and edit Permissions for issue, file and message</span>
+<span class="c"># to regular users now</span>
+<span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;msg&#39;</span><span class="p">,</span> <span class="s">&#39;query&#39;</span><span class="p">,</span> <span class="s">&#39;keyword&#39;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>add:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;priority&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-current-user-id">
+<h3><a class="toc-backref" href="#id65">0.7.0 Getting the current user id</a></h3>
+<p>The Database.curuserid attribute has been removed.</p>
+<p>Any code referencing this attribute should be replaced with a
+call to Database.getuid().</p>
+</div>
+<div class="section" id="zroundup-changes">
+<h3><a class="toc-backref" href="#id66">0.7.0 ZRoundup changes</a></h3>
+<p>The templates in your tracker&#8217;s html directory will need updating if you
+wish to use ZRoundup. If you&#8217;ve not modified those files (or some of them),
+you may just copy the new versions from the Roundup source in the
+templates/classic/html directory.</p>
+<p>If you have modified the html files, then you&#8217;ll need to manually edit them
+to change all occurances of special form variables from using the colon &#8220;:&#8221;
+special character to the at &#8220;&#64;&#8221; special character. That is, variables such
+as:</p>
+<div class="highlight-python"><pre>:action :required :template :remove:messages ...</pre>
+</div>
+<p>should become:</p>
+<div class="highlight-python"><pre>@action @required @template @remove@messages ...</pre>
+</div>
+<p>Note that <tt class="docutils literal"><span class="pre">tal:</span></tt> statements are unaffected. So are TAL expression type
+prefixes such as <tt class="docutils literal"><span class="pre">python:</span></tt> and <tt class="docutils literal"><span class="pre">string:</span></tt>. Please ask on the
+roundup-users mailing list for help if you&#8217;re unsure.</p>
+</div>
+<div class="section" id="edit-collision-detection">
+<h3><a class="toc-backref" href="#id67">0.7.0 Edit collision detection</a></h3>
+<p>Roundup now detects collisions with editing in the web interface (that is,
+two people editing the same item at the same time).</p>
+<p>You must copy the <tt class="docutils literal"><span class="pre">_generic.collision.html</span></tt> file from Roundup source in
+the <tt class="docutils literal"><span class="pre">templates/classic/html</span></tt> directory. to your tracker&#8217;s <tt class="docutils literal"><span class="pre">html</span></tt>
+directory.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-6-x-to-0-6-3">
+<h2><a class="toc-backref" href="#id68">Migrating from 0.6.x to 0.6.3</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id69">0.6.3 Configuration</a></h3>
+<p>You will need to copy the file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">templates</span><span class="o">/</span><span class="n">classic</span><span class="o">/</span><span class="n">detectors</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>to your tracker&#8217;s <tt class="docutils literal"><span class="pre">detectors</span></tt> directory, replacing the one already there.
+This fixes a couple of bugs in that file.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-5-to-0-6">
+<h2><a class="toc-backref" href="#id70">Migrating from 0.5 to 0.6</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id71">0.6.0 Configuration</a></h3>
+<p>Introduced EMAIL_FROM_TAG config variable. This value is inserted into
+the From: line of nosy email. If the sending user is &#8220;Foo Bar&#8221;, the
+From: line is usually:</p>
+<div class="highlight-python"><pre>"Foo Bar" &lt;issue_tracker@tracker.example&gt;</pre>
+</div>
+<p>the EMAIL_FROM_TAG goes inside the &#8220;Foo Bar&#8221; quotes like so:</p>
+<div class="highlight-python"><pre>"Foo Bar EMAIL_FROM_TAG" &lt;issue_tracker@tracker.example&gt;</pre>
+</div>
+<p>I&#8217;ve altered the mechanism in the detectors __init__.py module so that it
+doesn&#8217;t cross-import detectors from other trackers (if you run more than one
+in a single roundup-server). This change means that you&#8217;ll need to copy the
+__init__.py from roundup/templates/classic/detectors/__init__.py to your
+&lt;tracker home&gt;/detectors/__init__.py. Don&#8217;t worry, the &#8220;classic&#8221; __init__ is a
+one-size-fits-all, so it&#8217;ll work even if you&#8217;ve added/removed detectors.</p>
+</div>
+<div class="section" id="templating-changes">
+<h3><a class="toc-backref" href="#id72">0.6.0 Templating changes</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">user.item</span></tt> template (in the tracker home &#8220;templates&#8221; directory)
+needs to have the following hidden variable added to its form (between the
+<tt class="docutils literal"><span class="pre">&lt;form...&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;/form&gt;</span></tt> tags:</p>
+<div class="highlight-python"><pre>&lt;input type="hidden" name=":template" value="item"&gt;</pre>
+</div>
+</div>
+<div class="section" id="form-handling-changes">
+<h3><a class="toc-backref" href="#id73">0.6.0 Form handling changes</a></h3>
+<p>Roundup&#8217;s form handling capabilities have been significantly expanded. This
+should not affect users of 0.5 installations - but if you find you&#8217;re
+getting errors from form submissions, please ask for help on the Roundup
+users mailing list:</p>
+<blockquote>
+<a class="reference external" href="http://lists.sourceforge.net/lists/listinfo/roundup-users">http://lists.sourceforge.net/lists/listinfo/roundup-users</a></blockquote>
+<p>See the customisation doc section on <a class="reference external" href="customizing.html#form-values">Form Values</a> for documentation of the
+new form variables possible.</p>
+</div>
+<div class="section" id="multilingual-character-set-support">
+<h3><a class="toc-backref" href="#id74">0.6.0 Multilingual character set support</a></h3>
+<p>Added internationalization support. This is done via encoding all data
+stored in roundup database to utf-8 (unicode encoding). To support utf-8 in
+web interface you should add the folowing line to your tracker&#8217;s html/page
+and html/_generic.help files inside &lt;head&gt; tag:</p>
+<div class="highlight-python"><pre>&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&gt;</pre>
+</div>
+<p>Since latin characters in utf-8 have the same codes as in ASCII table, this
+modification is optional for users who use only plain latin characters.</p>
+<p>After this modification, you will be able to see and enter any world
+character via web interface. Data received via mail interface also converted
+to utf-8, however only new messages will be converted. If your roundup
+database contains some of non-ASCII characters in one of 8-bit encoding,
+they will not be visible in new unicode environment. Some of such data (e.g.
+user names, keywords, etc)  can be edited by administrator, the others
+(e.g. messages&#8217; contents) is not editable via web interface. Currently there
+is no tool for converting such data, the only solution is to close
+appropriate old issues and create new ones with the same content.</p>
+</div>
+<div class="section" id="user-timezone-support">
+<h3><a class="toc-backref" href="#id75">0.6.0 User timezone support</a></h3>
+<p>From version 0.6.0 roundup supports displaying of Date data in user&#8217; local
+timezone if he/she has provided timezone information. To make it possible
+some modification to tracker&#8217;s schema and HTML templates are required.
+First you must add string property &#8216;timezone&#8217; to user class in dbinit.py
+like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>   <span class="n">password</span><span class="o">=</span><span class="n">Password</span><span class="p">(),</span>
+                <span class="n">address</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>    <span class="n">realname</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">phone</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>      <span class="n">organisation</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">alternate_addresses</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">queries</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&#39;query&#39;</span><span class="p">),</span> <span class="n">roles</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">timezone</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>And second - html interface. Add following lines to
+$TRACKER_HOME/html/user.item template:</p>
+<div class="highlight-python"><pre>&lt;tr&gt;
+ &lt;th&gt;Timezone&lt;/th&gt;
+ &lt;td tal:content="structure context/timezone/field"&gt;timezone&lt;/td&gt;
+&lt;/tr&gt;</pre>
+</div>
+<p>After that all users should be able to provide their timezone information.
+Timezone should be a positive or negative integer - offset from GMT.</p>
+<p>After providing timezone, roundup will show all dates values, found in web
+and mail interfaces in local time. It will also accept any Date info in
+local time, convert and store it in GMT.</p>
+</div>
+<div class="section" id="search-page-structure">
+<h3><a class="toc-backref" href="#id76">0.6.0 Search page structure</a></h3>
+<p>In order to accomodate query editing the search page has been restructured. If
+you want to provide your users with query editing, you should update your
+search page using the macros detailed in the customisation doc section
+<a class="reference external" href="customizing.html#searching-on-categories">Searching on categories</a>.</p>
+<p>Also, the url field in the query class no longer starts with a &#8216;?&#8217;. You&#8217;ll need
+to remove this question mark from the url field to support queries. There&#8217;s
+a script in the &#8220;tools&#8221; directory called <tt class="docutils literal"><span class="pre">migrate-queries.py</span></tt> that should
+automatically change any existing queries for you. As always, make a backup
+of your database before running such a script.</p>
+</div>
+<div class="section" id="notes-for-metakit-backend-users">
+<h3><a class="toc-backref" href="#id77">0.6.0 Notes for metakit backend users</a></h3>
+<p>Roundup 0.6.0 introduced searching on ranges of dates and intervals. To
+support it, some modifications to interval storing routine were made. So if
+your tracker uses metakit backend and your db schema contains intervals
+property, searches on that property will not be accurate for db items that
+was stored before roundup&#8217; upgrade. However all new records should be
+searchable on intervals.</p>
+<p>It is possible to convert your database to new format: you can export and
+import back all your data (consult &#8220;Migrating backends&#8221; in &#8220;Maintenance&#8221;
+documentation). After this operation all your interval properties should
+become searchable.</p>
+<p>Users of backends others than metakit should not worry about this issue.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-4-x-to-0-5-0">
+<h2><a class="toc-backref" href="#id78">Migrating from 0.4.x to 0.5.0</a></h2>
+<p>This has been a fairly major revision of Roundup:</p>
+<ol class="arabic simple">
+<li>Brand new, much more powerful, flexible, tasty and nutritious templating.
+Unfortunately, this means all your current templates are useless. Hopefully
+the new documentation and examples will be enough to help you make the
+transition. Please don&#8217;t hesitate to ask on roundup-users for help (or
+complete conversions if you&#8217;re completely stuck)!</li>
+<li>The database backed got a lot more flexible, allowing Metakit and SQL
+databases! The only decent SQL database implemented at present is sqlite,
+but others shouldn&#8217;t be a whole lot more work.</li>
+<li>A brand new, highly flexible and much more robust security system including
+a system of Permissions, Roles and Role assignments to users. You may now
+define your own Permissions that may be checked in CGI transactions.</li>
+<li>Journalling has been made less storage-hungry, so has been turned on
+by default <em>except</em> for author, recipient and nosy link/unlink events. You
+are advised to turn it off in your trackers too.</li>
+<li>We&#8217;ve changed the terminology from &#8220;instance&#8221; to &#8220;tracker&#8221;, to ease the
+learning curve/impact for new users.</li>
+<li>Because of the above changes, the tracker configuration has seen some
+major changes. See below for the details.</li>
+</ol>
+<p>Please, <strong>back up your database</strong> before you start the migration process. This
+is as simple as copying the &#8220;db&#8221; directory and all its contents from your
+tracker to somewhere safe.</p>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id79">0.5.0 Configuration</a></h3>
+<p>First up, rename your <tt class="docutils literal"><span class="pre">instance_config.py</span></tt> file to just <tt class="docutils literal"><span class="pre">config.py</span></tt>.</p>
+<p>Then edit your tracker&#8217;s <tt class="docutils literal"><span class="pre">__init__.py</span></tt> module. It&#8217;ll currently look
+like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">instance_config</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">dbinit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span> <span class="c"># in installdir (probably :)</span>
+<span class="kn">from</span> <span class="nn">interfaces</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>and it needs to be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">config</span>
+<span class="kn">from</span> <span class="nn">dbinit</span> <span class="kn">import</span> <span class="nb">open</span><span class="p">,</span> <span class="n">init</span>
+<span class="kn">from</span> <span class="nn">interfaces</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">MailGW</span>
+</pre></div>
+</div>
+<p>Due to the new templating having a top-level <tt class="docutils literal"><span class="pre">page</span></tt> that defines links for
+searching, indexes, adding items etc, the following variables are no longer
+used:</p>
+<ul class="simple">
+<li>HEADER_INDEX_LINKS</li>
+<li>HEADER_ADD_LINKS</li>
+<li>HEADER_SEARCH_LINKS</li>
+<li>SEARCH_FILTERS</li>
+<li>DEFAULT_INDEX</li>
+<li>UNASSIGNED_INDEX</li>
+<li>USER_INDEX</li>
+<li>ISSUE_FILTER</li>
+</ul>
+<p>The new security implementation will require additions to the dbinit module,
+but also removes the need for the following tracker config variables:</p>
+<ul class="simple">
+<li>ANONYMOUS_ACCESS</li>
+<li>ANONYMOUS_REGISTER</li>
+</ul>
+<p>but requires two new variables which define the Roles assigned to users who
+register through the web and e-mail interfaces:</p>
+<ul class="simple">
+<li>NEW_WEB_USER_ROLES</li>
+<li>NEW_EMAIL_USER_ROLES</li>
+</ul>
+<p>in both cases, &#8216;User&#8217; is a good initial setting. To emulate
+<tt class="docutils literal"><span class="pre">ANONYMOUS_ACCESS='deny'</span></tt>, remove all &#8220;View&#8221; Permissions from the
+&#8220;Anonymous&#8221; Role. To emulate <tt class="docutils literal"><span class="pre">ANONYMOUS_REGISTER='deny'</span></tt>, remove the &#8220;Web
+Registration&#8221; and/or the &#8220;Email Registration&#8221; Permission from the &#8220;Anonymous&#8221;
+Role. See the section on customising security in the <a class="reference external" href="customizing.html">customisation
+documentation</a> for more information.</p>
+<p>Finally, the following config variables have been renamed to make more sense:</p>
+<ul class="simple">
+<li>INSTANCE_HOME -&gt; TRACKER_HOME</li>
+<li>INSTANCE_NAME -&gt; TRACKER_NAME</li>
+<li>ISSUE_TRACKER_WEB -&gt; TRACKER_WEB</li>
+<li>ISSUE_TRACKER_EMAIL -&gt; TRACKER_EMAIL</li>
+</ul>
+</div>
+<div class="section" id="schema-specification">
+<h3><a class="toc-backref" href="#id80">0.5.0 Schema Specification</a></h3>
+<div class="section" id="database-backend-changes">
+<h4><a class="toc-backref" href="#id81">0.5.0 Database backend changes</a></h4>
+<p>Your select_db module in your tracker has changed a fair bit. Where it used
+to contain:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># WARNING: DO NOT EDIT THIS FILE!!!</span>
+<span class="kn">from</span> <span class="nn">roundup.backends.back_anydbm</span> <span class="kn">import</span> <span class="n">Database</span>
+</pre></div>
+</div>
+<p>it must now contain:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># WARNING: DO NOT EDIT THIS FILE!!!</span>
+<span class="kn">from</span> <span class="nn">roundup.backends.back_anydbm</span> <span class="kn">import</span> <span class="n">Database</span><span class="p">,</span> <span class="n">Class</span><span class="p">,</span> <span class="n">FileClass</span><span class="p">,</span> <span class="n">IssueClass</span>
+</pre></div>
+</div>
+<p>Yes, I realise the irony of the &#8220;DO NOT EDIT THIS FILE&#8221; statement :)
+Note the addition of the Class, FileClass, IssueClass imports. These are very
+important, as they&#8217;re going to make the next change work too. You now need to
+modify the top of the dbinit module in your tracker from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">instance_config</span>
+<span class="kn">from</span> <span class="nn">roundup</span> <span class="kn">import</span> <span class="n">roundupdb</span>
+<span class="kn">from</span> <span class="nn">select_db</span> <span class="kn">import</span> <span class="n">Database</span>
+
+<span class="kn">from</span> <span class="nn">roundup.roundupdb</span> <span class="kn">import</span> <span class="n">Class</span><span class="p">,</span> <span class="n">FileClass</span>
+
+<span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="n">roundupdb</span><span class="o">.</span><span class="n">Database</span><span class="p">,</span> <span class="n">select_db</span><span class="o">.</span><span class="n">Database</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Creates a hybrid database from:</span>
+<span class="sd">         . the selected database back-end from select_db</span>
+<span class="sd">         . the roundup extensions from roundupdb</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">IssueClass</span><span class="p">(</span><span class="n">roundupdb</span><span class="o">.</span><span class="n">IssueClass</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; issues need the email information</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">config</span>
+<span class="kn">from</span> <span class="nn">select_db</span> <span class="kn">import</span> <span class="n">Database</span><span class="p">,</span> <span class="n">Class</span><span class="p">,</span> <span class="n">FileClass</span><span class="p">,</span> <span class="n">IssueClass</span>
+</pre></div>
+</div>
+<p>Yes, remove the Database and IssueClass definitions and those other imports.
+They&#8217;re not needed any more!</p>
+<p>Look for places in dbinit.py where <tt class="docutils literal"><span class="pre">instance_config</span></tt> is used too, and
+rename them <tt class="docutils literal"><span class="pre">config</span></tt>.</p>
+</div>
+<div class="section" id="journalling-changes">
+<h4><a class="toc-backref" href="#id82">0.5.0 Journalling changes</a></h4>
+<p>Journalling has been optimised for storage. Journalling of links has been
+turned back on by default. If your tracker has a large user base, you may wish
+to turn off journalling of nosy list, message author and message recipient
+link and unlink events. You do this by adding <tt class="docutils literal"><span class="pre">do_journal='no'</span></tt> to the Class
+initialisation in your dbinit. For example, your <em>msg</em> class initialisation
+probably looks like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">msg</span> <span class="o">=</span> <span class="n">FileClass</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;msg&quot;</span><span class="p">,</span>
+                <span class="n">author</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span> <span class="n">recipients</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                <span class="n">date</span><span class="o">=</span><span class="n">Date</span><span class="p">(),</span>         <span class="n">summary</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">files</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">),</span>
+                <span class="n">messageid</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>  <span class="n">inreplyto</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>to turn off journalling of author and recipient link events, add
+<tt class="docutils literal"><span class="pre">do_journal='no'</span></tt> to the <tt class="docutils literal"><span class="pre">author=Link(&quot;user&quot;)</span></tt> part of the statement,
+like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">msg</span> <span class="o">=</span> <span class="n">FileClass</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;msg&quot;</span><span class="p">,</span>
+                <span class="n">author</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="n">do_journal</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">),</span>
+                <span class="n">recipients</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="n">do_journal</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">),</span>
+                <span class="n">date</span><span class="o">=</span><span class="n">Date</span><span class="p">(),</span>         <span class="n">summary</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">files</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">),</span>
+                <span class="n">messageid</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>  <span class="n">inreplyto</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Nosy list link event journalling is actually turned off by default now. If you
+want to turn it on, change to your issue class&#8217; nosy list, change its
+definition from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">issue</span> <span class="o">=</span> <span class="n">IssueClass</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;issue&quot;</span><span class="p">,</span>
+                <span class="n">assignedto</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span> <span class="n">topic</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;keyword&quot;</span><span class="p">),</span>
+                <span class="n">priority</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;priority&quot;</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">issue</span> <span class="o">=</span> <span class="n">IssueClass</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;issue&quot;</span><span class="p">,</span> <span class="n">nosy</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="n">do_journal</span><span class="o">=</span><span class="s">&#39;yes&#39;</span><span class="p">),</span>
+                <span class="n">assignedto</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span> <span class="n">topic</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;keyword&quot;</span><span class="p">),</span>
+                <span class="n">priority</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;priority&quot;</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>noting that your definition of the nosy Multilink will override the normal one.</p>
+</div>
+<div class="section" id="user-schema-changes">
+<h4><a class="toc-backref" href="#id83">0.5.0 User schema changes</a></h4>
+<p>Users have two more properties, &#8220;queries&#8221; and &#8220;roles&#8221;. You&#8217;ll have something
+like this in your dbinit module now:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>   <span class="n">password</span><span class="o">=</span><span class="n">Password</span><span class="p">(),</span>
+                <span class="n">address</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>    <span class="n">realname</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">phone</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>      <span class="n">organisation</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">alternate_addresses</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+<span class="n">user</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and you&#8217;ll need to add the new properties and the new &#8220;query&#8221; class to it
+like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">query</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;query&quot;</span><span class="p">,</span>
+                <span class="n">klass</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>     <span class="n">name</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">url</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+<span class="n">query</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+
+<span class="c"># Note: roles is a comma-separated string of Role names</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>   <span class="n">password</span><span class="o">=</span><span class="n">Password</span><span class="p">(),</span>
+                <span class="n">address</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>    <span class="n">realname</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">phone</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>      <span class="n">organisation</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">alternate_addresses</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">queries</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&#39;query&#39;</span><span class="p">),</span> <span class="n">roles</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+<span class="n">user</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The &#8220;queries&#8221; property is used to store off the user&#8217;s favourite database
+queries. The &#8220;roles&#8221; property is explained below in <a class="reference internal" href="#security-settings">0.5.0 Security
+Settings</a>.</p>
+</div>
+<div class="section" id="security-settings">
+<h4><a class="toc-backref" href="#id84">0.5.0 Security Settings</a></h4>
+<p>See the <a class="reference external" href="security.html">security documentation</a> for an explanation of how the new security
+system works. In a nutshell though, the security is handled as a four step
+process:</p>
+<ol class="arabic simple">
+<li>Permissions are defined as having a name and optionally a hyperdb class
+they&#8217;re specific to,</li>
+<li>Roles are defined that have one or more Permissions,</li>
+<li>Users are assigned Roles in their &#8220;roles&#8221; property, and finally</li>
+<li>Roundup checks that users have appropriate Permissions at appropriate times
+(like editing issues).</li>
+</ol>
+<p>Your tracker dbinit module&#8217;s <em>open</em> function now has to define any
+Permissions that are specific to your tracker, and also the assignment
+of Permissions to Roles. At the moment, your open function
+ends with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">detectors</span>
+<span class="n">detectors</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+
+<span class="k">return</span> <span class="n">db</span>
+</pre></div>
+</div>
+<p>and what we need to do is insert some commands that will set up the security
+parameters. Right above the <tt class="docutils literal"><span class="pre">import</span> <span class="pre">detectors</span></tt> line, you&#8217;ll want to insert
+these lines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#</span>
+<span class="c"># SECURITY SETTINGS</span>
+<span class="c">#</span>
+<span class="c"># new permissions for this schema</span>
+<span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;msg&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">:</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit &quot;</span><span class="o">+</span><span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;View&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="n">cl</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to access &quot;</span><span class="o">+</span><span class="n">cl</span><span class="p">)</span>
+
+<span class="c"># Assign the access and edit permissions for issue, file and message</span>
+<span class="c"># to regular users now</span>
+<span class="k">for</span> <span class="n">cl</span> <span class="ow">in</span> <span class="s">&#39;issue&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;msg&#39;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Edit&#39;</span><span class="p">,</span> <span class="n">cl</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="c"># and give the regular users access to the web and email interface</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Web Access&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Email Access&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="c"># May users view other user information? Comment these lines out</span>
+<span class="c"># if you don&#39;t want them to</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;View&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="c"># Assign the appropriate permissions to the anonymous user&#39;s Anonymous</span>
+<span class="c"># Role. Choices here are:</span>
+<span class="c"># - Allow anonymous users to register through the web</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Web Registration&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="c"># - Allow anonymous (new) users to register through the email gateway</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Email Registration&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="c"># - Allow anonymous users access to the &quot;issue&quot; class of data</span>
+<span class="c">#   Note: this also grants access to related information like files,</span>
+<span class="c">#         messages, statuses etc that are linked to issues</span>
+<span class="c">#p = db.security.getPermission(&#39;View&#39;, &#39;issue&#39;)</span>
+<span class="c">#db.security.addPermissionToRole(&#39;Anonymous&#39;, p)</span>
+<span class="c"># - Allow anonymous users access to edit the &quot;issue&quot; class of data</span>
+<span class="c">#   Note: this also grants access to create related information like</span>
+<span class="c">#         files and messages etc that are linked to issues</span>
+<span class="c">#p = db.security.getPermission(&#39;Edit&#39;, &#39;issue&#39;)</span>
+<span class="c">#db.security.addPermissionToRole(&#39;Anonymous&#39;, p)</span>
+
+<span class="c"># oh, g&#39;wan, let anonymous access the web interface too</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">getPermission</span><span class="p">(</span><span class="s">&#39;Web Access&#39;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note in the comments there the places where you might change the permissions
+to restrict users or grant users more access. If you&#8217;ve created additional
+classes that users should be able to edit and view, then you should add them
+to the &#8220;new permissions for this schema&#8221; section at the start of the security
+block. Then add them to the &#8220;Assign the access and edit permissions&#8221; section
+too, so people actually have the new Permission you&#8217;ve created.</p>
+<p>One final change is needed that finishes off the security system&#8217;s
+initialisation. We need to add a call to <tt class="docutils literal"><span class="pre">db.post_init()</span></tt> at the end of the
+dbinit open() function. Add it like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">detectors</span>
+<span class="n">detectors</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+
+<span class="c"># schema is set up - run any post-initialisation</span>
+<span class="n">db</span><span class="o">.</span><span class="n">post_init</span><span class="p">()</span>
+<span class="k">return</span> <span class="n">db</span>
+</pre></div>
+</div>
+<p>You may verify the setup of Permissions and Roles using the new
+&#8220;<tt class="docutils literal"><span class="pre">roundup-admin</span> <span class="pre">security</span></tt>&#8221; command.</p>
+</div>
+<div class="section" id="user-changes">
+<h4><a class="toc-backref" href="#id85">0.5.0 User changes</a></h4>
+<p>To support all those schema changes, you&#8217;ll need to massage your user database
+a little too, to:</p>
+<ol class="arabic simple">
+<li>make sure there&#8217;s an &#8220;anonymous&#8221; user - this user is mandatory now and is
+the one that unknown users are logged in as.</li>
+<li>make sure all users have at least one Role.</li>
+</ol>
+<p>If you don&#8217;t have the &#8220;anonymous&#8221; user, create it now with the command:</p>
+<div class="highlight-python"><pre>roundup-admin create user username=anonymous roles=Anonymous</pre>
+</div>
+<p>making sure the capitalisation is the same as above. Once you&#8217;ve done that,
+you&#8217;ll need to set the roles property on all users to a reasonable default.
+The admin user should get &#8220;Admin&#8221;, the anonymous user &#8220;Anonymous&#8221;
+and all other users &#8220;User&#8221;. The <tt class="docutils literal"><span class="pre">fixroles.py</span></tt> script in the tools directory
+will do this. Run it like so (where python is your python 2+ binary):</p>
+<div class="highlight-python"><pre>python tools/fixroles.py -i &lt;tracker home&gt; fixroles</pre>
+</div>
+</div>
+</div>
+<div class="section" id="cgi-interface-changes">
+<h3><a class="toc-backref" href="#id86">0.5.0 CGI interface changes</a></h3>
+<p>The CGI interface code was completely reorganised and largely rewritten. The
+end result is that this section of your tracker interfaces module will need
+changing from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">roundup</span> <span class="kn">import</span> <span class="n">cgi_client</span><span class="p">,</span> <span class="n">mailgw</span>
+<span class="kn">from</span> <span class="nn">roundup.i18n</span> <span class="kn">import</span> <span class="n">_</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">(</span><span class="n">cgi_client</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; derives basic CGI implementation from the standard module,</span>
+<span class="sd">        with any specific extensions</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">roundup</span> <span class="kn">import</span> <span class="n">mailgw</span>
+<span class="kn">from</span> <span class="nn">roundup.cgi</span> <span class="kn">import</span> <span class="n">client</span>
+
+<span class="k">class</span> <span class="nc">Client</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">Client</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; derives basic CGI implementation from the standard module,</span>
+<span class="sd">        with any specific extensions</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>You will also need to install the new version of roundup.cgi from the source
+cgi-bin directory if you&#8217;re using it.</p>
+</div>
+<div class="section" id="html-templating">
+<h3><a class="toc-backref" href="#id87">0.5.0 HTML templating</a></h3>
+<p>You&#8217;ll want to make a backup of your current tracker html directory. You
+should then copy the html directory from the Roundup source &#8220;classic&#8221; template
+and modify it according to your local schema changes.</p>
+<p>If you need help with the new templating system, please ask questions on the
+roundup-users mailing list (available through the roundup web page on
+sourceforge, <a class="reference external" href="http://www.roundup-tracker.org/">http://www.roundup-tracker.org/</a>.</p>
+</div>
+<div class="section" id="detectors">
+<h3><a class="toc-backref" href="#id88">0.5.0 Detectors</a></h3>
+<p>The nosy reactor has been updated to handle the tracker not having an
+&#8220;assignedto&#8221; property on issues. You may want to copy it into your tracker&#8217;s
+detectors directory. Chances are you&#8217;ve already fixed it though :)</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-4-1-to-0-4-2">
+<h2><a class="toc-backref" href="#id89">Migrating from 0.4.1 to 0.4.2</a></h2>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id90">0.4.2 Configuration</a></h3>
+<p>The USER_INDEX definition introduced in 0.4.1 was too restrictive in its
+allowing replacement of &#8216;assignedto&#8217; with the user&#8217;s userid. Users must change
+the None value of &#8216;assignedto&#8217; to &#8216;CURRENT USER&#8217; (the string, in quotes) for
+the replacement behaviour to occur now.</p>
+<p>The new configuration variables are:</p>
+<ul class="simple">
+<li>EMAIL_KEEP_QUOTED_TEXT</li>
+<li>EMAIL_LEAVE_BODY_UNCHANGED</li>
+<li>ADD_RECIPIENTS_TO_NOSY</li>
+</ul>
+<p>See the sample configuration files in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/classic/instance_config.py</pre>
+</div>
+<p>and:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/extended/instance_config.py</pre>
+</div>
+<p>and the <a class="reference external" href="customizing.html">customisation documentation</a> for information on how they&#8217;re used.</p>
+</div>
+<div class="section" id="changes-to-detectors">
+<h3><a class="toc-backref" href="#id91">0.4.2 Changes to detectors</a></h3>
+<p>You will need to copy the detectors from the distribution into your instance
+home &#8220;detectors&#8221; directory. If you used the classic schema, the detectors
+are in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/classic/detectors/</pre>
+</div>
+<p>If you used the extended schema, the detectors are in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/extended/detectors/</pre>
+</div>
+<p>The change means that schema-specific code has been removed from the
+mail gateway and cgi interface and made into auditors:</p>
+<ul class="simple">
+<li>nosyreactor.py has now got an updatenosy auditor which updates the nosy
+list with author, recipient and assignedto information.</li>
+<li>statusauditor.py makes the unread or resolved -&gt; chatting changes and
+presets the status of an issue to unread.</li>
+</ul>
+<p>There&#8217;s also a bug or two fixed in the nosyreactor code.</p>
+</div>
+<div class="section" id="html-templating-changes">
+<h3><a class="toc-backref" href="#id92">0.4.2 HTML templating changes</a></h3>
+<p>The link() htmltemplate function now has a &#8220;showid&#8221; option for links and
+multilinks. When true, it only displays the linked item id as the anchor
+text. The link value is displayed as a tooltip using the title anchor
+attribute. To use in eg. the superseder field, have something like this:</p>
+<div class="highlight-python"><pre>&lt;td&gt;
+ &lt;display call="field('superseder', showid=1)"&gt;
+ &lt;display call="classhelp('issue', 'id,title', label='list', width=500)"&gt;
+ &lt;property name="superseder"&gt;
+  &lt;br&gt;View: &lt;display call="link('superseder', showid=1)"&gt;
+ &lt;/property&gt;
+&lt;/td&gt;</pre>
+</div>
+<p>The stylesheets have been cleaned up too. You may want to use the newer
+versions in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/&lt;template&gt;/html/default.css</pre>
+</div>
+</div>
+</div>
+<div class="section" id="migrating-from-0-4-0-to-0-4-1">
+<h2><a class="toc-backref" href="#id93">Migrating from 0.4.0 to 0.4.1</a></h2>
+<div class="section" id="files-storage">
+<h3><a class="toc-backref" href="#id94">0.4.1 Files storage</a></h3>
+<p>Messages and files from newly created issues will be put into subdierectories
+in thousands e.g. msg123 will be put into files/msg/0/msg123, file2003
+will go into files/file/2/file2003. Previous messages are still found, but
+could be put into this structure.</p>
+</div>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id95">0.4.1 Configuration</a></h3>
+<p>To allow more fine-grained access control, the variable used to check
+permission to auto-register users in the mail gateway is now called
+ANONYMOUS_REGISTER_MAIL rather than overloading ANONYMOUS_REGISTER. If the
+variable doesn&#8217;t exist, then ANONYMOUS_REGISTER is tested as before.</p>
+<p>Configuring the links in the web header is now easier too. The following
+variables have been added to the classic instance_config.py:</p>
+<div class="highlight-python"><pre>HEADER_INDEX_LINKS   - defines the "index" links to be made available
+HEADER_ADD_LINKS     - defines the "add" links
+DEFAULT_INDEX        - specifies the index view for DEFAULT
+UNASSIGNED_INDEX     - specifies the index view for UNASSIGNED
+USER_INDEX           - specifies the index view for USER</pre>
+</div>
+<p>See the &lt;roundup source&gt;/roundup/templates/classic/instance_config.py for more
+information - including how the variables are to be set up. Most users will
+just be able to copy the variables from the source to their instance home. If
+you&#8217;ve modified the header by changing the source of the interfaces.py file in
+the instance home, you&#8217;ll need to remove that customisation and move it into
+the appropriate variables in instance_config.py.</p>
+<p>The extended schema has similar variables added too - see the source for more
+info.</p>
+</div>
+<div class="section" id="alternate-e-mail-addresses">
+<h3><a class="toc-backref" href="#id96">0.4.1 Alternate E-Mail Addresses</a></h3>
+<p>If you add the property &#8220;alternate_addresses&#8221; to your user class, your users
+will be able to register alternate email addresses that they may use to
+communicate with roundup as. All email from roundup will continue to be sent
+to their primary address.</p>
+<p>If you have not edited the dbinit.py file in your instance home directory,
+you may simply copy the new dbinit.py file from the core code. If you used
+the classic schema, the interfaces file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/classic/dbinit.py</pre>
+</div>
+<p>If you used the extended schema, the file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/extended/dbinit.py</pre>
+</div>
+<p>If you have modified your dbinit.py file, you need to edit the dbinit.py
+file in your instance home directory. Find the lines which define the user
+class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;msg&quot;</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>   <span class="n">password</span><span class="o">=</span><span class="n">Password</span><span class="p">(),</span>
+                <span class="n">address</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>    <span class="n">realname</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">phone</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>      <span class="n">organisation</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">alternate_addresses</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>You will also want to add the property to the user&#8217;s details page. The
+template for this is the &#8220;user.item&#8221; file in your instance home &#8220;html&#8221;
+directory. Similar to above, you may copy the file from the roundup source if
+you haven&#8217;t modified it. Otherwise, add the following to the template:</p>
+<div class="highlight-python"><pre>&lt;display call="multiline('alternate_addresses')"&gt;</pre>
+</div>
+<p>with appropriate labelling etc. See the standard template for an idea.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-3-x-to-0-4-0">
+<h2><a class="toc-backref" href="#id97">Migrating from 0.3.x to 0.4.0</a></h2>
+<div class="section" id="message-id-and-in-reply-to-addition">
+<h3><a class="toc-backref" href="#id98">0.4.0 Message-ID and In-Reply-To addition</a></h3>
+<p>0.4.0 adds the tracking of messages by message-id and allows threading
+using in-reply-to. Most e-mail clients support threading using this
+feature, and we hope to add support for it to the web gateway. If you
+have not edited the dbinit.py file in your instance home directory, you may
+simply copy the new dbinit.py file from the core code. If you used the
+classic schema, the interfaces file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/classic/dbinit.py</pre>
+</div>
+<p>If you used the extended schema, the file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/extended/dbinit.py</pre>
+</div>
+<p>If you have modified your dbinit.py file, you need to edit the dbinit.py
+file in your instance home directory. Find the lines which define the msg
+class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">msg</span> <span class="o">=</span> <span class="n">FileClass</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;msg&quot;</span><span class="p">,</span>
+                <span class="n">author</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span> <span class="n">recipients</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                <span class="n">date</span><span class="o">=</span><span class="n">Date</span><span class="p">(),</span>         <span class="n">summary</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">files</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>and add the messageid and inreplyto properties like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">msg</span> <span class="o">=</span> <span class="n">FileClass</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;msg&quot;</span><span class="p">,</span>
+                <span class="n">author</span><span class="o">=</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span> <span class="n">recipients</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                <span class="n">date</span><span class="o">=</span><span class="n">Date</span><span class="p">(),</span>         <span class="n">summary</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">files</span><span class="o">=</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">),</span>
+                <span class="n">messageid</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>  <span class="n">inreplyto</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Also, configuration is being cleaned up. This means that your dbinit.py will
+also need to be changed in the open function. If you haven&#8217;t changed your
+dbinit.py, the above copy will be enough. If you have, you&#8217;ll need to change
+the line (round line 50):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">instance_config</span><span class="o">.</span><span class="n">DATABASE</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">instance_config</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id99">0.4.0 Configuration</a></h3>
+<p><tt class="docutils literal"><span class="pre">TRACKER_NAME</span></tt> and <tt class="docutils literal"><span class="pre">EMAIL_SIGNATURE_POSITION</span></tt> have been added to the
+instance_config.py. The simplest solution is to copy the default values
+from template in the core source.</p>
+<p>The mail gateway now checks <tt class="docutils literal"><span class="pre">ANONYMOUS_REGISTER</span></tt> to see if unknown users
+are to be automatically registered with the tracker. If it is set to &#8220;deny&#8221;
+then unknown users will not have access. If it is set to &#8220;allow&#8221; they will be
+automatically registered with the tracker.</p>
+</div>
+<div class="section" id="cgi-script-roundup-cgi">
+<h3><a class="toc-backref" href="#id100">0.4.0 CGI script roundup.cgi</a></h3>
+<p>The CGI script has been updated with some features and a bugfix, so you should
+copy it from the roundup cgi-bin source directory again. Make sure you update
+the ROUNDUP_INSTANCE_HOMES after the copy.</p>
+</div>
+<div class="section" id="nosy-reactor">
+<h3><a class="toc-backref" href="#id101">0.4.0 Nosy reactor</a></h3>
+<p>The nosy reactor has also changed - copy the nosyreactor.py file from the core
+source:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/&lt;template&gt;/detectors/nosyreactor.py</pre>
+</div>
+<p>to your instance home &#8220;detectors&#8221; directory.</p>
+</div>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id102">0.4.0 HTML templating</a></h3>
+<p>The field() function was incorrectly implemented - links and multilinks now
+display as text fields when rendered using field(). To display a menu (drop-
+down or select box) you need to use the menu() function.</p>
+</div>
+</div>
+<div class="section" id="migrating-from-0-2-x-to-0-3-x">
+<h2><a class="toc-backref" href="#id103">Migrating from 0.2.x to 0.3.x</a></h2>
+<div class="section" id="x-cookie-authentication-changes">
+<h3><a class="toc-backref" href="#id104">0.3.x Cookie Authentication changes</a></h3>
+<p>0.3.0 introduces cookie authentication - you will need to copy the
+interfaces.py file from the roundup source to your instance home to enable
+authentication. If you used the classic schema, the interfaces file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/classic/interfaces.py</pre>
+</div>
+<p>If you used the extended schema, the file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/extended/interfaces.py</pre>
+</div>
+<p>If you have modified your interfaces.Client class, you will need to take
+note of the login/logout functionality provided in roundup.cgi_client.Client
+(classic schema) or roundup.cgi_client.ExtendedClient (extended schema) and
+modify your instance code apropriately.</p>
+</div>
+<div class="section" id="x-password-encoding">
+<h3><a class="toc-backref" href="#id105">0.3.x Password encoding</a></h3>
+<p>This release also introduces encoding of passwords in the database. If you
+have not edited the dbinit.py file in your instance home directory, you may
+simply copy the new dbinit.py file from the core code. If you used the
+classic schema, the interfaces file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/classic/dbinit.py</pre>
+</div>
+<p>If you used the extended schema, the file is in:</p>
+<div class="highlight-python"><pre>&lt;roundup source&gt;/roundup/templates/extended/dbinit.py</pre>
+</div>
+<p>If you have modified your dbinit.py file, you may use encoded passwords:</p>
+<ol class="arabic">
+<li><p class="first">Edit the dbinit.py file in your instance home directory
+a. At the first code line of the open() function:</p>
+<div class="highlight-python"><pre> from roundup.hyperdb import String, Date, Link, Multilink
+
+alter to include Password, as so::
+
+ from roundup.hyperdb import String, Password, Date, Link, Multilink</pre>
+</div>
+<ol class="loweralpha" start="2">
+<li><p class="first">Where the password property is defined (around line 66):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>   <span class="n">password</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">address</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>    <span class="n">realname</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">phone</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>      <span class="n">organisation</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+<span class="n">user</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>alter the &#8220;password=String()&#8221; to &#8220;password=Password()&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">user</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>   <span class="n">password</span><span class="o">=</span><span class="n">Password</span><span class="p">(),</span>
+                <span class="n">address</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>    <span class="n">realname</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>
+                <span class="n">phone</span><span class="o">=</span><span class="n">String</span><span class="p">(),</span>      <span class="n">organisation</span><span class="o">=</span><span class="n">String</span><span class="p">())</span>
+<span class="n">user</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Any existing passwords in the database will remain cleartext until they
+are edited. It is recommended that at a minimum the admin password be
+changed immediately:</p>
+<div class="highlight-python"><pre>roundup-admin -i &lt;instance home&gt; set user1 password=&lt;new password&gt;</pre>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="x-configuration">
+<h3><a class="toc-backref" href="#id106">0.3.x Configuration</a></h3>
+<p>FILTER_POSITION, ANONYMOUS_ACCESS, ANONYMOUS_REGISTER have been added to
+the instance_config.py. Simplest solution is to copy the default values from
+template in the core source.</p>
+<p>MESSAGES_TO_AUTHOR has been added to the IssueClass in dbinit.py. Set to &#8216;yes&#8217;
+to send nosy messages to the author. Default behaviour is to not send nosy
+messages to the author. You will need to add MESSAGES_TO_AUTHOR to your
+dbinit.py in your instance home.</p>
+</div>
+<div class="section" id="x-cgi-script-roundup-cgi">
+<h3><a class="toc-backref" href="#id107">0.3.x CGI script roundup.cgi</a></h3>
+<p>There have been some structural changes to the roundup.cgi script - you will
+need to install it again from the cgi-bin directory of the source
+distribution. Make sure you update the ROUNDUP_INSTANCE_HOMES after the
+copy.</p>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Roundup FAQ"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/upgrading.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

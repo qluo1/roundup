@@ -1,0 +1,6 @@
+Name: jinja2-tracker
+Description: This is a generic issue tracker based on classic schema. It
+ uses Jinja2 for templating and Twitter bootstrap for responsive markup.
+ You will need jinja and gettext for this to work.
+Intended-for: Developers/Fearless first-time roundup users
+Path: h:\roundup\dev\tracker

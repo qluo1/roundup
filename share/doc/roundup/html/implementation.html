@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Implementation notes &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/implementation.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="implementation-notes">
+<h1>Implementation notes</h1>
+<p>[see also the roundup package docstring]</p>
+<p>There have been some modifications to the spec. I&#8217;ve marked these in the
+source with &#8216;XXX&#8217; comments when I remember to.</p>
+<dl class="docutils">
+<dt>In short:</dt>
+<dd><p class="first">Class.find() - may match multiple properties, uses keyword args.</p>
+<dl class="docutils">
+<dt>Class.filter() - isn&#8217;t in the spec and it&#8217;s very useful to have at the</dt>
+<dd>Class level.</dd>
+<dt>CGI interface index view specifier layout part - lose the &#8216;+&#8217; from the</dt>
+<dd>sorting arguments (it&#8217;s a reserved URL character ;). Just made no
+prefix mean ascending and &#8216;-&#8216; prefix descending.</dd>
+<dt>ItemClass - renamed to IssueClass to better match it only having one</dt>
+<dd>hypderdb class &#8220;issue&#8221;. Allowing &gt; 1 hyperdb class breaks the
+&#8220;superseder&#8221; multilink (since it can only link to one thing, and
+we&#8217;d want bugs to link to support and vice-versa).</dd>
+<dt>template - the call=&#8221;link()&#8221; is handled by special-case mechanisms in</dt>
+<dd>my top-level CGI handler. In a nutshell, the handler looks for a
+method on itself called &#8216;index%s&#8217; or &#8216;item%s&#8217; where %s is a class.
+Most items pass on to the templating mechanism, but the file class
+_always_ does downloading. It&#8217;ll probably stay this way too...</dd>
+<dt>template - call=&#8221;link(property)&#8221; may be used to link &#8220;the current item&#8221;</dt>
+<dd>(from an index) - the link text is the property specified.</dd>
+<dt>template - added functions that I found very useful: List, History and</dt>
+<dd>Submit.</dd>
+<dt>template - items must specify the message lists, history, etc. Having</dt>
+<dd>them by default was sometimes not wanted.</dd>
+<dt>template - index view determines its default columns from the</dt>
+<dd>template&#8217;s <tt class="docutils literal"><span class="pre">tal:condition=&quot;request/show/&lt;property&gt;&quot;</span></tt> directives.</dd>
+</dl>
+<p>template - menu() and field() look awfully similar now .... ;)</p>
+<dl class="last docutils">
+<dt>roundup_admin.py - the command-line tool has a lot more commands at its</dt>
+<dd>disposal</dd>
+</dl>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Back to <a class="reference external" href="index.html">Table of Contents</a></p>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/implementation.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

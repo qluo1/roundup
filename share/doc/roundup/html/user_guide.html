@@ -1,0 +1,1018 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Guide &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="Customising Roundup" href="customizing.html" />
+    <link rel="prev" title="Roundup FAQ" href="FAQ.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">User Guide</a><ul>
+<li><a class="reference external" href="#your-tracker-in-a-nutshell">Your Tracker in a Nutshell</a><ul>
+<li><a class="reference external" href="#accessing-the-tracker">Accessing the Tracker</a></li>
+<li><a class="reference external" href="#issue-life-cycles-in-roundup">Issue life cycles in Roundup</a></li>
+<li><a class="reference external" href="#entering-values-in-your-tracker">Entering values in your Tracker</a><ul>
+<li><a class="reference external" href="#string-and-numeric-properties">String and Numeric properties</a></li>
+<li><a class="reference external" href="#boolean-properties">Boolean properties</a></li>
+<li><a class="reference external" href="#constrained-link-and-multilink-properties">Constrained (link and multilink) properties</a></li>
+<li><a class="reference external" href="#date-properties">Date properties</a></li>
+<li><a class="reference external" href="#interval-properties">Interval properties</a></li>
+<li><a class="reference external" href="#simple-support-for-collision-detection">Simple support for collision detection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#web-interface">Web Interface</a><ul>
+<li><a class="reference external" href="#lists-of-items">Lists of Items</a></li>
+<li><a class="reference external" href="#display-edit-or-entry-of-an-item">Display, edit or entry of an item</a></li>
+<li><a class="reference external" href="#searching-page">Searching Page</a><ul>
+<li><a class="reference external" href="#saving-queries">Saving queries</a></li>
+<li><a class="reference external" href="#under-the-covers">Under the covers</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#access-controls">Access Controls</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#e-mail-gateway">E-Mail Gateway</a><ul>
+<li><a class="reference external" href="#subject-line-information">Subject-line information</a><ul>
+<li><a class="reference external" href="#setting-properties">Setting Properties</a></li>
+<li><a class="reference external" href="#automatic-properties">Automatic Properties</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#sender-identification">Sender identification</a></li>
+<li><a class="reference external" href="#e-mail-message-content">E-Mail Message Content</a><ul>
+<li><a class="reference external" href="#message-summary">Message summary</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#address-handling">Address handling</a><ul>
+<li><a class="reference external" href="#nosy-list">Nosy List</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#mail-gateway-script-command-line">Mail gateway script command line</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#command-line-tool">Command Line Tool</a><ul>
+<li><a class="reference external" href="#using-with-the-shell">Using with the shell</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="FAQ.html"
+                          title="previous chapter">Roundup FAQ</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="customizing.html"
+                          title="next chapter">Customising Roundup</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/user_guide.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="customizing.html" title="Customising Roundup"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Roundup FAQ"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="user-guide">
+<h1><a class="toc-backref" href="#id1">User Guide</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#user-guide" id="id1">User Guide</a><ul>
+<li><a class="reference internal" href="#your-tracker-in-a-nutshell" id="id2">Your Tracker in a Nutshell</a><ul>
+<li><a class="reference internal" href="#accessing-the-tracker" id="id3">Accessing the Tracker</a></li>
+<li><a class="reference internal" href="#issue-life-cycles-in-roundup" id="id4">Issue life cycles in Roundup</a></li>
+<li><a class="reference internal" href="#entering-values-in-your-tracker" id="id5">Entering values in your Tracker</a><ul>
+<li><a class="reference internal" href="#string-and-numeric-properties" id="id6">String and Numeric properties</a></li>
+<li><a class="reference internal" href="#boolean-properties" id="id7">Boolean properties</a></li>
+<li><a class="reference internal" href="#constrained-link-and-multilink-properties" id="id8">Constrained (link and multilink) properties</a></li>
+<li><a class="reference internal" href="#date-properties" id="id9">Date properties</a></li>
+<li><a class="reference internal" href="#interval-properties" id="id10">Interval properties</a></li>
+<li><a class="reference internal" href="#simple-support-for-collision-detection" id="id11">Simple support for collision detection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#web-interface" id="id12">Web Interface</a><ul>
+<li><a class="reference internal" href="#lists-of-items" id="id13">Lists of Items</a></li>
+<li><a class="reference internal" href="#display-edit-or-entry-of-an-item" id="id14">Display, edit or entry of an item</a></li>
+<li><a class="reference internal" href="#searching-page" id="id15">Searching Page</a><ul>
+<li><a class="reference internal" href="#saving-queries" id="id16">Saving queries</a></li>
+<li><a class="reference internal" href="#under-the-covers" id="id17">Under the covers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#access-controls" id="id18">Access Controls</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#e-mail-gateway" id="id19">E-Mail Gateway</a><ul>
+<li><a class="reference internal" href="#subject-line-information" id="id20">Subject-line information</a><ul>
+<li><a class="reference internal" href="#setting-properties" id="id21">Setting Properties</a></li>
+<li><a class="reference internal" href="#automatic-properties" id="id22">Automatic Properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sender-identification" id="id23">Sender identification</a></li>
+<li><a class="reference internal" href="#e-mail-message-content" id="id24">E-Mail Message Content</a><ul>
+<li><a class="reference internal" href="#message-summary" id="id25">Message summary</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#address-handling" id="id26">Address handling</a><ul>
+<li><a class="reference internal" href="#nosy-list" id="id27">Nosy List</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mail-gateway-script-command-line" id="id28">Mail gateway script command line</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-line-tool" id="id29">Command Line Tool</a><ul>
+<li><a class="reference internal" href="#using-with-the-shell" id="id30">Using with the shell</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition hint">
+<p class="first admonition-title">Hint</p>
+<p class="last">This document will refer to <em>issues</em> as the primary store of
+information in the tracker. This is the default of the classic template,
+but may vary in any given installation.</p>
+</div>
+<div class="section" id="your-tracker-in-a-nutshell">
+<h2><a class="toc-backref" href="#id2">Your Tracker in a Nutshell</a></h2>
+<p>Your tracker holds information about issues in bundles we call <em>items</em>.
+An item may be an <em>issue</em> (a bug or feature request) or a <em>user</em>. The
+issue-ness or user-ness is called the item&#8217;s <em>class</em>. So, for bug
+reports and features, the class is &#8220;issue&#8221;, and for users the class is
+&#8220;user&#8221;.</p>
+<p>Each item in the tracker has an ID number that identifies it along with
+its item class. To identify a particular issue or user, we combine the
+class with the number to create a unique label, so that user 1 (who,
+incidentally, is <em>always</em> the &#8220;admin&#8221; user) is referred to as &#8220;user1&#8221;.
+Issue number 315 is referred to as &#8220;issue315&#8221;. We call that label the
+item&#8217;s <em>designator</em>.</p>
+<p>Items in the database are never deleted, they&#8217;re just &#8220;retired&#8221;. You
+can still refer to them by ID - hence removing an item won&#8217;t break
+references to the item. It&#8217;s just that the item won&#8217;t appear in any
+listings.</p>
+<div class="section" id="accessing-the-tracker">
+<h3><a class="toc-backref" href="#id3">Accessing the Tracker</a></h3>
+<p>You may access your tracker through one of three ways:</p>
+<ol class="arabic simple">
+<li>through the <a class="reference internal" href="#web-interface">web interface</a>,</li>
+<li>through the <a class="reference internal" href="#e-mail-gateway">e-mail gateway</a>, or</li>
+<li>using the <a class="reference internal" href="#command-line-tool">command line tool</a>.</li>
+</ol>
+<p>The last is usually only used by administrators. Most users will use the
+web and e-mail interfaces. All three are explained below.</p>
+</div>
+<div class="section" id="issue-life-cycles-in-roundup">
+<h3><a class="toc-backref" href="#id4">Issue life cycles in Roundup</a></h3>
+<p>New issues may be submitted via the web or e-mail.</p>
+<p>By default, the issue will have the status &#8220;unread&#8221;. If another message
+is received for the issue, its status will change to &#8220;chatting&#8221;.</p>
+<p>The &#8220;home&#8221; page for a tracker will generally display all issues which
+are not &#8220;resolved&#8221;.</p>
+<p>If an issue is closed, and a new message is received then it&#8217;ll be
+reopened to the state of &#8220;chatting&#8221;.</p>
+<p>The full set of <strong>prority</strong> and <strong>status</strong> values are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Priority</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&#8220;critical&#8221;</td>
+<td>panic: work is stopped!</td>
+</tr>
+<tr><td>&#8220;urgent&#8221;</td>
+<td>important, but not deadly</td>
+</tr>
+<tr><td>&#8220;bug&#8221;</td>
+<td>lost work or incorrect results</td>
+</tr>
+<tr><td>&#8220;feature&#8221;</td>
+<td>want missing functionality</td>
+</tr>
+<tr><td>&#8220;wish&#8221;</td>
+<td>avoidable bugs, missing conveniences</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Status</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&#8220;unread&#8221;</td>
+<td>submitted but no action yet</td>
+</tr>
+<tr><td>&#8220;deferred&#8221;</td>
+<td>intentionally set aside</td>
+</tr>
+<tr><td>&#8220;chatting&#8221;</td>
+<td>under review or seeking clarification</td>
+</tr>
+<tr><td>&#8220;need-eg&#8221;</td>
+<td>need a reproducible example of a bug</td>
+</tr>
+<tr><td>&#8220;in-progress&#8221;</td>
+<td>understood; development in progress</td>
+</tr>
+<tr><td>&#8220;testing&#8221;</td>
+<td>we think it&#8217;s done; others, please test</td>
+</tr>
+<tr><td>&#8220;done-cbb&#8221;</td>
+<td>okay for now, but could be better</td>
+</tr>
+<tr><td>&#8220;resolved&#8221;</td>
+<td>fix has been released</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="entering-values-in-your-tracker">
+<h3><a class="toc-backref" href="#id5">Entering values in your Tracker</a></h3>
+<p>All interfaces to your tracker use the same format for entering values.
+This means the web interface for entering a new issue, the web interface
+for searching issues, the e-mail interface and even the command-line
+administration tool.</p>
+<div class="section" id="string-and-numeric-properties">
+<h4><a class="toc-backref" href="#id6">String and Numeric properties</a></h4>
+<p>These fields just take a simple text value, like <tt class="docutils literal"><span class="pre">It's</span> <span class="pre">broken</span></tt>.</p>
+</div>
+<div class="section" id="boolean-properties">
+<h4><a class="toc-backref" href="#id7">Boolean properties</a></h4>
+<p>These fields take a value which indicates &#8220;yes&#8221;/&#8221;no&#8221;, &#8220;true&#8221;/&#8221;false&#8221;,
+&#8220;1&#8221;/&#8221;0&#8221; or &#8220;on&#8221;/&#8221;off&#8221;.</p>
+</div>
+<div class="section" id="constrained-link-and-multilink-properties">
+<h4><a class="toc-backref" href="#id8">Constrained (link and multilink) properties</a></h4>
+<p>Fields like &#8220;Assigned To&#8221; and &#8220;Keywords&#8221; hold references to items in other
+classes (&#8220;user&#8221; and &#8220;keyword&#8221; in those two cases.)</p>
+<p>Sometimes, the selection is done through a menu, like in the &#8220;Assigned
+To&#8221; field.</p>
+<p>Where the input is not a simple menu selection, we use a comma-separated
+list of values to indicated which values of &#8220;user&#8221; or &#8220;keyword&#8221; are
+interesting. The values may be either numeric ids or the names of items.
+The special value &#8220;-1&#8221; may be used to match items where the property is
+not set. For example, the following searches on the issues:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">assignedto=richard,george</span></tt></dt>
+<dd>match issues which are assigned to richard or george.</dd>
+<dt><tt class="docutils literal"><span class="pre">assignedto=-1</span></tt></dt>
+<dd>match issues that are not assigned to a user.</dd>
+<dt><tt class="docutils literal"><span class="pre">assignedto=2,3,40</span></tt></dt>
+<dd>match issues that are assigned to users 2, 3 or 40.</dd>
+<dt><tt class="docutils literal"><span class="pre">keyword=user</span> <span class="pre">interface</span></tt></dt>
+<dd>match issues with the keyword &#8220;user interface&#8221; in their keyword list</dd>
+<dt><tt class="docutils literal"><span class="pre">keyword=web</span> <span class="pre">interface,e-mail</span> <span class="pre">interface</span></tt></dt>
+<dd>match issues with the keyword &#8220;web interface&#8221; or &#8220;e-mail interface&#8221; in
+their keyword list</dd>
+<dt><tt class="docutils literal"><span class="pre">keyword=-1</span></tt></dt>
+<dd>match issues with no keywords set</dd>
+</dl>
+</div>
+<div class="section" id="date-properties">
+<h4><a class="toc-backref" href="#id9">Date properties</a></h4>
+<p>Date-and-time stamps are specified with the date in
+international standard format (<tt class="docutils literal"><span class="pre">yyyy-mm-dd</span></tt>) joined to the time
+(<tt class="docutils literal"><span class="pre">hh:mm:ss</span></tt>) by a period <tt class="docutils literal"><span class="pre">.</span></tt>.  Dates in this form can be easily
+compared and are fairly readable when printed.  An example of a valid
+stamp is <tt class="docutils literal"><span class="pre">2000-06-24.13:03:59</span></tt>. We&#8217;ll call this the &#8220;full date
+format&#8221;.  When Timestamp objects are printed as strings, they appear in
+the full date format.</p>
+<p>For user input, some partial forms are also permitted: the whole time or
+just the seconds may be omitted; and the whole date may be omitted or
+just the year may be omitted.  If the time is given, the time is
+interpreted in the user&#8217;s local time zone. The Date constructor takes
+care of these conversions. In the following examples, suppose that
+<tt class="docutils literal"><span class="pre">yyyy</span></tt> is the current year, <tt class="docutils literal"><span class="pre">mm</span></tt> is the current month, and <tt class="docutils literal"><span class="pre">dd</span></tt> is
+the current day of the month.</p>
+<ul class="simple">
+<li>&#8220;2000-04-17&#8221; means &lt;Date 2000-04-17.00:00:00&gt;</li>
+<li>&#8220;01-25&#8221; means &lt;Date yyyy-01-25.00:00:00&gt;</li>
+<li>&#8220;2000-04-17.03:45&#8221; means &lt;Date 2000-04-17.08:45:00&gt;</li>
+<li>&#8220;08-13.22:13&#8221; means &lt;Date yyyy-08-14.03:13:00&gt;</li>
+<li>&#8220;11-07.09:32:43&#8221; means &lt;Date yyyy-11-07.14:32:43&gt;</li>
+<li>&#8220;14:25&#8221; means &lt;Date yyyy-mm-dd.19:25:00&gt;</li>
+<li>&#8220;8:47:11&#8221; means &lt;Date yyyy-mm-dd.13:47:11&gt;</li>
+<li>the special date &#8220;.&#8221; means &#8220;right now&#8221;</li>
+</ul>
+<p>When searching, a plain date entered as a search field will match that date
+exactly in the database.  We may also accept ranges of dates. You can
+specify range of dates in one of two formats:</p>
+<ol class="arabic">
+<li><p class="first">English syntax:</p>
+<div class="highlight-python"><pre>[From &lt;value&gt;][To &lt;value&gt;]</pre>
+</div>
+<p>Keywords &#8220;From&#8221; and &#8220;To&#8221; are case insensitive. Keyword &#8220;From&#8221; is
+optional.</p>
+</li>
+<li><p class="first">&#8220;Geek&#8221; syntax:</p>
+<div class="highlight-python"><pre>[&lt;value&gt;];[&lt;value&gt;]</pre>
+</div>
+</li>
+</ol>
+<p>Either first or second <tt class="docutils literal"><span class="pre">&lt;value&gt;</span></tt> can be omitted in both syntaxes.</p>
+<p>For example, if you enter string &#8220;from 9:00&#8221; to &#8220;Creation date&#8221; field,
+roundup will find  all issues, that were created today since 9 AM.</p>
+<p>The <tt class="docutils literal"><span class="pre">&lt;value&gt;</span></tt> may also be an interval, as described in the next section.
+Searching of &#8220;-2m; -1m&#8221; on activity field gives you issues which were
+active between period of time since 2 months up-till month ago.</p>
+<p>Other possible examples (consider local time is 2003-03-08.22:07:48):</p>
+<ul class="simple">
+<li>&#8220;from 2-12 to 4-2&#8221; means
+&lt;Range from 2003-02-12.00:00:00 to 2003-04-02.00:00:00&gt;</li>
+<li>&#8220;FROM 18:00 TO +2m&#8221; means
+&lt;Range from 2003-03-08.18:00:00 to 2003-05-08.20:07:48&gt;</li>
+<li>&#8220;12:00;&#8221; means
+&lt;Range from 2003-03-08.12:00:00 to None&gt;</li>
+<li>&#8220;tO +3d&#8221; means
+&lt;Range from None to 2003-03-11.20:07:48&gt;</li>
+<li>&#8220;2002-11-10; 2002-12-12&#8221; means
+&lt;Range from 2002-11-10.00:00:00 to 2002-12-12.00:00:00&gt;</li>
+<li>&#8220;; 20:00 +1d&#8221; means
+&lt;Range from None to 2003-03-09.20:00:00&gt;</li>
+<li>&#8220;2003&#8221; means
+&lt;Range from 2003-01-01.00:00:00 to 2003-12-31.23:59:59&gt;</li>
+<li>&#8220;2003-04&#8221; means
+&lt;Range from 2003-04-01.00:00:00 to 2003-04-30.23:59:59&gt;</li>
+</ul>
+</div>
+<div class="section" id="interval-properties">
+<h4><a class="toc-backref" href="#id10">Interval properties</a></h4>
+<p>Date intervals are specified using the suffixes &#8220;y&#8221;, &#8220;m&#8221;, and &#8220;d&#8221;.  The
+suffix &#8220;w&#8221; (for &#8220;week&#8221;) means 7 days. Time intervals are specified in
+hh:mm:ss format (the seconds may be omitted, but the hours and minutes
+may not).</p>
+<ul class="simple">
+<li>&#8220;3y&#8221; means three years</li>
+<li>&#8220;2y 1m&#8221; means two years and one month</li>
+<li>&#8220;1m 25d&#8221; means one month and 25 days</li>
+<li>&#8220;2w 3d&#8221; means two weeks and three days</li>
+<li>&#8220;1d 2:50&#8221; means one day, two hours, and 50 minutes</li>
+<li>&#8220;14:00&#8221; means 14 hours</li>
+<li>&#8220;0:04:33&#8221; means four minutes and 33 seconds</li>
+</ul>
+</div>
+<div class="section" id="simple-support-for-collision-detection">
+<h4><a class="toc-backref" href="#id11">Simple support for collision detection</a></h4>
+<p>Item edit pages remember when the item was last edited. When a form is
+submitted, the user will be informed if someone else has edited the item
+at the same time they tried to.</p>
+</div>
+</div>
+</div>
+<div class="section" id="web-interface">
+<h2><a class="toc-backref" href="#id12">Web Interface</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This document contains screenshots of the default look and feel.
+Your site may have a slightly (or very) different look, but the
+functionality will be very similar, and the concepts still hold.</p>
+</div>
+<p>The web interface is broken up into the following parts:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#lists-of-items">lists of items</a>,</li>
+<li><a class="reference internal" href="#display-edit-or-entry-of-an-item">display, edit or entry of an item</a>, and</li>
+<li><a class="reference internal" href="#searching-page">searching page</a>.</li>
+</ol>
+<div class="section" id="lists-of-items">
+<h3><a class="toc-backref" href="#id13">Lists of Items</a></h3>
+<p>The first thing you&#8217;ll see when you log into Roundup will be a list of
+open (ie. not resolved) issues. This list has been generated by a bunch
+of controls <a class="reference internal" href="#under-the-covers">under the covers</a> but for now, you can see something like:</p>
+<img alt="_images/index_logged_out.png" src="_images/index_logged_out.png" />
+<p>The screen is divided up into three sections. There&#8217;s a title which tells
+you where you are, a sidebar which contains useful navigation tools and a
+body which usually displays either a list of items or a single item from
+the tracker.</p>
+<p>You may either register or log in. Registration takes you to:</p>
+<img alt="_images/registration.png" src="_images/registration.png" />
+<p>Once you&#8217;re logged in, the sidebar changes to:</p>
+<img alt="_images/index_logged_in.png" src="_images/index_logged_in.png" />
+<p>You can now get to your &#8220;My Details&#8221; page:</p>
+<img alt="_images/my_details.png" src="_images/my_details.png" />
+</div>
+<div class="section" id="display-edit-or-entry-of-an-item">
+<h3><a class="toc-backref" href="#id14">Display, edit or entry of an item</a></h3>
+<p>Create a new issue with &#8220;create new&#8221; under the issue subheading. This
+will take you to:</p>
+<img alt="_images/new_issue.png" src="_images/new_issue.png" />
+<p>Editing an issue uses the same form, though now you&#8217;ll see attached files
+and messages, and the issue history at the bottom of the page:</p>
+<img alt="_images/edit_issue.png" src="_images/edit_issue.png" />
+</div>
+<div class="section" id="searching-page">
+<h3><a class="toc-backref" href="#id15">Searching Page</a></h3>
+<p>See <a class="reference internal" href="#entering-values-in-your-tracker">entering values in your tracker</a> for an explanation of what you
+may type into the search form.</p>
+<div class="section" id="saving-queries">
+<h4><a class="toc-backref" href="#id16">Saving queries</a></h4>
+<p>You may save queries in the tracker by giving the query a name. Each user
+may only have one query with a given name - if a subsequent search is
+performed with the same query name supplied, then it will edit the
+existing query of the same name.</p>
+<p>Queries may be marked as &#8220;private&#8221;. These queries are only visible to the
+user that created them. If they&#8217;re not marked &#8220;private&#8221; then all other
+users may include the query in their list of &#8220;Your Queries&#8221;. Marking it as
+private at a later date does not affect users already using the query, nor
+does deleting the query.</p>
+<p>If a user subsequently creates or edits a public query, a new personal
+version of that query is made, with the same editing rules as described
+above.</p>
+</div>
+<div class="section" id="under-the-covers">
+<h4><a class="toc-backref" href="#id17">Under the covers</a></h4>
+<p>The searching page converts your selections into the following
+arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Argument</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>&#64;sort</td>
+<td>sort by prop name, optionally preceeded with &#8216;-&#8216; to give
+descending or nothing for ascending sorting. The sort
+argument can have several props separated with comma.</td>
+</tr>
+<tr><td>&#64;group</td>
+<td>group by prop name, optionally preceeded with &#8216;-&#8216; or to sort
+in descending or nothing for ascending order. The group
+argument can have several props separated with comma.</td>
+</tr>
+<tr><td>&#64;columns</td>
+<td>selects the columns that should be displayed. Default is
+all.</td>
+</tr>
+<tr><td>&#64;filter</td>
+<td>indicates which properties are being used in filtering.
+Default is none.</td>
+</tr>
+<tr><td>propname</td>
+<td>selects the values the item properties given by propname must
+have (very basic search/filter).</td>
+</tr>
+<tr><td>&#64;search_text</td>
+<td>performs a full-text search (message bodies, issue titles,
+etc)</td>
+</tr>
+</tbody>
+</table>
+<p>You may manually write URLS that contain these arguments, like so
+(whitespace has been added for clarity):</p>
+<div class="highlight-python"><pre>/issue?status=unread,in-progress,resolved&amp;
+    keyword=security,ui&amp;
+    @group=priority,-status&amp;
+    @sort=-activity&amp;
+    @filters=status,keyword&amp;
+    @columns=title,status,fixer</pre>
+</div>
+</div>
+</div>
+<div class="section" id="access-controls">
+<h3><a class="toc-backref" href="#id18">Access Controls</a></h3>
+<p>User access is controlled through Permissions. These are are grouped
+into Roles, and users have a comma-separated list of Roles assigned to
+them.</p>
+<p>Permissions divide access controls up into answering questions like:</p>
+<ul class="simple">
+<li>may the user edit issues (&#8220;Edit&#8221;, &#8220;issue&#8221;)</li>
+<li>is the user allowed to use the web interface (&#8220;Web Access&#8221;)</li>
+<li>may the user edit other user&#8217;s Roles through the web (&#8220;Web Roles&#8221;)</li>
+</ul>
+<p>Any number of new Permissions and Roles may be created as described in
+the customisation documentation. Examples of new access controls are:</p>
+<ul class="simple">
+<li>only managers may sign off issues as complete</li>
+<li>don&#8217;t give users who register through e-mail web access</li>
+<li>let some users edit the details of all users</li>
+</ul>
+</div>
+</div>
+<div class="section" id="e-mail-gateway">
+<h2><a class="toc-backref" href="#id19">E-Mail Gateway</a></h2>
+<p>Roundup trackers may be used to facilitate e-mail conversations around
+issues. The &#8220;nosy&#8221; list attached to each issue indicates the users who
+should receive e-mail when messages are added to the issue.</p>
+<p>When e-mail comes into a tracker that identifies an issue in the subject
+line, the content of the e-mail is attached to the issue.</p>
+<p>You may even create new issues from e-mail messages.</p>
+<p>E-mail sent to a tracker is examined for several pieces of information:</p>
+<ol class="arabic simple">
+<li><a class="reference internal" href="#subject-line-information">subject-line information</a> identifying the purpose of the e-mail</li>
+<li><a class="reference internal" href="#sender-identification">sender identification</a> using the sender of the message</li>
+<li><a class="reference internal" href="#e-mail-message-content">e-mail message content</a> which is to be extracted</li>
+<li>e-mail attachments which should be associated with the message</li>
+</ol>
+<div class="section" id="subject-line-information">
+<h3><a class="toc-backref" href="#id20">Subject-line information</a></h3>
+<p>The subject line of the incoming message is examined to find one of:</p>
+<ol class="arabic simple">
+<li>the item that the message is responding to,</li>
+<li>the type of item the message should create, or</li>
+<li>we default the item class and try some trickiness</li>
+</ol>
+<p>If the subject line contains a prefix in <tt class="docutils literal"><span class="pre">[square</span> <span class="pre">brackets]</span></tt> then
+we&#8217;re looking at case 1 or 2 above. Any &#8220;re:&#8221; or &#8220;fwd:&#8221; prefixes are
+stripped off the subject line before we start looking for real
+information.</p>
+<p>If an item designator (class name and id number, for example
+<tt class="docutils literal"><span class="pre">issue123</span></tt>) is found there, a new &#8220;msg&#8221; item is added to the
+&#8220;messages&#8221; property for that item, and any new &#8220;file&#8221; items are added to
+the &#8220;files&#8221; property for the item.</p>
+<p>If just an item class name is found there, we attempt to create a new
+item of that class with its &#8220;messages&#8221; property initialized to contain
+the new &#8220;msg&#8221; item and its &#8220;files&#8221; property initialized to contain any
+new &#8220;file&#8221; items.</p>
+<p>The third case above - where no <tt class="docutils literal"><span class="pre">[information]</span></tt> is provided, the
+tracker&#8217;s <tt class="docutils literal"><span class="pre">MAIL_DEFAULT_CLASS</span></tt> configuration variable defines what
+class of item the message relates to. We try to match the subject line
+to an existing item of the default class, and if there&#8217;s a match, the
+message is related to that matched item. If not, then a new item of the
+default class is created.</p>
+<div class="section" id="setting-properties">
+<h4><a class="toc-backref" href="#id21">Setting Properties</a></h4>
+<p>The e-mail interface also provides a simple way to set properties on
+items. At the end of the subject line, propname=value pairs can be
+specified in square brackets, using the same conventions as for the
+roundup set shell command.</p>
+<p>For example,</p>
+<ul>
+<li><p class="first">setting the priority of an issue:</p>
+<div class="highlight-python"><pre>Subject: Re: [issue2] the coffee machine is broken! [priority=urgent]</pre>
+</div>
+</li>
+<li><p class="first">adding yourself to a nosy list:</p>
+<div class="highlight-python"><pre>Subject: Re: [issue2] we're out of widgets [nosy=+richard]</pre>
+</div>
+</li>
+<li><p class="first">setting the nosy list to just you and cliff:</p>
+<div class="highlight-python"><pre>Subject: Re: [issue2] we're out of widgets [nosy=richard,cliff]</pre>
+</div>
+</li>
+<li><p class="first">removing yourself from a nosy list and setting the priority:</p>
+<div class="highlight-python"><pre>Subject: Re: [issue2] we're out of widgets [nosy=-richard;priority=bug]</pre>
+</div>
+</li>
+</ul>
+<p>In all cases, the message relates to issue 2. The <tt class="docutils literal"><span class="pre">Re:</span></tt> prefix is
+stripped off.</p>
+</div>
+<div class="section" id="automatic-properties">
+<h4><a class="toc-backref" href="#id22">Automatic Properties</a></h4>
+<dl class="docutils">
+<dt><strong>status of new issues</strong></dt>
+<dd>When a new message is received that is not identified as being related
+to an existing issue, it creates a new issue. The status of the new
+issue is defaulted to &#8220;unread&#8221;.</dd>
+<dt><strong>reopening of resolved issues</strong></dt>
+<dd>When a message is is received for a resolved issue, the issue status is
+automatically reset to &#8220;chatting&#8221; to indicate new information has been
+received.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="sender-identification">
+<h3><a class="toc-backref" href="#id23">Sender identification</a></h3>
+<p>If the sender of an e-mail is unknown to Roundup (looking up both user
+primary e-mail addresses and their alternate addresses) then a new user
+may be created, depending on tracker configuration (see the <a class="reference external" href="admin_guide.html">Admin
+Guide</a> section &#8220;Users and Security&#8221; for configuration details.)</p>
+<p>The new user will have their username set to the &#8220;user&#8221; part of
+&#8220;<a class="reference external" href="mailto:user&#37;&#52;&#48;domain">user<span>&#64;</span>domain</a>&#8221; in their e-mail address. Their password will be
+completely randomised, and they&#8217;ll have to visit the web interface to
+have it changed. Some sites don&#8217;t allow web access by users who register
+via e-mail like this.</p>
+</div>
+<div class="section" id="e-mail-message-content">
+<h3><a class="toc-backref" href="#id24">E-Mail Message Content</a></h3>
+<p>Roundup only associates plain text (MIME type <tt class="docutils literal"><span class="pre">text/plain</span></tt>) as
+messages for items. Any other parts of a message are associated as
+downloadable files. If no plain text part is found, the message is
+rejected.</p>
+<p>To do this, incoming messages are examined for multiple parts:</p>
+<ul class="simple">
+<li>In a multipart/mixed message or part, each subpart is extracted and
+examined. The text/plain subparts are assembled to form the textual
+body of the message, to be stored in the file associated with a &#8220;msg&#8221;
+class item. Any parts of other types are each stored in separate files
+and given &#8220;file&#8221; class items that are linked to the &#8220;msg&#8221; item.</li>
+<li>In a multipart/alternative message or part, we look for a text/plain
+subpart and ignore the other parts.</li>
+</ul>
+<p>If the message is a response to a previous message, and contains quoted
+sections, then these will be stripped out of the message if the
+<tt class="docutils literal"><span class="pre">EMAIL_KEEP_QUOTED_TEXT</span></tt> configuration variable is set to <tt class="docutils literal"><span class="pre">'no'</span></tt>.</p>
+<div class="section" id="message-summary">
+<h4><a class="toc-backref" href="#id25">Message summary</a></h4>
+<p>The &#8220;summary&#8221; property on message items is taken from the first
+non-quoting section in the message body. The message body is divided
+into sections by blank lines. Sections where the second and all
+subsequent lines begin with a &#8220;&gt;&#8221; or &#8220;|&#8221; character are considered
+&#8220;quoting sections&#8221;. The first line of the first non-quoting section
+becomes the summary of the message.</p>
+</div>
+</div>
+<div class="section" id="address-handling">
+<h3><a class="toc-backref" href="#id26">Address handling</a></h3>
+<p>All of the addresses in the <tt class="docutils literal"><span class="pre">To:</span></tt> and <tt class="docutils literal"><span class="pre">Cc:</span></tt> headers of the incoming
+message are looked up among the tracker users, and the corresponding
+users are placed in the &#8220;recipients&#8221; property on the new &#8220;msg&#8221; item. The
+address in the <tt class="docutils literal"><span class="pre">From:</span></tt> header similarly determines the &#8220;author&#8221;
+property of the new &#8220;msg&#8221; item. The default handling for addresses that
+don&#8217;t have corresponding users is to create new users with no passwords
+and a username equal to the address.</p>
+<p>The addresses mentioned in the <tt class="docutils literal"><span class="pre">To:</span></tt>, <tt class="docutils literal"><span class="pre">From:</span></tt> and <tt class="docutils literal"><span class="pre">Cc:</span></tt> headers of
+the message may be added to the <a class="reference internal" href="#nosy-list">nosy list</a> depending on:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">ADD_AUTHOR_TO_NOSY</span></tt></dt>
+<dd>Does the author of a message get placed on the nosy list automatically?
+If &#8216;new&#8217; is used, then the author will only be added when a message
+creates a new issue. If &#8216;yes&#8217;, then the author will be added on
+followups too. If &#8216;no&#8217;, they&#8217;re never added to the nosy.</dd>
+<dt><tt class="docutils literal"><span class="pre">ADD_RECIPIENTS_TO_NOSY</span></tt></dt>
+<dd>Do the recipients (To:, Cc:) of a message get placed on the nosy list?
+If &#8216;new&#8217; is used, then the recipients will only be added when a message
+creates a new issue. If &#8216;yes&#8217;, then the recipients will be added on
+followups too. If &#8216;no&#8217;, they&#8217;re never added to the nosy.</dd>
+</dl>
+<div class="section" id="nosy-list">
+<h4><a class="toc-backref" href="#id27">Nosy List</a></h4>
+<p>Roundup watches for additions to the &#8220;messages&#8221; property of items.</p>
+<p>When a new message is added, it is sent to all the users on the &#8220;nosy&#8221;
+list for the item that are not already on the &#8220;recipients&#8221; list of the
+message. Those users are then appended to the &#8220;recipients&#8221; property on
+the message, so multiple copies of a message are never sent to the same
+user. The journal recorded by the hyperdatabase on the &#8220;recipients&#8221;
+property then provides a log of when the message was sent to whom.</p>
+<p>If the author of the message is also in the nosy list for the item that
+the message is attached to, then the config var <tt class="docutils literal"><span class="pre">MESSAGES_TO_AUTHOR</span></tt>
+is queried to determine if they get a nosy list copy of the message too.</p>
+</div>
+</div>
+<div class="section" id="mail-gateway-script-command-line">
+<h3><a class="toc-backref" href="#id28">Mail gateway script command line</a></h3>
+<p>Usage:</p>
+<div class="highlight-python"><pre>roundup-mailgw [[-C class] -S field=value]* &lt;instance home&gt; [method]</pre>
+</div>
+<p>The roundup mail gateway may be called in one of three ways:</p>
+<blockquote>
+<ul class="simple">
+<li>with an instance home as the only argument,</li>
+<li>with both an instance home and a mail spool file, or</li>
+<li>with both an instance home and a pop server account.</li>
+</ul>
+</blockquote>
+<p>It also supports optional -C and -S arguments that allows you to set a
+fields for a class created by the roundup-mailgw. The default class if
+not specified is msg, but the other classes: issue, file, user can also
+be used. The -S or &#8211;set options uses the same
+property=value[;property=value] notation accepted by the command line
+roundup command or the commands that can be given on the Subject line of
+an e-mail message.</p>
+<p>It can let you set the type of the message on a per e-mail address basis.</p>
+<dl class="docutils">
+<dt>PIPE:</dt>
+<dd>In the first case, the mail gateway reads a single message from the
+standard input and submits the message to the roundup.mailgw module.</dd>
+<dt>UNIX mailbox:</dt>
+<dd><p class="first">In the second case, the gateway reads all messages from the mail spool
+file and submits each in turn to the roundup.mailgw module. The file is
+emptied once all messages have been successfully handled. The file is
+specified as:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">mailbox</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">mailbox</span>
+</pre></div>
+</div>
+</dd>
+<dt>POP:</dt>
+<dd><p class="first">In the third case, the gateway reads all messages from the POP server
+specified and submits each in turn to the roundup.mailgw module. The
+server is specified as:</p>
+<div class="highlight-python"><pre>pop username:password@server</pre>
+</div>
+<p>The username and password may be omitted:</p>
+<div class="highlight-python"><pre>pop username@server
+pop server</pre>
+</div>
+<p class="last">are both valid. The username and/or password will be prompted for if
+not supplied on the command-line.</p>
+</dd>
+<dt>POPS:</dt>
+<dd><p class="first">Connect to a POP server over ssl. This requires python 2.4 or later.
+This supports the same notation as POP:</p>
+<div class="last highlight-python"><pre>pops username:password@server</pre>
+</div>
+</dd>
+<dt>APOP:</dt>
+<dd><p class="first">Same as POP, but using Authenticated POP:</p>
+<div class="last highlight-python"><pre>apop username:password@server</pre>
+</div>
+</dd>
+<dt>IMAP:</dt>
+<dd><p class="first">Connect to an IMAP server. This supports the same notation as that of
+POP mail:</p>
+<div class="highlight-python"><pre>imap username:password@server</pre>
+</div>
+<p>It also allows you to specify a specific mailbox other than INBOX using
+this format:</p>
+<div class="last highlight-python"><pre>imap username:password@server mailbox</pre>
+</div>
+</dd>
+<dt>IMAPS:</dt>
+<dd><p class="first">Connect to an IMAP server over ssl.
+This supports the same notation as IMAP:</p>
+<div class="last highlight-python"><pre>imaps username:password@server [mailbox]</pre>
+</div>
+</dd>
+<dt>IMAPS_CRAM:</dt>
+<dd><p class="first">Connect to an IMAP server over ssl using CRAM-MD5 authentication.
+This supports the same notation as IMAP:</p>
+<div class="last highlight-python"><pre>imaps_cram username:password@server [mailbox]</pre>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="command-line-tool">
+<h2><a class="toc-backref" href="#id29">Command Line Tool</a></h2>
+<p>The basic usage is:</p>
+<div class="highlight-python"><pre>Usage: roundup-admin [options] [&lt;command&gt; &lt;arguments&gt;]
+
+Options:
+ -i instance home  -- specify the issue tracker "home directory" to administer
+ -u                -- the user[:password] to use for commands
+ -d                -- print full designators not just class id numbers
+ -c                -- when outputting lists of data, comma-separate them.
+              Same as '-S ","'.
+ -S &lt;string&gt;       -- when outputting lists of data, string-separate them
+ -s                -- when outputting lists of data, space-separate them.
+              Same as '-S " "'.
+
+ Only one of -s, -c or -S can be specified.
+
+Help:
+ roundup-admin -h
+ roundup-admin help                       -- this help
+ roundup-admin help &lt;command&gt;             -- command-specific help
+ roundup-admin help all                   -- all available help
+
+Commands:
+ commit
+ create classname property=value ...
+ display designator[,designator]*
+ export [class[,class]] export_dir
+ find classname propname=value ...
+ get property designator[,designator]*
+ help topic
+ history designator
+ import import_dir
+ initialise [adminpw]
+ install [template [backend [admin password]]]
+ list classname [property]
+ pack period | date
+ reindex
+ retire designator[,designator]*
+ rollback
+ security [Role name]
+ set items property=value property=value ...
+ specification classname
+ table classname [property[,property]*]
+Commands may be abbreviated as long as the abbreviation matches only one
+command, e.g. l == li == lis == list.</pre>
+</div>
+<p>All commands (except help) require a tracker specifier. This is just the
+path to the roundup tracker you&#8217;re working with. A roundup tracker is
+where roundup keeps the database and configuration file that defines an
+issue tracker. It may be thought of as the issue tracker&#8217;s &#8220;home
+directory&#8221;. It may be specified in the environment variable
+<tt class="docutils literal"><span class="pre">TRACKER_HOME</span></tt> or on the command line as &#8220;<tt class="docutils literal"><span class="pre">-i</span> <span class="pre">tracker</span></tt>&#8220;.</p>
+<p>A designator is a classname and an itemid concatenated, eg. bug1,
+user10, ... Property values are represented as strings in command
+arguments and in the printed results:</p>
+<ul>
+<li><p class="first">Strings are, well, strings.</p>
+</li>
+<li><p class="first">Password values will display as their encoded value.</p>
+</li>
+<li><p class="first">Date values are printed in the full date format in the local time
+zone, and accepted in the full format or any of the partial formats
+explained below.:</p>
+<div class="highlight-python"><pre>Input of...        Means...
+"2000-04-17.03:45" 2000-04-17.03:45:00
+"2000-04-17"       2000-04-17.00:00:00
+"01-25"            yyyy-01-25.00:00:00
+"08-13.22:13"      yyyy-08-13.22:13:00
+"11-07.09:32:43"   yyyy-11-07.09:32:43
+"14:25"            yyyy-mm-dd.14:25:00
+"8:47:11"          yyyy-mm-dd.08:47:11
+"2003"             2003-01-01.00:00:00
+"2003-04"          2003-04-01.00:00:00
+"."                "right now"</pre>
+</div>
+</li>
+<li><p class="first">Link values are printed as item designators. When given as an
+argument, item designators and key strings are both accepted.</p>
+</li>
+<li><p class="first">Multilink values are printed as lists of item designators joined by
+commas. When given as an argument, item designators and key strings
+are both accepted; an empty string, a single item, or a list of items
+joined by commas is accepted.</p>
+</li>
+</ul>
+<p>When multiple items are specified to the roundup get or roundup set
+commands, the specified properties are retrieved or set on all the
+listed items.  When multiple results are returned by the roundup get or
+roundup find commands, they are printed one per line (default) or joined
+by commas (with the &#8220;<tt class="docutils literal"><span class="pre">-c</span></tt>&#8221; option).</p>
+<p>Where the command changes data, a login name/password is required. The
+login may be specified as either &#8220;<tt class="docutils literal"><span class="pre">name</span></tt>&#8221; or &#8220;<tt class="docutils literal"><span class="pre">name:password</span></tt>&#8220;.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ROUNDUP_LOGIN</span></tt> environment variable</li>
+<li>the &#8220;<tt class="docutils literal"><span class="pre">-u</span></tt>&#8221; command-line option</li>
+</ul>
+<p>If either the name or password is not supplied, they are obtained from
+the command-line.</p>
+<p>When you initialise a new tracker instance you are prompted for the
+admin password. If you want to initialise a tracker non-interactively
+you can put the initialise command and password on the commnd
+line. But this allows others on the host to see the password (using
+the ps command). To initialise a tracker non-interactively without
+exposing the password, create a file (e.g init_tracker) set to mode
+600 (so only the owner can read it) with the contents:</p>
+<blockquote>
+initialise admin_password</blockquote>
+<p>and feed it to roundup-admin on standard input. E.G.</p>
+<blockquote>
+cat init_tracker | roundup-admin -i tracker_dir</blockquote>
+<p>(for more details see <a class="reference external" href="http://issues.roundup-tracker.org/issue2550789">http://issues.roundup-tracker.org/issue2550789</a>.)</p>
+<div class="section" id="using-with-the-shell">
+<h3><a class="toc-backref" href="#id30">Using with the shell</a></h3>
+<p>With version 0.6.0 or newer of roundup (which introduced support for
+multiple designators to display and the -d, -S and -s flags):</p>
+<p>To find all messages regarding chatting issues that contain the word
+&#8220;spam&#8221;, for example, you could execute the following command from the
+directory where the database dumps its files:</p>
+<div class="highlight-python"><pre>shell% for issue in `roundup-admin -ds find issue status=chatting`; do
+&gt; grep -l spam `roundup-admin -ds ' ' get messages $issue`
+&gt; done
+msg23
+msg49
+msg50
+msg61
+shell%</pre>
+</div>
+<p>Or, using the -dc option, this can be written as a single command:</p>
+<div class="highlight-python"><pre>shell% grep -l spam `roundup get messages \
+    \`roundup -dc find issue status=chatting\``
+msg23
+msg49
+msg50
+msg61
+shell%</pre>
+</div>
+<p>You can also display issue contents:</p>
+<div class="highlight-python"><pre>shell% roundup-admin display `roundup-admin -dc get messages \
+           issue3,issue1`
+files: []
+inreplyto: None
+recipients: []
+author: 1
+date: 2003-02-16.21:23:03
+messageid: None
+summary: jkdskldjf
+files: []
+inreplyto: None
+recipients: []
+author: 1
+date: 2003-02-15.01:59:11
+messageid: None
+summary: jlkfjadsf</pre>
+</div>
+<p>or status:</p>
+<div class="highlight-python"><pre>shell% roundup-admin get name `/tools/roundup/bin/roundup-admin \
+      -dc -i /var/roundup/sysadmin get status issue3,issue1`
+unread
+deferred</pre>
+</div>
+<p>or status on a single line:</p>
+<div class="highlight-python"><pre>shell% echo `roundup-admin get name \`/tools/roundup/bin/roundup-admin \
+         -dc -i /var/roundup/sysadmin get status issue3,issue1\``
+unread deferred</pre>
+</div>
+<p>which is the same as:</p>
+<div class="highlight-python"><pre>shell% roundup-admin -s get name `/tools/roundup/bin/roundup-admin \
+         -dc -i /var/roundup/sysadmin get status issue3,issue1`
+unread deferred</pre>
+</div>
+<p>Also the tautological:</p>
+<div class="highlight-python"><pre>shell% roundup-admin get name \
+   `roundup-admin -dc get status \`roundup-admin -dc find issue \
+       status=chatting\``
+chatting
+chatting</pre>
+</div>
+<p>Remember the roundup commands that accept multiple designators accept
+them &#8216;,&#8217; separated so using &#8216;-dc&#8217; is almost always required.</p>
+</div>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="customizing.html" title="Customising Roundup"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Roundup FAQ"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/user_guide.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Roundup - An Issue-Tracking System for Knowledge Workers &amp;mdash; Roundup v1.4 documentation</title>
+    <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+          URL_ROOT:    '#',
+          VERSION:     '1.4',
+          COLLAPSE_MODINDEX: false,
+          FILE_SUFFIX: '.html'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Roundup v1.4 documentation" href="index.html" />
+    <link rel="next" title="Developing Roundup" href="developers.html" />
+    <link rel="prev" title="XML-RPC access to Roundup" href="xmlrpc.html" /> 
+  </head>
+  <body>
+    <div class="header"><h1>Roundup</h1>
+        <div id="searchbox" style="display: none">
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Search" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+        </div>
+        <script type="text/javascript">$('#searchbox').show(0);</script>
+    </div>
+    <div class="navigation">
+      <div class="menu">
+       
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul>
+<li><a class="reference external" href="#">Roundup - An Issue-Tracking System for Knowledge Workers</a><ul>
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#the-layer-cake">The Layer Cake</a></li>
+<li><a class="reference external" href="#hyperdatabase">Hyperdatabase</a><ul>
+<li><a class="reference external" href="#dates-and-date-arithmetic">Dates and Date Arithmetic</a></li>
+<li><a class="reference external" href="#items-and-classes">Items and Classes</a></li>
+<li><a class="reference external" href="#identifiers-and-designators">Identifiers and Designators</a></li>
+<li><a class="reference external" href="#property-names-and-types">Property Names and Types</a></li>
+<li><a class="reference external" href="#hyperdb-interface-specification">Hyperdb Interface Specification</a></li>
+<li><a class="reference external" href="#hyperdatabase-implementations">Hyperdatabase Implementations</a></li>
+<li><a class="reference external" href="#application-example">Application Example</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#roundup-database">Roundup Database</a><ul>
+<li><a class="reference external" href="#reserved-classes">Reserved Classes</a><ul>
+<li><a class="reference external" href="#users">Users</a></li>
+<li><a class="reference external" href="#messages">Messages</a></li>
+<li><a class="reference external" href="#files">Files</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#issue-classes">Issue Classes</a></li>
+<li><a class="reference external" href="#roundupdb-interface-specification">Roundupdb Interface Specification</a></li>
+<li><a class="reference external" href="#default-schema">Default Schema</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#detector-interface">Detector Interface</a><ul>
+<li><a class="reference external" href="#detector-interface-specification">Detector Interface Specification</a></li>
+<li><a class="reference external" href="#detector-example">Detector Example</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#command-interface">Command Interface</a><ul>
+<li><a class="reference external" href="#command-interface-specification">Command Interface Specification</a></li>
+<li><a class="reference external" href="#usage-example">Usage Example</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#e-mail-user-interface">E-mail User Interface</a><ul>
+<li><a class="reference external" href="#message-processing">Message Processing</a></li>
+<li><a class="reference external" href="#nosy-lists">Nosy Lists</a></li>
+<li><a class="reference external" href="#setting-properties">Setting Properties</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#web-user-interface">Web User Interface</a><ul>
+<li><a class="reference external" href="#views-and-view-specifiers">Views and View Specifiers</a></li>
+<li><a class="reference external" href="#displaying-properties">Displaying Properties</a></li>
+<li><a class="reference external" href="#index-views">Index Views</a><ul>
+<li><a class="reference external" href="#index-view-specifiers">Index View Specifiers</a></li>
+<li><a class="reference external" href="#index-section">Index Section</a></li>
+<li><a class="reference external" href="#sorting">Sorting</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#issue-views">Issue Views</a><ul>
+<li><a class="reference external" href="#issue-view-specifiers">Issue View Specifiers</a></li>
+<li><a class="reference external" href="#editor-section">Editor Section</a></li>
+<li><a class="reference external" href="#spool-section">Spool Section</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#access-control">Access Control</a><ul>
+<li><a class="reference external" href="#access-control-interface-specification">Access Control Interface Specification</a></li>
+<li><a class="reference external" href="#authentication-of-users">Authentication of Users</a></li>
+<li><a class="reference external" href="#anonymous-users">Anonymous Users</a></li>
+<li><a class="reference external" href="#use-cases">Use Cases</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#deployment-scenarios">Deployment Scenarios</a></li>
+<li><a class="reference external" href="#acknowledgements">Acknowledgements</a></li>
+<li><a class="reference external" href="#changes-to-this-document">Changes to this document</a></li>
+</ul>
+</li>
+</ul>
+
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="xmlrpc.html"
+                          title="previous chapter">XML-RPC access to Roundup</a></p>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="developers.html"
+                          title="next chapter">Developing Roundup</a></p>
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/design.txt"
+             rel="nofollow">Show Source</a></li>
+    </ul>
+  <div id="searchbox" style="display: none">
+    <h3>Quick search</h3>
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" size="18" />
+        <input type="submit" value="Go" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+      <p style="font-size: 90%">Enter search terms or a module, class or function name.</p>
+  </div>
+  <script type="text/javascript">$('#searchbox').show(0);</script>
+      </div>
+    </div>
+    <div class="content">
+       
+    <div class="related related-top">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="developers.html" title="Developing Roundup"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="xmlrpc.html" title="XML-RPC access to Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+       <div class="section" id="roundup-an-issue-tracking-system-for-knowledge-workers">
+<h1><a class="toc-backref" href="#id2">Roundup - An Issue-Tracking System for Knowledge Workers</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Ka-Ping Yee (original), Richard Jones (implementation)</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#roundup-an-issue-tracking-system-for-knowledge-workers" id="id2">Roundup - An Issue-Tracking System for Knowledge Workers</a><ul>
+<li><a class="reference internal" href="#introduction" id="id3">Introduction</a></li>
+<li><a class="reference internal" href="#the-layer-cake" id="id4">The Layer Cake</a></li>
+<li><a class="reference internal" href="#hyperdatabase" id="id5">Hyperdatabase</a><ul>
+<li><a class="reference internal" href="#dates-and-date-arithmetic" id="id6">Dates and Date Arithmetic</a></li>
+<li><a class="reference internal" href="#items-and-classes" id="id7">Items and Classes</a></li>
+<li><a class="reference internal" href="#identifiers-and-designators" id="id8">Identifiers and Designators</a></li>
+<li><a class="reference internal" href="#property-names-and-types" id="id9">Property Names and Types</a></li>
+<li><a class="reference internal" href="#hyperdb-interface-specification" id="id10">Hyperdb Interface Specification</a></li>
+<li><a class="reference internal" href="#hyperdatabase-implementations" id="id11">Hyperdatabase Implementations</a></li>
+<li><a class="reference internal" href="#application-example" id="id12">Application Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#roundup-database" id="id13">Roundup Database</a><ul>
+<li><a class="reference internal" href="#reserved-classes" id="id14">Reserved Classes</a><ul>
+<li><a class="reference internal" href="#users" id="id15">Users</a></li>
+<li><a class="reference internal" href="#messages" id="id16">Messages</a></li>
+<li><a class="reference internal" href="#files" id="id17">Files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#issue-classes" id="id18">Issue Classes</a></li>
+<li><a class="reference internal" href="#roundupdb-interface-specification" id="id19">Roundupdb Interface Specification</a></li>
+<li><a class="reference internal" href="#default-schema" id="id20">Default Schema</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#detector-interface" id="id21">Detector Interface</a><ul>
+<li><a class="reference internal" href="#detector-interface-specification" id="id22">Detector Interface Specification</a></li>
+<li><a class="reference internal" href="#detector-example" id="id23">Detector Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-interface" id="id24">Command Interface</a><ul>
+<li><a class="reference internal" href="#command-interface-specification" id="id25">Command Interface Specification</a></li>
+<li><a class="reference internal" href="#usage-example" id="id26">Usage Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#e-mail-user-interface" id="id27">E-mail User Interface</a><ul>
+<li><a class="reference internal" href="#message-processing" id="id28">Message Processing</a></li>
+<li><a class="reference internal" href="#nosy-lists" id="id29">Nosy Lists</a></li>
+<li><a class="reference internal" href="#setting-properties" id="id30">Setting Properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#web-user-interface" id="id31">Web User Interface</a><ul>
+<li><a class="reference internal" href="#views-and-view-specifiers" id="id32">Views and View Specifiers</a></li>
+<li><a class="reference internal" href="#displaying-properties" id="id33">Displaying Properties</a></li>
+<li><a class="reference internal" href="#index-views" id="id34">Index Views</a><ul>
+<li><a class="reference internal" href="#index-view-specifiers" id="id35">Index View Specifiers</a></li>
+<li><a class="reference internal" href="#index-section" id="id36">Index Section</a></li>
+<li><a class="reference internal" href="#sorting" id="id37">Sorting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#issue-views" id="id38">Issue Views</a><ul>
+<li><a class="reference internal" href="#issue-view-specifiers" id="id39">Issue View Specifiers</a></li>
+<li><a class="reference internal" href="#editor-section" id="id40">Editor Section</a></li>
+<li><a class="reference internal" href="#spool-section" id="id41">Spool Section</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#access-control" id="id42">Access Control</a><ul>
+<li><a class="reference internal" href="#access-control-interface-specification" id="id43">Access Control Interface Specification</a></li>
+<li><a class="reference internal" href="#authentication-of-users" id="id44">Authentication of Users</a></li>
+<li><a class="reference internal" href="#anonymous-users" id="id45">Anonymous Users</a></li>
+<li><a class="reference internal" href="#use-cases" id="id46">Use Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#deployment-scenarios" id="id47">Deployment Scenarios</a></li>
+<li><a class="reference internal" href="#acknowledgements" id="id48">Acknowledgements</a></li>
+<li><a class="reference internal" href="#changes-to-this-document" id="id49">Changes to this document</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction</a></h2>
+<p>This document presents a description of the components of the Roundup
+system and specifies their interfaces and behaviour in sufficient detail
+to guide an implementation. For the philosophy and rationale behind the
+Roundup design, see the first-round Software Carpentry <a class="reference external" href="spec.html">submission for
+Roundup</a>. This document fleshes out that design as well as specifying
+interfaces so that the components can be developed separately.</p>
+</div>
+<div class="section" id="the-layer-cake">
+<h2><a class="toc-backref" href="#id4">The Layer Cake</a></h2>
+<p>Lots of software design documents come with a picture of a cake.
+Everybody seems to like them.  I also like cakes (I think they are
+tasty).  So I, too, shall include a picture of a cake here:</p>
+<div class="highlight-python"><pre> ________________________________________________________________
+| E-mail Client |  Web Browser  |  Detector Scripts  |   Shell   |
+|---------------+---------------+--------------------+-----------|
+|  E-mail User  |   Web User    |     Detector       |  Command  |
+|----------------------------------------------------------------|
+|                    Roundup Database Layer                      |
+|----------------------------------------------------------------|
+|                     Hyperdatabase Layer                        |
+|----------------------------------------------------------------|
+|                        Storage Layer                           |
+ ----------------------------------------------------------------</pre>
+</div>
+<p>The colourful parts of the cake are part of our system; the faint grey
+parts of the cake are external components.</p>
+<p>I will now proceed to forgo all table manners and eat from the bottom of
+the cake to the top.  You may want to stand back a bit so you don&#8217;t get
+covered in crumbs.</p>
+</div>
+<div class="section" id="hyperdatabase">
+<h2><a class="toc-backref" href="#id5">Hyperdatabase</a></h2>
+<p>The lowest-level component to be implemented is the hyperdatabase. The
+hyperdatabase is a flexible data store that can hold configurable data
+in records which we call items.</p>
+<p>The hyperdatabase is implemented on top of the storage layer, an
+external module for storing its data. The &#8220;batteries-includes&#8221; distribution
+implements the hyperdatabase on the standard anydbm module.  The storage
+layer could be a third-party RDBMS; for a low-maintenance solution,
+implementing the hyperdatabase on the SQLite RDBMS is suggested.</p>
+<div class="section" id="dates-and-date-arithmetic">
+<h3><a class="toc-backref" href="#id6">Dates and Date Arithmetic</a></h3>
+<p>Before we get into the hyperdatabase itself, we need a way of handling
+dates.  The hyperdatabase module provides Timestamp objects for
+representing date-and-time stamps and Interval objects for representing
+date-and-time intervals.</p>
+<p>As strings, date-and-time stamps are specified with the date in ISO8601
+international standard format (<tt class="docutils literal"><span class="pre">yyyy-mm-dd</span></tt>) joined to the time
+(<tt class="docutils literal"><span class="pre">hh:mm:ss</span></tt>) by a period &#8220;<tt class="docutils literal"><span class="pre">.</span></tt>&#8220;.  Dates in this form can be easily
+compared and are fairly readable when printed.  An example of a valid
+stamp is &#8220;<tt class="docutils literal"><span class="pre">2000-06-24.13:03:59</span></tt>&#8220;. We&#8217;ll call this the &#8220;full date
+format&#8221;.  When Timestamp objects are printed as strings, they appear in
+the full date format with the time always given in GMT.  The full date
+format is always exactly 19 characters long.</p>
+<p>For user input, some partial forms are also permitted: the whole time or
+just the seconds may be omitted; and the whole date may be omitted or
+just the year may be omitted.  If the time is given, the time is
+interpreted in the user&#8217;s local time zone. The Date constructor takes
+care of these conversions. In the following examples, suppose that
+<tt class="docutils literal"><span class="pre">yyyy</span></tt> is the current year, <tt class="docutils literal"><span class="pre">mm</span></tt> is the current month, and <tt class="docutils literal"><span class="pre">dd</span></tt> is
+the current day of the month; and suppose that the user is on Eastern
+Standard Time.</p>
+<ul class="simple">
+<li>&#8220;2000-04-17&#8221; means &lt;Date 2000-04-17.00:00:00&gt;</li>
+<li>&#8220;01-25&#8221; means &lt;Date yyyy-01-25.00:00:00&gt;</li>
+<li>&#8220;2000-04-17.03:45&#8221; means &lt;Date 2000-04-17.08:45:00&gt;</li>
+<li>&#8220;08-13.22:13&#8221; means &lt;Date yyyy-08-14.03:13:00&gt;</li>
+<li>&#8220;11-07.09:32:43&#8221; means &lt;Date yyyy-11-07.14:32:43&gt;</li>
+<li>&#8220;14:25&#8221; means &lt;Date yyyy-mm-dd.19:25:00&gt;</li>
+<li>&#8220;8:47:11&#8221; means &lt;Date yyyy-mm-dd.13:47:11&gt;</li>
+<li>the special date &#8220;.&#8221; means &#8220;right now&#8221;</li>
+</ul>
+<p>Date intervals are specified using the suffixes &#8220;y&#8221;, &#8220;m&#8221;, and &#8220;d&#8221;.  The
+suffix &#8220;w&#8221; (for &#8220;week&#8221;) means 7 days. Time intervals are specified in
+hh:mm:ss format (the seconds may be omitted, but the hours and minutes
+may not).</p>
+<ul class="simple">
+<li>&#8220;3y&#8221; means three years</li>
+<li>&#8220;2y 1m&#8221; means two years and one month</li>
+<li>&#8220;1m 25d&#8221; means one month and 25 days</li>
+<li>&#8220;2w 3d&#8221; means two weeks and three days</li>
+<li>&#8220;1d 2:50&#8221; means one day, two hours, and 50 minutes</li>
+<li>&#8220;14:00&#8221; means 14 hours</li>
+<li>&#8220;0:04:33&#8221; means four minutes and 33 seconds</li>
+</ul>
+<p>The Date class should understand simple date expressions of the form
+<em>stamp</em> <tt class="docutils literal"><span class="pre">+</span></tt> <em>interval</em> and <em>stamp</em> <tt class="docutils literal"><span class="pre">-</span></tt> <em>interval</em>. When adding or
+subtracting intervals involving months or years, the components are
+handled separately.  For example, when evaluating &#8220;<tt class="docutils literal"><span class="pre">2000-06-25</span> <span class="pre">+</span> <span class="pre">1m</span>
+<span class="pre">10d</span></tt>&#8220;, we first add one month to get 2000-07-25, then add 10 days to
+get 2000-08-04 (rather than trying to decide whether 1m 10d means 38 or
+40 or 41 days).</p>
+<p>Here is an outline of the Date and Interval classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Date</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct a date given a specification and a time zone</span>
+<span class="sd">        offset.</span>
+
+<span class="sd">        &#39;spec&#39; is a full date or a partial form, with an optional</span>
+<span class="sd">        added or subtracted interval.  &#39;offset&#39; is the local time</span>
+<span class="sd">        zone offset from GMT in hours.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add an interval to this date to produce another date.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subtract an interval from this date to produce another</span>
+<span class="sd">        date.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__cmp__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compare this date to another date.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return this date as a string in the yyyy-mm-dd.hh:mm:ss</span>
+<span class="sd">        format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">local</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return this date as yyyy-mm-dd.hh:mm:ss in a local time</span>
+<span class="sd">        zone.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct an interval given a specification.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__cmp__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compare this interval to another interval.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return this interval as a string.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Here are some examples of how these classes would behave in practice.
+For the following examples, assume that we are on Eastern Standard Time
+and the current local time is 19:34:02 on 25 June 2000:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+<span class="go">&lt;Date 2000-06-26.00:34:02&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">local</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&quot;2000-06-25.19:34:02&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;. + 2d&quot;</span><span class="p">)</span>
+<span class="go">&lt;Date 2000-06-28.00:34:02&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;1997-04-17&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&lt;Date 1997-04-17.00:00:00&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;01-25&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&lt;Date 2000-01-25.00:00:00&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;08-13.22:13&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&lt;Date 2000-08-14.03:13:00&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;14:25&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&lt;Date 2000-06-25.19:25:00&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Interval</span><span class="p">(</span><span class="s">&quot;  3w  1  d  2:00&quot;</span><span class="p">)</span>
+<span class="go">&lt;Interval 22d 2:00&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;. + 2d&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">Interval</span><span class="p">(</span><span class="s">&quot;3w&quot;</span><span class="p">)</span>
+<span class="go">&lt;Date 2000-06-07.00:34:02&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="items-and-classes">
+<h3><a class="toc-backref" href="#id7">Items and Classes</a></h3>
+<p>Items contain data in properties.  To Python, these properties are
+presented as the key-value pairs of a dictionary. Each item belongs to a
+class which defines the names and types of its properties.  The database
+permits the creation and modification of classes as well as items.</p>
+</div>
+<div class="section" id="identifiers-and-designators">
+<h3><a class="toc-backref" href="#id8">Identifiers and Designators</a></h3>
+<p>Each item has a numeric identifier which is unique among items in its
+class.  The items are numbered sequentially within each class in order
+of creation, starting from 1. The designator for an item is a way to
+identify an item in the database, and consists of the name of the item&#8217;s
+class concatenated with the item&#8217;s numeric identifier.</p>
+<p>For example, if &#8220;spam&#8221; and &#8220;eggs&#8221; are classes, the first item created in
+class &#8220;spam&#8221; has id 1 and designator &#8220;spam1&#8221;. The first item created in
+class &#8220;eggs&#8221; also has id 1 but has the distinct designator &#8220;eggs1&#8221;. Item
+designators are conventionally enclosed in square brackets when
+mentioned in plain text.  This permits a casual mention of, say,
+&#8220;[patch37]&#8221; in an e-mail message to be turned into an active hyperlink.</p>
+</div>
+<div class="section" id="property-names-and-types">
+<h3><a class="toc-backref" href="#id9">Property Names and Types</a></h3>
+<p>Property names must begin with a letter.</p>
+<p>A property may be one of five basic types:</p>
+<ul class="simple">
+<li>String properties are for storing arbitrary-length strings.</li>
+<li>Boolean properties are for storing true/false, or yes/no values.</li>
+<li>Number properties are for storing numeric values.</li>
+<li>Date properties store date-and-time stamps. Their values are Timestamp
+objects.</li>
+<li>A Link property refers to a single other item selected from a
+specified class.  The class is part of the property; the value is an
+integer, the id of the chosen item.</li>
+<li>A Multilink property refers to possibly many items in a specified
+class.  The value is a list of integers.</li>
+</ul>
+<p><em>None</em> is also a permitted value for any of these property types.  An
+attempt to store None into a Multilink property stores an empty list.</p>
+<p>A property that is not specified will return as None from a <em>get</em>
+operation.</p>
+</div>
+<div class="section" id="hyperdb-interface-specification">
+<h3><a class="toc-backref" href="#id10">Hyperdb Interface Specification</a></h3>
+<p>TODO: replace the Interface Specifications with links to the pydoc</p>
+<p>The hyperdb module provides property objects to designate the different
+kinds of properties.  These objects are used when specifying what
+properties belong in classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">String</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indexme</span><span class="o">=</span><span class="s">&#39;no&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object designating a String property.&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Boolean</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object designating a Boolean property.&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Number</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object designating a Number property.&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Date</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object designating a Date property.&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Link</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classname</span><span class="p">,</span> <span class="n">do_journal</span><span class="o">=</span><span class="s">&#39;yes&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object designating a Link property that links to</span>
+<span class="sd">        items in a specified class.</span>
+
+<span class="sd">        If the do_journal argument is not &#39;yes&#39; then changes to</span>
+<span class="sd">        the property are not journalled in the linked item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Multilink</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">classname</span><span class="p">,</span> <span class="n">do_journal</span><span class="o">=</span><span class="s">&#39;yes&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An object designating a Multilink property that links</span>
+<span class="sd">        to items in a specified class.</span>
+
+<span class="sd">        If the do_journal argument is not &#39;yes&#39; then changes to</span>
+<span class="sd">        the property are not journalled in the linked item(s).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Here is the interface provided by the hyperdatabase:</p>
+<div class="highlight-python"><pre>class Database:
+    """A database for storing records containing flexible data
+    types.
+    """
+
+    def __init__(self, config, journaltag=None):
+        """Open a hyperdatabase given a specifier to some storage.
+
+        The 'storagelocator' is obtained from config.DATABASE. The
+        meaning of 'storagelocator' depends on the particular
+        implementation of the hyperdatabase.  It could be a file
+        name, a directory path, a socket descriptor for a connection
+        to a database over the network, etc.
+
+        The 'journaltag' is a token that will be attached to the
+        journal entries for any edits done on the database.  If
+        'journaltag' is None, the database is opened in read-only
+        mode: the Class.create(), Class.set(), Class.retire(), and
+        Class.restore() methods are disabled.
+        """
+
+    def __getattr__(self, classname):
+        """A convenient way of calling self.getclass(classname)."""
+
+    def getclasses(self):
+        """Return a list of the names of all existing classes."""
+
+    def getclass(self, classname):
+        """Get the Class object representing a particular class.
+
+        If 'classname' is not a valid class name, a KeyError is
+        raised.
+        """
+
+class Class:
+    """The handle to a particular class of items in a hyperdatabase.
+    """
+
+    def __init__(self, db, classname, **properties):
+        """Create a new class with a given name and property
+        specification.
+
+        'classname' must not collide with the name of an existing
+        class, or a ValueError is raised.  The keyword arguments in
+        'properties' must map names to property objects, or a
+        TypeError is raised.
+
+        A proxied reference to the database is available as the
+        'db' attribute on instances. For example, in
+        'IssueClass.send_message', the following is used to lookup
+        users, messages and files::
+
+            users = self.db.user
+            messages = self.db.msg
+            files = self.db.file
+        """
+
+    # Editing items:
+
+    def create(self, **propvalues):
+        """Create a new item of this class and return its id.
+
+        The keyword arguments in 'propvalues' map property names to
+        values. The values of arguments must be acceptable for the
+        types of their corresponding properties or a TypeError is
+        raised.  If this class has a key property, it must be
+        present and its value must not collide with other key
+        strings or a ValueError is raised.  Any other properties on
+        this class that are missing from the 'propvalues' dictionary
+        are set to None.  If an id in a link or multilink property
+        does not refer to a valid item, an IndexError is raised.
+        """
+
+    def get(self, itemid, propname):
+        """Get the value of a property on an existing item of this
+        class.
+
+        'itemid' must be the id of an existing item of this class or
+        an IndexError is raised.  'propname' must be the name of a
+        property of this class or a KeyError is raised.
+        """
+
+    def set(self, itemid, **propvalues):
+        """Modify a property on an existing item of this class.
+
+        'itemid' must be the id of an existing item of this class or
+        an IndexError is raised.  Each key in 'propvalues' must be
+        the name of a property of this class or a KeyError is
+        raised.  All values in 'propvalues' must be acceptable types
+        for their corresponding properties or a TypeError is raised.
+        If the value of the key property is set, it must not collide
+        with other key strings or a ValueError is raised.  If the
+        value of a Link or Multilink property contains an invalid
+        item id, a ValueError is raised.
+        """
+
+    def retire(self, itemid):
+        """Retire an item.
+
+        The properties on the item remain available from the get()
+        method, and the item's id is never reused.  Retired items
+        are not returned by the find(), list(), or lookup() methods,
+        and other items may reuse the values of their key
+        properties.
+        """
+
+    def restore(self, nodeid):
+    '''Restore a retired node.
+
+    Make node available for all operations like it was before
+    retirement.
+    '''
+
+    def history(self, itemid):
+        """Retrieve the journal of edits on a particular item.
+
+        'itemid' must be the id of an existing item of this class or
+        an IndexError is raised.
+
+        The returned list contains tuples of the form
+
+            (date, tag, action, params)
+
+        'date' is a Timestamp object specifying the time of the
+        change and 'tag' is the journaltag specified when the
+        database was opened. 'action' may be:
+
+            'create' or 'set' -- 'params' is a dictionary of
+                property values
+            'link' or 'unlink' -- 'params' is (classname, itemid,
+                propname)
+            'retire' -- 'params' is None
+        """
+
+    # Locating items:
+
+    def setkey(self, propname):
+        """Select a String property of this class to be the key
+        property.
+
+        'propname' must be the name of a String property of this
+        class or None, or a TypeError is raised.  The values of the
+        key property on all existing items must be unique or a
+        ValueError is raised.
+        """
+
+    def getkey(self):
+        """Return the name of the key property for this class or
+        None.
+        """
+
+    def lookup(self, keyvalue):
+        """Locate a particular item by its key property and return
+        its id.
+
+        If this class has no key property, a TypeError is raised.
+        If the 'keyvalue' matches one of the values for the key
+        property among the items in this class, the matching item's
+        id is returned; otherwise a KeyError is raised.
+        """
+
+    def find(self, **propspec):
+        """Get the ids of items in this class which link to the
+        given items.
+
+        'propspec' consists of keyword args propname=itemid or
+                   propname={&lt;itemid 1&gt;:1, &lt;itemid 2&gt;:1, ...}
+        'propname' must be the name of a property in this class,
+                   or a KeyError is raised.  That property must
+                   be a Link or Multilink property, or a TypeError
+                   is raised.
+
+        Any item in this class whose 'propname' property links to
+        any of the itemids will be returned. Examples::
+
+            db.issue.find(messages='1')
+            db.issue.find(messages={'1':1,'3':1}, files={'7':1})
+        """
+
+    def filter(self, search_matches, filterspec, sort, group):
+        """Return a list of the ids of the active nodes in this class that
+        match the 'filter' spec, sorted by the group spec and then the
+        sort spec.
+
+        "search_matches" is a container type
+
+        "filterspec" is {propname: value(s)}
+
+        "sort" and "group" are [(dir, prop), ...] where dir is '+', '-'
+        or None and prop is a prop name or None. Note that for
+        backward-compatibility reasons a single (dir, prop) tuple is
+        also allowed.
+
+        The filter must match all properties specificed. If the property
+        value to match is a list:
+
+        1. String properties must match all elements in the list, and
+        2. Other properties must match any of the elements in the list.
+
+        The propname in filterspec and prop in a sort/group spec may be
+        transitive, i.e., it may contain properties of the form
+        link.link.link.name, e.g. you can search for all issues where
+        a message was added by a certain user in the last week with a
+        filterspec of
+        {'messages.author' : '42', 'messages.creation' : '.-1w;'}
+        """
+
+    def list(self):
+        """Return a list of the ids of the active items in this
+        class.
+        """
+
+    def count(self):
+        """Get the number of items in this class.
+
+        If the returned integer is 'numitems', the ids of all the
+        items in this class run from 1 to numitems, and numitems+1
+        will be the id of the next item to be created in this class.
+        """
+
+    # Manipulating properties:
+
+    def getprops(self):
+        """Return a dictionary mapping property names to property
+        objects.
+        """
+
+    def addprop(self, **properties):
+        """Add properties to this class.
+
+        The keyword arguments in 'properties' must map names to
+        property objects, or a TypeError is raised.  None of the
+        keys in 'properties' may collide with the names of existing
+        properties, or a ValueError is raised before any properties
+        have been added.
+        """
+
+    def getitem(self, itemid, cache=1):
+        """ Return a Item convenience wrapper for the item.
+
+        'itemid' must be the id of an existing item of this class or
+        an IndexError is raised.
+
+        'cache' indicates whether the transaction cache should be
+        queried for the item. If the item has been modified and you
+        need to determine what its values prior to modification are,
+        you need to set cache=0.
+        """
+
+class Item:
+    """ A convenience wrapper for the given item. It provides a
+    mapping interface to a single item's properties
+    """</pre>
+</div>
+</div>
+<div class="section" id="hyperdatabase-implementations">
+<h3><a class="toc-backref" href="#id11">Hyperdatabase Implementations</a></h3>
+<p>Hyperdatabase implementations exist to create the interface described in
+the <a class="reference internal" href="#hyperdb-interface-specification">hyperdb interface specification</a> over an existing storage
+mechanism. Examples are relational databases, *dbm key-value databases,
+and so on.</p>
+<p>Several implementations are provided - they belong in the
+<tt class="docutils literal"><span class="pre">roundup.backends</span></tt> package.</p>
+</div>
+<div class="section" id="application-example">
+<h3><a class="toc-backref" href="#id12">Application Example</a></h3>
+<p>Here is an example of how the hyperdatabase module would work in
+practice:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hyperdb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">hyperdb</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s">&quot;foo.db&quot;</span><span class="p">,</span> <span class="s">&quot;ping&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span>
+<span class="go">&lt;hyperdb.Database &quot;foo.db&quot; opened by &quot;ping&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;status&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+<span class="go">&lt;hyperdb.Class &quot;status&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;unread&quot;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;in-progress&quot;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;testing&quot;</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;resolved&quot;</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="go">[1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;in-progress&quot;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">retire</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="go">[1, 2, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;issue&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span> <span class="n">status</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">))</span>
+<span class="go">&lt;hyperdb.Class &quot;issue&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;spam&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;eggs&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;ham&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;arguments&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;abuse&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+<span class="gp">... </span><span class="n">password</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+<span class="go">&lt;hyperdb.Class &quot;user&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">addprop</span><span class="p">(</span><span class="n">fixer</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">getprops</span><span class="p">()</span>
+<span class="go">{&quot;title&quot;: &lt;hyperdb.String&gt;, &quot;status&quot;: &lt;hyperdb.Link to &quot;status&quot;&gt;,</span>
+<span class="go"> &quot;user&quot;: &lt;hyperdb.Link to &quot;user&quot;&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&quot;status&quot;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="go">&quot;in-progress&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">&quot;title&quot;</span><span class="p">)</span>
+<span class="go">&quot;abuse&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;in-progress&quot;</span><span class="p">))</span>
+<span class="go">[2, 4, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">history</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">[(&lt;Date 2000-06-28.19:09:43&gt;, &quot;ping&quot;, &quot;create&quot;, {&quot;title&quot;: &quot;abuse&quot;,</span>
+<span class="go">&quot;status&quot;: 1}),</span>
+<span class="go"> (&lt;Date 2000-06-28.19:11:04&gt;, &quot;ping&quot;, &quot;set&quot;, {&quot;status&quot;: 2})]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">history</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[(&lt;Date 2000-06-28.19:09:43&gt;, &quot;ping&quot;, &quot;link&quot;, (&quot;issue&quot;, 5, &quot;status&quot;)),</span>
+<span class="go"> (&lt;Date 2000-06-28.19:11:04&gt;, &quot;ping&quot;, &quot;unlink&quot;, (&quot;issue&quot;, 5, &quot;status&quot;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">history</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[(&lt;Date 2000-06-28.19:11:04&gt;, &quot;ping&quot;, &quot;link&quot;, (&quot;issue&quot;, 5, &quot;status&quot;))]</span>
+</pre></div>
+</div>
+<p>For the purposes of journalling, when a Multilink property is set to a
+new list of items, the hyperdatabase compares the old list to the new
+list. The journal records &#8220;unlink&#8221; events for all the items that appear
+in the old list but not the new list, and &#8220;link&#8221; events for all the
+items that appear in the new list but not in the old list.</p>
+</div>
+</div>
+<div class="section" id="roundup-database">
+<h2><a class="toc-backref" href="#id13">Roundup Database</a></h2>
+<p>The Roundup database layer is implemented on top of the hyperdatabase
+and mediates calls to the database. Some of the classes in the Roundup
+database are considered issue classes. The Roundup database layer adds
+detectors and user items, and on issues it provides mail spools, nosy
+lists, and superseders.</p>
+<div class="section" id="reserved-classes">
+<h3><a class="toc-backref" href="#id14">Reserved Classes</a></h3>
+<p>Internal to this layer we reserve three special classes of items that
+are not issues.</p>
+<div class="section" id="users">
+<h4><a class="toc-backref" href="#id15">Users</a></h4>
+<p>Users are stored in the hyperdatabase as items of class &#8220;user&#8221;.  The
+&#8220;user&#8221; class has the definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">hyperdb</span><span class="o">.</span><span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+                          <span class="n">password</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+                          <span class="n">address</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+<span class="n">db</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="messages">
+<h4><a class="toc-backref" href="#id16">Messages</a></h4>
+<p>E-mail messages are represented by hyperdatabase items of class &#8220;msg&#8221;.
+The actual text content of the messages is stored in separate files.
+(There&#8217;s no advantage to be gained by stuffing them into the
+hyperdatabase, and if messages are stored in ordinary text files, they
+can be grepped from the command line.)  The text of a message is saved
+in a file named after the message item designator (e.g. &#8220;msg23&#8221;) for the
+sake of the command interface (see below).  Attachments are stored
+separately and associated with &#8220;file&#8221; items. The &#8220;msg&#8221; class has the
+definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">hyperdb</span><span class="o">.</span><span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;msg&quot;</span><span class="p">,</span> <span class="n">author</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                         <span class="n">recipients</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                         <span class="n">date</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Date</span><span class="p">(),</span>
+                         <span class="n">summary</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+                         <span class="n">files</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The &#8220;author&#8221; property indicates the author of the message (a &#8220;user&#8221; item
+must exist in the hyperdatabase for any messages that are stored in the
+system). The &#8220;summary&#8221; property contains a summary of the message for
+display in a message index.</p>
+</div>
+<div class="section" id="files">
+<h4><a class="toc-backref" href="#id17">Files</a></h4>
+<p>Submitted files are represented by hyperdatabase items of class &#8220;file&#8221;.
+Like e-mail messages, the file content is stored in files outside the
+database, named after the file item designator (e.g. &#8220;file17&#8221;). The
+&#8220;file&#8221; class has the definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">hyperdb</span><span class="o">.</span><span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                          <span class="n">name</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+                          <span class="nb">type</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The &#8220;user&#8221; property indicates the user who submitted the file, the
+&#8220;name&#8221; property holds the original name of the file, and the &#8220;type&#8221;
+property holds the MIME type of the file as received.</p>
+</div>
+</div>
+<div class="section" id="issue-classes">
+<h3><a class="toc-backref" href="#id18">Issue Classes</a></h3>
+<p>All issues have the following standard properties:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Property</th>
+<th class="head">Definition</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>title</td>
+<td>hyperdb.String()</td>
+</tr>
+<tr><td>messages</td>
+<td>hyperdb.Multilink(&#8220;msg&#8221;)</td>
+</tr>
+<tr><td>files</td>
+<td>hyperdb.Multilink(&#8220;file&#8221;)</td>
+</tr>
+<tr><td>nosy</td>
+<td>hyperdb.Multilink(&#8220;user&#8221;)</td>
+</tr>
+<tr><td>superseder</td>
+<td>hyperdb.Multilink(&#8220;issue&#8221;)</td>
+</tr>
+</tbody>
+</table>
+<p>Also, two Date properties named &#8220;creation&#8221; and &#8220;activity&#8221; are fabricated
+by the Roundup database layer. Two user Link properties, &#8220;creator&#8221; and
+&#8220;actor&#8221; are also fabricated. By &#8220;fabricated&#8221; we mean that no such
+properties are actually stored in the hyperdatabase, but when properties
+on issues are requested, the &#8220;creation&#8221;/&#8221;creator&#8221; and &#8220;activity&#8221;/&#8221;actor&#8221;
+properties are made available. The value of the &#8220;creation&#8221;/&#8221;creator&#8221;
+properties relate to issue creation, and the value of the &#8220;activity&#8221;/
+&#8220;actor&#8221; properties relate to the last editing of any property on the issue
+(equivalently, these are the dates on the first and last records in the
+issue&#8217;s journal).</p>
+</div>
+<div class="section" id="roundupdb-interface-specification">
+<h3><a class="toc-backref" href="#id19">Roundupdb Interface Specification</a></h3>
+<p>The interface to a Roundup database delegates most method calls to the
+hyperdatabase, except for the following changes and additional methods:</p>
+<div class="highlight-python"><pre>class Database:
+    def getuid(self):
+        """Return the id of the "user" item associated with the user
+        that owns this connection to the hyperdatabase."""
+
+class Class:
+    # Overridden methods:
+
+    def create(self, **propvalues):
+    def set(self, **propvalues):
+    def retire(self, itemid):
+        """These operations trigger detectors and can be vetoed.
+        Attempts to modify the "creation", "creator", "activity"
+        properties or "actor" cause a KeyError.
+        """
+
+class IssueClass(Class):
+    # Overridden methods:
+
+    def __init__(self, db, classname, **properties):
+        """The newly-created class automatically includes the
+        "messages", "files", "nosy", and "superseder" properties.
+        If the 'properties' dictionary attempts to specify any of
+        these properties or a "creation", "creator", "activity" or
+        "actor" property, a ValueError is raised."""
+
+    def get(self, itemid, propname):
+    def getprops(self):
+        """In addition to the actual properties on the item, these
+        methods provide the "creation", "creator", "activity" and
+        "actor" properties."""
+
+    # New methods:
+
+    def addmessage(self, itemid, summary, text):
+        """Add a message to an issue's mail spool.
+
+        A new "msg" item is constructed using the current date, the
+        user that owns the database connection as the author, and
+        the specified summary text.  The "files" and "recipients"
+        fields are left empty.  The given text is saved as the body
+        of the message and the item is appended to the "messages"
+        field of the specified issue.
+        """
+
+    def nosymessage(self, itemid, msgid):
+        """Send a message to the members of an issue's nosy list.
+
+        The message is sent only to users on the nosy list who are
+        not already on the "recipients" list for the message.  These
+        users are then added to the message's "recipients" list.
+        """</pre>
+</div>
+</div>
+<div class="section" id="default-schema">
+<h3><a class="toc-backref" href="#id20">Default Schema</a></h3>
+<p>The default schema included with Roundup turns it into a typical
+software bug tracker.  The database is set up like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pri</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;priority&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+            <span class="n">order</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+<span class="n">pri</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="n">pri</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;critical&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">pri</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;urgent&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">pri</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;bug&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">)</span>
+<span class="n">pri</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;feature&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;4&quot;</span><span class="p">)</span>
+<span class="n">pri</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;wish&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="p">)</span>
+
+<span class="n">stat</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;status&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+             <span class="n">order</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">setkey</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;unread&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;deferred&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;chatting&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;need-eg&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;4&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;in-progress&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;testing&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;6&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;done-cbb&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;7&quot;</span><span class="p">)</span>
+<span class="n">stat</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;resolved&quot;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&quot;8&quot;</span><span class="p">)</span>
+
+<span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;keyword&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+
+<span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">&quot;issue&quot;</span><span class="p">,</span> <span class="n">fixer</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">),</span>
+                   <span class="n">keyword</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Multilink</span><span class="p">(</span><span class="s">&quot;keyword&quot;</span><span class="p">),</span>
+                   <span class="n">priority</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;priority&quot;</span><span class="p">),</span>
+                   <span class="n">status</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>(The &#8220;order&#8221; property hasn&#8217;t been explained yet.  It gets used by the
+Web user interface for sorting.)</p>
+<p>The above isn&#8217;t as pretty-looking as the schema specification in the
+first-stage submission, but it could be made just as easy with the
+addition of a convenience function like Choice for setting up the
+&#8220;priority&#8221; and &#8220;status&#8221; classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">Choice</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">options</span><span class="p">):</span>
+    <span class="n">cl</span> <span class="o">=</span> <span class="n">Class</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">(),</span>
+               <span class="n">order</span><span class="o">=</span><span class="n">hyperdb</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)):</span>
+        <span class="n">cl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">option</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">hyperdb</span><span class="o">.</span><span class="n">Link</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="detector-interface">
+<h2><a class="toc-backref" href="#id21">Detector Interface</a></h2>
+<p>Detectors are Python functions that are triggered on certain kinds of
+events.  The definitions of the functions live in Python modules placed
+in a directory set aside for this purpose.  Importing the Roundup
+database module also imports all the modules in this directory, and the
+<tt class="docutils literal"><span class="pre">init()</span></tt> function of each module is called when a database is opened
+to provide it a chance to register its detectors.</p>
+<p>There are two kinds of detectors:</p>
+<ol class="arabic simple">
+<li>an auditor is triggered just before modifying an item</li>
+<li>a reactor is triggered just after an item has been modified</li>
+</ol>
+<p>When the Roundup database is about to perform a <tt class="docutils literal"><span class="pre">create()</span></tt>, <tt class="docutils literal"><span class="pre">set()</span></tt>,
+<tt class="docutils literal"><span class="pre">retire()</span></tt>, or <tt class="docutils literal"><span class="pre">restore</span></tt> operation, it first calls any <em>auditors</em>
+that have been registered for that operation on that class. Any auditor
+may raise a <em>Reject</em> exception to abort the operation.</p>
+<p>If none of the auditors raises an exception, the database proceeds to
+carry out the operation.  After it&#8217;s done, it then calls all of the
+<em>reactors</em> that have been registered for the operation.</p>
+<div class="section" id="detector-interface-specification">
+<h3><a class="toc-backref" href="#id22">Detector Interface Specification</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">audit()</span></tt> and <tt class="docutils literal"><span class="pre">react()</span></tt> methods register detectors on a given
+class of items:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Class</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">audit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">detector</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register an auditor on this class.</span>
+
+<span class="sd">        &#39;event&#39; should be one of &quot;create&quot;, &quot;set&quot;, &quot;retire&quot;, or</span>
+<span class="sd">        &quot;restore&quot;. &#39;detector&#39; should be a function accepting four</span>
+<span class="sd">        arguments. Detectors are called in priority order, execution</span>
+<span class="sd">        order is undefined for detectors with the same priority.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">react</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">detector</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Register a reactor on this class.</span>
+
+<span class="sd">        &#39;event&#39; should be one of &quot;create&quot;, &quot;set&quot;, &quot;retire&quot;, or</span>
+<span class="sd">        &quot;restore&quot;. &#39;detector&#39; should be a function accepting four</span>
+<span class="sd">        arguments. Detectors are called in priority order, execution</span>
+<span class="sd">        order is undefined for detectors with the same priority.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Auditors are called with the arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">audit</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="n">itemid</span><span class="p">,</span> <span class="n">newdata</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">db</span></tt> is the database, <tt class="docutils literal"><span class="pre">cl</span></tt> is an instance of Class or
+IssueClass within the database, and <tt class="docutils literal"><span class="pre">newdata</span></tt> is a dictionary mapping
+property names to values.</p>
+<p>For a <tt class="docutils literal"><span class="pre">create()</span></tt> operation, the <tt class="docutils literal"><span class="pre">itemid</span></tt> argument is None and
+newdata contains all of the initial property values with which the item
+is about to be created.</p>
+<p>For a <tt class="docutils literal"><span class="pre">set()</span></tt> operation, newdata contains only the names and values of
+properties that are about to be changed.</p>
+<p>For a <tt class="docutils literal"><span class="pre">retire()</span></tt> or <tt class="docutils literal"><span class="pre">restore()</span></tt> operation, newdata is None.</p>
+<p>Reactors are called with the arguments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">react</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="n">itemid</span><span class="p">,</span> <span class="n">olddata</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">db</span></tt> is the database, <tt class="docutils literal"><span class="pre">cl</span></tt> is an instance of Class or
+IssueClass within the database, and <tt class="docutils literal"><span class="pre">olddata</span></tt> is a dictionary mapping
+property names to values.</p>
+<p>For a <tt class="docutils literal"><span class="pre">create()</span></tt> operation, the <tt class="docutils literal"><span class="pre">itemid</span></tt> argument is the id of the
+newly-created item and <tt class="docutils literal"><span class="pre">olddata</span></tt> is None.</p>
+<p>For a <tt class="docutils literal"><span class="pre">set()</span></tt> operation, <tt class="docutils literal"><span class="pre">olddata</span></tt> contains the names and previous
+values of properties that were changed.</p>
+<p>For a <tt class="docutils literal"><span class="pre">retire()</span></tt> or <tt class="docutils literal"><span class="pre">restore()</span></tt> operation, <tt class="docutils literal"><span class="pre">itemid</span></tt> is the id of
+the retired or restored item and <tt class="docutils literal"><span class="pre">olddata</span></tt> is None.</p>
+</div>
+<div class="section" id="detector-example">
+<h3><a class="toc-backref" href="#id23">Detector Example</a></h3>
+<p>Here is an example of detectors written for a hypothetical
+project-management application, where users can signal approval of a
+project by adding themselves to an &#8220;approvals&#8221; list, and a project
+proceeds when it has three approvals:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Permit users only to add themselves to the &quot;approvals&quot; list.</span>
+
+<span class="k">def</span> <span class="nf">check_approvals</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">newdata</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">newdata</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;approvals&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="s">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;approved&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Reject</span><span class="p">,</span> <span class="s">&quot;You can&#39;t modify the approvals list &quot;</span> \
+                <span class="s">&quot;for a project that has already been approved.&quot;</span>
+        <span class="n">old</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="s">&quot;approvals&quot;</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">newdata</span><span class="p">[</span><span class="s">&quot;approvals&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">old</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">uid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new</span> <span class="ow">and</span> <span class="n">uid</span> <span class="o">!=</span> <span class="n">db</span><span class="o">.</span><span class="n">getuid</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">Reject</span><span class="p">,</span> <span class="s">&quot;You can&#39;t remove other users from &quot;</span> \
+                    <span class="s">&quot;the approvals list; you can only remove &quot;</span> \
+                    <span class="s">&quot;yourself.&quot;</span>
+        <span class="k">for</span> <span class="n">uid</span> <span class="ow">in</span> <span class="n">new</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">uid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">old</span> <span class="ow">and</span> <span class="n">uid</span> <span class="o">!=</span> <span class="n">db</span><span class="o">.</span><span class="n">getuid</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">Reject</span><span class="p">,</span> <span class="s">&quot;You can&#39;t add other users to the &quot;</span> \
+                    <span class="s">&quot;approvals list; you can only add yourself.&quot;</span>
+
+<span class="c"># When three people have approved a project, change its status from</span>
+<span class="c"># &quot;pending&quot; to &quot;approved&quot;.</span>
+
+<span class="k">def</span> <span class="nf">approve_project</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">cl</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">olddata</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">olddata</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;approvals&quot;</span><span class="p">)</span> <span class="ow">and</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">cl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="s">&quot;approvals&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="s">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;pending&quot;</span><span class="p">):</span>
+            <span class="n">cl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s">&quot;approved&quot;</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s">&quot;set&quot;</span><span class="p">,</span> <span class="n">check_approval</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">react</span><span class="p">(</span><span class="s">&quot;set&quot;</span><span class="p">,</span> <span class="n">approve_project</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is another example of a detector that can allow or prevent the
+creation of new items.  In this scenario, patches for a software project
+are submitted by sending in e-mail with an attached file, and we want to
+ensure that there are text/plain attachments on the message.  The
+maintainer of the package can then apply the patch by setting its status
+to &#8220;applied&#8221;:</p>
+<div class="highlight-python"><pre># Only accept attempts to create new patches that come with patch
+# files.
+
+def check_new_patch(db, cl, id, newdata):
+    if not newdata["files"]:
+        raise Reject, "You can't submit a new patch without " \
+                      "attaching a patch file."
+    for fileid in newdata["files"]:
+        if db.file.get(fileid, "type") != "text/plain":
+            raise Reject, "Submitted patch files must be " \
+                          "text/plain."
+
+# When the status is changed from "approved" to "applied", apply the
+# patch.
+
+def apply_patch(db, cl, id, olddata):
+    if (cl.get(id, "status") == db.status.lookup("applied") and
+        olddata["status"] == db.status.lookup("approved")):
+        # ...apply the patch...
+
+def init(db):
+    db.patch.audit("create", check_new_patch)
+    db.patch.react("set", apply_patch)</pre>
+</div>
+</div>
+</div>
+<div class="section" id="command-interface">
+<h2><a class="toc-backref" href="#id24">Command Interface</a></h2>
+<p>The command interface is a very simple and minimal interface, intended
+only for quick searches and checks from the shell prompt. (Anything more
+interesting can simply be written in Python using the Roundup database
+module.)</p>
+<div class="section" id="command-interface-specification">
+<h3><a class="toc-backref" href="#id25">Command Interface Specification</a></h3>
+<p>A single command, <tt class="docutils literal"><span class="pre">roundup-admin</span></tt>, provides basic access to the hyperdatabase
+from the command line:</p>
+<div class="highlight-python"><pre>roundup-admin help
+roundup-admin get [-list] designator[, designator,...] propname
+roundup-admin set designator[, designator,...] propname=value ...
+roundup-admin find [-list] classname propname=value ...</pre>
+</div>
+<p>See <tt class="docutils literal"><span class="pre">roundup-admin</span> <span class="pre">help</span> <span class="pre">commands</span></tt> for a complete list of commands.</p>
+<p>Property values are represented as strings in command arguments and in
+the printed results:</p>
+<ul class="simple">
+<li>Strings are, well, strings.</li>
+<li>Numbers are displayed the same as strings.</li>
+<li>Booleans are displayed as &#8216;Yes&#8217; or &#8216;No&#8217;.</li>
+<li>Date values are printed in the full date format in the local time
+zone, and accepted in the full format or any of the partial formats
+explained above.</li>
+<li>Link values are printed as item designators.  When given as an
+argument, item designators and key strings are both accepted.</li>
+<li>Multilink values are printed as lists of item designators joined by
+commas.  When given as an argument, item designators and key strings
+are both accepted; an empty string, a single item, or a list of items
+joined by commas is accepted.</li>
+</ul>
+<p>When multiple items are specified to the roundup-admin get or roundup-admin set
+commands, the specified properties are retrieved or set on all the
+listed items.</p>
+<p>When multiple results are returned by the roundup-admin get or
+roundup-admin find
+commands, they are printed one per line (default) or joined by commas
+(with the -list) option.</p>
+</div>
+<div class="section" id="usage-example">
+<h3><a class="toc-backref" href="#id26">Usage Example</a></h3>
+<p>To find all messages regarding in-progress issues that contain the word
+&#8220;spam&#8221;, for example, you could execute the following command from the
+directory where the database dumps its files:</p>
+<div class="highlight-python"><pre>shell% for issue in `roundup-admin find issue status=in-progress`; do
+&gt; grep -l spam `roundup-admin get $issue messages`
+&gt; done
+msg23
+msg49
+msg50
+msg61
+shell%</pre>
+</div>
+<p>Or, using the -list option, this can be written as a single command:</p>
+<div class="highlight-python"><pre>shell% grep -l spam `roundup-admin get \
+    \`roundup-admin find -list issue status=in-progress\` messages`
+msg23
+msg49
+msg50
+msg61
+shell%</pre>
+</div>
+</div>
+</div>
+<div class="section" id="e-mail-user-interface">
+<h2><a class="toc-backref" href="#id27">E-mail User Interface</a></h2>
+<p>The Roundup system must be assigned an e-mail address at which to
+receive mail.  Messages should be piped to the Roundup mail-handling
+script by the mail delivery system (e.g. using an alias beginning with
+&#8220;|&#8221; for sendmail).</p>
+<div class="section" id="message-processing">
+<h3><a class="toc-backref" href="#id28">Message Processing</a></h3>
+<p>Incoming messages are examined for multiple parts. In a multipart/mixed
+message or part, each subpart is extracted and examined.  In a
+multipart/alternative message or part, we look for a text/plain subpart
+and ignore the other parts.  The text/plain subparts are assembled to
+form the textual body of the message, to be stored in the file
+associated with a &#8220;msg&#8221; class item. Any parts of other types are each
+stored in separate files and given &#8220;file&#8221; class items that are linked to
+the &#8220;msg&#8221; item.</p>
+<p>The &#8220;summary&#8221; property on message items is taken from the first
+non-quoting section in the message body. The message body is divided
+into sections by blank lines. Sections where the second and all
+subsequent lines begin with a &#8220;&gt;&#8221; or &#8220;|&#8221; character are considered
+&#8220;quoting sections&#8221;.  The first line of the first non-quoting section
+becomes the summary of the message.</p>
+<p>All of the addresses in the To: and Cc: headers of the incoming message
+are looked up among the user items, and the corresponding users are
+placed in the &#8220;recipients&#8221; property on the new &#8220;msg&#8221; item.  The address
+in the From: header similarly determines the &#8220;author&#8221; property of the
+new &#8220;msg&#8221; item. The default handling for addresses that don&#8217;t have
+corresponding users is to create new users with no passwords and a
+username equal to the address.  (The web interface does not permit
+logins for users with no passwords.)  If we prefer to reject mail from
+outside sources, we can simply register an auditor on the &#8220;user&#8221; class
+that prevents the creation of user items with no passwords.</p>
+<p>The subject line of the incoming message is examined to determine
+whether the message is an attempt to create a new issue or to discuss an
+existing issue.  A designator enclosed in square brackets is sought as
+the first thing on the subject line (after skipping any &#8220;Fwd:&#8221; or &#8220;Re:&#8221;
+prefixes).</p>
+<p>If an issue designator (class name and id number) is found there, the
+newly created &#8220;msg&#8221; item is added to the &#8220;messages&#8221; property for that
+issue, and any new &#8220;file&#8221; items are added to the &#8220;files&#8221; property for
+the issue.</p>
+<p>If just an issue class name is found there, we attempt to create a new
+issue of that class with its &#8220;messages&#8221; property initialized to contain
+the new &#8220;msg&#8221; item and its &#8220;files&#8221; property initialized to contain any
+new &#8220;file&#8221; items.</p>
+<p>Both cases may trigger detectors (in the first case we are calling the
+set() method to add the message to the issue&#8217;s spool; in the second case
+we are calling the create() method to create a new item).  If an auditor
+raises an exception, the original message is bounced back to the sender
+with the explanatory message given in the exception.</p>
+</div>
+<div class="section" id="nosy-lists">
+<h3><a class="toc-backref" href="#id29">Nosy Lists</a></h3>
+<p>A standard detector is provided that watches for additions to the
+&#8220;messages&#8221; property.  When a new message is added, the detector sends it
+to all the users on the &#8220;nosy&#8221; list for the issue that are not already
+on the &#8220;recipients&#8221; list of the message.  Those users are then appended
+to the &#8220;recipients&#8221; property on the message, so multiple copies of a
+message are never sent to the same user.  The journal recorded by the
+hyperdatabase on the &#8220;recipients&#8221; property then provides a log of when
+the message was sent to whom.</p>
+</div>
+<div class="section" id="setting-properties">
+<h3><a class="toc-backref" href="#id30">Setting Properties</a></h3>
+<p>The e-mail interface also provides a simple way to set properties on
+issues.  At the end of the subject line, <tt class="docutils literal"><span class="pre">propname=value</span></tt> pairs can be
+specified in square brackets, using the same conventions as for the
+roundup-admin <tt class="docutils literal"><span class="pre">set</span></tt> shell command.</p>
+</div>
+</div>
+<div class="section" id="web-user-interface">
+<h2><a class="toc-backref" href="#id31">Web User Interface</a></h2>
+<p>The web interface is provided by a CGI script that can be run under any
+web server.  A simple web server can easily be built on the standard
+CGIHTTPServer module, and should also be included in the distribution
+for quick out-of-the-box deployment.</p>
+<p>The user interface is constructed from a number of template files
+containing mostly HTML.  Among the HTML tags in templates are
+interspersed some nonstandard tags, which we use as placeholders to be
+replaced by properties and their values.</p>
+<div class="section" id="views-and-view-specifiers">
+<h3><a class="toc-backref" href="#id32">Views and View Specifiers</a></h3>
+<p>There are two main kinds of views: <em>index</em> views and <em>issue</em> views. An
+index view displays a list of issues of a particular class, optionally
+sorted and filtered as requested.  An issue view presents the properties
+of a particular issue for editing and displays the message spool for the
+issue.</p>
+<p>A view specifier is a string that specifies all the options needed to
+construct a particular view. It goes after the URL to the Roundup CGI
+script or the web server to form the complete URL to a view.  When the
+result of selecting a link or submitting a form takes the user to a new
+view, the Web browser should be redirected to a canonical location
+containing a complete view specifier so that the view can be bookmarked.</p>
+</div>
+<div class="section" id="displaying-properties">
+<h3><a class="toc-backref" href="#id33">Displaying Properties</a></h3>
+<p>Properties appear in the user interface in three contexts: in indices,
+in editors, and as search filters.  For each type of property, there are
+several display possibilities.  For example, in an index view, a string
+property may just be printed as a plain string, but in an editor view,
+that property should be displayed in an editable field.</p>
+<p>The display of a property is handled by functions in the
+<tt class="docutils literal"><span class="pre">cgi.templating</span></tt> module.</p>
+<p>Displayer functions are triggered by <tt class="docutils literal"><span class="pre">tal:content</span></tt> or <tt class="docutils literal"><span class="pre">tal:replace</span></tt>
+tag attributes in templates.  The value of the attribute provides an
+expression for calling the displayer function. For example, the
+occurrence of:</p>
+<div class="highlight-python"><pre>tal:content="context/status/plain"</pre>
+</div>
+<p>in a template triggers a call to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">context</span><span class="p">[</span><span class="s">&#39;status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plain</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>where the context would be an item of the &#8220;issue&#8221; class.  The displayer
+functions can accept extra arguments to further specify details about
+the widgets that should be generated.</p>
+<p>Some of the standard displayer functions include:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>plain</td>
+<td>display a String property directly;
+display a Date property in a specified time zone with an
+option to omit the time from the date stamp; for a Link or
+Multilink property, display the key strings of the linked
+items (or the ids if the linked class has no key property)</td>
+</tr>
+<tr><td>field</td>
+<td>display a property like the plain displayer above, but in a
+text field to be edited</td>
+</tr>
+<tr><td>menu</td>
+<td>for a Link property, display a menu of the available choices</td>
+</tr>
+</tbody>
+</table>
+<p>See the <a class="reference external" href="customizing.html">customisation</a> documentation for the complete list.</p>
+</div>
+<div class="section" id="index-views">
+<h3><a class="toc-backref" href="#id34">Index Views</a></h3>
+<p>An index view contains two sections: a filter section and an index
+section. The filter section provides some widgets for selecting which
+issues appear in the index.  The index section is a table of issues.</p>
+<div class="section" id="index-view-specifiers">
+<h4><a class="toc-backref" href="#id35">Index View Specifiers</a></h4>
+<p>An index view specifier looks like this (whitespace has been added for
+clarity):</p>
+<div class="highlight-python"><pre>/issue?status=unread,in-progress,resolved&amp;
+    keyword=security,ui&amp;
+    :group=priority,-status&amp;
+    :sort=-activity&amp;
+    :filters=status,keyword&amp;
+    :columns=title,status,fixer</pre>
+</div>
+<p>The index view is determined by two parts of the specifier: the layout
+part and the filter part. The layout part consists of the query
+parameters that begin with colons, and it determines the way that the
+properties of selected items are displayed. The filter part consists of
+all the other query parameters, and it determines the criteria by which
+items are selected for display.</p>
+<p>The filter part is interactively manipulated with the form widgets
+displayed in the filter section.  The layout part is interactively
+manipulated by clicking on the column headings in the table.</p>
+<p>The filter part selects the union of the sets of issues with values
+matching any specified Link properties and the intersection of the sets
+of issues with values matching any specified Multilink properties.</p>
+<p>The example specifies an index of &#8220;issue&#8221; items. Only issues with a
+&#8220;status&#8221; of either &#8220;unread&#8221; or &#8220;in-progres&#8221; or &#8220;resolved&#8221; are displayed,
+and only issues with &#8220;keyword&#8221; values including both &#8220;security&#8221; and &#8220;ui&#8221;
+are displayed.  The items are grouped by priority arranged in ascending
+order and in descending order by status; and within groups, sorted by
+activity, arranged in descending order. The filter section shows
+filters for the &#8220;status&#8221; and &#8220;keyword&#8221; properties, and the table includes
+columns for the &#8220;title&#8221;, &#8220;status&#8221;, and &#8220;fixer&#8221; properties.</p>
+<p>Associated with each issue class is a default layout specifier.  The
+layout specifier in the above example is the default layout to be
+provided with the default bug-tracker schema described above in section
+4.4.</p>
+</div>
+<div class="section" id="index-section">
+<h4><a class="toc-backref" href="#id36">Index Section</a></h4>
+<p>The template for an index section describes one row of the index table.
+Fragments protected by a <tt class="docutils literal"><span class="pre">tal:condition=&quot;request/show/&lt;property&gt;&quot;</span></tt> are
+included or omitted depending on whether the view specifier requests a
+column for a particular property. The table cells are filled by the
+<tt class="docutils literal"><span class="pre">tal:content=&quot;context/&lt;property&gt;&quot;</span></tt> directive, which displays the value
+of the property.</p>
+<p>Here&#8217;s a simple example of an index template:</p>
+<div class="highlight-python"><pre>&lt;tr&gt;
+  &lt;td tal:condition="request/show/title"
+      tal:content="contex/title"&gt;&lt;/td&gt;
+  &lt;td tal:condition="request/show/status"
+      tal:content="contex/status"&gt;&lt;/td&gt;
+  &lt;td tal:condition="request/show/fixer"
+      tal:content="contex/fixer"&gt;&lt;/td&gt;
+&lt;/tr&gt;</pre>
+</div>
+</div>
+<div class="section" id="sorting">
+<h4><a class="toc-backref" href="#id37">Sorting</a></h4>
+<p>String and Date values are sorted in the natural way. Link properties
+are sorted according to the value of the &#8220;order&#8221; property on the linked
+items if it is present; or otherwise on the key string of the linked
+items; or finally on the item ids.  Multilink properties are sorted
+according to how many links are present.</p>
+</div>
+</div>
+<div class="section" id="issue-views">
+<h3><a class="toc-backref" href="#id38">Issue Views</a></h3>
+<p>An issue view contains an editor section and a spool section. At the top
+of an issue view, links to superseding and superseded issues are always
+displayed.</p>
+<div class="section" id="issue-view-specifiers">
+<h4><a class="toc-backref" href="#id39">Issue View Specifiers</a></h4>
+<p>An issue view specifier is simply the issue&#8217;s designator:</p>
+<div class="highlight-python"><pre>/patch23</pre>
+</div>
+</div>
+<div class="section" id="editor-section">
+<h4><a class="toc-backref" href="#id40">Editor Section</a></h4>
+<p>The editor section is generated from a template containing
+<tt class="docutils literal"><span class="pre">tal:content=&quot;context/&lt;property&gt;/&lt;widget&gt;&quot;</span></tt> directives to insert the
+appropriate widgets for editing properties.</p>
+<p>Here&#8217;s an example of a basic editor template:</p>
+<div class="highlight-python"><pre>&lt;table&gt;
+&lt;tr&gt;
+    &lt;td colspan=2
+        tal:content="python:context.title.field(size='60')"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td tal:content="context/fixer/field"&gt;&lt;/td&gt;
+    &lt;td tal:content="context/status/menu"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td tal:content="context/nosy/field"&gt;&lt;/td&gt;
+    &lt;td tal:content="context/priority/menu"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td colspan=2&gt;
+      &lt;textarea name=":note" rows=5 cols=60&gt;&lt;/textarea&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</pre>
+</div>
+<p>As shown in the example, the editor template can also include a &#8220;:note&#8221;
+field, which is a text area for entering a note to go along with a
+change.</p>
+<p>When a change is submitted, the system automatically generates a message
+describing the changed properties. The message displays all of the
+property values on the issue and indicates which ones have changed. An
+example of such a message might be this:</p>
+<div class="highlight-python"><pre>title: Polly Parrot is dead
+priority: critical
+status: unread -&gt; in-progress
+fixer: (none)
+keywords: parrot,plumage,perch,nailed,dead</pre>
+</div>
+<p>If a note is given in the &#8220;:note&#8221; field, the note is appended to the
+description.  The message is then added to the issue&#8217;s message spool
+(thus triggering the standard detector to react by sending out this
+message to the nosy list).</p>
+</div>
+<div class="section" id="spool-section">
+<h4><a class="toc-backref" href="#id41">Spool Section</a></h4>
+<p>The spool section lists messages in the issue&#8217;s &#8220;messages&#8221; property.
+The index of messages displays the &#8220;date&#8221;, &#8220;author&#8221;, and &#8220;summary&#8221;
+properties on the message items, and selecting a message takes you to
+its content.</p>
+</div>
+</div>
+</div>
+<div class="section" id="access-control">
+<h2><a class="toc-backref" href="#id42">Access Control</a></h2>
+<p>At each point that requires an action to be performed, the security
+mechanisms are asked if the current user has permission. This permission
+is defined as a Permission.</p>
+<p>Individual assignment of Permission to user is unwieldy. The concept of
+a Role, which encompasses several Permissions and may be assigned to
+many Users, is quite well developed in many projects. Roundup will take
+this path, and allow the multiple assignment of Roles to Users, and
+multiple Permissions to Roles. These definitions are not persistent -
+they&#8217;re defined when the application initialises.</p>
+<p>There will be three levels of Permission. The Class level permissions
+define logical permissions associated with all items of a particular
+class (or all classes). The Item level permissions define logical
+permissions associated with specific items by way of their user-linked
+properties. The Property level permissions define logical permissions
+associated with a specific property of an item.</p>
+<div class="section" id="access-control-interface-specification">
+<h3><a class="toc-backref" href="#id43">Access Control Interface Specification</a></h3>
+<p>The security module defines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Permission</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; Defines a Permission with the attributes</span>
+<span class="sd">        - name</span>
+<span class="sd">        - description</span>
+<span class="sd">        - klass (optional)</span>
+<span class="sd">        - properties (optional)</span>
+<span class="sd">        - check function (optional)</span>
+
+<span class="sd">        The klass may be unset, indicating that this permission is</span>
+<span class="sd">        not locked to a particular hyperdb class. There may be</span>
+<span class="sd">        multiple Permissions for the same name for different</span>
+<span class="sd">        classes.</span>
+
+<span class="sd">        If property names are set, permission is restricted to those</span>
+<span class="sd">        properties only.</span>
+
+<span class="sd">        If check function is set, permission is granted only when</span>
+<span class="sd">        the function returns value interpreted as boolean true.</span>
+<span class="sd">        The function is called with arguments db, userid, itemid.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="k">class</span> <span class="nc">Role</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; Defines a Role with the attributes</span>
+<span class="sd">        - name</span>
+<span class="sd">        - description</span>
+<span class="sd">        - permissions</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="k">class</span> <span class="nc">Security</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Initialise the permission and role stores, and add in</span>
+<span class="sd">            the base roles (for admin user).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">getPermission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">permission</span><span class="p">,</span> <span class="n">classname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+            <span class="n">check</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Find the Permission exactly matching the name, class,</span>
+<span class="sd">            properties list and check function.</span>
+
+<span class="sd">            Raise ValueError if there is no exact match.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">hasPermission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">permission</span><span class="p">,</span> <span class="n">userid</span><span class="p">,</span> <span class="n">classname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+            <span class="nb">property</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">itemid</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Look through all the Roles, and hence Permissions, and</span>
+<span class="sd">            see if &quot;permission&quot; exists given the constraints of</span>
+<span class="sd">            classname, property and itemid.</span>
+
+<span class="sd">            If classname is specified (and only classname) then the</span>
+<span class="sd">            search will match if there is *any* Permission for that</span>
+<span class="sd">            classname, even if the Permission has additional</span>
+<span class="sd">            constraints.</span>
+
+<span class="sd">            If property is specified, the Permission matched must have</span>
+<span class="sd">            either no properties listed or the property must appear in</span>
+<span class="sd">            the list.</span>
+
+<span class="sd">            If itemid is specified, the Permission matched must have</span>
+<span class="sd">            either no check function defined or the check function,</span>
+<span class="sd">            when invoked, must return a True value.</span>
+
+<span class="sd">            Note that this functionality is actually implemented by the</span>
+<span class="sd">            Permission.test() method.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">addPermission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">propspec</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a new Permission with the properties defined in</span>
+<span class="sd">            &#39;propspec&#39;. See the Permission class for the possible</span>
+<span class="sd">            keyword args.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">addRole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">propspec</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Create a new Role with the properties defined in</span>
+<span class="sd">            &#39;propspec&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">addPermissionToRole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rolename</span><span class="p">,</span> <span class="n">permission</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Add the permission to the role&#39;s permission list.</span>
+
+<span class="sd">            &#39;rolename&#39; is the name of the role to add permission to.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>Modules such as <tt class="docutils literal"><span class="pre">cgi/client.py</span></tt> and <tt class="docutils literal"><span class="pre">mailgw.py</span></tt> define their own
+permissions like so (this example is <tt class="docutils literal"><span class="pre">cgi/client.py</span></tt>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">initialiseSecurity</span><span class="p">(</span><span class="n">security</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Create some Permissions and Roles on the security object</span>
+
+<span class="sd">        This function is directly invoked by</span>
+<span class="sd">        security.Security.__init__() as a part of the Security</span>
+<span class="sd">        object instantiation.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Web Registration&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s">&quot;Anonymous users may register through the web&quot;</span><span class="p">)</span>
+    <span class="n">security</span><span class="o">.</span><span class="n">addToRole</span><span class="p">(</span><span class="s">&#39;Anonymous&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Detectors may also define roles in their init() function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="c"># register an auditor that checks that a user has the &quot;May</span>
+    <span class="c"># Resolve&quot; Permission before allowing them to set an issue</span>
+    <span class="c"># status to &quot;resolved&quot;</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s">&#39;set&#39;</span><span class="p">,</span> <span class="n">checkresolvedok</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;May Resolve&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&quot;issue&quot;</span><span class="p">)</span>
+    <span class="n">security</span><span class="o">.</span><span class="n">addToRole</span><span class="p">(</span><span class="s">&#39;Manager&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The tracker dbinit module then has in <tt class="docutils literal"><span class="pre">open()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># open the database - it must be modified to init the Security class</span>
+<span class="c"># from security.py as db.security</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c"># add some extra permissions and associate them with roles</span>
+<span class="n">ei</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&quot;issue&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to edit issues&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">ei</span><span class="p">)</span>
+<span class="n">ai</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermission</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;View&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s">&quot;issue&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s">&quot;User is allowed to access issues&quot;</span><span class="p">)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">addPermissionToRole</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">ai</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the dbinit <tt class="docutils literal"><span class="pre">init()</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># create the two default users</span>
+<span class="n">user</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">&quot;admin&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">Password</span><span class="p">(</span><span class="n">adminpw</span><span class="p">),</span>
+            <span class="n">address</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">ADMIN_EMAIL</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="s">&#39;Admin&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="s">&#39;Anonymous&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then in the code that matters, calls to <tt class="docutils literal"><span class="pre">hasPermission</span></tt> and
+<tt class="docutils literal"><span class="pre">hasItemPermission</span></tt> are made to determine if the user has permission
+to perform some action:</p>
+<div class="highlight-python"><pre>if db.security.hasPermission('issue', 'Edit', userid):
+    # all ok
+
+if db.security.hasItemPermission('issue', itemid,
+                                 assignedto=userid):
+    # all ok</pre>
+</div>
+<p>Code in the core will make use of these methods, as should code in
+auditors in custom templates. The HTML templating may access the access
+controls through the <em>user</em> attribute of the <em>request</em> variable. It
+exposes a <tt class="docutils literal"><span class="pre">hasPermission()</span></tt> method:</p>
+<div class="highlight-python"><pre>tal:condition="python:request.user.hasPermission('Edit', 'issue')"</pre>
+</div>
+<p>or, if the <em>context</em> is <em>issue</em>, then the following is the same:</p>
+<div class="highlight-python"><pre>tal:condition="python:request.user.hasPermission('Edit')"</pre>
+</div>
+</div>
+<div class="section" id="authentication-of-users">
+<h3><a class="toc-backref" href="#id44">Authentication of Users</a></h3>
+<p>Users must be authenticated correctly for the above controls to work.
+This is not done in the current mail gateway at all. Use of digital
+signing of messages could alleviate this problem.</p>
+<p>The exact mechanism of registering the digital signature should be
+flexible, with perhaps a level of trust. Users who supply their
+signature through their first message into the tracker should be at a
+lower level of trust to those who supply their signature to an admin for
+submission to their user details.</p>
+</div>
+<div class="section" id="anonymous-users">
+<h3><a class="toc-backref" href="#id45">Anonymous Users</a></h3>
+<p>The &#8220;anonymous&#8221; user must always exist, and defines the access
+permissions for anonymous users. Unknown users accessing Roundup through
+the web or email interfaces will be logged in as the &#8220;anonymous&#8221; user.</p>
+</div>
+<div class="section" id="use-cases">
+<h3><a class="toc-backref" href="#id46">Use Cases</a></h3>
+<dl class="docutils">
+<dt>public - end users can submit bugs, request new features, request</dt>
+<dd>support
+The Users would be given the default &#8220;User&#8221; Role which gives &#8220;View&#8221;
+and &#8220;Edit&#8221; Permission to the &#8220;issue&#8221; class.</dd>
+<dt>developer - developers can fix bugs, implement new features, provide</dt>
+<dd>support
+A new Role &#8220;Developer&#8221; is created with the Permission &#8220;Fixer&#8221; which
+is checked for in custom auditors that see whether the issue is
+being resolved with a particular resolution (&#8220;fixed&#8221;, &#8220;implemented&#8221;,
+&#8220;supported&#8221;) and allows that resolution only if the permission is
+available.</dd>
+<dt>manager - approvers/managers can approve new features and signoff bug</dt>
+<dd>fixes
+A new Role &#8220;Manager&#8221; is created with the Permission &#8220;Signoff&#8221; which
+is checked for in custom auditors that see whether the issue status
+is being changed similar to the developer example. admin -
+administrators can add users and set user&#8217;s roles The existing Role
+&#8220;Admin&#8221; has the Permissions &#8220;Edit&#8221; for all classes (including
+&#8220;user&#8221;) and &#8220;Web Roles&#8221; which allow the desired actions.</dd>
+<dt>system - automated request handlers running various report/escalation</dt>
+<dd>scripts
+A combination of existing and new Roles, Permissions and auditors
+could be used here.</dd>
+<dt>privacy - issues that are only visible to some users</dt>
+<dd>A new property is added to the issue which marks the user or group
+of users who are allowed to view and edit the issue. An auditor will
+check for edit access, and the template user object can check for
+view access.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="deployment-scenarios">
+<h2><a class="toc-backref" href="#id47">Deployment Scenarios</a></h2>
+<p>The design described above should be general enough to permit the use of
+Roundup for bug tracking, managing projects, managing patches, or
+holding discussions.  By using items of multiple types, one could deploy
+a system that maintains requirement specifications, catalogs bugs, and
+manages submitted patches, where patches could be linked to the bugs and
+requirements they address.</p>
+</div>
+<div class="section" id="acknowledgements">
+<h2><a class="toc-backref" href="#id48">Acknowledgements</a></h2>
+<p>My thanks are due to Christy Heyl for reviewing and contributing
+suggestions to this paper and motivating me to get it done, and to Jesse
+Vincent, Mark Miller, Christopher Simons, Jeff Dunmall, Wayne Gramlich,
+and Dean Tribble for their assistance with the first-round submission.</p>
+</div>
+<div class="section" id="changes-to-this-document">
+<h2><a class="toc-backref" href="#id49">Changes to this document</a></h2>
+<ul class="simple">
+<li>Added Boolean and Number types</li>
+<li>Added section Hyperdatabase Implementations</li>
+<li>&#8220;Item&#8221; has been renamed to &#8220;Issue&#8221; to account for the more specific
+nature of the Class.</li>
+<li>New Templating</li>
+<li>Access Controls</li>
+<li>Added &#8220;actor&#8221; property</li>
+</ul>
+</div>
+</div>
+
+       
+    <div class="related related-bottom">
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="developers.html" title="Developing Roundup"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="xmlrpc.html" title="XML-RPC access to Roundup"
+             accesskey="P">previous</a></li>
+        <li><a href="index.html">Roundup v1.4 documentation</a></li> 
+      </ul>
+    </div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009, Richard Jones.
+        <p class="source"><a href="_sources/design.txt" rel="nofollow">source</a></p>
+    </div>
+  </body>
+</html>

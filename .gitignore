@@ -2,4 +2,6 @@
 
 
 *.pyc
+
 tracker/db/db
+tracker/db/files/*

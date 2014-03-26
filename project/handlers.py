@@ -1,3 +1,4 @@
+import re
 import tornado
 import tornado.web
 
@@ -18,7 +19,7 @@ class User(object):
         return self.db.security.hasPermission(perm,self.uid,item)
 
     def is_view_ok(self,item,itemid):
-        if self.itemid:
+        if itemid:
             return self.db.security.hasPermission('View',self.uid,item,None,itemid)
 
         return self.db.security.hasPermission('View',self.uid,item)
@@ -82,12 +83,12 @@ class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
         self.set_secure_cookie("user",self.username)
 
         ## web context
-        user =  User(self.db,self.username)
+        self.user =  User(self.db,self.username)
         
         # default context object
         self.context = {
-            'user': user,
-            'context': Context(user,"issue"),
+            'user': self.user,
+            'context': Context(self.user,"issue"),
             'login_url': self.get_login_url(),
             'ok_message': self.get_flash_message("ok"),
             'error_message': self.get_flash_message("error"),
@@ -95,7 +96,6 @@ class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
     def on_finish(self):
         self.db.close()
-
 
 
 class IndexHandler(SetupHandler):
@@ -110,12 +110,22 @@ class APIHandler(SetupHandler):
         print path, self.path_args,self.path_kwargs
         print self.request.arguments, self.request.uri, self.request.path
 
-        if path == "index":
-
+        if path == "list":
             return self.render("modules/issue.list.html",**self.context)
-        else:
-            self.write("hello world")
 
+
+        dre=re.compile(r'([^\d]+)0*(\d+)')
+        match = dre.match(path)
+        if match:
+            group = match.groups()
+            item = group[0]
+            itemid = group[1]
+
+            # update context
+            self.context['context'] = Context(self.user,item,itemid)
+            print item
+            print "%s.html"%item
+            return self.render("modules/" + "%s.html"%item,**self.context)
 
 class AuthHandler(SetupHandler):
 

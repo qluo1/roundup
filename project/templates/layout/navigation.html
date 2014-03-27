@@ -1,6 +1,6 @@
 {% if user.hasPermission('View', 'query') %}
   <p>
-    <b>{{ i18n.gettext('Your Queries') }}</b> (<a href="query?@template=edit">{{ i18n.gettext('edit') }}</a>)
+    <b>{{ i18n.gettext('Your Queries') }}</b> (<a id="js-edit-query" href="#">{{ i18n.gettext('edit') }}</a>)
   </p>
 {% end %}
 
@@ -11,7 +11,7 @@
     </li>
     {% if user.hasPermission('Create', 'issue') %}
       <li>
-        <a href="new?@template=issue">{{ i18n.gettext('Create New') }}</a>
+        <a id="js-new-issue" href="#">{{ i18n.gettext('Create New') }}</a>
       </li>
     {% end %}
 
@@ -19,17 +19,17 @@
       <a href="">{{ i18n.gettext('Show Unassigned') }}</a>
     </li>
     <li>
-      <a href="">{{ i18n.gettext('Show All') }}</a>
+      <a id="js-show-all" href="#">{{ i18n.gettext('Show All') }}</a>
     </li>
     <li>
-      <a href="issue?@template=search">{{ i18n.gettext('Search') }}</a>
+      <a id="js-search" href="#">{{ i18n.gettext('Search') }}</a>
     </li>
     <li>
-      <form method="POST" class='form-inline' action="{{ "request.base" }}">
-        <input type="hidden" name="@type" value="issue">
-        <input type="hidden" name="@action" value="show">
-        <input class="input-mini" type="text" name="@number">
+      <form id="js-show-issue" class='form-inline' role="form">
+        <div class="form-group">
+        <input class="form-control input-sm" type="text" name="@number">
         <input type="submit" class="btn btn-primary btn-sm" value="{{ i18n.gettext('Show issue') }}">
+        </div>
       </form>
     </li>
   </ul>

@@ -5,3 +5,5 @@
 
 tracker/db/db
 tracker/db/files/*
+tracker/outgoing-mail.out
+node_modules

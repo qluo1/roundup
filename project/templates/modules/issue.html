@@ -2,7 +2,7 @@
 {% from uihelper import * %}
 {% if context.is_view_ok() %}
   {% if context.is_edit_ok() %}
-    <form role="form" name ="input" action="issue{{context.id}}" method="POST">
+    <form enctype="multipart/form-data" role="form" name ="input" action="issue{{context.id}}">
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" name="@title" id="title" value="{{context.title}}">

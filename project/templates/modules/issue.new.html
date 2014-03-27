@@ -1,0 +1,39 @@
+{% from roundup import i18n%}
+{% from uihelper import * %}
+{% if context.is_view_ok() %}
+    <form enctype="multipart/form-data" role="form" name ="input" action="#">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="@title" id="title" placeholder="Enter issue title to unique identify the issue.">
+      </div>
+
+      <div class='row'>
+      <div class="col-xs-3">
+        <label for='status'>status</label>
+        {% raw status_html_select(context.status) %}
+      </div>
+      <div class="col-xs-3">
+        <label for='priority'>priority</label>
+        {% raw priority_html_select(context.priority) %}
+      </div>
+      <div class="col-xs-3">
+        <label for='assignto'>assignTo</label>
+        {% raw user_html_select(context.assignedto) %}
+      </div>
+      </div>
+      <!-- Note -->
+      <div class='form-group'>
+        <label for='note'>{{ i18n.gettext('Note') }}</label>
+          <textarea name="@note" rows="5" class='form-control' id='note' placeholder="Enter description of the issue"></textarea>
+      </div>
+      <!-- File upload -->
+      <div class='form-group'>
+        <label for='file_upload'>{{ i18n.gettext('File') }}</label>
+          <input type="file" class='form-control' name="@file" id='file_upload'/>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% else %}
+  "You don't have premissiont to crate new issue!"
+{% end %}
+

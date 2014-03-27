@@ -2,6 +2,7 @@ import re
 import tornado
 import tornado.web
 
+from roundup.date import Date
 from utils.helper import FlashMessageMixin, NodeProxy
 
 class User(object):
@@ -113,6 +114,8 @@ class APIHandler(SetupHandler):
         if path == "list":
             return self.render("modules/issue.list.html",**self.context)
 
+        if path == "new":
+            return self.render("modules/issue.new.html",**self.context)
 
         dre=re.compile(r'([^\d]+)0*(\d+)')
         match = dre.match(path)
@@ -126,6 +129,39 @@ class APIHandler(SetupHandler):
             print item
             print "%s.html"%item
             return self.render("modules/" + "%s.html"%item,**self.context)
+
+    def post(self,path):
+
+        if path =="new":
+
+            args = self.request.arguments
+            print args
+
+            if args.get('@title') and args.get('@note') and args.get('@status') and args.get('@priority'):
+                title = args['@title'][0]
+                note = args['@note'][0]
+                status = args['@status'][0]
+                pri = args['@priority'][0]
+                assignedto = args['@user'][0]
+
+                # message
+                msg_ = self.db.msg.create(content=note, summary=title,
+                author=self.uid,date=Date())
+                # new issue
+                new_ = self.db.issue.create(title=title,status=status,
+                            priority=pri,messages=[msg_],
+                            assignedto=assignedto)
+
+                # add attached file
+                if self.request.files:
+                    file1 = self.request.files['@file'][0]
+                    body = file1['body']
+                    file_= self.db.file.create(name=file1['filename'],content=body)
+                    self.db.issue.set(new_,files=[file_])
+                
+                self.db.commit()
+                return self.write({"status":"ok","id": new_});
+
 
 class AuthHandler(SetupHandler):
 

@@ -251,6 +251,6 @@ var uiFlashMessage = flight.component(function(){
 dataMain.attachTo(document);
 uiMain.attachTo("#ui",{});
 uiMenu.attachTo(".navigation");
-uiFlashMessage.attachTo("#flashMessage");
+uiFlashMessage.attachTo(document);
 // enable debug logging
 DEBUG.events.logAll();

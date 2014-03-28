@@ -5,79 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="customized roundup tracker">
     <meta name="viewport" content="width=device-width">
-    <title>Qunit test run </title>
+    <title>uiFlash unit test</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
   </head>
   <body>
 
-  <script id="flashTemplate" type="text/x-handlebars-template">
-    <p class='alert {{style}} alert-dismissable'>
-      <button type='button' class='close' data-dismiss='alert'>&times;</button>
-    <strong>{{message}}</strong>
-  </p>
-
-  </script>
 
   <div id="flashMessage">
-
   </div>
 
   <button id="ok">OK </button>
   <button id="error"> ERROR </button>
   <script src="../js/jquery/jquery-1.10.2.js"></script>
+  <script src="../js/bootstrap/bootstrap.js"></script>
   <script src="../js/es5-shim.min.js"></script>
   <script src="../js/flight.js"></script>
   <script src="../js/handlebar-1.1.2.js"></script>
+  <script src="../apps/uiFlashMessage.js"></script>
   <!-- tet scripts -->
 
   <script>
-    var source = $("#flashTemplate").html();
-    var template = Handlebars.compile(source);
-    var uiFlashMessage = flight.component(function()
-    {
-      this.defaultAttrs({
-        msgboard: '#flashMessage',
-        msg:      '#flashMessage > p'
-      });
 
-      this.template = template;
-
-      this.flash_message = function(html,timeout) {
-
-        $(this.attr.msgboard).hide().append(html).slideDown(500);
-        var that = this;
-        setTimeout(function(){
-          $(that.attr.msg).slideToggle().remove();
-        },timeout);
-
-      }
-      this.ok_message = function(ev,data){
-        var context = {
-          style: 'alert-success',
-          message: data.msg
-        }
-        var html = this.template(context);
-        this.flash_message(html,3000);
-
-      }
-
-      this.error_message = function(ev,data){
-        var context = {
-          style: 'alert-danger',
-          message: data.msg
-        }
-        var html = this.template(context);
-        this.flash_message(html,3000);
-      }
-
-      this.after("initialize",function(){
-        this.on(document,"ok",this.ok_message);
-        this.on(document,"error",this.error_message);
-      });
-      
-    });
-
-
-    uiFlashMessage.attachTo(document);
+  uiFlashMessage.attachTo(document);
 
   $(function(){
 

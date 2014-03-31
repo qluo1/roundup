@@ -202,6 +202,13 @@ var uiMenu = flight.component(function(){
 });
 
 
+/* load app templates */
+var args = {
+    path : '/static/apps/templates.hbs',
+    sync : true
+}
+Handlebars.Loader.load(args);
+
 dataMain.attachTo(document);
 uiMain.attachTo("#ui",{});
 uiMenu.attachTo(".navigation");

@@ -5,11 +5,10 @@
  
         //script type of handle bar template
         TYPE: "text/x-handlebars-template",
-         //Handlebar identifier attribute
+        //Handlebar identifier attribute
         NAME: "data-template-name",
-         //Template Store.
+        //Template Store.
         _store: {},
- 
  
         //Get the template from template store
         get: function(templateName, context){
@@ -64,7 +63,6 @@
             );
             //Cleanup DOM once processed
             handlebarTemplate.remove();
- 
             return template;
         }
  
@@ -110,12 +108,4 @@
                 });
         }
     }
-
-    /* load all templates for the app */ 
-    var args = {
-      path: "../apps/templates.hbs",
-      sync: true
-    }
-    Handlebars.Loader.load(args);
-
 })(window.Handlebars, jQuery);

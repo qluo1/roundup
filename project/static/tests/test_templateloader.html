@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="customized roundup tracker">
     <meta name="viewport" content="width=device-width">
-    <title>uiFlash unit test</title>
+    <title>Handlebars template loader unit test</title>
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
   </head>
@@ -27,10 +27,16 @@
   <!-- tet scripts -->
 
   <script>
+    /* load all templates for the app */ 
+    var args = {
+      path: "../apps/templates.hbs",
+      sync: true
+    }
+    Handlebars.Loader.load(args);
 
     var test = Handlebars.Templates.get("testTemplate",{username:"sxljb016"});
     console.log(test);
-
+    $("#flashMessage").append(test);
   </script>
 
   </body>

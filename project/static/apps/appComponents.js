@@ -50,7 +50,7 @@ var dataMain = flight.component(function(){
         $.post(url,data.data, function(data){
             console.log("return:" + data);
             that.trigger("loadIssuelist",{});
-            that.trigger("okMessage",{msg:"new issue[" + data.id + "] added"});
+            that.trigger("ok",{msg:"new issue[" + data.id + "] added"});
         });
         console.log("posting new issue in data comp:" + data.data);
         
@@ -68,17 +68,16 @@ var dataMain = flight.component(function(){
     });
 });
 
-
 var uiMain = flight.component(function() {
 
     /* attrs*/
     this.defaultAttrs({
         /*selector*/
-        issueSelector:     "#ui_issue",
-        issueNewSelector:  "#ui_new",
-        issueListSelector: "#ui_list",
+        issueSelector:      "#ui_issue",
+        issueNewSelector:   "#ui_new",
+        issueListSelector:  "#ui_list",
         
-        itemSelector:      "#ui_list a",
+        itemSelector:       "#ui_list a",
         itemSubmitSelector: "#ui_issue > form",
         itemNewSubmitSelector: "#ui_new > form"
     });
@@ -143,9 +142,7 @@ var uiMain = flight.component(function() {
         this.on(document,'dataIssueNew',this.renderIssueNew);
 
     });
-
 });
-
 
 var uiMenu = flight.component(function(){
 
@@ -195,62 +192,18 @@ var uiMenu = flight.component(function(){
 
             "editQuerySelector": this.editQuery,
             "newIssueSelector": this.newIssue,
-            "showAllSelector": this.showAll,
+            "showAllSelector": this.showAll
+        });
+
+        this.on("submit",{
             "showIssueSelector": this.showIssue
         });
     })
-
 });
 
-
-var uiFlashMessage = flight.component(function(){
-
-    this.defaultAttrs({
-        okSelector: ".alert-success",
-        okMsgSelector: ".alert-success > strong",
-        errSelector: ".alert-danger",
-        errMsgSelector: ".alert-danger > strong"
-    });
-
-
-    this.okMessage = function(ev,data){
-        console.log("okMessage:" + data.msg);
-        // this.select(this.attr.errSelector).hide();
-        // this.select(this.attr.okSelector).show();
-        // this.select(this.attr.okMsgSelector).text(data.msg);
-        $(".alert-danger").hide();
-        $(".alert-success > strong").text(data.msg);
-        $(".alert-success").slideDown();
-
-        setTimeout(function(){
-            $(".alert-success").slideToggle();
-        },3000);
-
-    }
-
-    this.errMessage = function(ev,data){
-        console.log("errMessage:" + data.msg);
-        $(".alert-success").hide();
-        $(".alert-danger").show();
-        $(".alert-danger > strong").text(data.msg);
-
-        setTimeout(function(){
-            $(".alert-danger").fadeIn();
-        },3000);
-    }
-
-    this.after("initialize",function(){
-
-        this.on(document,"okMessage",this.okMessage);
-        this.on(document,"errorMessage",this.errMessage);
-        $(".alert").hide();
-    });
-
-});
 
 dataMain.attachTo(document);
 uiMain.attachTo("#ui",{});
 uiMenu.attachTo(".navigation");
-uiFlashMessage.attachTo(document);
 // enable debug logging
-DEBUG.events.logAll();
+// DEBUG.events.logAll();

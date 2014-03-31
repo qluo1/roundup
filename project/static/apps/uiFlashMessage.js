@@ -2,7 +2,7 @@ var uiFlashMessage = flight.component(function()
 {
   this.defaultAttrs({
     msgboard: '#flashMessage',
-    msg:      '#flashMessage > p'
+    msg:      '#flashMessage > p',
   });
 
   var source = "<p class='alert {{style}} alert-dismissable'>\
@@ -42,6 +42,10 @@ var uiFlashMessage = flight.component(function()
   this.after("initialize",function(){
     this.on(document,"ok",this.ok_message);
     this.on(document,"error",this.error_message);
+
   });
   
 });
+
+uiFlashMessage.attachTo(document);
+

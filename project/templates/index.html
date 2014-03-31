@@ -1,18 +1,9 @@
-{% extends layout\layout.html %}
+{% extends layout/layout.html %}
 
 
 
 {% block content %}
 <div class="row" id="flashMessage">
-	<p class='alert alert-danger alert-dismissable'>
-	  <button type='button' class='close' data-dismiss='alert'>&times;</button>
-	  <strong></strong>
-	</p>
-
-	<p class='alert alert-success alert-dismissable'>
-	  <button type='button' class='close' data-dismiss='alert'>&times;</button>
-	  <strong></strong>
-	</p>
 </div>
 <div class="row" id="ui">
 	<div id="ui_list"></div>
@@ -22,5 +13,6 @@
 {% end %}
 
 {% block extrajs %} 
+  	<script src="{{static_url('apps/uiFlashMessage.js')}}"></script>
     <script src="{{static_url('apps/appComponents.js') }}"></script>
 {% end %}

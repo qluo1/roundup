@@ -6,7 +6,8 @@ var dataMain = flight.component(function(){
         priority: "",
         url_issueList: "/api/list",
         url_issue: "/api",
-        url_issue_new: "/api/new"
+        url_issue_new: "/api/new",
+        url_issue_search: "/api/search"
     });
 
     this.loadIssuelist = function() {
@@ -47,13 +48,31 @@ var dataMain = flight.component(function(){
     this.postNewIssue = function(ev,data){
         var url = this.attr.url_issue_new;
         var that = this;
-        $.post(url,data.data, function(data){
-            console.log("return:" + data);
+        $.post(url,data.data, function(out){
+            console.log("return:" + out);
             that.trigger("loadIssuelist",{});
-            that.trigger("ok",{msg:"new issue[" + data.id + "] added"});
+            that.trigger("ok",{msg:"new issue[" + out.id + "] added"});
         });
         console.log("posting new issue in data comp:" + data.data);
         
+    }
+
+    this.loadSearch = function(ev,data){
+        var url = this.attr.url_issue_search;
+        var that = this;
+        $.get(url,function(data){
+            that.trigger("dataSearch",{html:data});
+        });
+    }
+
+    this.postItemSearch = function(ev,data){
+        var url = this.attr.url_issue_search;
+        var that = this;
+        $.post(url,data.data,function(out){
+            console.log("search return: " + out);
+            that.trigger("dataSearchItems",{html:data});
+        });
+
     }
 
     this.after("initialize",function(){
@@ -62,6 +81,8 @@ var dataMain = flight.component(function(){
         this.on(document,"loadIssue",this.loadIssue);
         this.on(document,"uiNewIssue",this.loadNewIssue);
         this.on(document,"uiPostNewIssue",this.postNewIssue);
+        this.on(document,"uiSearch",this.loadSearch);
+        this.on(document,"uiSearchItems",this.postItemSearch);
 
         /* kick start load issues*/
         this.trigger("loadIssuelist",{});
@@ -124,6 +145,12 @@ var uiMain = flight.component(function() {
         this.select("issueNewSelector").html(data.html);
     }
 
+    this.hide = function(ev,data){
+        this.select("issueListSelector").html("");
+        this.select('issueSelector').html("");
+        this.select("issueNewSelector").html("");
+    }
+
     this.after('initialize',function(){
 
         this.on('click', {
@@ -140,6 +167,7 @@ var uiMain = flight.component(function() {
         this.on(document,'dataIssueList',this.renderIssueList);
         this.on(document,'dataIssue',this.renderIssue);
         this.on(document,'dataIssueNew',this.renderIssueNew);
+        this.on(document,'dataSearch',this.hide);
 
     });
 });
@@ -151,7 +179,8 @@ var uiMenu = flight.component(function(){
         editQuerySelector: "#js-edit-query",
         newIssueSelector: "#js-new-issue",
         showAllSelector: "#js-show-all",
-        showIssueSelector: "#js-show-issue"
+        showIssueSelector: "#js-show-issue",
+        searchSelector: "#js-search"
     });
 
 
@@ -186,13 +215,20 @@ var uiMenu = flight.component(function(){
         ev.preventDefault();
     }
 
+    this.search = function(ev,data){
+        console.log("search issue");
+        this.trigger("uiSearch",{});
+        ev.preventDefault();
+    }
+
     this.after("initialize",function(){
 
         this.on("click",{
 
             "editQuerySelector": this.editQuery,
             "newIssueSelector": this.newIssue,
-            "showAllSelector": this.showAll
+            "showAllSelector": this.showAll,
+            "searchSelector": this.search
         });
 
         this.on("submit",{
@@ -212,5 +248,5 @@ Handlebars.Loader.load(args);
 dataMain.attachTo(document);
 uiMain.attachTo("#ui",{});
 uiMenu.attachTo(".navigation");
-// enable debug logging
+// enable debug logging 
 // DEBUG.events.logAll();

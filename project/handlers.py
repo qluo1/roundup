@@ -107,6 +107,10 @@ class IndexHandler(SetupHandler):
         self.render("index.html",**self.context)
 
 class APIHandler(SetupHandler):
+    """ 
+        for ajax call
+    """
+
     def get(self,path):
         print path, self.path_args,self.path_kwargs
         print self.request.arguments, self.request.uri, self.request.path
@@ -116,6 +120,9 @@ class APIHandler(SetupHandler):
 
         if path == "new":
             return self.render("modules/issue.new.html",**self.context)
+
+        if path == "search":
+            return self.render("modules/issue.search.html",**self.context)
 
         dre=re.compile(r'([^\d]+)0*(\d+)')
         match = dre.match(path)
@@ -132,10 +139,10 @@ class APIHandler(SetupHandler):
 
     def post(self,path):
 
-        if path =="new":
+        args = self.request.arguments
+        print args
 
-            args = self.request.arguments
-            print args
+        if path =="new":
 
             if args.get('@title') and args.get('@note') and args.get('@status') and args.get('@priority'):
                 title = args['@title'][0]
@@ -161,6 +168,11 @@ class APIHandler(SetupHandler):
                 
                 self.db.commit()
                 return self.write({"status":"ok","id": new_});
+
+
+        if path == "search":
+            """ search items """
+
 
 
 class AuthHandler(SetupHandler):

@@ -1,0 +1,45 @@
+{% from roundup import i18n%}
+{% from uihelper import * %}
+{% if context.is_view_ok() %}
+    <form role="form" name ="input" action="#">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="@title" id="title" placeholder="search title">
+      </div>
+
+      <div class='row'>
+        <div class="col-xs-3">
+          <label for='status'>status</label>
+          {% raw status_html_select_search(context.status) %}
+        </div>
+        <div class="col-xs-3">
+          <label for='priority'>priority</label>
+          {% raw priority_html_select_search(context.priority) %}
+        </div>
+        <div class="col-xs-3">
+          <label for='assignto'>assignTo</label>
+          {% raw user_html_select_search(context.assignedto) %}
+        </div>
+        <div class="col-xs-3">
+          <label for='creator'>creator</label>
+          {% raw user_html_select_search(context.creator) %}
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class="col-xs-3">
+          <label for='from date'>Creation date from</label>
+          <input type="text" class="form-control" name="fromDate" id="fromDate" placeholder="">
+        </div>
+        <div class="col-xs-3">
+          <label for='priority'>Creation date to</label>
+          <input type="text" class="form-control" name="toDate" id="toDate" placeholder="">
+        </div>
+      </div>
+
+      <button id="search" type="submit" class="btn btn-primary">Search</button>
+    </form>
+{% else %}
+  "You don't have premissiont to crate new issue!"
+{% end %}
+

@@ -1,4 +1,5 @@
-roundup=1.5.0
+roundup==1.5.0
 tornado
 jinja2
+whoosh
 

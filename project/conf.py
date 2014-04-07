@@ -8,6 +8,8 @@ TRACKER_HOME = os.path.join(ROOT,"tracker")
 
 ROUNDUP_HOME = os.path.join(ROOT,"roundup")
 
+INDEX_HOME = os.path.join(ROOT,"index")
+
 if ROUNDUP_HOME not in sys.path:
 	sys.path.append(ROUNDUP_HOME)
 

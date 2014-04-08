@@ -1,0 +1,29 @@
+{% from roundup import i18n%}
+{% from uihelper import * %}
+{% if context.is_view_ok() %}
+
+  {% if pagination.has_prev % }
+    <a href="{{ "url_for_other_page(pagination.page-1)" }}">Previous &raquo;</a>
+  {% end %}
+
+  {% for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+      {% else %}
+        <strong>{{ page }}</strong>
+      {% end %}
+    {% else %}
+      <span>…</span>
+    {% end %}
+  {% end %}
+
+  {% if pagination.has_next % }
+    <a href="{{ "url_for_other_page(pagination.page + 1)" }}">Next &raquo;</a>
+  {% end %}
+
+
+{% else %}
+  "You don't have premissiont to crate new issue!"
+{% end %}
+

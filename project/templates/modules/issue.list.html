@@ -1,6 +1,6 @@
 {% from roundup import i18n%}
 {% if context.is_view_ok %}
-  {% if context.list() %}
+  {% if context.list(page) %}
     <table class='table'>
       <tr class='info'>
         <td>{{ i18n.gettext('Priority') }}</td>
@@ -25,6 +25,9 @@
         </tr>
       {% end %}
     </table>
+
+  {% include "pagination.html" %}
+  
   {% else %}
     <p class='text-error'>{{ i18n.gettext('There are no issue yet!') }}</p>
   {% end %}

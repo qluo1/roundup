@@ -4,6 +4,7 @@ import tornado.web
 
 from roundup.date import Date
 from utils.helper import FlashMessageMixin, NodeProxy
+from utils.pagination import Pagination
 
 class User(object):
 
@@ -28,6 +29,8 @@ class User(object):
     def is_edit_ok(self,item,itemid):
         return self.db.security.hasPermission('Edit',self.uid,item,None,itemid)
 
+
+PAGE_SIZE = 10
 class Context(object):
 
     def __init__(self,user,item,itemid=None):
@@ -38,6 +41,13 @@ class Context(object):
         self.db = user.db
         self.item = item
         self.itemid = itemid
+        self.pagination = None
+        self.page = None
+
+        if not itemid:
+            kls = self.db.getclass(item)
+            self.pagination = Pagination(1,PAGE_SIZE,kls.count())
+
 
     def is_view_ok(self):
         """ """
@@ -49,10 +59,10 @@ class Context(object):
             return self.user.is_edit_ok(self.item,self.itemid)
         return False
 
-    def list(self):
+    def list(self,page=1):
         if not self.itemid:
             kl = self.db.getclass(self.item)
-            return [ NodeProxy(kl.getnode(i)) for i in kl.list()]
+            return [NodeProxy(kl.getnode(i)) for i in kl.list()][(page-1)*PAGE_SIZE : page*PAGE_SIZE]
     
     def filter(self,filterspec):
         """
@@ -104,6 +114,7 @@ class IndexHandler(SetupHandler):
     def get(self):
 
         print self.path_args, self.path_kwargs
+        self.context['page'] = 1
         self.render("index.html",**self.context)
 
 class APIHandler(SetupHandler):
@@ -115,13 +126,20 @@ class APIHandler(SetupHandler):
         print path, self.path_args,self.path_kwargs
         print self.request.arguments, self.request.uri, self.request.path
 
+        args = self.request.arguments
+
         if path == "list":
+            self.context['page'] = args.get('page',1)
+            print "context ->",self.context
             return self.render("modules/issue.list.html",**self.context)
 
         if path == "new":
             return self.render("modules/issue.new.html",**self.context)
 
         if path == "search":
+            page = args.get('page',1)
+            self.context['page'] = page
+
             return self.render("modules/issue.search.html",**self.context)
 
         dre=re.compile(r'([^\d]+)0*(\d+)')
@@ -172,6 +190,7 @@ class APIHandler(SetupHandler):
 
         if path == "search":
             """ search items """
+
 
 
 

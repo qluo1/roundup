@@ -1,4 +1,5 @@
 import os.path
+from datetime import datetime as DT
 import whoosh
 from whoosh.index import create_in,open_dir
 from whoosh.qparser import QueryParser,MultifieldParser
@@ -8,9 +9,9 @@ from .conf import INDEX_HOME
 from .conf import TRACKER
 
 
-schema = Schema(title=TEXT(stored=True),issueId=ID(unique=True,stored=True),
-				status=ID(), priority=ID(),assignedto=ID(store=True),
-				creator=ID(stored=True),msg=TEXT,createAt=DATETIME)
+schema = Schema(title=TEXT(stored=True),issueId=ID(unique=True,stored=True,sortable=True),
+				status=ID(), priority=ID(),assignedto=ID(stored=True),
+				creator=ID(stored=True),msg=TEXT,createAt=DATETIME(sortable=True))
 
 def build_index(rebuild=False):
 	""" 
@@ -34,26 +35,30 @@ def build_index(rebuild=False):
 
 		if rebuild:
 			writer.delete_by_term('issueId',unicode(node.id))
-
+		createAt = DT.strptime(node.creation.formal(),"%Y-%m-%d.%H:%M:%S")
 		writer.add_document(title=unicode(node.title),issueId=unicode(node.id),
 					status=unicode(node.status),priority=unicode(node.priority),
 					assignedto=unicode(node.assignedto),
-					creator=unicode(node.creator),msg=unicode(messages))
+					creator=unicode(node.creator),msg=unicode(messages),createAt=createAt)
 
 	writer.commit()
 
-def search_index(querystring):
+def search_index(querystring,page=1):
 	"""
 	"""
 	ix = open_dir(INDEX_HOME)
-	qp = MultifieldParser(["creator","title","msg"],schema=schema)
+	qp = MultifieldParser(["creator","title","msg","createAt"],schema=schema)
 	user_q = qp.parse(querystring)
+	total = 0
 	with  ix.searcher() as searcher:
-		results = searcher.search(user_q)
-		print results
-		for i in results:
-			print i
-
+		results = searcher.search_page(user_q,page)
+		# debug 
+		# print results.pagenum, results.pagecount, results.pagelen
+		# print("Showing results %d-%d of %d"
+		#     		% (results.offset + 1, results.offset + results.pagelen ,len(results)))
+		# for i in results:
+		# 	print i
+		return results
 
 def add_issue(issueId):
 	""" 
@@ -73,20 +78,40 @@ def add_issue(issueId):
 		indexed_issues = set([i['issueId'] for i in searcher.all_stored_fields()])
 		if unicode(node.id) in indexed_issues:
 			writer.delete_by_term('issueId',unicode(node.id))
+		
+		createAt = DT.strptime(node.creation.formal(),"%Y-%m-%d.%H:%M:%S")
 		# add issue
 		writer.add_document(title=unicode(node.title),issueId=unicode(node.id),
 					status=unicode(node.status),priority=unicode(node.priority),
 					assignedto=unicode(node.assignedto),
-					creator=unicode(node.creator),msg=unicode(messages))
+					creator=unicode(node.creator),msg=unicode(messages),createAt=createAt)
 
+		writer.commit()
 
 if __name__ == "__main__":
 	build_index()
 
 	build_index(True)
 
+	print "search msg AND title AND creator"
 	search_index("msg:Test AND title:issue AND creator:4")
 
-	search_index("creator:4")
+	print "search creator"
+	search_index("creator:4",3)
+
+	print "search status"
+
+	search_index("status:3")
+
+	print "search priority"
+
+	search_index("priority:3")
+
+	print "search createAt"
+
+	search_index("createAt:201403")
 
 
+	print "search createAt range"
+
+	search_index("createAt:[20140328 to 20140405]")

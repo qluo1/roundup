@@ -14,12 +14,14 @@ var uiSearchFrom = flight.component (function(){
 	this.render = function (ev,data) {
 
 		if (this.attr.hide){
-			// hide previous search result
-			$(this.attr.ui_search).children().hide().remove();	
-			// hide search form 
-			$(this.attr.uiSearchFormSelector).hide().remove();
-			// show search form
-			$(this.attr.uiSearchSelector).append(data.html).show();
+			if ($(this.attr.uiSearchResult).html() == undefined) {
+				/* no previous result, show new search form*/
+				$(this.attr.uiSearchSelector).append(data.html).show();
+
+			}else{
+				/* show old search result*/
+				$(this.attr.uiSearchSelector).show();
+			}
 			this.attr.hide = false;
 		}
 	}
@@ -35,8 +37,8 @@ var uiSearchFrom = flight.component (function(){
 	this.searchResult = function(ev,data){
 
 		if (!this.attr.hide){
-			//remove previous search result
-			$(this.attr.uiSearchResult).children().hide().remove();
+			/*remove previous search result*/
+			$(this.attr.uiSearchResult).html("");
 			$(this.attr.uiSearchResult).append(data.html).show();
 		}
 	}
@@ -44,15 +46,14 @@ var uiSearchFrom = flight.component (function(){
 	this.hideSearch = function(ev,data){
 		
 		if (!this.attr.hide) {
-			/* remove search */
-			$(this.attr.uiSearchSelector).html("");
+			/* hide current search */
+			$(this.attr.uiSearchSelector).hide();
 			this.attr.hide = true;
 		}
 	}
 
 	this.clickSearchItem = function(ev,data){
 
-		alert("clicked:" + ev.target.pathname);
 		this.trigger("loadIssue",{item: ev.target.pathname});
 		ev.preventDefault();
 

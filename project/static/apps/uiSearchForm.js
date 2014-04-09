@@ -5,7 +5,8 @@ var uiSearchFrom = flight.component (function(){
 		uiSearchSelector: "#ui_search",
 		uiSearchFormSelector: "#ui_search > form",
 		uiSearchSubmit: "#search",
-		uiSearchResult: "#ui_search #search_result",
+		uiSearchResult: "#ui_search > #search_result",
+		uiClickSearchItem: "#ui_search > #search_result a",
 		hide: true
 
 	});
@@ -13,7 +14,11 @@ var uiSearchFrom = flight.component (function(){
 	this.render = function (ev,data) {
 
 		if (this.attr.hide){
+			// hide previous search result
+			$(this.attr.ui_search).children().hide().remove();	
+			// hide search form 
 			$(this.attr.uiSearchFormSelector).hide().remove();
+			// show search form
 			$(this.attr.uiSearchSelector).append(data.html).show();
 			this.attr.hide = false;
 		}
@@ -30,7 +35,8 @@ var uiSearchFrom = flight.component (function(){
 	this.searchResult = function(ev,data){
 
 		if (!this.attr.hide){
-			$(this.attr.uiSearchResult).children().hide().remove()
+			//remove previous search result
+			$(this.attr.uiSearchResult).children().hide().remove();
 			$(this.attr.uiSearchResult).append(data.html).show();
 		}
 	}
@@ -38,9 +44,18 @@ var uiSearchFrom = flight.component (function(){
 	this.hideSearch = function(ev,data){
 		
 		if (!this.attr.hide) {
-			$(this.attr.uiSearchFormSelector).hide().remove();	
+			/* remove search */
+			$(this.attr.uiSearchSelector).html("");
 			this.attr.hide = true;
 		}
+	}
+
+	this.clickSearchItem = function(ev,data){
+
+		alert("clicked:" + ev.target.pathname);
+		this.trigger("loadIssue",{item: ev.target.pathname});
+		ev.preventDefault();
+
 	}
 
 	this.after("initialize",function(){
@@ -52,6 +67,7 @@ var uiSearchFrom = flight.component (function(){
 
 		this.on('click', {
 			'uiSearchSubmit': this.submitSearch,
+			'uiClickSearchItem': this.clickSearchItem
 		});
 
 	});

@@ -1,8 +1,7 @@
 {% from roundup import i18n%}
 {% from uihelper import * %}
+<div id="results" class="row">
 {% if context.is_view_ok() %}
-
-  <div class="row">
   {% if context.list(page) %}
   <table class='table'>
     <tr class='info'>
@@ -39,9 +38,8 @@
   {% else %}
     <p> No results found </p>
   {% end %}
-  </div>
 
 {% else %}
-  "You don't have premissiont to crate new issue!"
+  <p>"You don't have premissiont to crate new issue!"</p>
 {% end %}
-
+</div>

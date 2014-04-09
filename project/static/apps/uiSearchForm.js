@@ -5,6 +5,7 @@ var uiSearchFrom = flight.component (function(){
 		uiSearchSelector: "#ui_search",
 		uiSearchFormSelector: "#ui_search > form",
 		uiSearchSubmit: "#search",
+		uiSearchResult: "#ui_search #search_result",
 		hide: true
 
 	});
@@ -26,6 +27,14 @@ var uiSearchFrom = flight.component (function(){
 		ev.preventDefault();
 	}
 
+	this.searchResult = function(ev,data){
+
+		if (!this.attr.hide){
+			$(this.attr.uiSearchResult).children().hide().remove()
+			$(this.attr.uiSearchResult).append(data.html).show();
+		}
+	}
+
 	this.hideSearch = function(ev,data){
 		
 		if (!this.attr.hide) {
@@ -39,9 +48,10 @@ var uiSearchFrom = flight.component (function(){
 		this.on(document,"dataSearch", this.render);
         this.on(document,"loadIssuelist",this.hideSearch);
         this.on(document,"loadIssue",this.hideSearch);
+        this.on(document,'dataSearchResult', this.searchResult);
 
 		this.on('click', {
-			'uiSearchSubmit': this.submitSearch
+			'uiSearchSubmit': this.submitSearch,
 		});
 
 	});

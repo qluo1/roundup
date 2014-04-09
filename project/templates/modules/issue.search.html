@@ -40,14 +40,9 @@
       <button id="search" type="submit" class="btn btn-primary">Search</button>
     </form>
 
-    {{ results }}
+    <div id="search_result">
 
-    {% comment results here ? %}
-    {% if results is not None%}
-      {% for r in results %}
-        {{r}}
-      {% end %}
-    {% end %}
+    </div>
 
 {% else %}
   "You don't have premissiont to crate new issue!"

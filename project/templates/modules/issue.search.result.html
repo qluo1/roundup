@@ -2,26 +2,44 @@
 {% from uihelper import * %}
 {% if context.is_view_ok() %}
 
-  {% if pagination.has_prev % }
-    <a href="{{ "url_for_other_page(pagination.page-1)" }}">Previous &raquo;</a>
-  {% end %}
-
-  {% for page in pagination.iter_pages() %}
-    {% if page %}
-      {% if page != pagination.page %}
-        <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
-      {% else %}
-        <strong>{{ page }}</strong>
-      {% end %}
-    {% else %}
-      <span>…</span>
+  <div class="row">
+  {% if context.list(page) %}
+  <table class='table'>
+    <tr class='info'>
+      <td>{{ i18n.gettext('Priority') }}</td>
+      <td>{{ i18n.gettext('ID') }}</td>
+      <td>{{ i18n.gettext('Title') }}</td>
+      <td>{{ i18n.gettext('Activity') }}</td>
+      <td>{{ i18n.gettext('Status') }}</td>
+      <td>{{ i18n.gettext('Creator') }}</td>
+      <td>{{ i18n.gettext('Assigned To') }}</td>
+    </tr>
+    {% for issue in context.list(page) %}
+      <tr>
+       <td>{{ issue.priority }}</td>
+       <td>{{ issue.id }}</td>
+       <td>
+        <a href='issue{{ issue.id }}'>{{ issue.title }}</a>
+       </td>
+       <td>{{ issue.activity }}</td>
+       <td>{{ issue.status }}</td>
+       <td>{{ issue.creator }}</td>
+       <td>{{ issue.assignedto}}</td>
+      </tr>
     {% end %}
-  {% end %}
+  </table>
 
-  {% if pagination.has_next % }
-    <a href="{{ "url_for_other_page(pagination.page + 1)" }}">Next &raquo;</a>
-  {% end %}
+  <ul class="pagination" data-id="search">
+    {% include "pagination.html" %}
+  </ul>
 
+  <script type="text/javascript">
+    uiPagination.attachTo(".pagination");
+  </script>
+  {% else %}
+    <p> No results found </p>
+  {% end %}
+  </div>
 
 {% else %}
   "You don't have premissiont to crate new issue!"

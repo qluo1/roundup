@@ -75,8 +75,8 @@ var dataMain = flight.component(function(){
         var url = this.attr.url_issue_search;
         var that = this;
         $.post(url,data.data,function(out){
-            console.log("search return: " + out);
-            that.trigger("dataSearchItems",{html:data});
+            // console.log("search return: " + out);
+            that.trigger(document,"dataSearchResult",{html:out});
         });
 
     }

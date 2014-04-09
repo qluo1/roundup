@@ -1,10 +1,13 @@
-{% if context.pagination.has_prev %}
-  <li> <a href="#" data-id="{{ context.pagination.page - 1}}">Previous &raquo;</a> </li>
+{% set pagination = context.pagination%}
+
+{% if pagination.has_prev %}
+  <li> <a href="#" data-id="{{ pagination.page - 1}}">Previous &raquo;</a> </li>
 {% end %}
 
-{% for _page in context.pagination.iter_pages() %}
+
+{% for _page in pagination.iter_pages() %}
   {% if _page %}
-    {% if _page != context.pagination.page %}
+    {% if _page != pagination.page %}
       <li> <a href="#" data-id="{{_page}}">{{ _page }}</a> </li>
     {% else %}
       <li class="active"> <span>{{ _page }}</span></li>
@@ -15,6 +18,6 @@
 {% end %}
 
 
-{% if context.pagination.has_next %}
-  <li><a href="#" data-id="{{ context.pagination.page + 1 }}"> Next &raquo;</a> </li>
+{% if pagination.has_next %}
+  <li><a href="#" data-id="{{ pagination.page + 1 }}"> Next &raquo;</a> </li>
 {% end %}

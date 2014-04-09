@@ -81,6 +81,32 @@ class Context(object):
             kl = self.db.getclass(self.item)
             return NodeProxy(kl.getnode(self.itemid))[field]
 
+class ContextSearch(object):
+
+    def __init__(self,user,item,qstring):
+        """ """
+        self.user = user
+        self.db = user.db
+        self.item = item
+        self.query = qstring
+
+    def is_view_ok(self):
+        """ """
+        return self.user.is_view_ok(self.item,None)
+
+    def is_edit_ok(self):
+        """ """
+        return False
+    def list(self,page):
+        """ """
+        res = search_index(self.query,page)
+        kl = self.db.getclass("issue")
+        results = [NodeProxy(kl.getnode(r['issueId'])) for r in res['data']]
+        self.page = page
+        self.pagination = Pagination(page,res['pgsize'],res['count'])
+        return results
+
+
 class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
     def prepare(self):
@@ -117,7 +143,6 @@ class IndexHandler(SetupHandler):
     def get(self):
 
         print self.path_args, self.path_kwargs
-        self.context['page'] = 1
         self.render("index.html",**self.context)
 
 class APIHandler(SetupHandler):
@@ -136,7 +161,7 @@ class APIHandler(SetupHandler):
             if type(page) != int:
                 page = page[0]
             self.context['page'] = int(page)
-            print "context ->",self.context
+
             return self.render("modules/issue.list.html",**self.context)
 
         if path == "new":
@@ -220,15 +245,13 @@ class APIHandler(SetupHandler):
             if title:
                 q.append(u"title:%s" % title)
 
-            print " AND ".join(q)
-            res = search_index(" AND ".join(q))
-            data =res['data']
-            print res
-            for r in data:
-                print r
 
-            # self.context['results'] = copy(res['data'])
-            self.write(res)
+            qstring = " AND ".join(q)
+            self.context['context'] = ContextSearch(self.user,"issue",qstring)
+
+
+            return self.render("modules/issue.search.result.html",**self.context)
+
 
 class AuthHandler(SetupHandler):
 

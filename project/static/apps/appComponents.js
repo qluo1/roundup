@@ -10,7 +10,7 @@ var dataMain = flight.component(function(){
         url_issue_search: "/api/search"
     });
 
-    this.loadIssuelist = function() {
+    this.loadIssuelist = function(ev,data) {
 
         var url = this.attr.url_issueList;
         var that = this;    
@@ -21,6 +21,10 @@ var dataMain = flight.component(function(){
         
         if (this.attr.priority){
             url += "&priority=" + this.attr.priority
+        }
+
+        if (data.page) {
+            url += "&page=" + data.page;
         }
         
         $.get(url,function(data){
@@ -40,9 +44,11 @@ var dataMain = flight.component(function(){
     this.loadNewIssue = function(ev,data){
         var url = this.attr.url_issue_new;
         var that = this;
-        $.get(url,function(data){
-            that.trigger("dataIssueNew",{html:data});
-        });
+        if (data.item !== "/") {
+            $.get(url,function(data){
+                that.trigger("dataIssueNew",{html:data});
+            });
+        }
     }
 
     this.postNewIssue = function(ev,data){
@@ -75,6 +81,25 @@ var dataMain = flight.component(function(){
 
     }
 
+    this.pagination = function(ev,data){
+
+        var item = data.item;
+        var page = data.page;
+        var that = this;
+        console.log("load page data");
+        
+        if (item == "issue"){
+            var url = this.attr.url_issueList;
+
+            if (data.page) {
+                url += "?page=" + data.page;
+                $.get(url,function(data){
+                    that.trigger("dataIssueList",{html:data});
+                });
+            } 
+        } /* issue pagination */
+    }
+
     this.after("initialize",function(){
         
         this.on(document,"loadIssuelist",this.loadIssuelist);
@@ -83,6 +108,7 @@ var dataMain = flight.component(function(){
         this.on(document,"uiPostNewIssue",this.postNewIssue);
         this.on(document,"uiSearch",this.loadSearch);
         this.on(document,"uiSearchItems",this.postItemSearch);
+        this.on(document,"uiPagination", this.pagination);
 
         /* kick start load issues*/
         this.trigger("loadIssuelist",{});
@@ -98,7 +124,7 @@ var uiMain = flight.component(function() {
         issueNewSelector:   "#ui_new",
         issueListSelector:  "#ui_list",
         
-        itemSelector:       "#ui_list a",
+        itemSelector:       "#ui_list table a",
         itemSubmitSelector: "#ui_issue > form",
         itemNewSubmitSelector: "#ui_new > form"
     });

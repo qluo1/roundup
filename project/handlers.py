@@ -46,7 +46,7 @@ class Context(object):
 
         if not itemid:
             kls = self.db.getclass(item)
-            self.pagination = Pagination(1,PAGE_SIZE,kls.count())
+            # self.pagination = Pagination(1,PAGE_SIZE,kls.count())
 
 
     def is_view_ok(self):
@@ -59,10 +59,13 @@ class Context(object):
             return self.user.is_edit_ok(self.item,self.itemid)
         return False
 
-    def list(self,page=1):
+    def list(self,page):
         if not self.itemid:
             kl = self.db.getclass(self.item)
-            return [NodeProxy(kl.getnode(i)) for i in kl.list()][(page-1)*PAGE_SIZE : page*PAGE_SIZE]
+            start = (page-1)*PAGE_SIZE
+            end = page*PAGE_SIZE
+            self.pagination = Pagination(page,PAGE_SIZE,kl.count())
+            return [NodeProxy(kl.getnode(i)) for i in kl.list()][start:end]
     
     def filter(self,filterspec):
         """
@@ -70,7 +73,7 @@ class Context(object):
         """
         if not self.itemid:
             kl = self.db.getclass(self.item)
-            return [ NodeProxy(kl.getnode(i)) for i in kl.filter(None,filterspec)]
+            return [NodeProxy(kl.getnode(i)) for i in kl.filter(None,filterspec)]
 
     def __getattr__(self,field):
         if self.itemid:
@@ -129,7 +132,10 @@ class APIHandler(SetupHandler):
         args = self.request.arguments
 
         if path == "list":
-            self.context['page'] = args.get('page',1)
+            page = args.get('page',1)
+            if type(page) != int:
+                page = page[0]
+            self.context['page'] = int(page)
             print "context ->",self.context
             return self.render("modules/issue.list.html",**self.context)
 

@@ -11,7 +11,7 @@
         <td>{{ i18n.gettext('Creator') }}</td>
         <td>{{ i18n.gettext('Assigned To') }}</td>
       </tr>
-      {% for issue in reversed(context.list()) %}
+      {% for issue in context.list(page) %}
         <tr>
          <td>{{ issue.priority }}</td>
          <td>{{ issue.id }}</td>
@@ -26,8 +26,14 @@
       {% end %}
     </table>
 
-  {% include "pagination.html" %}
-  
+  <ul class="pagination" data-id="issue">
+    {% include "pagination.html" %}
+  </ul>
+
+<script type="text/javascript">
+  uiPagination.attachTo(".pagination");
+</script>
+
   {% else %}
     <p class='text-error'>{{ i18n.gettext('There are no issue yet!') }}</p>
   {% end %}

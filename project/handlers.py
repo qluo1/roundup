@@ -5,6 +5,8 @@ import tornado.web
 from roundup.date import Date
 from utils.helper import FlashMessageMixin, NodeProxy
 from utils.pagination import Pagination
+from search_engine import search_index
+from copy import copy
 
 class User(object):
 
@@ -46,8 +48,6 @@ class Context(object):
 
         if not itemid:
             kls = self.db.getclass(item)
-            # self.pagination = Pagination(1,PAGE_SIZE,kls.count())
-
 
     def is_view_ok(self):
         """ """
@@ -62,9 +62,9 @@ class Context(object):
     def list(self,page):
         if not self.itemid:
             kl = self.db.getclass(self.item)
+            self.pagination = Pagination(page,PAGE_SIZE,kl.count())
             start = (page-1)*PAGE_SIZE
             end = page*PAGE_SIZE
-            self.pagination = Pagination(page,PAGE_SIZE,kl.count())
             return [NodeProxy(kl.getnode(i)) for i in kl.list()][start:end]
     
     def filter(self,filterspec):
@@ -73,13 +73,13 @@ class Context(object):
         """
         if not self.itemid:
             kl = self.db.getclass(self.item)
+            # TODO pagination here
             return [NodeProxy(kl.getnode(i)) for i in kl.filter(None,filterspec)]
 
     def __getattr__(self,field):
         if self.itemid:
             kl = self.db.getclass(self.item)
             return NodeProxy(kl.getnode(self.itemid))[field]
-
 
 class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
@@ -143,8 +143,8 @@ class APIHandler(SetupHandler):
             return self.render("modules/issue.new.html",**self.context)
 
         if path == "search":
-            page = args.get('page',1)
-            self.context['page'] = page
+            self.context['page'] = 1
+            self.context['results'] = None
 
             return self.render("modules/issue.search.html",**self.context)
 
@@ -195,10 +195,40 @@ class APIHandler(SetupHandler):
 
 
         if path == "search":
+
+            ## pagination
+            page = args.get('page',1)
+            if type(page) != int:
+                page = page[0]
+            self.context['page'] = page
+
             """ search items """
+            status,priority = args['status'][0],args['priority'][0]
+            assignedto,creator = args['user']
+            title = args['title'][0]
+            fromDate,toDate = args['fromDate'][0],args['toDate'][0]
 
+            print status,priority,assignedto,creator,title,fromDate,toDate
 
+            q = []
+            if status:
+                q.append(u"status:%s" % status)
+            if priority:
+                q.append(u"priority:%s" % priority)
+            if creator:
+                q.append(u"creator:%s" % creator)
+            if title:
+                q.append(u"title:%s" % title)
 
+            print " AND ".join(q)
+            res = search_index(" AND ".join(q))
+            data =res['data']
+            print res
+            for r in data:
+                print r
+
+            # self.context['results'] = copy(res['data'])
+            self.write(res)
 
 class AuthHandler(SetupHandler):
 

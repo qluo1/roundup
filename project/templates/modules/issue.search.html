@@ -4,7 +4,7 @@
     <form role="form" name ="input" action="#">
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" name="@title" id="title" placeholder="search title">
+        <input type="text" class="form-control" name="title" id="title" placeholder="search title">
       </div>
 
       <div class='row'>
@@ -39,6 +39,16 @@
 
       <button id="search" type="submit" class="btn btn-primary">Search</button>
     </form>
+
+    {{ results }}
+
+    {% comment results here ? %}
+    {% if results is not None%}
+      {% for r in results %}
+        {{r}}
+      {% end %}
+    {% end %}
+
 {% else %}
   "You don't have premissiont to crate new issue!"
 {% end %}

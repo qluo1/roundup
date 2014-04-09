@@ -5,13 +5,15 @@ from whoosh.index import create_in,open_dir
 from whoosh.qparser import QueryParser,MultifieldParser
 from whoosh.fields import *
 
-from .conf import INDEX_HOME
-from .conf import TRACKER
+from conf import INDEX_HOME
+from conf import TRACKER
 
 
 schema = Schema(title=TEXT(stored=True),issueId=ID(unique=True,stored=True,sortable=True),
 				status=ID(), priority=ID(),assignedto=ID(stored=True),
 				creator=ID(stored=True),msg=TEXT,createAt=DATETIME(sortable=True))
+
+from copy import copy
 
 def build_index(rebuild=False):
 	""" 
@@ -53,12 +55,18 @@ def search_index(querystring,page=1):
 	with  ix.searcher() as searcher:
 		results = searcher.search_page(user_q,page)
 		# debug 
-		# print results.pagenum, results.pagecount, results.pagelen
-		# print("Showing results %d-%d of %d"
-		#     		% (results.offset + 1, results.offset + results.pagelen ,len(results)))
-		# for i in results:
-		# 	print i
-		return results
+		print results.pagenum, results.pagecount, results.pagelen
+		print("Showing results %d-%d of %d"
+		    		% (results.offset + 1, results.offset + results.pagelen ,len(results)))
+		res = []
+		for i in results:
+			# print i
+			res.append(i.fields())
+
+
+		return {'page': results.pagenum,'count': len(results),
+			    'pages':results.pagecount,'pgsize':results.pagelen,'data': res}
+
 
 def add_issue(issueId):
 	""" 

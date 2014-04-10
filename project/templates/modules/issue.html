@@ -1,4 +1,5 @@
 {% from roundup import i18n%}
+{% from roundup.date import Date%}
 {% from uihelper import * %}
 {% if context.is_view_ok() %}
   {% if context.is_edit_ok() %}
@@ -44,9 +45,9 @@
 
 {% if context.id %}
   <p>
-    Created on <b>{{ context.creation }}</b>
+    Created on <b>{{ (context.creation - Date(".")).pretty() }}</b>
     by <b>{{ context.creator }}</b>,
-    last changed <b>{{ context.activity }}</b>
+    last changed <b>{{ (context.activity - Date(".")).pretty() }}</b>
     by <b>{{ context.actor }}</b>.
   </p>
 {% end %}
@@ -63,7 +64,7 @@
         <a href='msg{{ msg.id }}'>msg{{msg.id}} (view)</a>
       </div>
       <div class='span4'>
-        Author: {{ msg.author }}, Date: {{ msg.date }}
+        Author: {{ msg.author }}, Added: {{ (msg.date - Date(".")).pretty() }}
       </div>
       <div class='pull-right'>
         {% if context.is_edit_ok %}

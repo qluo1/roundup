@@ -65,7 +65,9 @@ class Context(object):
             self.pagination = Pagination(page,PAGE_SIZE,kl.count())
             start = (page-1)*PAGE_SIZE
             end = page*PAGE_SIZE
-            return [NodeProxy(kl.getnode(i)) for i in kl.list()][start:end]
+            total  =  sorted([NodeProxy(kl.getnode(i)) for i in kl.list()],key=lambda n:n.activity, reverse=True)
+            out = total[start:end]
+            return out
     
     def filter(self,filterspec):
         """

@@ -1,4 +1,5 @@
 {% from roundup import i18n%}
+{% from roundup.date import Date%}
 {% from uihelper import * %}
 <div id="results" class="row">
 {% if context.is_view_ok() %}
@@ -20,7 +21,7 @@
        <td>
         <a href='issue{{ issue.id }}'>{{ issue.title }}</a>
        </td>
-       <td>{{ issue.activity }}</td>
+       <td>{{ (issue.activity - Date(".")).pretty() }}</td>
        <td>{{ issue.status }}</td>
        <td>{{ issue.creator }}</td>
        <td>{{ issue.assignedto}}</td>

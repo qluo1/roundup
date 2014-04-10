@@ -6,7 +6,7 @@ var uiSearchFrom = flight.component (function(){
 		uiSearchFormSelector: "#ui_search > form",
 		uiSearchSubmit: "#search",
 		uiSearchResult: "#ui_search > #search_result",
-		uiClickSearchItem: "#ui_search > #search_result a",
+		uiClickSearchItem: "#ui_search > #search_result table a",
 		hide: true
 
 	});
@@ -59,16 +59,30 @@ var uiSearchFrom = flight.component (function(){
 
 	}
 
+	this.paginateSearchItem = function(ev,data){
+
+		if (data.item == "search") {
+			var page = data.page;
+			var data = $(this.attr.uiSearchFormSelector).serializeArray();
+			data.push({name:"page",value:page});
+			console.log("search data: " + data);
+			this.trigger(document,"uiSearchItems", {data:data});
+			ev.preventDefault();
+		}
+		
+	}
+
 	this.after("initialize",function(){
 
 		this.on(document,"dataSearch", this.render);
         this.on(document,"loadIssuelist",this.hideSearch);
         this.on(document,"loadIssue",this.hideSearch);
         this.on(document,'dataSearchResult', this.searchResult);
+        this.on(document,"uiPagination", this.paginateSearchItem);
 
 		this.on('click', {
 			'uiSearchSubmit': this.submitSearch,
-			'uiClickSearchItem': this.clickSearchItem
+			'uiClickSearchItem': this.clickSearchItem,
 		});
 
 	});

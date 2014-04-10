@@ -5,7 +5,7 @@ import tornado.web
 from roundup.date import Date
 from utils.helper import FlashMessageMixin, NodeProxy
 from utils.pagination import Pagination
-from search_engine import search_index
+from search_engine import search_index, add_issue
 from copy import copy
 
 class User(object):
@@ -192,17 +192,17 @@ class APIHandler(SetupHandler):
         print args
 
         if path =="new":
-
-            if args.get('@title') and args.get('@note') and args.get('@status') and args.get('@priority'):
+            if args.get('@title') and args.get('@note') and args.get('status') and args.get('priority'):
                 title = args['@title'][0]
                 note = args['@note'][0]
-                status = args['@status'][0]
-                pri = args['@priority'][0]
-                assignedto = args['@user'][0]
+                status = args['status'][0]
+                pri = args['priority'][0]
+                assignedto = args['user'][0]
 
                 # message
                 msg_ = self.db.msg.create(content=note, summary=title,
                 author=self.uid,date=Date())
+                print "msg: ", msg_
                 # new issue
                 new_ = self.db.issue.create(title=title,status=status,
                             priority=pri,messages=[msg_],
@@ -215,16 +215,27 @@ class APIHandler(SetupHandler):
                     file_= self.db.file.create(name=file1['filename'],content=body)
                     self.db.issue.set(new_,files=[file_])
                 
-                self.db.commit()
-                return self.write({"status":"ok","id": new_});
+                print "issue: ", new_
 
+                if new_ and msg_:
+                    self.db.commit()
+                    # update search index
+                    add_issue(new_)
+                    return self.write({"status":"ok","id": new_});
+                else:
+                    print "unexpect error on saving issue??"
+                    return self.write({"status":"error", "message":"issue failed to created"})
+            else:
+                print "error missing more fields"
+
+            return self.write({"status":"error", "message":"missing all required fields"})
 
         if path == "search":
 
             ## pagination
             page = args.get('page',1)
             if type(page) != int:
-                page = page[0]
+                page = int(page[0])
             self.context['page'] = page
 
             """ search items """

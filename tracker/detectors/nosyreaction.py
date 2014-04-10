@@ -98,7 +98,7 @@ def updatenosy(db, cl, nodeid, newvalues):
 
     # see if there's any new messages - if so, possibly add the author and
     # recipient to the nosy
-    if newvalues.has_key('messages'):
+    if newvalues.has_key('messages') and newvalues['messages']:
         if nodeid is None:
             ok = ('new', 'yes')
             messages = newvalues['messages']
@@ -107,6 +107,7 @@ def updatenosy(db, cl, nodeid, newvalues):
             # figure which of the messages now on the issue weren't
             oldmessages = cl.get(nodeid, 'messages')
             messages = []
+            
             for msgid in newvalues['messages']:
                 if msgid not in oldmessages:
                     messages.append(msgid)

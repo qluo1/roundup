@@ -194,12 +194,12 @@ class APIHandler(SetupHandler):
         print args
 
         if path =="new":
-            if args.get('@title') and args.get('@note') and args.get('status') and args.get('priority'):
+            if args.get('@title') and args.get('@note') and args.get('@status') and args.get('@priority'):
                 title = args['@title'][0]
                 note = args['@note'][0]
-                status = args['status'][0]
-                pri = args['priority'][0]
-                assignedto = args['user'][0]
+                status = args['@status'][0]
+                pri = args['@priority'][0]
+                assignedto = args['@user'][0]
 
                 # message
                 msg_ = self.db.msg.create(content=note, summary=title,
@@ -232,6 +232,52 @@ class APIHandler(SetupHandler):
 
             return self.write({"status":"error", "message":"missing all required fields"})
 
+        if path == "update":
+
+            issueId = args['@id'][0]
+            status = args.get('@status')[0]
+            priority = args.get('@priority')[0]
+            title = args.get('@title')[0]
+            note = args.get('@note')[0]
+            assignedto = args.get('@user')[0]
+
+            print issueId,status,priority,title,note
+            dre=re.compile(r'([^\d]+)0*(\d+)')
+            match = dre.match(issueId)
+            if match:
+                group = match.groups()
+                item = group[0]
+                itemid = group[1]
+
+                kls = self.db.getclass(item)
+                node = kls.getnode(itemid)
+
+                if node.status != status:
+                    node.status = status
+                if node.priority != priority:
+                    node.priority = priority
+                if node.title != title:
+                    node.title = title
+                if node.assignedto != assignedto:
+                    node.assignedto = assignedto
+
+                if note:
+                    print "add message: ", note
+                    msg_ = self.db.msg.create(content=note,summary=title,author=self.uid,date=Date("."))
+                    msgs = node.messages
+                    msgs.append(msg_)
+                    node.messages = msgs
+                    print node.messages
+
+                self.db.commit()
+                # update search index
+                add_issue(itemid)
+                self.write({"status":"ok","id": itemid})
+
+            else:
+                ## unknown item type
+                self.write({"status":"error", "message":"unknown item type"})
+
         if path == "search":
 
             ## pagination
@@ -241,10 +287,10 @@ class APIHandler(SetupHandler):
             self.context['page'] = page
 
             """ search items """
-            status,priority = args['status'][0],args['priority'][0]
-            assignedto,creator = args['user']
-            title = args['title'][0]
-            fromDate,toDate = args['fromDate'][0],args['toDate'][0]
+            status,priority = args['@status'][0],args['@priority'][0]
+            assignedto,creator = args['@user']
+            title = args['@title'][0]
+            fromDate,toDate = args['@fromDate'][0],args['@toDate'][0]
 
             print status,priority,assignedto,creator,title,fromDate,toDate
 

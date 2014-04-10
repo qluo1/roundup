@@ -7,6 +7,7 @@ var dataMain = flight.component(function(){
         url_issueList: "/api/list",
         url_issue: "/api",
         url_issue_new: "/api/new",
+        url_issue_update: "/api/update",
         url_issue_search: "/api/search"
     });
 
@@ -57,10 +58,31 @@ var dataMain = flight.component(function(){
         $.post(url,data.data, function(out){
             console.log("return:" + out);
             that.trigger("loadIssuelist",{});
-            that.trigger("ok",{msg:"new issue[" + out.id + "] added"});
+            if (out.status == 'ok'){
+                that.trigger("ok",{msg:"new issue[" + out.id + "] added"});    
+            }else{
+                that.trigger("error",{msg:"failed: "+ out.message});    
+            }
+            
         });
         console.log("posting new issue in data comp:" + data.data);
         
+    }
+
+    this.postUpdatedIssue = function(ev,data){
+        var url = this.attr.url_issue_update;
+        var that = this;
+        $.post(url,data.data,function(out){
+            console.log("return: " + out);
+            if (out.status == 'ok'){
+                that.trigger("ok",{msg:"issue[" + out.id + "] updated"});    
+                that.trigger("loadIssue",{item:"/issue"+ out.id});
+            }else{
+                that.trigger("error",{msg:"failed: "+ out.message});       
+            }
+            
+        });
+
     }
 
     this.loadSearch = function(ev,data){
@@ -106,6 +128,7 @@ var dataMain = flight.component(function(){
         this.on(document,"loadIssue",this.loadIssue);
         this.on(document,"uiNewIssue",this.loadNewIssue);
         this.on(document,"uiPostNewIssue",this.postNewIssue);
+        this.on(document,"uiPostUpdatedIssue",this.postUpdatedIssue);
         this.on(document,"uiSearch",this.loadSearch);
         this.on(document,"uiSearchItems",this.postItemSearch);
         this.on(document,"uiPagination", this.pagination);
@@ -137,9 +160,12 @@ var uiMain = flight.component(function() {
 
     this.submitIssue = function(ev,data){
         
-        console.log( this.select("itemSubmitSelector").serializeArray());
+        console.log("submit updated issue");
+
+        // console.log( this.select("itemSubmitSelector").serializeArray());
+        var data = this.select("itemSubmitSelector").serializeArray();
+        this.trigger("uiPostUpdatedIssue",{data:data})
         ev.preventDefault();
-        
     }
 
     this.submitNewIssue = function(ev,data){

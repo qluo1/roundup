@@ -8,7 +8,6 @@ from whoosh.fields import *
 from conf import INDEX_HOME
 from conf import TRACKER
 
-
 schema = Schema(title=TEXT(stored=True),issueId=ID(unique=True,stored=True,sortable=True),
 				status=ID(), priority=ID(),assignedto=ID(stored=True),
 				creator=ID(stored=True),msg=TEXT,createAt=DATETIME(sortable=True))
@@ -49,7 +48,7 @@ def search_index(querystring,page=1):
 	"""
 	"""
 	ix = open_dir(INDEX_HOME)
-	qp = MultifieldParser(["creator","title","msg","createAt"],schema=schema)
+	qp = MultifieldParser(["creator","title","msg","createAt","msg","assignedto"],schema=schema)
 	user_q = qp.parse(querystring)
 	total = 0
 	with  ix.searcher() as searcher:
@@ -62,7 +61,6 @@ def search_index(querystring,page=1):
 		for i in results:
 			# print i
 			res.append(i.fields())
-
 
 		return {'page': results.pagenum,'count': len(results),
 			    'pages':results.pagecount,'pgsize':results.pagelen,'data': res}

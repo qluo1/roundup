@@ -13,9 +13,9 @@ def get_html_select(name,multiple=True,search=False,selected=None):
 
     """
     if multiple:
-        out = "<select multiple class='form-control' name='%s'>" % name    
+        out = "<select multiple class='form-control' name='@%s'>" % name    
     else:
-        out = "<select class='form-control' name='%s'>" % name
+        out = "<select class='form-control' name='@%s'>" % name
 
     kls = db.getclass(name)
     for i in sorted(kls.list()):

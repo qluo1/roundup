@@ -8,6 +8,31 @@ from tornado import escape
 from conf import TRACKER
 db = TRACKER.open("admin")
 
+def id_to_name(item,itemid):
+    kls = db.getclass(item)
+    node = kls.getnode(itemid)
+    if hasattr(node,"name"):
+        return getattr(node,"name")
+    if hasattr(node,"username"):
+        return getattr(node,"username")
+
+    return node.id
+
+def hist_args_to_str(args):
+    """ """
+    out = ""
+    if args == {}:
+        return out
+    
+    for k,v in args.items():
+        if k in ('creator','assignedto',):
+            out += "%s: %s; " %(k, id_to_name("user",v))
+        elif k in ('status','priority'):
+            out += "%s: %s; " %(k, id_to_name(k,v))
+        else:
+            out += "%s: %s; " % (k,str(v))
+    return out
+
 def get_html_select(name,multiple=True,search=False,selected=None):
     """ 
 

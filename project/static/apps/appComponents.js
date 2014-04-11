@@ -8,6 +8,7 @@ var dataMain = flight.component(function(){
         url_issue: "/api",
         url_issue_new: "/api/new",
         url_issue_update: "/api/update",
+        url_msg_remove: "/api/remove",
         url_issue_search: "/api/search"
     });
 
@@ -72,6 +73,7 @@ var dataMain = flight.component(function(){
     this.postUpdatedIssue = function(ev,data){
         var url = this.attr.url_issue_update;
         var that = this;
+
         $.post(url,data.data,function(out){
             console.log("return: " + out);
             if (out.status == 'ok'){
@@ -80,7 +82,6 @@ var dataMain = flight.component(function(){
             }else{
                 that.trigger("error",{msg:"failed: "+ out.message});       
             }
-            
         });
 
     }
@@ -122,6 +123,21 @@ var dataMain = flight.component(function(){
         } /* issue pagination */
     }
 
+    this.removeIssueMsg = function(env,data) {
+
+        console.log("remove issue message");
+        var that = this;
+        var url = this.attr.url_msg_remove;
+        $.post(url,data.data,function(out){
+            if (out.status == "ok") {
+                that.trigger("loadIssue",{item:"/issue"+ out.id});
+                that.trigger("ok",{msg:"issue[" + out.id + "] updated"});
+            }else{
+                // TODO alert
+            }
+        });
+    }
+
     this.after("initialize",function(){
         
         this.on(document,"loadIssuelist",this.loadIssuelist);
@@ -132,6 +148,7 @@ var dataMain = flight.component(function(){
         this.on(document,"uiSearch",this.loadSearch);
         this.on(document,"uiSearchItems",this.postItemSearch);
         this.on(document,"uiPagination", this.pagination);
+        this.on(document,"uiRemoveMsg", this.removeIssueMsg);
 
         /* kick start load issues*/
         this.trigger("loadIssuelist",{});
@@ -143,13 +160,14 @@ var uiMain = flight.component(function() {
     /* attrs*/
     this.defaultAttrs({
         /*selector*/
-        issueSelector:      "#ui_issue",
-        issueNewSelector:   "#ui_new",
-        issueListSelector:  "#ui_list",
+        issueSelector:          "#ui_issue",
+        issueNewSelector:       "#ui_new",
+        issueListSelector:      "#ui_list",
         
-        itemSelector:       "#ui_list table a",
-        itemSubmitSelector: "#ui_issue > form",
-        itemNewSubmitSelector: "#ui_new > form"
+        itemSelector:           "#ui_list table a",
+        itemSubmitSelector:     "#ui_issue > form",
+        itemNewSubmitSelector:  "#ui_new > form",
+        msgRemoveBtnSelector:   "#ui_issue form.js-form-inline"
     });
 
     this.selectIssue = function (ev,data){
@@ -162,9 +180,13 @@ var uiMain = flight.component(function() {
         
         console.log("submit updated issue");
 
-        // console.log( this.select("itemSubmitSelector").serializeArray());
         var data = this.select("itemSubmitSelector").serializeArray();
+         // var data = new FormData($(this.attr.itemSubmitSelector)[0]);
+        data.file = $("#ui_issue > form #file_upload").val();
         this.trigger("uiPostUpdatedIssue",{data:data})
+        
+         
+
         ev.preventDefault();
     }
 
@@ -203,6 +225,12 @@ var uiMain = flight.component(function() {
         this.select("issueNewSelector").html("");
     }
 
+    this.submitRemoveMsg = function(ev,data) {
+        var data = $(this.attr.msgRemoveBtnSelector).serializeArray();
+        this.trigger(document,"uiRemoveMsg",{data:data});
+        ev.preventDefault();
+    }
+    
     this.after('initialize',function(){
 
         this.on('click', {
@@ -213,7 +241,8 @@ var uiMain = flight.component(function() {
         this.on('submit',{
 
             "itemSubmitSelector": this.submitIssue,
-            "itemNewSubmitSelector": this.submitNewIssue
+            "itemNewSubmitSelector": this.submitNewIssue,
+            "msgRemoveBtnSelector" : this.submitRemoveMsg
         })
 
         this.on(document,'dataIssueList',this.renderIssueList);

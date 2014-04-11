@@ -29,6 +29,7 @@ class User(object):
         return self.db.security.hasPermission('View',self.uid,item)
 
     def is_edit_ok(self,item,itemid):
+        print "is_edit_ok",self.username, self.uid, item
         return self.db.security.hasPermission('Edit',self.uid,item,None,itemid)
 
 
@@ -212,6 +213,7 @@ class APIHandler(SetupHandler):
 
                 # add attached file
                 if self.request.files:
+                    print "prossing file"
                     file1 = self.request.files['@file'][0]
                     body = file1['body']
                     file_= self.db.file.create(name=file1['filename'],content=body)
@@ -267,7 +269,13 @@ class APIHandler(SetupHandler):
                     msgs = node.messages
                     msgs.append(msg_)
                     node.messages = msgs
-                    print node.messages
+
+                # add attached file
+                if self.request.files:
+                    file1 = self.request.files['@file'][0]
+                    body = file1['body']
+                    file_= self.db.file.create(name=file1['filename'],content=body)
+                    self.db.issue.set(new_,files=[file_])
 
                 self.db.commit()
                 # update search index
@@ -310,6 +318,20 @@ class APIHandler(SetupHandler):
 
 
             return self.render("modules/issue.search.result.html",**self.context)
+
+        if path == "remove":
+            action,issue,msg = args.get("@action"), args.get("@issue"), args.get("@message")
+            if action[0] == "remove" and issue[0] and msg[0]:
+                issue = self.db.issue.getnode(issue[0])
+                msgs = issue.messages
+                if msg[0] in msgs:
+                    msgs.remove(msg[0])
+                    issue.messages = msgs
+                self.db.commit()
+                # update search 
+                add_issue(issue.id)
+            
+                return self.write({"status":"ok", "id":issue.id})
 
 
 class AuthHandler(SetupHandler):

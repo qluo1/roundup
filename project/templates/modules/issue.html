@@ -3,7 +3,7 @@
 {% from uihelper import * %}
 {% if context.is_view_ok() %}
   {% if context.is_edit_ok() %}
-    <form enctype="multipart/form-data" role="form" name ="input" action="issue{{context.id}}">
+    <form role="form" name ="input_form" action="">
       <div class="form-group">
         <input type="hidden" name="@id" value="issue{{context.id}}" />
         <label for="title">Title</label>
@@ -11,35 +11,29 @@
       </div>
 
       <div class='row'>
-      
-      <div class="col-xs-3">
-        <label for='status'>status</label>
-        {% raw status_html_select(context.status) %}
-      </div>
-      <div class="col-xs-3">
-        <label for='priority'>priority</label>
-        {% raw priority_html_select(context.priority) %}
-      </div>
-      <div class="col-xs-3">
-        <label for='assignto'>assignTo</label>
-        {% raw user_html_select(context.assignedto) %}
-      </div>
+        <div class="col-xs-3">
+          <label for='status'>status</label>
+          {% raw status_html_select(context.status) %}
+        </div>
+        <div class="col-xs-3">
+          <label for='priority'>priority</label>
+          {% raw priority_html_select(context.priority) %}
+        </div>
+        <div class="col-xs-3">
+          <label for='assignto'>assignTo</label>
+          {% raw user_html_select(context.assignedto) %}
+        </div>
       </div>
       <!-- Note -->
       <div class='form-group'>
         <label for='note'>{{ i18n.gettext('Note') }}</label>
           <textarea name="@note" rows="5" class='form-control' id='note' placeholder="Description of the issue"></textarea>
       </div>
-      <!-- File upload -->
-      <div class='form-group'>
-        <label for='file_upload'>{{ i18n.gettext('File') }}</label>
-          <input type="file" class='form-control' name="@file" id='file_upload'/>
-      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
   {% else %}
-    {% comment include 'issue.item.readonly.html' %}
+    {% include 'issue.readonly.html' %}
   {% end %}
 {% end %}
 
@@ -67,11 +61,12 @@
         Author: {{ msg.author }}, Added: {{ (msg.date - Date(".")).pretty() }}
       </div>
       <div class='pull-right'>
-        {% if context.is_edit_ok %}
-          <form method="POST" action='issue{{ context.id }}' class='form-inline'>
-            <input type="hidden" name="@remove@messages" value='{{ msg.id }}'>
-            <input type="hidden" name="@action" value="edit">
-            <input type="submit" value="remove">
+        {% if context.is_edit_ok() %}
+          <form method="POST" class='js-form-inline'>
+            <input type="hidden" name="@issue" value='{{ context.id }}'>
+            <input type="hidden" name="@message" value='{{ msg.id }}'>
+            <input type="hidden" name="@action" value="remove">
+            <button type="submit" class="btn-sm">remove</button>
           </form>
         {% end %}
       </div>
@@ -81,3 +76,6 @@
     </div>
   {% end %}
 {% end %}
+
+
+{% module Template("modules/history.html", name="issue", history=context.history()) %}

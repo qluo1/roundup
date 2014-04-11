@@ -1,0 +1,26 @@
+{% from roundup import i18n%}
+{% from roundup.date import Date%}
+{% from uihelper import * %}
+
+<h2>History </h2>
+<table class="table table-striped"> 
+<thead>
+	<tr>
+	<th>Date</th>
+	<th>User</th>
+	<th>Action</th>
+	<th>Args</th>
+	</tr>
+</thead>
+<tbody>
+{% for h in reversed(history) %}
+	<tr>
+		<td> {{ (h[1] - Date(".")).pretty() }} </td>
+		<td> {{ id_to_name("user",h[2]) }} </td>
+		<td> {{ h[3]}} </td>
+		<td> {{ hist_args_to_str(h[4]) }} </td>
+	</tr>
+{% end %}
+</tbody>
+
+</table>

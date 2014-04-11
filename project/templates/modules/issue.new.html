@@ -26,11 +26,6 @@
         <label for='note'>{{ i18n.gettext('Note') }}</label>
           <textarea name="@note" rows="5" class='form-control' id='note' placeholder="Enter description of the issue"></textarea>
       </div>
-      <!-- File upload -->
-      <div class='form-group'>
-        <label for='file_upload'>{{ i18n.gettext('File') }}</label>
-          <input type="file" class='form-control' name="@file" id='file_upload'/>
-      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 {% else %}

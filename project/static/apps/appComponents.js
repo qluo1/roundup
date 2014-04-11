@@ -1,3 +1,16 @@
+
+var alertFallback = true;
+   if (typeof console === "undefined" || typeof console.log === "undefined") {
+     console = {};
+     if (alertFallback) {
+         console.log = function(msg) {
+              alert(msg);
+         };
+     } else {
+         console.log = function() {};
+     }
+   }
+
 var dataMain = flight.component(function(){
     // main data component
     
@@ -36,7 +49,7 @@ var dataMain = flight.component(function(){
 
     this.loadIssue = function(ev,data) {
         
-        var url = this.attr.url_issue + data.item;
+        var url = this.attr.url_issue + "/" + data.item;
         var that = this;
         $.get(url,function(data){
             that.trigger("dataIssue",{html:data});
@@ -248,7 +261,7 @@ var uiMain = flight.component(function() {
     this.msgViewClick = function(ev,data) {
         var path = ev.target.pathname
         // alert("msg click: " + path);
-        this.trigger(document,"uiMsgView",{item: path});
+        this.trigger(document,"uiMsgView",{item: "/" + path});
         ev.preventDefault();
     }
 

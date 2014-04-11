@@ -1081,7 +1081,7 @@ define('lib/index', [
  
   context.flight = require('lib/index');
   // enable debug
-  // var debug = require("lib/debug");
-  // debug.enable(true);
+  var debug = require("lib/debug");
+  debug.enable(false);
 
 }(this));

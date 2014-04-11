@@ -1,5 +1,6 @@
 
-var alertFallback = true;
+/* workaround IE8 missing console object*/
+var alertFallback = false;
    if (typeof console === "undefined" || typeof console.log === "undefined") {
      console = {};
      if (alertFallback) {
@@ -91,7 +92,7 @@ var dataMain = flight.component(function(){
             console.log("return: " + out);
             if (out.status == 'ok'){
                 that.trigger("ok",{msg:"issue[" + out.id + "] updated"});    
-                that.trigger("loadIssue",{item:"/issue"+ out.id});
+                that.trigger("loadIssue",{item:"issue"+ out.id});
             }else{
                 that.trigger("error",{msg:"failed: "+ out.message});       
             }
@@ -199,7 +200,12 @@ var uiMain = flight.component(function() {
 
     this.selectIssue = function (ev,data){
 
-        this.trigger("loadIssue",{item: ev.target.pathname});
+        var item = ev.target.pathname
+        
+        if (item.slice(0,1) == "/"){
+            var item = item.substr(1,item.length)    
+        }
+        this.trigger("loadIssue",{item: item});
         ev.preventDefault();
     }
 
@@ -259,9 +265,12 @@ var uiMain = flight.component(function() {
     }
 
     this.msgViewClick = function(ev,data) {
-        var path = ev.target.pathname
+        var item = ev.target.pathname
+        if (item.slice(0,1) == "/") {
+            item = item.substr(1,item.length);    
+        }
         // alert("msg click: " + path);
-        this.trigger(document,"uiMsgView",{item: "/" + path});
+        this.trigger(document,"uiMsgView",{item: "/" + item});
         ev.preventDefault();
     }
 
@@ -332,7 +341,7 @@ var uiMenu = flight.component(function(){
         var data = this.select("showIssueSelector").serializeArray();
 
         if (data && data[0].value){
-            this.trigger("loadIssue",{item:"/issue"+ data[0].value});
+            this.trigger("loadIssue",{item:"issue"+ data[0].value});
         }
         ev.preventDefault();
     }

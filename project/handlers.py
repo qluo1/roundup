@@ -103,10 +103,10 @@ class ContextSearch(object):
     def list(self,page):
         """ """
         res = search_index(self.query,page)
-        kl = self.db.getclass("issue")
-        results = [NodeProxy(kl.getnode(r['issueId'])) for r in res['data']]
+        kls = self.db.getclass("issue")
+        results = [NodeProxy(kls.getnode(r['issueId'])) for r in res['data']]
         self.page = page
-        self.pagination = Pagination(page,res['pgsize'],res['count'])
+        self.pagination = Pagination(page,PAGE_SIZE,res['count'])
         return results
 
 

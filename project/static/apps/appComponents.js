@@ -123,7 +123,7 @@ var dataMain = flight.component(function(){
         } /* issue pagination */
     }
 
-    this.removeIssueMsg = function(env,data) {
+    this.removeIssueMsg = function(ev,data) {
 
         console.log("remove issue message");
         var that = this;
@@ -138,6 +138,15 @@ var dataMain = flight.component(function(){
         });
     }
 
+    this.viewMsg = function(ev,data) {
+        var url = this.attr.url_issue + data.item;
+        var that = this;
+        $.get(url,function(out){
+            console.log(out);
+            that.trigger(document,"dataMsgView",{html:out});
+        });
+    }
+
     this.after("initialize",function(){
         
         this.on(document,"loadIssuelist",this.loadIssuelist);
@@ -149,6 +158,8 @@ var dataMain = flight.component(function(){
         this.on(document,"uiSearchItems",this.postItemSearch);
         this.on(document,"uiPagination", this.pagination);
         this.on(document,"uiRemoveMsg", this.removeIssueMsg);
+        this.on(document,"uiMsgView", this.viewMsg);
+        
 
         /* kick start load issues*/
         this.trigger("loadIssuelist",{});
@@ -163,11 +174,14 @@ var uiMain = flight.component(function() {
         issueSelector:          "#ui_issue",
         issueNewSelector:       "#ui_new",
         issueListSelector:      "#ui_list",
-        
+        msgSelector:            "#ui_msg",
+
         itemSelector:           "#ui_list table a",
         itemSubmitSelector:     "#ui_issue > form",
         itemNewSubmitSelector:  "#ui_new > form",
-        msgRemoveBtnSelector:   "#ui_issue form.js-form-inline"
+        msgRemoveBtnSelector:   "#ui_issue form.js-form-inline",
+        msgViewClickSelector:   "#ui_issue div#js-messages a"
+
     });
 
     this.selectIssue = function (ev,data){
@@ -200,22 +214,21 @@ var uiMain = flight.component(function() {
 
     this.renderIssueList = function(e,data) {
 
-        this.select("issueNewSelector").html("");
-        this.select("issueSelector").html("");
+        // this.select("issueNewSelector").html("");
+        // this.select("issueSelector").html("");
+        this.hide();
         this.select('issueListSelector').html(data.html);
     }
 
     this.renderIssue = function(e,data) {
 
-        this.select("issueNewSelector").html("");
-        this.select("issueListSelector").html("");
+        this.hide();
         this.select('issueSelector').html(data.html);
     }
 
     this.renderIssueNew = function(ev,data){
         
-        this.select("issueListSelector").html("");
-        this.select('issueSelector').html("");
+        this.hide();
         this.select("issueNewSelector").html(data.html);
     }
 
@@ -223,6 +236,7 @@ var uiMain = flight.component(function() {
         this.select("issueListSelector").html("");
         this.select('issueSelector').html("");
         this.select("issueNewSelector").html("");
+        this.select("msgSelector").html("");
     }
 
     this.submitRemoveMsg = function(ev,data) {
@@ -230,12 +244,25 @@ var uiMain = flight.component(function() {
         this.trigger(document,"uiRemoveMsg",{data:data});
         ev.preventDefault();
     }
-    
+
+    this.msgViewClick = function(ev,data) {
+        var path = ev.target.pathname
+        // alert("msg click: " + path);
+        this.trigger(document,"uiMsgView",{item: path});
+        ev.preventDefault();
+    }
+
+    this.renderMsg = function(ev,data){
+        this.hide();
+        this.select("msgSelector").html(data.html);
+    }
+
     this.after('initialize',function(){
 
         this.on('click', {
 
-            "itemSelector": this.selectIssue
+            "itemSelector": this.selectIssue,
+            "msgViewClickSelector": this.msgViewClick
         
         });
         this.on('submit',{
@@ -249,6 +276,7 @@ var uiMain = flight.component(function() {
         this.on(document,'dataIssue',this.renderIssue);
         this.on(document,'dataIssueNew',this.renderIssueNew);
         this.on(document,'dataSearch',this.hide);
+        this.on(document,'dataMsgView',this.renderMsg);
 
     });
 });

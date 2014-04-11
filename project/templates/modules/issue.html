@@ -50,6 +50,7 @@
   {% comment include 'file.index.html' %}
 {% end %}
 
+<div id="js-messages">
 {% if context.messages %}
   <h4>Messages</h4>
   {% for msg in reversed(context.messages) %}
@@ -76,6 +77,6 @@
     </div>
   {% end %}
 {% end %}
-
+</div>
 
 {% module Template("modules/history.html", name="issue", history=context.history()) %}

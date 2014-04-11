@@ -23,14 +23,16 @@ def hist_args_to_str(args):
     out = ""
     if args == {}:
         return out
-    
-    for k,v in args.items():
-        if k in ('creator','assignedto',):
-            out += "%s: %s; " %(k, id_to_name("user",v))
-        elif k in ('status','priority'):
-            out += "%s: %s; " %(k, id_to_name(k,v))
-        else:
-            out += "%s: %s; " % (k,str(v))
+    if type(args) == tuple:
+        out += str(args)
+    else:
+        for k,v in args.items():
+            if k in ('creator','assignedto',):
+                out += "%s: %s; " %(k, id_to_name("user",v))
+            elif k in ('status','priority'):
+                out += "%s: %s; " %(k, id_to_name(k,v))
+            else:
+                out += "%s: %s; " % (k,str(v))
     return out
 
 def get_html_select(name,multiple=True,search=False,selected=None):

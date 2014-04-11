@@ -1,0 +1,23 @@
+{% from roundup import i18n%}
+{% from roundup.date import Date%}
+{% from uihelper import * %}
+
+<div class='row-fluid'>
+  <div class='span2'>
+    <p>msg{{context.id}}</a>
+  </div>
+  <div class='span4'>
+    Author: {{ context.author }}, Created: {{ (context.date - Date(".")).pretty() }}
+  </div>
+</div>
+
+<div class='row-fluid'>
+  <p>{{ context.summary }}</p>
+</div>
+
+<div class='row-fluid'>
+  <p> Content </p>
+  <pre>{{ context.content }}</pre>
+</div>
+
+{% module Template("modules/history.html", name="msg", history=context.history()) %}

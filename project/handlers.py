@@ -333,7 +333,6 @@ class APIHandler(SetupHandler):
             
                 return self.write({"status":"ok", "id":issue.id})
 
-
 class AuthHandler(SetupHandler):
 
     def get(self,path):

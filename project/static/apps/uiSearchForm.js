@@ -77,6 +77,7 @@ var uiSearchFrom = flight.component (function(){
 		this.on(document,"dataSearch", this.render);
         this.on(document,"loadIssuelist",this.hideSearch);
         this.on(document,"loadIssue",this.hideSearch);
+        this.on(document,"uiNewIssue",this.hideSearch);
         this.on(document,'dataSearchResult', this.searchResult);
         this.on(document,"uiPagination", this.paginateSearchItem);
 

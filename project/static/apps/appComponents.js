@@ -18,12 +18,12 @@ var dataMain = flight.component(function(){
     this.defaultAttrs({
         status: "bug",
         priority: "",
-        url_issueList: "/api/list",
-        url_issue: "/api",
-        url_issue_new: "/api/new",
-        url_issue_update: "/api/update",
-        url_msg_remove: "/api/remove",
-        url_issue_search: "/api/search"
+        url_issueList: "api/list",
+        url_issue: "api",
+        url_issue_new: "api/new",
+        url_issue_update: "api/update",
+        url_msg_remove: "api/remove",
+        url_issue_search: "api/search"
     });
 
     this.loadIssuelist = function(ev,data) {
@@ -50,13 +50,11 @@ var dataMain = flight.component(function(){
 
     this.loadIssue = function(ev,data) {
         
-        var url = this.attr.url_issue;
+        var url  = this.attr.url_issue + "/";
         /* workaround IE8 , Firefox difference */
-        if (data.item.slice(0,1) != "/") {
-            url  += "/" + data.item;
-        }else{
-            url += data.item;
-        }
+        var strarray = data.item.split("/");
+        /* last item*/
+        url += strarray[strarray.length-1];
         var that = this;
         $.get(url,function(data){
             that.trigger("dataIssue",{html:data});
@@ -159,7 +157,12 @@ var dataMain = flight.component(function(){
     }
 
     this.viewMsg = function(ev,data) {
-        var url = this.attr.url_issue
+        
+        var url = this.attr.url_issue + "/";
+        var strarray = data.item.split("/");
+
+        url += strarray[strarray.length - 1];
+
         if (data.item.slice(0,1) == "/") {
             url += data.item;    
         }else{

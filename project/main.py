@@ -1,3 +1,7 @@
+from conf import trackers
+import roundup
+from roundup import instance
+
 import tornado
 import tornado.httpserver
 import tornado.web
@@ -12,20 +16,24 @@ from handlers import *
 
 class Application(tornado.web.Application):
 
-    def __init__(self,tracker,settings):
-        self.tracker = tracker
-        handlers = [
-            (r"/",IndexHandler),
-            (r"/api/(.*)",APIHandler),
-            (r"/auth/(.*)",AuthHandler),
-        ]
+    def __init__(self,trackers,settings):
+        self.trackers = trackers
+        handlers = []
+        for t in trackers:
+            url = t['url']
+            tracker = t['tracker']
+            #
+            handlers.append((r"/%s/" % url,IndexHandler,dict(tracker=tracker)))
+            handlers.append((r"/%s/api/(.*)" % url,APIHandler,dict(tracker=tracker)))
+            handlers.append((r"/%s/auth/(.*)" % url,AuthHandler,dict(tracker=tracker)))
+
 
         tornado.web.Application.__init__(self,handlers,**settings)
 
 
 if __name__ == "__main__":
 
-    from conf import TRACKER,settings
+    from conf import settings
     parse_command_line()
 
     if options.debug:
@@ -37,7 +45,7 @@ if __name__ == "__main__":
             )
         )
 
-    app = Application(TRACKER,settings)
+    app = Application(trackers,settings)
     server = tornado.httpserver.HTTPServer(app)
     server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()

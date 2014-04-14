@@ -3,8 +3,9 @@
 
 *.pyc
 
-tracker/db/db
-tracker/db/files/*
-tracker/outgoing-mail.out
+trackers/db/db
+trackers/db/files/*
+trackers/outgoing-mail.out
 node_modules
-index
+trackers/*_index
+project/whoosh

@@ -1,12 +1,12 @@
 import roundup
 from roundup import instance
 from functools import partial
-from conf import *
 
 from tornado import escape
 
-from conf import TRACKER
-db = TRACKER.open("admin")
+## temporary workaround
+from conf import trackers
+db = trackers[0]['tracker'].open("admin")
 
 def id_to_name(item,itemid):
     kls = db.getclass(item)
@@ -37,7 +37,6 @@ def hist_args_to_str(args):
 
 def get_html_select(name,multiple=True,search=False,selected=None):
     """ 
-
     """
     if multiple:
         out = "<select multiple class='form-control' name='@%s'>" % name    
@@ -68,6 +67,3 @@ priority_html_select_search = partial(get_html_select,"priority",False, True)
 user_html_select_search = partial(get_html_select,"user",False, True)
 
 user_html_select_mult = partial(get_html_select,"user",True, False)
-
-
-

@@ -5,7 +5,8 @@ import tornado.web
 from roundup.date import Date
 from utils.helper import FlashMessageMixin, NodeProxy
 from utils.pagination import Pagination
-from search_engine import search_index, add_issue
+# from search_engine import search_index, add_issue
+from search_engine import TrackerSearcher
 from copy import copy
 
 class User(object):
@@ -102,7 +103,7 @@ class ContextSearch(object):
         return False
     def list(self,page):
         """ """
-        res = search_index(self.query,page)
+        res = self.searcher.search_index(self.query,page)
         kls = self.db.getclass("issue")
         results = [NodeProxy(kls.getnode(r['issueId'])) for r in res['data']]
         self.page = page
@@ -112,9 +113,13 @@ class ContextSearch(object):
 
 class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
+    def initialize(self,tracker):
+        self.tracker = tracker
+        self.searcher = TrackerSearcher(tracker)
+
     def prepare(self):
         """ """
-        self.tracker = self.application.tracker
+        # self.tracker = self.application.tracker
         self.db = self.tracker.open("admin")
         self.username = self.get_secure_cookie("user") or "anonymous"
 
@@ -224,7 +229,7 @@ class APIHandler(SetupHandler):
                 if new_ and msg_:
                     self.db.commit()
                     # update search index
-                    add_issue(new_)
+                    self.searcher.add_issue(new_)
                     return self.write({"status":"ok","id": new_});
                 else:
                     print "unexpect error on saving issue??"
@@ -279,7 +284,7 @@ class APIHandler(SetupHandler):
 
                 self.db.commit()
                 # update search index
-                add_issue(itemid)
+                self.searcher.add_issue(itemid)
                 self.write({"status":"ok","id": itemid})
 
             else:
@@ -329,7 +334,7 @@ class APIHandler(SetupHandler):
                     issue.messages = msgs
                 self.db.commit()
                 # update search 
-                add_issue(issue.id)
+                self.searcher.add_issue(issue.id)
             
                 return self.write({"status":"ok", "id":issue.id})
 

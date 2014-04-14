@@ -1,0 +1,2059 @@
+From roundup-admin@qidata.com.au Thu Mar 03 05:37:45 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395898665.14.0.814034301278.issue3@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue3] this is a test issue
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:37:45 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395898665.14.0.814034301278.issue3@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+this is a test note
+!
+!
+
+----------
+assignedto: testuser
+messages: 3
+nosy: testuser
+priority: critical
+status: unread
+title: this is a test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue3>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 05:51:37 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395899497.47.0.0229880345065.issue4@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue4] anohter test issue
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:51:37 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395899497.47.0.0229880345065.issue4@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+just another test issue
+
+----------
+assignedto: testuser
+messages: 4
+nosy: testuser
+priority: critical
+status: unread
+title: anohter test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue4>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 05:53:28 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395899608.53.0.0383425237634.issue5@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue5] junk title
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:53:28 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395899608.53.0.0383425237634.issue5@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test note
+
+
+jusn
+
+----------
+assignedto: testuser
+messages: 5
+nosy: testuser
+priority: critical
+status: deferred
+title: junk title
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue5>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 05:54:20 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395899660.61.0.809390723761.issue6@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue6] this is a test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:54:20 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395899660.61.0.809390723761.issue6@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test
+
+----------
+assignedto: admin
+messages: 6
+nosy: admin
+priority: critical
+status: deferred
+title: this is a test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue6>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 05:55:53 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395899753.79.0.642565608334.issue7@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue7] this is a test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:55:53 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395899753.79.0.642565608334.issue7@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test
+
+----------
+assignedto: admin
+messages: 7
+nosy: admin
+priority: critical
+status: unread
+title: this is a test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue7>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 05:56:34 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395899794.43.0.055454909312.issue8@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue8] anohter test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:56:34 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395899794.43.0.055454909312.issue8@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test
+
+----------
+assignedto: admin
+messages: 8
+nosy: admin
+priority: critical
+status: unread
+title: anohter test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue8>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 05:59:45 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395899985.97.0.0915801504667.issue9@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue9] anot
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 06:59:45 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395899985.97.0.0915801504667.issue9@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test
+
+----------
+assignedto: admin
+messages: 9
+nosy: admin
+priority: critical
+status: deferred
+title: anot
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue9>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:01:04 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900064.64.0.853346467769.issue10@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue10] anohter test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:01:04 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900064.64.0.853346467769.issue10@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test
+
+----------
+assignedto: admin
+messages: 10
+nosy: admin
+priority: critical
+status: unread
+title: anohter test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue10>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:01:26 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900086.12.0.0670666615664.issue11@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue11] test
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:01:26 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900086.12.0.0670666615664.issue11@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 11
+nosy: admin
+priority: critical
+status: unread
+title: test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue11>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:02:45 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900165.34.0.393140632359.issue12@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue12] jusn test
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:02:45 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900165.34.0.393140632359.issue12@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test
+
+----------
+assignedto: admin
+messages: 12
+nosy: admin
+priority: critical
+status: unread
+title: jusn test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue12>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:05:56 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900356.35.0.280845050063.issue13@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue13] this is a test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:05:56 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900356.35.0.280845050063.issue13@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 13
+nosy: admin
+priority: critical
+status: unread
+title: this is a test issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue13>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:07:53 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900473.56.0.9646936493.issue14@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue14] test
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:07:53 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900473.56.0.9646936493.issue14@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 14
+nosy: admin
+priority: critical
+status: unread
+title: test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue14>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:08:40 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900520.59.0.733420293559.issue15@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue15] test
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:08:40 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900520.59.0.733420293559.issue15@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 15
+nosy: admin
+priority: critical
+status: unread
+title: test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue15>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:08:44 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900524.3.0.105548941357.issue16@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue16] test
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:08:44 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900524.3.0.105548941357.issue16@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 16
+nosy: admin
+priority: critical
+status: unread
+title: test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue16>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:08:54 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395900534.76.0.727186155239.issue17@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue17] ateatadtaet
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:08:54 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395900534.76.0.727186155239.issue17@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+teat
+
+----------
+assignedto: admin
+messages: 17
+nosy: admin
+priority: critical
+status: unread
+title: ateatadtaet
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue17>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:18:05 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395901085.69.0.530383240695.issue18@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue18] issue from chrom
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:18:05 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395901085.69.0.530383240695.issue18@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test issue
+
+----------
+assignedto: admin
+messages: 18
+nosy: admin
+priority: critical
+status: unread
+title: issue from chrom
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue18>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:34:36 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue19] test adfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:34:36 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adafa
+
+----------
+assignedto: admin
+messages: 19
+nosy: admin
+priority: critical
+status: unread
+title: test adfadfadf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue19>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:45:09 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395902709.44.0.0203960227496.issue20@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue20] teate
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:45:09 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395902709.44.0.0203960227496.issue20@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 20
+nosy: admin
+priority: critical
+status: unread
+title: teate
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue20>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:50:55 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903055.35.0.587316475864.issue21@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue21] teaet
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:50:55 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903055.35.0.587316475864.issue21@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 21
+nosy: admin
+priority: critical
+status: unread
+title: teaet
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue21>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:52:32 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903152.09.0.812422268143.issue22@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue22] afadfaf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:52:32 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903152.09.0.812422268143.issue22@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 22
+nosy: admin
+priority: critical
+status: unread
+title: afadfaf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue22>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:55:16 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903316.05.0.916278598736.issue23@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue23] teate
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:55:16 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903316.05.0.916278598736.issue23@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 23
+nosy: admin
+priority: critical
+status: unread
+title: teate
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue23>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 06:59:15 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903555.33.0.881835406672.issue24@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue24] asdfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 07:59:15 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903555.33.0.881835406672.issue24@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 24
+nosy: admin
+priority: critical
+status: unread
+title: asdfadfadf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue24>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:00:17 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903617.1.0.773841648548.issue25@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue25] adfadfaf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:00:17 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903617.1.0.773841648548.issue25@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+
+
+----------
+assignedto: admin
+messages: 25
+nosy: admin
+priority: critical
+status: unread
+title: adfadfaf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue25>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:03:34 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903814.18.0.39317434449.issue26@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue26] test adfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:03:34 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903814.18.0.39317434449.issue26@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adsfadfa
+
+----------
+assignedto: admin
+messages: 26
+nosy: admin
+priority: critical
+status: unread
+title: test adfadfadf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue26>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:04:51 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903891.82.0.192932271.issue27@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: wish
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue27] asdfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:04:51 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903891.82.0.192932271.issue27@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadfadf
+
+----------
+assignedto: admin
+messages: 27
+nosy: admin
+priority: wish
+status: chatting
+title: asdfadfadf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue27>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:05:34 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903934.64.0.757868834073.issue28@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue28] adfadfa
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:05:34 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903934.64.0.757868834073.issue28@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadfaf
+
+----------
+assignedto: admin
+messages: 28
+nosy: admin
+priority: critical
+status: unread
+title: adfadfa
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue28>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:05:54 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395903954.35.0.508410851006.issue29@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue29] adfadfa
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:05:54 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395903954.35.0.508410851006.issue29@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadf
+
+----------
+assignedto: admin
+messages: 29
+nosy: admin
+priority: critical
+status: unread
+title: adfadfa
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue29>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:08:35 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395904115.91.0.765965702152.issue30@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue30] adfad
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:08:35 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395904115.91.0.765965702152.issue30@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadf
+
+----------
+assignedto: admin
+messages: 30
+nosy: admin
+priority: critical
+status: unread
+title: adfad
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue30>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Mar 03 07:19:59 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395904799.65.0.690385142955.issue31@qidata.com.au>
+X-Roundup-issue-status: unread
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue31] afadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 27 Mar 2014 08:19:59 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395904799.65.0.690385142955.issue31@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadfadf
+
+----------
+assignedto: admin
+messages: 31
+nosy: admin
+priority: critical
+status: unread
+title: afadf
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue31>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Mar 03 06:42:28 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1395988948.92.0.0911448538261.issue33@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: feature
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue33] an test issue from IE9
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 28 Mar 2014 07:42:28 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1395988948.92.0.0911448538261.issue33@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+ADFADFADF
+
+IE9 SUCK
+
+----------
+assignedto: testuser
+messages: 33
+nosy: testuser
+priority: feature
+status: deferred
+title: an test issue from IE9
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue33>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Mon Mar 03 02:32:31 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1396233151.24.0.837550819252.issue34@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue34] template loader test
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Mon, 31 Mar 2014 03:32:31 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1396233151.24.0.837550819252.issue34@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadf
+
+----------
+assignedto: testuser
+messages: 34
+nosy: testuser
+priority: critical
+status: deferred
+title: template loader test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue34>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Mon Mar 03 02:37:50 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1396233470.13.0.73818587757.issue35@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue35] another new issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Mon, 31 Mar 2014 03:37:50 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1396233470.13.0.73818587757.issue35@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+adfadfadf
+
+----------
+assignedto: admin
+messages: 35
+nosy: admin
+priority: critical
+status: chatting
+title: another new issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue35>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Apr 04 00:13:00 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: urgent
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue36] test msg1
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 10 Apr 2014 01:13:00 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test message from console
+
+----------
+assignedto: testuser
+messages: 36
+nosy: testuser
+priority: urgent
+status: chatting
+title: test msg1
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue36>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Apr 04 00:17:12 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397089032.55.0.349946992776.issue37@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: urgent
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue37] test msg2
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 10 Apr 2014 01:17:12 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397089032.55.0.349946992776.issue37@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test message 3
+
+----------
+assignedto: testuser
+messages: 37
+nosy: testuser
+priority: urgent
+status: deferred
+title: test msg2
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue37>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Apr 04 03:46:32 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: urgent
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue39] enter issue id here title
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 10 Apr 2014 04:46:32 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+junk test issue
+
+----------
+assignedto: testuser
+messages: 39
+nosy: testuser
+priority: urgent
+status: deferred
+title: enter issue id here title
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue39>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Apr 04 04:46:26 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397105186.92.0.713404131978.issue35@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+In-Reply-To: <1396233470.13.0.73818587757.issue35@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue35] another new issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 10 Apr 2014 05:46:26 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397105186.92.0.713404131978.issue35@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1396233470.13.0.73818587757.issue35@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+another update
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue35>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Apr 04 05:40:37 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397108437.87.0.672161814391.issue4@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395899497.47.0.0229880345065.issue4@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue4] anohter test issue
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 10 Apr 2014 06:40:37 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397108437.87.0.672161814391.issue4@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395899497.47.0.0229880345065.issue4@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add another note!
+
+----------
+status: unread -> chatting
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue4>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Thu Apr 04 06:57:16 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397113036.48.0.33854053344.issue39@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue39] enter issue id here title
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Thu, 10 Apr 2014 07:57:16 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397113036.48.0.33854053344.issue39@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue39>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 00:18:52 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397175532.66.0.862651660765.issue36@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue36] test msg1
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 01:18:52 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397175532.66.0.862651660765.issue36@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add note!
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue36>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 00:29:55 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397176195.9.0.0902683264365.issue36@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue36] test msg1
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 01:29:55 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397176195.9.0.0902683264365.issue36@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+another test note!
+
+just anothe test note!!
+
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue36>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 00:32:32 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397176352.47.0.0902100690328.issue10@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1395900064.64.0.853346467769.issue10@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue10] anohter test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 01:32:32 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397176352.47.0.0902100690328.issue10@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395900064.64.0.853346467769.issue10@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add note!
+
+----------
+status: unread -> chatting
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue10>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 00:56:34 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397177794.73.0.11990513674.issue39@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue39] enter issue id here title
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 01:56:34 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397177794.73.0.11990513674.issue39@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+update
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue39>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 01:27:04 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397179624.2.0.664950644423.issue36@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue36] test msg1
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 02:27:04 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397179624.2.0.664950644423.issue36@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397088780.9.0.128093167768.issue36@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add naother message
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue36>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 02:27:29 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397183249.96.0.817988801432.issue11@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue11] test
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 03:27:29 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397183249.96.0.817988801432.issue11@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+add new message! with some content
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue11>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 02:28:14 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397183294.68.0.932568284531.issue6@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395899660.61.0.809390723761.issue6@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue6] this is a test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 03:28:14 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397183294.68.0.932568284531.issue6@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395899660.61.0.809390723761.issue6@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add another test message
+
+
+
+just more lines
+
+
+just more lines
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue6>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:37:56 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397201876.54.0.269277786031.issue19@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue19] test adfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:37:56 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397201876.54.0.269277786031.issue19@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add another note!
+
+----------
+status: unread -> chatting
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue19>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:39:47 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397201987.33.0.255596225629.issue39@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue39] enter issue id here title
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:39:47 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397201987.33.0.255596225629.issue39@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add update for test iload issue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue39>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:40:13 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397202013.28.0.0775426033221.issue39@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: urgent
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue39] enter issue id here title
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:40:13 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397202013.28.0.0775426033221.issue39@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1397101592.8.0.711844998357.issue39@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add test=20
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue39>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:41:28 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397202088.41.0.555166273359.issue6@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395899660.61.0.809390723761.issue6@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue6] this is a test issue
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:41:28 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397202088.41.0.555166273359.issue6@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395899660.61.0.809390723761.issue6@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add test isue
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue6>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:51:05 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397202665.94.0.590496284407.issue19@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue19] test adfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:51:05 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397202665.94.0.590496284407.issue19@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add test
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue19>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:51:14 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397202674.93.0.50088867666.issue19@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue19] test adfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:51:14 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397202674.93.0.50088867666.issue19@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+add test 2
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue19>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Fri Apr 04 07:51:34 2014
+FROM: roundup-admin@qidata.com.au
+TO: roundup-admin@qidata.com.au
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397202694.44.0.895829871163.issue19@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: critical
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue19] test adfadfadf
+To: roundup-admin@qidata.com.au
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Fri, 11 Apr 2014 08:51:34 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397202694.44.0.895829871163.issue19@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+In-Reply-To: <1395902076.55.0.8174877516.issue19@qidata.com.au>
+
+
+Samuel Luo <Samuel.Luo@gs.com> added the comment:
+
+adfadfadfadf added
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue19>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Mon Apr 04 00:33:01 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397435581.6.0.874931932307.issue40@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: bug
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue40] another new test item
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Mon, 14 Apr 2014 01:33:01 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397435581.6.0.874931932307.issue40@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+test item
+
+----------
+assignedto: testuser
+messages: 71
+nosy: testuser
+priority: bug
+status: deferred
+title: another new test item
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue40>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Mon Apr 04 00:36:53 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397435813.04.0.437374409534.issue41@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: bug
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue41] this is a test issue 343
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Mon, 14 Apr 2014 01:36:53 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397435813.04.0.437374409534.issue41@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+afadfadf
+
+----------
+assignedto: testuser
+messages: 72
+nosy: testuser
+priority: bug
+status: deferred
+title: this is a test issue 343
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue41>
+_____________________________________________
+
+From roundup-admin@qidata.com.au Mon Apr 04 00:38:12 2014
+FROM: roundup-admin@qidata.com.au
+TO: t1@example.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397435892.88.0.249951635117.issue41@qidata.com.au>
+X-Roundup-issue-status: deferred
+X-Roundup-issue-priority: bug
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue41] this is a test issue 343
+To: t1@example.com
+From: Samuel Luo <issue_tracker@qidata.com.au>
+Date: Mon, 14 Apr 2014 01:38:12 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397435892.88.0.249951635117.issue41@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from Samuel Luo <Samuel.Luo@gs.com>:
+
+add another issue note
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue41>
+_____________________________________________
+

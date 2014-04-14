@@ -22,7 +22,12 @@ stat.create(name=''"resolved", order="8")
 user = db.getclass('user')
 user.create(username="admin", password=adminpw,
     address=admin_email, roles='Admin')
+
 user.create(username="anonymous", roles='Anonymous')
+
 user.create(username='testuser', password=password.Password('testuser'),
     realname='Test User', roles='User', address='t1@example.com')
-#SHA: f8514ba7337f53b071f8b38d97699093b9867196
+
+user.create(username='testuser2', password=password.Password('testuser'),
+    realname='Test User', roles='Web Access', address='t2@example.com')
+

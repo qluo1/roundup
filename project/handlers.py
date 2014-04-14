@@ -207,6 +207,7 @@ class APIHandler(SetupHandler):
 
         args = self.request.arguments
         print args
+        print path
 
         if path =="new":
             if args.get('@title') and args.get('@note') and args.get('@status') and args.get('@priority'):
@@ -346,6 +347,27 @@ class APIHandler(SetupHandler):
                 self.searcher.add_issue(issue.id)
             
                 return self.write({"status":"ok", "id":issue.id})
+
+        if path == "register":
+            print "register new user"
+            realname = args['realname'][0]
+            username = args['username'][0]
+            pwd = args['password'][0]
+            pwd_conf = args['confirm@password'][0]
+            email = args['Email'][0]
+            phone =args['phone'][0]
+
+            assert pwd == pwd_conf
+            from roundup import password, date
+            try:
+                new_ = self.db.user.create(realname=realname, username=username,password=password.Password(pwd),
+                                address=email,roles='User')
+
+                self.db.commit()
+                return self.write({"status":"ok","id": new_})
+            except Exception, e:
+                print e
+                return self.write({"status":"error","msg": "error: %s" % e})
 
 class AuthHandler(SetupHandler):
 

@@ -29,6 +29,27 @@ var uiRegister = flight.component(function(){
 	this.submitRegister = function(ev,data){
 
 		console.log("submit");
+		var data = $(this.attr.uiRegisterFormSelector).serializeArray();
+		var realname = data[0].value;
+		var username = data[1].value;
+		var pwd = data[2].value;
+		var confirm_pwd = data[3].value;
+		var phone =data[4].value;
+		var email = data[5].value;
+
+		if (username && realname && pwd && confirm_pwd && email){
+
+			if (pwd !== confirm_pwd){
+				this.trigger(document,"error",{msg:"password doesnt' match!"});
+			}else{
+				this.trigger(document,"uiNewUser",{data:data});
+			}
+
+		}else{
+
+			this.trigger(document,"error",{msg:"missing required fields!"});
+		}
+
 		ev.preventDefault();
 	}
 

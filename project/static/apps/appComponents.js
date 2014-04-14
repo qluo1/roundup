@@ -23,7 +23,9 @@ var dataMain = flight.component(function(){
         url_issue_new: "api/new",
         url_issue_update: "api/update",
         url_msg_remove: "api/remove",
-        url_issue_search: "api/search"
+        url_issue_search: "api/search",
+        url_register: "api/register"
+
     });
 
     this.loadIssuelist = function(ev,data) {
@@ -176,6 +178,20 @@ var dataMain = flight.component(function(){
         });
     }
 
+    this.regNewUser = function(ev,data){
+        var url = this.attr.url_register;
+        var that = this;
+        $.post(url,data.data,function(out){
+            if (out.status == "ok"){
+                that.trigger(document,"ok",{msg:"new user added! " + out.id});    
+            }else{
+                that.trigger(document,"error",{msg:"failed: " + out.msg});
+            }
+            
+        });
+
+    }
+
     this.after("initialize",function(){
         
         this.on(document,"loadIssuelist",this.loadIssuelist);
@@ -188,6 +204,7 @@ var dataMain = flight.component(function(){
         this.on(document,"uiPagination", this.pagination);
         this.on(document,"uiRemoveMsg", this.removeIssueMsg);
         this.on(document,"uiMsgView", this.viewMsg);
+        this.on(document,"uiNewUser", this.regNewUser);
         
 
         /* kick start load issues*/

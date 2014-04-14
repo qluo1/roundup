@@ -50,7 +50,13 @@ var dataMain = flight.component(function(){
 
     this.loadIssue = function(ev,data) {
         
-        var url = this.attr.url_issue + "/" + data.item;
+        var url = this.attr.url_issue;
+        /* workaround IE8 , Firefox difference */
+        if (data.item.slice(0,1) != "/") {
+            url  += "/" + data.item;
+        }else{
+            url += data.item;
+        }
         var that = this;
         $.get(url,function(data){
             that.trigger("dataIssue",{html:data});
@@ -153,7 +159,13 @@ var dataMain = flight.component(function(){
     }
 
     this.viewMsg = function(ev,data) {
-        var url = this.attr.url_issue + data.item;
+        var url = this.attr.url_issue
+        if (data.item.slice(0,1) == "/") {
+            url += data.item;    
+        }else{
+            url += "/" + data.item;
+        }
+        
         var that = this;
         $.get(url,function(out){
             console.log(out);
@@ -202,9 +214,6 @@ var uiMain = flight.component(function() {
 
         var item = ev.target.pathname
         
-        if (item.slice(0,1) == "/"){
-            var item = item.substr(1,item.length)    
-        }
         this.trigger("loadIssue",{item: item});
         ev.preventDefault();
     }
@@ -266,11 +275,8 @@ var uiMain = flight.component(function() {
 
     this.msgViewClick = function(ev,data) {
         var item = ev.target.pathname
-        if (item.slice(0,1) == "/") {
-            item = item.substr(1,item.length);    
-        }
         // alert("msg click: " + path);
-        this.trigger(document,"uiMsgView",{item: "/" + item});
+        this.trigger(document,"uiMsgView",{item: item});
         ev.preventDefault();
     }
 

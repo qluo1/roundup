@@ -14,22 +14,34 @@ define("debug", default=True, help="debug flag", type=bool)
 
 from handlers import *
 
+class TocHandler(tornado.web.RequestHandler):
+
+    def initialize(self,trackers):
+        self.trackers = trackers
+
+    def get(self):
+        c = {
+            'trackers': self.trackers
+        }
+        self.render("toc.html",**c)
+
 class Application(tornado.web.Application):
 
     def __init__(self,trackers,settings):
         self.trackers = trackers
-        handlers = []
+        # toc 
+        handlers = [(r'/',TocHandler,dict(trackers=trackers))]
+        # trackers 
         for t in trackers:
-            url = t['url']
+            name = t['name']
             tracker = t['tracker']
+            url = t['url']
             #
-            handlers.append((r"/%s/" % url,IndexHandler,dict(tracker=tracker)))
-            handlers.append((r"/%s/api/(.*)" % url,APIHandler,dict(tracker=tracker)))
-            handlers.append((r"/%s/auth/(.*)" % url,AuthHandler,dict(tracker=tracker)))
-
+            handlers.append((r"/%s/" % name,IndexHandler,dict(path=url, tracker=tracker)))
+            handlers.append((r"/%s/api/(.*)" % name,APIHandler,dict(path=url,tracker=tracker)))
+            handlers.append((r"/%s/auth/(.*)" % name,AuthHandler,dict(path=url, tracker=tracker)))
 
         tornado.web.Application.__init__(self,handlers,**settings)
-
 
 if __name__ == "__main__":
 

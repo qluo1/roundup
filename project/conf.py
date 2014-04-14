@@ -18,7 +18,7 @@ from tracker_config import trackers
 
 settings = dict(
     cookie_secret="cfa5809d-a2cf-47bb-adbf-5695915d87fa",
-    login_url="/auth/login",
+    login_url="auth/login",
     template_path=os.path.join(HOME, "templates"),
     static_path=os.path.join(HOME, "static"),
     # xsrf_cookies=True,

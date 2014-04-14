@@ -113,7 +113,8 @@ class ContextSearch(object):
 
 class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
-    def initialize(self,tracker):
+    def initialize(self,path,tracker):
+        self.rootPath = path
         self.tracker = tracker
         self.searcher = TrackerSearcher(tracker)
 
@@ -124,7 +125,12 @@ class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
         self.username = self.get_secure_cookie("user") or "anonymous"
 
         # re-open db with current user
-        self.uid = self.db.user.lookup(self.username)
+        try:
+            self.uid = self.db.user.lookup(self.username)
+        except KeyError:
+            self.username = "anonymous"
+            self.uid = self.db.user.lookup(self.username)
+
         self.db = self.tracker.open(self.uid)
         self.db.setCurrentUser(self.username)
         self.db.tx_Source = "web"
@@ -347,7 +353,7 @@ class AuthHandler(SetupHandler):
                 self.set_secure_cookie("user",self.username)
                 self.set_flash_message("ok","you have been logged out")
 
-        self.redirect("/")
+        self.redirect("/" + self.rootPath)
 
     def post(self,path):
 
@@ -372,4 +378,4 @@ class AuthHandler(SetupHandler):
         if error:
             self.set_flash_message('error',error)
         
-        self.redirect("/")
+        self.redirect("/" + self.rootPath)

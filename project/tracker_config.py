@@ -8,6 +8,6 @@ ROOT = os.path.dirname(HOME)
 TRACKER_HOME = os.path.join(ROOT,"trackers")
 
 trackers = (
-	dict(url="gsib",tracker=instance.open(os.path.join(TRACKER_HOME,"tracker"))),
-	# dict(url="demon",home=os.path.join(TRACKER_HOME,"demo")),
+	dict(name="gsib",url="gsib/", tracker=instance.open(os.path.join(TRACKER_HOME,"tracker"))),
+	dict(name="demo",url="demo/",tracker=instance.open(os.path.join(TRACKER_HOME,"demo"))),
 )

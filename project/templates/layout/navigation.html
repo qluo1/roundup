@@ -108,11 +108,11 @@
       </li>
       <li class='vspace-one'>
         {% if user.hasPermission('Register', 'user') %}
-          <a href="user?@template=register">{{ i18n.gettext('Register') }}</a>
+          <a id="js-register" href="#">{{ i18n.gettext('Register') }}</a>
         {% end %}
       </li>
       <li>
-        <a href="user?@template=forgotten">{{ i18n.gettext('Lost your login?') }}</a>
+        <a id="js-forgotten" href="#">{{ i18n.gettext('Lost your login?') }}</a>
       </li>
     </ul>
     <input type="hidden" name="@action" value="{{ i18n.gettext('Login') }}">

@@ -308,6 +308,7 @@ var uiMain = flight.component(function() {
         this.on(document,'dataIssueNew',this.renderIssueNew);
         this.on(document,'dataSearch',this.hide);
         this.on(document,'dataMsgView',this.renderMsg);
+        this.on(document,'uiRegister',this.hide);
 
     });
 });
@@ -320,7 +321,9 @@ var uiMenu = flight.component(function(){
         newIssueSelector: "#js-new-issue",
         showAllSelector: "#js-show-all",
         showIssueSelector: "#js-show-issue",
-        searchSelector: "#js-search"
+        searchSelector: "#js-search",
+        registerSelector: "#js-register",
+        forgottenSelector: "#js-forgotten"
     });
 
 
@@ -361,6 +364,17 @@ var uiMenu = flight.component(function(){
         ev.preventDefault();
     }
 
+    this.register = function(ev,data){
+        console.log("register");
+        this.trigger(document,"uiRegister",{});
+        ev.preventDefault();
+    }
+    this.forgotten = function(ev,data){
+        console.log("forgotten");
+        this.trigger(document,"uiForgotten",{});
+        ev.preventDefault();
+    }
+
     this.after("initialize",function(){
 
         this.on("click",{
@@ -368,7 +382,9 @@ var uiMenu = flight.component(function(){
             "editQuerySelector": this.editQuery,
             "newIssueSelector": this.newIssue,
             "showAllSelector": this.showAll,
-            "searchSelector": this.search
+            "searchSelector": this.search,
+            "registerSelector": this.register,
+            "forgottenSelector": this.forgotten
         });
 
         this.on("submit",{

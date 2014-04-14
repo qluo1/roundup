@@ -198,7 +198,10 @@ class APIHandler(SetupHandler):
             self.context['context'] = Context(self.user,item,itemid)
             print item
             print "%s.html"%item
-            return self.render("modules/" + "%s.html"%item,**self.context)
+            try:
+                return self.render("modules/" + "%s.html"%item,**self.context)
+            except IndexError:
+                return self.write("item: %s not found!" % itemid)
 
     def post(self,path):
 

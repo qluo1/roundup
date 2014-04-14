@@ -4,5 +4,7 @@
 *.pyc
 
 trackers/*
+trackers/tracker/db/db
+trackers/tracker/outgoing-mail.out
 node_modules
 project/whoosh

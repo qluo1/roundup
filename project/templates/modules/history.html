@@ -16,9 +16,9 @@
 {% for h in reversed(history) %}
 	<tr>
 		<td> {{ (h[1] - Date(".")).pretty() }} </td>
-		<td> {{ id_to_name("user",h[2]) }} </td>
+		<td> {{ uihelper.id_to_name("user",h[2]) }} </td>
 		<td> {{ h[3]}} </td>
-		<td> {{ hist_args_to_str(h[4]) }} </td>
+		<td> {{ uihelper.hist_args_to_str(h[4]) }} </td>
 	</tr>
 {% end %}
 </tbody>

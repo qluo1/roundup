@@ -1,69 +1,61 @@
-import roundup
-from roundup import instance
-from functools import partial
-
 from tornado import escape
+class UiHelper(object):
 
-## temporary workaround
-from conf import trackers
-db = trackers[0]['tracker'].open("admin")
+    def __init__(self,user):
+        self.db = user.db
 
-def id_to_name(item,itemid):
-    kls = db.getclass(item)
-    node = kls.getnode(itemid)
-    if hasattr(node,"name"):
-        return getattr(node,"name")
-    if hasattr(node,"username"):
-        return getattr(node,"username")
-
-    return node.id
-
-def hist_args_to_str(args):
-    """ """
-    out = ""
-    if args == {}:
-        return out
-    if type(args) == tuple:
-        out += str(args)
-    else:
-        for k,v in args.items():
-            if k in ('creator','assignedto',):
-                out += "%s: %s; " %(k, id_to_name("user",v))
-            elif k in ('status','priority'):
-                out += "%s: %s; " %(k, id_to_name(k,v))
-            else:
-                out += "%s: %s; " % (k,str(v))
-    return out
-
-def get_html_select(name,multiple=True,search=False,selected=None):
-    """ 
-    """
-    if multiple:
-        out = "<select multiple class='form-control' name='@%s'>" % name    
-    else:
-        out = "<select class='form-control' name='@%s'>" % name
-
-    kls = db.getclass(name)
-    for i in sorted(kls.list()):
-        value =  kls.get(i,kls.labelprop())
-        # print "html_select", i, selected
-        if value == selected:
-            out += "<option selected value='%s'>%s</option>" %(i,value)
+    def _html_select(self,name,multiple=False,search=False,selected=None):
+        if multiple:
+            out = "<select multiple class='form-control' name='@%s'>" % name    
         else:
-            out += "<option value='%s'>%s</option>" %(i,value)
-    
-    if search:
-        out += "<option selected value='%s'>%s</option>" %("","don't care")
-    out += "</select>"
-    return out
+            out = "<select class='form-control' name='@%s'>" % name
+
+        kls = self.db.getclass(name)
+        for i in sorted(kls.list()):
+            value =  kls.get(i,kls.labelprop())
+            # print "html_select", i, selected
+            if value == selected:
+                out += "<option selected value='%s'>%s</option>" %(i,value)
+            else:
+                out += "<option value='%s'>%s</option>" %(i,value)
+        
+        if search:
+            out += "<option selected value='%s'>%s</option>" %("","don't care")
+        out += "</select>"
+        return out
+
+    def item_html_select(self,name,**kw):
+        print name
+        multiple = kw.get("multiple",False)
+        search = kw.get("search",False)
+        selected = kw.get("selected")
+        return self._html_select(name,multiple=multiple,search=search,selected=selected)
 
 
-status_html_select = partial(get_html_select,"status",False, False)
-priority_html_select = partial(get_html_select,"priority",False, False)
-user_html_select = partial(get_html_select,"user",False, False)
-# 
-status_html_select_search = partial(get_html_select,"status",False, True)
-priority_html_select_search = partial(get_html_select,"priority",False, True)
-user_html_select_search = partial(get_html_select,"user",False, True)
+    def id_to_name(self,item,itemid):
+        """ """
+        kls = self.db.getclass(item)
+        node = kls.getnode(itemid)
+        if hasattr(node,"name"):
+            return getattr(node,"name")
+        if hasattr(node,"username"):
+            return getattr(node,"username")
 
-user_html_select_mult = partial(get_html_select,"user",True, False)
+        return node.id
+
+    def hist_args_to_str(self,args):
+        """ """
+        out = ""
+        if args == {}:
+            return out
+        if type(args) == tuple:
+            out += str(args)
+        else:
+            for k,v in args.items():
+                if k in ('creator','assignedto',):
+                    out += "%s: %s; " %(k, self.id_to_name("user",v))
+                elif k in ('status','priority'):
+                    out += "%s: %s; " %(k, self.id_to_name(k,v))
+                else:
+                    out += "%s: %s; " % (k,str(v))
+        return out

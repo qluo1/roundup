@@ -2057,3 +2057,42 @@ Roundup tracker <issue_tracker@qidata.com.au>
 <http://localhost:8080/demo/issue41>
 _____________________________________________
 
+From roundup-admin@qidata.com.au Mon Apr 04 05:14:01 2014
+FROM: roundup-admin@qidata.com.au
+TO: Samuel.Luo@gs.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+Message-Id: <1397452441.25.0.106664054813.issue42@qidata.com.au>
+X-Roundup-issue-status: chatting
+X-Roundup-issue-priority: urgent
+Content-Transfer-Encoding: quoted-printable
+Subject: [issue42] add a test issue for user register
+To: Samuel.Luo@gs.com
+From: test5 <issue_tracker@qidata.com.au>
+Date: Mon, 14 Apr 2014 06:14:01 +0100
+Precedence: bulk
+X-Roundup-Name: Roundup tracker
+X-Roundup-Loop: hello
+X-Roundup-Version: 1.5.0
+Message-Id: <1397452441.25.0.106664054813.issue42@qidata.com.au>
+Reply-To: Roundup tracker <issue_tracker@qidata.com.au>
+
+
+New submission from test5 <test5@gs.com>:
+
+new issue just added by user 5
+
+----------
+assignedto: sxljb016
+messages: 74
+nosy: sxljb016
+priority: urgent
+status: chatting
+title: add a test issue for user register
+
+_____________________________________________
+Roundup tracker <issue_tracker@qidata.com.au>
+<http://localhost:8080/demo/issue42>
+_____________________________________________
+

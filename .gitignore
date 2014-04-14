@@ -3,9 +3,6 @@
 
 *.pyc
 
-trackers/db/db
-trackers/db/files/*
-trackers/outgoing-mail.out
+trackers/*
 node_modules
-trackers/*_index
 project/whoosh

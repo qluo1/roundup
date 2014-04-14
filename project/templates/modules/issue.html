@@ -13,15 +13,15 @@
       <div class='row'>
         <div class="col-xs-3">
           <label for='status'>status</label>
-          {% raw status_html_select(context.status) %}
+          {% raw uihelper.item_html_select("status",selected=context.status) %}
         </div>
         <div class="col-xs-3">
           <label for='priority'>priority</label>
-          {% raw priority_html_select(context.priority) %}
+          {% raw uihelper.item_html_select("priority",selected=context.priority) %}
         </div>
         <div class="col-xs-3">
           <label for='assignto'>assignTo</label>
-          {% raw user_html_select(context.assignedto) %}
+          {% raw uihelper.item_html_select("user",selected=context.assignedto) %}
         </div>
       </div>
       <!-- Note -->
@@ -79,4 +79,4 @@
 {% end %}
 </div>
 
-{% module Template("modules/history.html", name="issue", history=context.history()) %}
+{% module Template("modules/history.html", name="issue", history=context.history(), uihelper=uihelper) %}

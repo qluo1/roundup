@@ -10,15 +10,15 @@
       <div class='row'>
       <div class="col-xs-3">
         <label for='status'>status</label>
-        {% raw status_html_select(context.status) %}
+        {% raw uihelper.item_html_select("status") %}
       </div>
       <div class="col-xs-3">
         <label for='priority'>priority</label>
-        {% raw priority_html_select(context.priority) %}
+        {% raw uihelper.item_html_select("priority") %}
       </div>
       <div class="col-xs-3">
         <label for='assignto'>assignTo</label>
-        {% raw user_html_select(context.assignedto) %}
+        {% raw uihelper.item_html_select("user") %}
       </div>
       </div>
       <!-- Note -->

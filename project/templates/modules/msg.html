@@ -20,4 +20,4 @@
   <pre>{{ context.content }}</pre>
 </div>
 
-{% module Template("modules/history.html", name="msg", history=context.history()) %}
+{% module Template("modules/history.html", name="msg", history=context.history(),uihelper=uihelper) %}

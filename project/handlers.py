@@ -4,6 +4,7 @@ import tornado.web
 
 from roundup.date import Date
 from utils.helper import FlashMessageMixin, NodeProxy
+from uihelper import UiHelper
 from utils.pagination import Pagination
 # from search_engine import search_index, add_issue
 from search_engine import TrackerSearcher
@@ -87,12 +88,13 @@ class Context(object):
 
 class ContextSearch(object):
 
-    def __init__(self,user,item,qstring):
+    def __init__(self,user,searcher,item,qstring):
         """ """
         self.user = user
         self.db = user.db
         self.item = item
         self.query = qstring
+        self.searcher=searcher
 
     def is_view_ok(self):
         """ """
@@ -109,7 +111,6 @@ class ContextSearch(object):
         self.page = page
         self.pagination = Pagination(page,PAGE_SIZE,res['count'])
         return results
-
 
 class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
@@ -143,6 +144,7 @@ class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
         self.context = {
             'user': self.user,
             'context': Context(self.user,"issue"),
+            'uihelper': UiHelper(self.user),
             'login_url': self.get_login_url(),
             'ok_message': self.get_flash_message("ok"),
             'error_message': self.get_flash_message("error"),
@@ -150,7 +152,6 @@ class SetupHandler(tornado.web.RequestHandler,FlashMessageMixin):
 
     def on_finish(self):
         self.db.close()
-
 
 class IndexHandler(SetupHandler):
 
@@ -329,8 +330,7 @@ class APIHandler(SetupHandler):
 
 
             qstring = " AND ".join(q)
-            self.context['context'] = ContextSearch(self.user,"issue",qstring)
-
+            self.context['context'] = ContextSearch(self.user,self.searcher,"issue",qstring)
 
             return self.render("modules/issue.search.result.html",**self.context)
 

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="customized roundup tracker">
+    <meta name="viewport" content="width=device-width">
+    <title>uiFlash unit test</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">
+  </head>
+  <body>
+
+
+  <div id="flashMessage">
+  </div>
+
+  <button id="ok">OK </button>
+  <button id="error"> ERROR </button>
+  
+  <script type="text/javascript">
+      if (!Object.create) {
+          Object.create = (function(){
+              function F(){}
+
+              return function(o){
+                  if (arguments.length != 1) {
+                      throw new Error('Object.create implementation only accepts one parameter.');
+                  }
+                  F.prototype = o;
+                  return new F()
+              }
+          })()
+      }
+
+    /* workaround IE8 missing console object*/
+    var alertFallback = false;
+       if (typeof console === "undefined" || typeof console.log === "undefined") {
+         console = {};
+         if (alertFallback) {
+             console.log = function(msg) {
+                  alert(msg);
+             };
+         } else {
+             console.log = function() {};
+         }
+       }
+</script>
+  <script src="../js/jquery/jquery-1.10.2.js"></script>
+  <script src="../js/bootstrap/bootstrap.js"></script>
+  <script src="../js/es5-shim.min.js"></script>
+  <script src="../js/flight.js"></script>
+  <!--script src="../js/handlebar-1.1.2.js"></script-->
+  <script src="../js/handlebars-1.3.0.js"></script>
+  <script src="../apps/templateloader.js"></script>
+  <script src="../apps/uiFlashMessage.js"></script>
+  <!-- tet scripts -->
+
+<script type="text/javascript">
+
+	var args = {
+		path : '/static/apps/templates.hbs',
+		sync : true
+	}
+	Handlebars.Loader.load(args);
+
+
+  uiFlashMessage.attachTo(document);
+
+  $(function(){
+
+    $("#ok").click(function(){
+        $(document).trigger("ok", {msg:'OK'});
+    });
+
+    $("#error").click(function(){
+      $(document).trigger("error",{msg:'ERROR'});
+    });
+
+  });
+
+  </script>
+
+  </body>
+</html>
+

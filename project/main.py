@@ -14,16 +14,6 @@ define("debug", default=True, help="debug flag", type=bool)
 
 from handlers import *
 
-class TocHandler(tornado.web.RequestHandler):
-
-    def initialize(self,trackers):
-        self.trackers = trackers
-
-    def get(self):
-        c = {
-            'trackers': self.trackers
-        }
-        self.render("toc.html",**c)
 
 class Application(tornado.web.Application):
 

@@ -54,12 +54,11 @@
         processTemplate: function(el){
  
             //Access the handlebar template
-            var handlebarTemplate = $(el),
-                        template;
+            var handlebarTemplate = $(el);
              //Add template to templateStore
-            template = Handlebars.Templates.add(
+            var template = Handlebars.Templates.add(
                 handlebarTemplate.attr(Handlebars.Templates.NAME),
-                handlebarTemplate.text()
+                el.text
             );
             //Cleanup DOM once processed
             handlebarTemplate.remove();
@@ -88,10 +87,8 @@
                     if(status == "success"){
  
                         data = response.responseText;
- 
                         //Append to make it part of DOM
                         $('body').append(data);
- 
                         //Process Templates
                         Handlebars.Templates.process();
  

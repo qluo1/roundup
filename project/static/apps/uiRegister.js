@@ -10,6 +10,7 @@ var uiRegister = flight.component(function(){
 
 
 	this.render = function(ev,data) {
+		console.log("uiRegister render: " + this.attr.hide);
 		// render ui form
 		if(this.attr.hide) {
 			var html = Handlebars.Templates.get(this.attr.templateName,{});
@@ -63,7 +64,7 @@ var uiRegister = flight.component(function(){
 
 		this.on(document,"uiNewIssue",this.hide);
 		this.on(document,"loadIssueList",this.hide);
-		this.on(document,"uiClickSearchItem",this.hide);
+		this.on(document,"uiSearch",this.hide);
 	});
 
 });

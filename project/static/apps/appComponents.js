@@ -1,17 +1,4 @@
 
-/* workaround IE8 missing console object*/
-var alertFallback = false;
-   if (typeof console === "undefined" || typeof console.log === "undefined") {
-     console = {};
-     if (alertFallback) {
-         console.log = function(msg) {
-              alert(msg);
-         };
-     } else {
-         console.log = function() {};
-     }
-   }
-
 var dataMain = flight.component(function(){
     // main data component
     
@@ -354,13 +341,13 @@ var uiMenu = flight.component(function(){
     this.newIssue = function(ev,data){
         console.log("newIssue");
         console.log(ev.target);
-        this.trigger("uiNewIssue",{});
+        this.trigger(document,"uiNewIssue",{});
         ev.preventDefault();
     }
 
     this.showAll = function(ev,data){
         console.log("showall");
-        this.trigger("loadIssuelist",{});
+        this.trigger(document,"loadIssuelist",{});
         ev.preventDefault();
     }
 
@@ -377,7 +364,7 @@ var uiMenu = flight.component(function(){
 
     this.search = function(ev,data){
         console.log("search issue");
-        this.trigger("uiSearch",{});
+        this.trigger(document,"uiSearch",{});
         ev.preventDefault();
     }
 

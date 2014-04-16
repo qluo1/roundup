@@ -404,3 +404,17 @@ class AuthHandler(SetupHandler):
             self.set_flash_message('error',error)
         
         self.redirect("/" + self.rootPath)
+
+class TocHandler(tornado.web.RequestHandler):
+    """ 
+        list all available trackers
+    """
+
+    def initialize(self,trackers):
+        self.trackers = trackers
+
+    def get(self):
+        c = {
+            'trackers': self.trackers
+        }
+        self.render("toc.html",**c)

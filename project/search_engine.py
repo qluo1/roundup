@@ -44,7 +44,7 @@ class TrackerSearcher(object):
             writer.add_document(title=unicode(node.title),issueId=unicode(node.id),
                         status=unicode(node.status),priority=unicode(node.priority),
                         assignedto=unicode(node.assignedto),
-                        creator=unicode(node.creator),msg=unicode(messages),createAt=createAt)
+                        creator=unicode(node.creator),msg=unicode(messages,errors='replace'),createAt=createAt)
 
         writer.commit()
 

@@ -34,7 +34,9 @@
   </ul>
 
   <script type="text/javascript">
-    uiPagination.attachTo(".pagination");
+    if (uiPagination !== undefined){
+      uiPagination.attachTo(".pagination");  
+    }
   </script>
   {% else %}
     <p> No results found </p>

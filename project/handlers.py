@@ -170,7 +170,8 @@ class APIHandler(SetupHandler):
         print self.request.arguments, self.request.uri, self.request.path
 
         args = self.request.arguments
-
+        #IE cache busting
+        self.set_header('Expires', '-1')
         if path == "list":
             page = args.get('page',1)
             if type(page) != int:
@@ -216,7 +217,7 @@ class APIHandler(SetupHandler):
 
         dre=re.compile(r'([^\d]+)0*(\d+)')
         args = self.request.arguments
-        print args
+        # print args
         print path
 
         if path =="new":
@@ -380,7 +381,6 @@ class APIHandler(SetupHandler):
 
         if path == "uploadfile":
             """ handle upload file"""
-            print self.request.files
             theissue = args["issue"][0]
             match = dre.match(theissue)
             if match:
@@ -392,9 +392,7 @@ class APIHandler(SetupHandler):
                 if itemid:
                     if self.request.files:
                         file1 = self.request.files['file'][0]
-                        print file1
                         body = file1['body']
-                        print body
                         file_= self.db.file.create(name=file1['filename'],content=body)
                         files = node.files
                         files.append(file_)

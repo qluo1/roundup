@@ -235,10 +235,10 @@ var uiMain = flight.component(function() {
         var data = this.select("itemSubmitSelector").serializeArray();
          // var data = new FormData($(this.attr.itemSubmitSelector)[0]);
         //data.file = $("#ui_issue > form #file_upload").val();
-        if (this.uploadObj !== undefined){
-            this.uploadObj.startUpload();
-            this.uploadObj = undefined;
-        }
+        // if (this.uploadObj !== undefined){
+        //     this.uploadObj.startUpload();
+        //     // this.uploadObj = undefined;
+        // }
         this.trigger("uiPostUpdatedIssue",{data:data});
          
 
@@ -266,11 +266,13 @@ var uiMain = flight.component(function() {
         this.hide();
         this.select('issueSelector').html(data.html);
         // attach upload file
-        this.uploadObj = $(this.attr.uploadfileSelector).uploadFile({
+        var uploadObj = $(this.attr.uploadfileSelector).uploadFile({
             url: "api/uploadfile",
-            autoSubmit:false,
+            autoSubmit:true,
             formData: {"issue":data.issue}
         });
+
+        // uploadObj.startUpload();
     }
 
     this.renderIssueNew = function(ev,data){
@@ -369,7 +371,7 @@ var uiMenu = flight.component(function(){
         var data = this.select("showIssueSelector").serializeArray();
 
         if (data && data[0].value){
-            this.trigger("loadIssue",{item:"issue"+ data[0].value});
+            this.trigger(document,"loadIssue",{item:"issue"+ data[0].value});
         }
         ev.preventDefault();
     }

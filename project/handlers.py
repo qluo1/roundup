@@ -195,17 +195,26 @@ class APIHandler(SetupHandler):
             item = group[0]
             itemid = group[1]
 
-            # update context
-            self.context['context'] = Context(self.user,item,itemid)
-            print item
-            print "%s.html"%item
-            try:
-                return self.render("modules/" + "%s.html"%item,**self.context)
-            except IndexError:
-                return self.write("item: %s not found!" % itemid)
+            if item == "issue":
+                # update context
+                self.context['context'] = Context(self.user,item,itemid)
+                print item
+                print "%s.html"%item
+                try:
+                    return self.render("modules/" + "%s.html"%item,**self.context)
+                except IndexError:
+                    return self.write("item: %s not found!" % itemid)
+
+            if item == "file":
+                # download file
+                node = self.db.getclass(item).getnode(itemid)
+                self.set_header('Content-Type', 'application/octet-stream')
+                self.set_header('Content-Disposition', 'attachment; filename=' + node.name)
+                self.write(node.content)
 
     def post(self,path):
 
+        dre=re.compile(r'([^\d]+)0*(\d+)')
         args = self.request.arguments
         print args
         print path
@@ -260,7 +269,7 @@ class APIHandler(SetupHandler):
             assignedto = args.get('@user')[0]
 
             print issueId,status,priority,title,note
-            dre=re.compile(r'([^\d]+)0*(\d+)')
+
             match = dre.match(issueId)
             if match:
                 group = match.groups()
@@ -288,7 +297,7 @@ class APIHandler(SetupHandler):
 
                 # add attached file
                 if self.request.files:
-                    file1 = self.request.files['@file'][0]
+                    file1 = self.request.files['file'][0]
                     body = file1['body']
                     file_= self.db.file.create(name=file1['filename'],content=body)
                     self.db.issue.set(new_,files=[file_])
@@ -368,6 +377,34 @@ class APIHandler(SetupHandler):
             except Exception, e:
                 print e
                 return self.write({"status":"error","msg": "error: %s" % e})
+
+        if path == "uploadfile":
+            """ handle upload file"""
+            print self.request.files
+            theissue = args["issue"][0]
+            match = dre.match(theissue)
+            if match:
+                group = match.groups()
+                item = group[0]
+                itemid = group[1]
+                kls = self.db.getclass(item)
+                node = kls.getnode(itemid)
+                if itemid:
+                    if self.request.files:
+                        file1 = self.request.files['file'][0]
+                        print file1
+                        body = file1['body']
+                        print body
+                        file_= self.db.file.create(name=file1['filename'],content=body)
+                        files = node.files
+                        files.append(file_)
+                        node.files = files
+                        self.db.commit()
+                        print "file added: %s" % file1['filename']
+                else:
+                    print "warning unknown item id??"
+            else:
+                print "waring unknown issue??"
 
 class AuthHandler(SetupHandler):
 

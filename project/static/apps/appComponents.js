@@ -43,10 +43,11 @@ var dataMain = flight.component(function(){
         /* workaround IE8 , Firefox difference */
         var strarray = data.item.split("/");
         /* last item*/
-        url += strarray[strarray.length-1];
+        var issue = strarray[strarray.length-1];
+        url += issue;
         var that = this;
         $.get(url,function(data){
-            that.trigger("dataIssue",{html:data});
+            that.trigger("dataIssue",{html:data,issue:issue});
         });
     }
 
@@ -213,7 +214,9 @@ var uiMain = flight.component(function() {
         itemSubmitSelector:     "#ui_issue > form",
         itemNewSubmitSelector:  "#ui_new > form",
         msgRemoveBtnSelector:   "#ui_issue form.js-form-inline",
-        msgViewClickSelector:   "#ui_issue div#js-messages a"
+        msgViewClickSelector:   "#ui_issue div#js-messages a",
+
+        uploadfileSelector:     "#ui_issue div#js-uploadfile"
 
     });
 
@@ -231,9 +234,12 @@ var uiMain = flight.component(function() {
 
         var data = this.select("itemSubmitSelector").serializeArray();
          // var data = new FormData($(this.attr.itemSubmitSelector)[0]);
-        data.file = $("#ui_issue > form #file_upload").val();
-        this.trigger("uiPostUpdatedIssue",{data:data})
-        
+        //data.file = $("#ui_issue > form #file_upload").val();
+        if (this.uploadObj !== undefined){
+            this.uploadObj.startUpload();
+            this.uploadObj = undefined;
+        }
+        this.trigger("uiPostUpdatedIssue",{data:data});
          
 
         ev.preventDefault();
@@ -242,9 +248,9 @@ var uiMain = flight.component(function() {
     this.submitNewIssue = function(ev,data){
         
        console.log(this.select("itemNewSubmitSelector").serializeArray());
-       ev.preventDefault();
        // TODO: validation
        this.trigger("uiPostNewIssue",{data: this.select("itemNewSubmitSelector").serializeArray()});
+       ev.preventDefault();
     }
 
     this.renderIssueList = function(e,data) {
@@ -259,6 +265,12 @@ var uiMain = flight.component(function() {
 
         this.hide();
         this.select('issueSelector').html(data.html);
+        // attach upload file
+        this.uploadObj = $(this.attr.uploadfileSelector).uploadFile({
+            url: "api/uploadfile",
+            autoSubmit:false,
+            formData: {"issue":data.issue}
+        });
     }
 
     this.renderIssueNew = function(ev,data){

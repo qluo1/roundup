@@ -1,6 +1,10 @@
 {% from roundup import i18n%}
 {% from roundup.date import Date%}
 {% from uihelper import * %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('css/uploadfile.css') }}">
+{% end %}
+
 {% if context.is_view_ok() %}
   {% if context.is_edit_ok() %}
     <form role="form" name ="input_form" action="">
@@ -29,8 +33,10 @@
         <label for='note'>{{ i18n.gettext('Note') }}</label>
           <textarea name="@note" rows="5" class='form-control' id='note' placeholder="Description of the issue"></textarea>
       </div>
+      <div id="js-uploadfile" class="ajax-file-upload">Upload file</div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+  
 
   {% else %}
     {% include 'issue.readonly.html' %}
@@ -49,6 +55,18 @@
 {% if context.files %}
   {% comment include 'file.index.html' %}
 {% end %}
+
+<div id="js.files">
+{% if context.files %}
+<h4> Files </h4>
+ {% for file in context.files %}
+ <div class='row-fluid'>
+  {{ (file.creation - Date(".")).pretty()}} {{file.creator}} attached file: 
+  <a id="download" href='api/file{{ file.id }}'> {{file.name}}(download) </a>
+ </div>
+ {% end %}
+{% end %}
+</div>
 
 <div id="js-messages">
 {% if context.messages %}
